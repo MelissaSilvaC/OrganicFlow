@@ -1,0 +1,11 @@
+Modelo geral de qualquer componente React
+
+function Componente(){
+    return (
+        <div>
+            
+        </div>
+    )
+}
+
+export default Componente;
