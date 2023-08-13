@@ -2,7 +2,7 @@ import fundoSessao from '../assets/img/fundo_login.jpg'
 import logoBranca from '../assets/img/logo branca c. letras.png'
 import Empresas from './Empresa/Empresas'
 
-function TelaSessao() {
+export default function TelaSessao() {
 
     const labelTCSS = 'text-neutral-50 text-xl font-bold'
     const campoTCSS = 'w-full h-[50px] bg-zinc-300 rounded-[15px] shadow px-6'
@@ -69,5 +69,3 @@ function TelaSessao() {
         </div>
     )
 }
-
-export default TelaSessao;

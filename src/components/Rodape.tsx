@@ -1,9 +1,7 @@
-function Rodape() {
+export default function Rodape() {
     return (
         <div>
 
         </div>
     )
 }
-
-export default Rodape;

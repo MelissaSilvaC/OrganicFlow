@@ -1,9 +1,7 @@
-function Relatorio() {
+export default function Relatorio() {
     return (
         <div>
 
         </div>
     )
 }
-
-export default Relatorio; 

@@ -1,8 +1,9 @@
 
 import { FiSearch } from 'react-icons/fi';
 import Navbar from '../../components/Navbar';
+import Card from '../../components/Card';
 
-function Empresas(){
+export default function Empresas(){
     return (
         <Navbar>
             {/** Cabeçalho comum em todas as páginas */}
@@ -28,15 +29,13 @@ function Empresas(){
 
                     {/** Espaço para exibir os cards de cada empresa */}
                     <div className=' grid col-start-3 col-span-3 place-content-center'>
-                        <div className='bg-neutral-50 w-[1440px] h-screen rounded-tl-[10px] rounded-tr-[10px]'>
-                            Lista de cards
+                        <div className='bg-neutral-50 w-[1440px] rounded-xl flex flex-wrap p-10'>
+
+                        <Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card />
                         </div>
                     </div>
-
 
                 </div>
         </Navbar>
     )
 }
-
-export default Empresas;

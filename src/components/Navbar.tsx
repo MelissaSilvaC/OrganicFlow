@@ -7,9 +7,8 @@ import ImagemFundo from './ImagemFundo'
 //Verde escuro: green-950
 
 const itemListaTCSS = 'px-5 pb-4 pt-12 self-end font-bold text-sm hover:pt-[100px] hover:bg-green-950 hover:text-neutral-50'
-type navbar = { children: React.ReactNode }
 
-function Navbar(props: navbar) {
+export default function Navbar({children}:{children?: React.ReactNode}) {
     return (
         <ImagemFundo>
             {/** Inserindo o código dentro das tags da imagem de fundo*/}
@@ -25,8 +24,8 @@ function Navbar(props: navbar) {
                 <nav className='grid col-span-2 place-content-end'>
                     <ul className='flex space-x-[60px] justify-center'>
                         <li className={itemListaTCSS}>RASTREABILIDADE</li>
-                        <li className={itemListaTCSS} >EMPRESAS</li>
-                        <li className={itemListaTCSS} >QUEM SOMOS</li>
+                        <li className={itemListaTCSS}>EMPRESAS</li>
+                        <li className={itemListaTCSS}>QUEM SOMOS</li>
                     </ul>
                 </nav>
 
@@ -38,10 +37,8 @@ function Navbar(props: navbar) {
 
             {/** local onde vamos inserir os conteúdo de cada página */}
             <div className='my-20 absolute top-32'>
-                <div>{props.children}</div>
+                <div>{children}</div>
             </div>
         </ImagemFundo>
     )
 }
-
-export default Navbar;

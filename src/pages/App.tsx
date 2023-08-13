@@ -1,19 +1,7 @@
-import Font from "../common/utils/font";
 import TelaSessao from "./TelaSessao";
 
-
-function App() {
-  
-//Trechos de código
-
+export default function App() {
   return (
-    <Font>
-
       <TelaSessao />
-
-
-    </Font>
   );
 }
-
-export default App;

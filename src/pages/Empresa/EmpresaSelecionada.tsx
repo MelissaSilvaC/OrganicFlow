@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar";
 import perfil from '../../assets/img/logo_basica.png'
 
-function EmpSelecionada() {
+export default function EmpSelecionada() {
     return (
         <Navbar>
             {/** Cabeçalho comum em todas as páginas */}
@@ -54,5 +54,3 @@ function EmpSelecionada() {
         </Navbar>
     )
 }
-
-export default EmpSelecionada;

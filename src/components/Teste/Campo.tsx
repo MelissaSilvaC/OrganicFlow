@@ -5,13 +5,15 @@
     value?: any
     onChange: () => void
     required: boolean
-    labelCSS: string
-    campoCSS: string
-    inputCSS: string
+    labelCSS?: string
+    campoCSS?: string
+    inputCSS?: string
+
+    target: EventTarget & HTMLInputElement
 
  }
 
-function Campo({ type, label, placeholder, value, onChange, required, labelCSS, campoCSS, inputCSS} : Props) {
+export default function Campo({ required = false, label, placeholder, onChange, value, type, labelCSS, campoCSS, inputCSS} : Props) {
     return (
         <div>
             <label className={`${labelCSS}`}>{label}</label>
@@ -20,7 +22,7 @@ function Campo({ type, label, placeholder, value, onChange, required, labelCSS, 
                     className={`${inputCSS}`} 
                     type={type}
                     value={value}
-                    onChange={/**evento => aoAlterado(evento.target.value) */ () => {}}
+                    onChange={evento => onChange()}
                     required={required}
                     placeholder={placeholder}
                 />
@@ -29,4 +31,21 @@ function Campo({ type, label, placeholder, value, onChange, required, labelCSS, 
     )
 }
 
-export default Campo;
+
+/**
+ * Do que o campo login vai precisar?
+ * 
+ * Obrigatoriedade (Boolean)
+ * Label (String)
+ * Placeholder (String)
+ * onChange (useState na página de sessão   setvalue)
+ * value (useState na página de sessão  value)
+ * type (String, o tipo do campo, e-mail, password...)
+ * 
+ * Parametros de estilo
+ * labelTCSS
+ * campoTCSS
+ * inputTCSS
+ * 
+ * 
+ */

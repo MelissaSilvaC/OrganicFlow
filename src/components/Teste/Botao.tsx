@@ -1,9 +1,7 @@
-function Botao() {
+export default function Botao() {
     return (
         <div>
 
         </div>
     )
 }
-
-export default Botao;
