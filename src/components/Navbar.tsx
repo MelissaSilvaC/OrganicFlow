@@ -2,11 +2,7 @@ import logo from '../assets/img/logo colorida c. letras.png'
 import perfil from '../assets/img/logo_basica.png'
 import ImagemFundo from './ImagemFundo'
 
-//Branco: neutral-50
-//Verde claro: lime-700
-//Verde escuro: green-950
-
-const itemListaTCSS = 'px-5 pb-4 pt-12 self-end font-bold text-sm hover:pt-[100px] hover:bg-green-950 hover:text-neutral-50'
+const itemListaTCSS = 'px-5 pb-4 pt-12 self-end font-bold text-sm hover:pt-[100px] hover:bg-verde_escuro hover:text-neutral-50'
 
 export default function Navbar({children}:{children?: React.ReactNode}) {
     return (

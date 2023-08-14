@@ -22,7 +22,7 @@ export default function Empresas(){
                     {/** Barra de pesquisa */}
                     <div className='grid col-start-3 col-span-3 my-12 place-content-center'>
                         <div className='w-[620px] h-[70px] bg-neutral-100 rounded-[50px] flex px-6'>
-                            <FiSearch className='w-7 h-7 my-5 stroke-lime-700' />
+                            <FiSearch className='w-7 h-7 my-5 stroke-verde_folha' />
                             <input className='bg-transparent focus:outline-none m-5 grow text-lg' placeholder='Pesquise empresas aqui...' />
                         </div>
                     </div>

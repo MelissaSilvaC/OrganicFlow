@@ -1,19 +1,16 @@
  interface Props {
     type?: any
-    label: string
+    label?: string
     placeholder?: string
     value?: any
-    onChange: () => void
-    required: boolean
+    onChange: (evento: any) => void
+    obrigatorio: boolean
     labelCSS?: string
     campoCSS?: string
     inputCSS?: string
+}
 
-    target: EventTarget & HTMLInputElement
-
- }
-
-export default function Campo({ required = false, label, placeholder, onChange, value, type, labelCSS, campoCSS, inputCSS} : Props) {
+export default function Campo({ obrigatorio = false, label, placeholder, onChange,  value, type, labelCSS, campoCSS, inputCSS} : Props) {
     return (
         <div>
             <label className={`${labelCSS}`}>{label}</label>
@@ -22,8 +19,8 @@ export default function Campo({ required = false, label, placeholder, onChange, 
                     className={`${inputCSS}`} 
                     type={type}
                     value={value}
-                    onChange={evento => onChange()}
-                    required={required}
+                    onChange={() => {}}
+                    required={obrigatorio}
                     placeholder={placeholder}
                 />
             </div>
