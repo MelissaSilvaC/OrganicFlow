@@ -29,14 +29,14 @@ export default function EmpSelecionadaJu() {
                         </div>
 
 
-                        {/**Barra de pesquisa e filtros */}
+                        {/**Barra de pesquisa*/}
                         <div>
                             
                             {/** Barra de pesquisa */}
                             <div className=''>
                                 <div className='w-[620px] h-[70px] bg-neutral-100 rounded-[50px] flex px-6'>
                                     <FiSearch className='w-7 h-7 my-5 stroke-verde_folha' />
-                                    <input className='bg-transparent focus:outline-none m-5 grow text-lg' placeholder='Pesquise empresas aqui...' />
+                                    <input className='bg-transparent focus:outline-none m-5 grow text-lg' placeholder='Localize um produto' />
                                 </div>
                             </div>
 

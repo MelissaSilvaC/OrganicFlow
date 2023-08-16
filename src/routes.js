@@ -3,7 +3,7 @@ import TelaSessao from './pages/TelaSessao'
 import Empresas from './pages/Empresa/Empresas'
 import EmpSelecionada from './pages/Empresa/EmpresaSelecionada'
 import PopupSenha from './components/Sessao/PopupSenha'
-import EmpSelecionadaJu from './pages/Empresa/EmpSelecionadaJu'
+import EmpSelecionadaJu from './pages/Perfil/PerfilEmpresa'
 
 export default function AppRouter(){
     return(
