@@ -1,40 +1,28 @@
-import logo from '../assets/img/logo colorida c. letras.png'
+import logo from '../assets/img/Logo/logo-letras.png'
 import perfil from '../assets/img/logo_basica.png'
-import ImagemFundo from './ImagemFundo'
 
-const itemListaTCSS = 'px-5 pb-4 pt-12 self-end font-bold text-sm hover:pt-[100px] hover:bg-verde_escuro hover:text-neutral-50'
+const itemListaTCSS = 'px-4 py-3 font-bold hover:bg-verde_escuro hover:text-neutral-50 rounded-lg'
 
-export default function Navbar({children}:{children?: React.ReactNode}) {
+export default function Navbar(){
     return (
-        <ImagemFundo>
-            {/** Inserindo o código dentro das tags da imagem de fundo*/}
-            
-            {/** Barra de navegação */}
-            <div className='absolute top-0 w-screen grid grid-cols-4 gap-3 font-montserrat'>
+        <header className='bg-amarelo_areia w-screen py-4 flex items-center font-montserrat'>   
                 {/** Logo */}
-                <div> 
-                    <img src={logo} alt="logo do OrganicFlow" className=' w-60 h-50 relative'/> 
+                <img src={logo} className='w-[220px] ml-10' />
+                
+                <div className='flex flex-grow justify-end pt-10'>
+                    {/** Itens da barra do menu */}
+                    <nav>
+                        <ul className='flex space-x-14'>
+                            <li className={itemListaTCSS}>Empresas</li>
+                            <li className={itemListaTCSS}>Quem somos</li>
+                        </ul>
+                    </nav>
                 </div>
-
-                {/** Itens da barra do menu */}
-                <nav className='grid col-span-2 place-content-end'>
-                    <ul className='flex space-x-[60px] justify-center'>
-                        <li className={itemListaTCSS}>RASTREABILIDADE</li>
-                        <li className={itemListaTCSS}>EMPRESAS</li>
-                        <li className={itemListaTCSS}>QUEM SOMOS</li>
-                    </ul>
-                </nav>
 
                 {/** Perfil; NOTA: o item deve ser clicável e com uma condicional de ser a possoa estar logada ou não */}
-                <div className='grid place-content-end'>
-                    <img src={perfil} alt="Perfil do site" className='w-14 h-14 mr-20 my-10 rounded-full relative' />
+                <div className='flex ml-24 mr-14'>
+                    <img src={perfil} className='w-[60px] h-[60px] my-1 rounded-full' />
                 </div>
-            </div>
-
-            {/** local onde vamos inserir os conteúdo de cada página */}
-            <div className='my-20 absolute top-32'>
-                <div>{children}</div>
-            </div>
-        </ImagemFundo>
+        </header>
     )
 }

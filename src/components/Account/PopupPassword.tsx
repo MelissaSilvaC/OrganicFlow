@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import logoColorida from '../../assets/img/logo colorida c. letras.png'
-import Campo from '../Itens de formulario/Campo'
-import Botao from '../Itens de formulario/Botao'
+import logoColorida from '../../assets/img/Logo/color-words-horizontal.png'
+import TextField from '../Items_Forms/TextField'
+import Button from '../Items_Forms/Button'
 
-export default function PopupSenha() {
+export default function PopupPassword() {
     {/** useStates */ }
     const [ReEmail, setReEmail] = useState("")
 
@@ -26,7 +26,7 @@ export default function PopupSenha() {
                 </div>
 
                 {/** Campo recuperar e-mail */}
-                <Campo
+                <TextField
                     obrigatorio={true}
                     placeholder='E-mail'
                     onChange={evento => setReEmail(evento.target.value)}
@@ -35,7 +35,7 @@ export default function PopupSenha() {
                     campoCSS={campoTCSS}
                     inputCSS={inputTCSS}
                 />
-                <Botao botaoCSS={botaoTCSS} texto='Enviar' />
+                <Button botaoCSS={botaoTCSS} texto='Enviar' />
 
                 
                 <a className='text-verde_escuro underline font-bold mt-5 mb-2'>Precisa de ajuda?</a>

@@ -1,4 +1,4 @@
-export default function Relatorio() {
+export default function Footer() {
     return (
         <div>
 

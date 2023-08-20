@@ -1,7 +1,7 @@
-import TelaSessao from "./TelaSessao";
+import AccountScreen from "./AccountScreen";
 
 export default function App() {
   return (
-      <TelaSessao />
+      <AccountScreen />
   );
 }

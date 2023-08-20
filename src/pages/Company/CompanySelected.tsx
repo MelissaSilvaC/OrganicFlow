@@ -1,7 +1,7 @@
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/Float_Navbar";
 import perfil from '../../assets/img/logo_basica.png'
 
-export default function EmpSelecionada() {
+export default function CompanySelected() {
     return (
         <Navbar>
             {/** Cabeçalho comum em todas as páginas */}
@@ -12,7 +12,7 @@ export default function EmpSelecionada() {
                 {/** Texto qualquer */}
 
                 {/** Barra de pesquisa */}
-                
+
 
                 {/** Espaço para exibir dados da empresa */}
                 <div className='mt-12 grid col-start-3 col-span-3 place-content-center'>

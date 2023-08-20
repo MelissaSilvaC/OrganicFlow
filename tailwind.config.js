@@ -8,7 +8,9 @@ module.exports = {
       },
       colors: {
         'verde_folha': '#4c8f36',
-        'verde_escuro': '#00371b',
+        'verde_escuro': '#00371b', 
+        'amarelo_areia': '#f8f0df', 
+        'preto': '#333333',
       },
     },
   },

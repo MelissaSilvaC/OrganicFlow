@@ -10,7 +10,7 @@
     inputCSS?: string
 }
 
-export default function Campo({ obrigatorio = false, label, placeholder, onChange,  value, type, labelCSS, campoCSS, inputCSS} : Props) {
+export default function TextField({ obrigatorio = false, label, placeholder, onChange,  value, type, labelCSS, campoCSS, inputCSS} : Props) {
     return (
         <div>
             <label className={`${labelCSS}`}>{label}</label>

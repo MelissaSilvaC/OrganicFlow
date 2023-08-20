@@ -1,9 +1,9 @@
 
 import { FiSearch } from 'react-icons/fi';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Float_Navbar';
 import Card from '../../components/Card';
 
-export default function Empresas(){
+export default function Companies(){
     return (
         <Navbar>
             {/** Cabeçalho comum em todas as páginas */}

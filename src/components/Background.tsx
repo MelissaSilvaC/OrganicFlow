@@ -1,7 +1,7 @@
 import React from 'react'
 import banner from '../assets/img/banner.jpg'
 
-export default function ImagemFundo({children}:{children?: React.ReactNode}) {
+export default function Background({children}:{children?: React.ReactNode}) {
     return (
         <div>
             {/** A imagem de fundo é basicamente uma imagem e um degradê branco */}
