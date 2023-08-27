@@ -2,14 +2,13 @@ import logoEmpresa from '../assets/img/logo2.png'
 import { FiSearch } from 'react-icons/fi';
 import { FiFilter } from 'react-icons/fi';
 import fundo from '../assets/img/field.png'
-import ProductCard from '../components/ProductCard';
 
 export default function ProfileScreen({ children }: { children?: React.ReactNode }) {
     return (
-        <div>
-            <div className="bg-red-200 w-screen h-[300px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
+        <div className='h-screen'>
+            <div className="bg-red-200 h-[300px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
             {/** Tela do perfil da empresa */}
-            <div className="bg-preto w-screen h-[650px]">
+            <div className="bg-preto">
                 <div className="bg-verde_folha h-2" />
 
                 {/** Perfil, bio, barra de pesquisa e filtros */}
@@ -21,9 +20,9 @@ export default function ProfileScreen({ children }: { children?: React.ReactNode
                         </div>
                         <div className='flex flex-col ml-[170px]'>
                             <p className='font-bold text-5xl text-white my-4'>Plantinha</p>
-                            <p className='font-medium text-lg text-white'>plantinha@gmail.com</p>
-                            <p className='font-medium text-lg text-white pb-5'>Rua plantao, 123 - Penha/São Paulo - SP</p>
-                            <p className='w-[500px] text-md text-white'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam neque modi aspernatur quisquam nam labore eveniet eligendi delectus voluptatum a doloribus dolor, facilis odit cumque. Mollitia, voluptas perferendis? Dolores, praesentium.</p>
+                            <p className='text-lg text-white'>plantinha@gmail.com</p>
+                            <p className='text-lg text-white pb-5'>Rua plantao, 123 - Penha/São Paulo - SP</p>
+                            <p className='font-light w-[500px] text-md text-white'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam neque modi aspernatur quisquam nam labore eveniet eligendi delectus voluptatum a doloribus dolor, facilis odit cumque. Mollitia, voluptas perferendis? Dolores, praesentium.</p>
                         </div>
                     </div>
 
@@ -39,8 +38,22 @@ export default function ProfileScreen({ children }: { children?: React.ReactNode
                     </div>
                 </div>
 
-                {/** Contaúdo do perfil fiscal/empresa */}
-                <div>{children}</div>
+                {/** Conteúdo do perfil fiscal/empresa */}
+                <div className='h-screen'>
+                    {children}
+
+                    {/** 
+                     * Aqui vai ter um if/else:
+                     * 
+                     * Se o botão clicado levou para a rota /telaLogin/cadastro: Tela de cadastro
+                     * Dentro da tela de cadastro temos o cadastro comum e e o cadastro de pessoa jurídica
+                     * 
+                     * Se o botão clicado levou para a rota /telaLogin/login: Tela de login
+                     * Se esquecer a senha, abre o popup
+                     * 
+                    */}
+
+                </div>
             </div>
 
 

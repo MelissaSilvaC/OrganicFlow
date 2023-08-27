@@ -2,6 +2,7 @@ import { useState } from 'react'
 import TextField from '../Items_Forms/TextField'
 import Button from '../Items_Forms/Button'
 import Title from '../Items_Forms/Title'
+import { Link } from 'react-router-dom'
 
 export default function PanelPartner() {
 
@@ -88,7 +89,7 @@ export default function PanelPartner() {
 
             <div className='flex mt-4 w-full justify-center font-bold text-xl'>
                 <p className='flex text-white mr-2'>Já possui conta? </p>
-                <a href='' className='flex text-verde_folha underline'>Entre</a>
+                <Link to='/sessao/login' className='flex text-verde_folha underline'>Entre</Link>
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-import AccountScreen from "./AccountScreen";
+import AccountScreen from "./SignupScreen";
 
 export default function App() {
   return (

@@ -1,4 +1,4 @@
-import logoEmpresa from "../assets/img/logo_basica.png"
+import logoEmpresa from "../../assets/img/logo_basica.png"
 
 /**Aceitará como parametros o nome e imagem da empresa */
 export default function Card() {

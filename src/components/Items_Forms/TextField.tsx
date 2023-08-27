@@ -27,22 +27,3 @@ export default function TextField({ obrigatorio = false, label, placeholder, onC
         </div>
     )
 }
-
-
-/**
- * Do que o campo login vai precisar?
- * 
- * Obrigatoriedade (Boolean)
- * Label (String)
- * Placeholder (String)
- * onChange (useState na página de sessão   setvalue)
- * value (useState na página de sessão  value)
- * type (String, o tipo do campo, e-mail, password...)
- * 
- * Parametros de estilo
- * labelTCSS
- * campoTCSS
- * inputTCSS
- * 
- * 
- */

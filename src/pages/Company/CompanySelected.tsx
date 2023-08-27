@@ -1,9 +1,9 @@
-import Navbar from "../../components/Float_Navbar";
+import Background from 'components/Background'
 import perfil from '../../assets/img/logo_basica.png'
 
 export default function CompanySelected() {
     return (
-        <Navbar>
+        <Background>
             {/** Cabeçalho comum em todas as páginas */}
 
             {/** Conteúdo da empresa selecionada */}
@@ -51,6 +51,6 @@ export default function CompanySelected() {
 
 
             </div>
-        </Navbar>
+        </Background>
     )
 }
