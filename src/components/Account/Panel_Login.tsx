@@ -4,6 +4,7 @@ import Button from '../Items_Forms/Button'
 import PopupPassword from './PopupPassword'
 import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
+import BasicModal from 'components/Modal'
 
 
 export default function PanelLogin() {
@@ -49,7 +50,7 @@ export default function PanelLogin() {
 
                 {/** Link de recuperação de senha, divisão e autenticação */}
                 <div className='space-y-2 mt-1'>
-                    <a className='text-white text-lg opacity-70 mt-2 underline cursor-pointer'> Esqueceu a senha? </a>
+                    <BasicModal />
                     {/** Ativa o popup */}
 
 

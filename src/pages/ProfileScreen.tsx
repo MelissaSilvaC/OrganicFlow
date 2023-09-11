@@ -1,7 +1,7 @@
 import logoEmpresa from '../assets/img/logo2.png'
 import { FiSearch } from 'react-icons/fi';
 import { FiFilter } from 'react-icons/fi';
-import fundo from '../assets/img/field.png'
+import fundo from '../assets/img/Fundo/field.png'
 
 export default function ProfileScreen({ children }: { children?: React.ReactNode }) {
     return (

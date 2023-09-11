@@ -1,0 +1,10 @@
+npm install
+
+npm i react-router-dom
+
+(instalando a biblioteca do MUI)
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/x-data-grid
+
+(instalando o MobX)
+npm install --save mobx

@@ -1,4 +1,4 @@
-import Background from '../assets/img/loginBg.png'
+import Background from '../assets/img/Fundo/loginBg.png'
 import logoOF from '../assets/img/Logo/white-words-horizontal.png'
 import { Link } from 'react-router-dom'
 import PanelLogin from 'components/Account/Panel_Login'

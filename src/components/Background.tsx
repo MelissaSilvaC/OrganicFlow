@@ -1,5 +1,5 @@
 import React from 'react'
-import Banner from '../assets/img/predio.png'
+import Banner from '../assets/img/Fundo/predio.png'
 
 export default function Background({children}:{children?: React.ReactNode}) {
     return (

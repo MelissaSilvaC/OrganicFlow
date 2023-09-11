@@ -1,21 +1,15 @@
 import TitleComplaint from "components/Cards/TitleComplaint";
+import Table from "components/Table/ComplaintsTable";
 
 export default function ComplaintsList(){
     return (
-        <div className="bg-preto h-screen">
-            <div className="pt-16">
+        <div className="bg-preto h-full py-28">
+            <div className="pt-16 pb-24">
                 <TitleComplaint />
             </div>
-            
-            <div className="text-white text-lg font-medium p-16 space-x-14">
-                <button>Excluir</button>
-                <button>Ordenar por</button>
+            <div className="px-16">
+                <Table />
             </div>
-            
-            <div>
-                {/**Tabela */}
-            </div>
-
         </div>
     )
 }

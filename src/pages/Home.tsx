@@ -1,4 +1,4 @@
-import Background from '../assets/img/hotifruti.png'
+import Background from '../assets/img/Fundo/hotifruti.png'
 
 export default function Home(){
     return(
