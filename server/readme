@@ -1,0 +1,42 @@
+yarn
+npm init -y       
+npm install prisma typescript ts-node @types/node --save-dev
+npx tsc --init    
+npx prisma
+yarn add prisma -D
+yarn prisma init
+npx prisma migrate dev
+yarn add @prisma/client
+npm i --save-dev @types/express
+yarn prisma studio
+
+ATUALIZAÇÃO
+npx prisma validate
+prisma format
+
+Dependências OUT
+npm install bcrypt
+npm install jsonwebtoken
+npm install -D @types/jsonwebtoken
+npm install qrcode 
+
+Requisitos funcionais
+
+•    RF01 – Realizar login. ✅  (sem autenticação google)
+•    RF02 – Consultar relatório. 
+•    RF03 – Cadastrar relatório. 
+•    RF04 – Editar relatório. 
+•    RF05 – Visualizar relatório(preview). 
+•    RF06 – Analisar relatório. 
+•    RF07 – Fazer Denúncia.✅ 
+•    RF08 – Consultar Denúncia.✅
+•    RF09 – Excluir Denúncia.✅
+•    RF10 – Cadastrar Linha do tempo.✅
+•    RF11 – Consultar Linha do tempo.✅
+•    RF12 – Consultar empresas. ✅
+•    RF13 – Manter Fiscal ✅
+
+-------------- Casos que não constam no caso de uso --------------------------
+
+•    RF14 – Fazer feedback
+•    RF15 – Manter gerente ✅

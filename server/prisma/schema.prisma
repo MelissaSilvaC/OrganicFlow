@@ -1,0 +1,233 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String
+  password String
+  email    String
+  company  String?
+  cnpj     String?
+  photo    String?
+  gerente  Boolean @default(false)
+  //photo  Photo[]
+
+  created_at     DateTime         @default(now())
+  UserRole       UserRole[]
+  UserPermission UserPermission[]
+  Denuncia       Denuncia[]
+
+  Relatorio1 Prod_Agri[]
+  Relatorio2 Embalagem[]
+  Relatorio3 Transporte[]
+  Relatorio4 Armazenamento[]
+  Relatorio5 Varejo[]
+
+  Feed Feed[]
+
+  @@map("users")
+}
+
+model Role {
+  id             Int              @id @default(autoincrement())
+  name           String
+  description    String
+  UserRole       UserRole[]
+  RolePermission RolePermission[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_role           Int
+  role              Role   @relation(fields: [id_role], references: [id], onDelete: Cascade)
+  responsavel_email String @default("none")
+
+  @@map("user_role")
+}
+
+model Permission {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+
+  created_at     DateTime         @default(now())
+  RolePermission RolePermission[]
+  UserPermission UserPermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  id            Int        @id @default(autoincrement())
+  id_permission Int
+  permission    Permission @relation(fields: [id_permission], references: [id], onDelete: Cascade)
+
+  id_role Int
+  role    Role @relation(fields: [id_role], references: [id], onDelete: Cascade)
+
+  @@map("role_permission")
+}
+
+model UserPermission {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_permission Int
+  permission    Permission @relation(fields: [id_permission], references: [id], onDelete: Cascade)
+
+  @@map("user_permission")
+}
+
+model Denuncia {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  description String
+  alvo        String
+
+  @@map("denuncia")
+}
+
+model Linha {
+  id Int @id @default(autoincrement())
+
+  Relatorio1 Prod_Agri[]
+  Relatorio2 Embalagem[]
+  Relatorio3 Transporte[]
+  Relatorio4 Armazenamento[]
+  Relatorio5 Varejo[]
+
+  photo         String?
+  local_cultivo String
+  especie       String
+  data_cultivo  String
+  lote          Int
+  qrcode        String? @db.VarChar(10000) // Aumentar o tamanho da coluna qrcode para 1000 caracteres
+
+  @@map("linha")
+}
+
+model Prod_Agri {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_linha Int
+  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
+
+  nome        String
+  local       String
+  dt_plantio  DateTime
+  dt_colheita DateTime
+  insumo      String
+  praticas    String
+  private     Boolean  @default(false)
+
+  @@map("prod_agri")
+}
+
+model Embalagem {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_linha Int
+  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
+
+  nome             String
+  local            String
+  ingrediente      String
+  praticas         String
+  dt_processamento DateTime
+  dt_embalagem     DateTime
+  private          Boolean  @default(false)
+
+  @@map("embalagem")
+}
+
+model Transporte {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_linha Int
+  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
+
+  nome               String
+  praticas           String
+  dt_carregamento    DateTime
+  dt_descarregamento DateTime
+  origem             String
+  destino            String
+  private            Boolean  @default(false)
+
+  @@map("transporte")
+}
+
+model Armazenamento {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_linha Int
+  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
+
+  nome        String
+  local       String
+  praticas    String
+  responsavel String
+  dt_entrada  DateTime
+  dt_saida    DateTime
+  private     Boolean  @default(false)
+
+  @@map("armazenamento")
+}
+
+model Varejo {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  id_linha Int
+  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
+
+  nome       String
+  local      String
+  dt_chegada DateTime
+  private    Boolean  @default(false)
+
+  @@map("varejo")
+}
+
+model Feed {
+  id      Int  @id @default(autoincrement())
+  id_user Int
+  user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  description String
+
+  @@map("feed")
+}
+
+// type Photo {
+//   height Int
+//   width  Int
+//   url    String
+// }
