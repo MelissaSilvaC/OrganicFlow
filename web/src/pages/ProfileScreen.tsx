@@ -5,10 +5,10 @@ import fundo from '../assets/img/Fundo/field.png'
 
 export default function ProfileScreen({ children }: { children?: React.ReactNode }) {
     return (
-        <div className='bg-preto h-full'>
+        <div className='bg-preto'>
             <div className="bg-red-200 h-[300px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
             {/** Tela do perfil da empresa */}
-            <div className="">
+            <div className="h-full">
                 <div className="bg-verde_folha h-2" />
 
                 {/** Perfil, bio, barra de pesquisa e filtros */}
@@ -39,7 +39,7 @@ export default function ProfileScreen({ children }: { children?: React.ReactNode
                 </div>
 
                 {/** Conteúdo do perfil fiscal/empresa */}
-                <div>
+                <div className='pb-16'>
                     {children}
                 </div>
             </div>

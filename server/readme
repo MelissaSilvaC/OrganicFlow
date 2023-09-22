@@ -40,3 +40,9 @@ Requisitos funcionais
 
 •    RF14 – Fazer feedback
 •    RF15 – Manter gerente ✅
+
+gerente ele cadastrar o produto
+cliente ao consultar o produto exibirá todas as linhas do tempo sobre ele, ordenados por id de ordem por data (novo para velho)
+regra de negócio: um lote para cada empresa. um fiscal não pode distribuir o mesmo qrCode e nem o mesmo registro para a linha do tempo
+alterar um registro: if(se o fiscal for o último da lista a inserir o registro, só ele terá a permissão de editar o relatório)
+consultar empresas. consultei uma empresa que não tem permissão

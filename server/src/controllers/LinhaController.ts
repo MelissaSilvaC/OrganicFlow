@@ -26,6 +26,7 @@ export class LinhaController{
         
         const protocol = request.protocol;//pega o protocolo http
         const host = request.headers.host;//pega o host localhost
+        const front= 'organicflow/' //url do front
         const url= `${protocol}://${host}${postUrl}`
         console.log(url)
 

@@ -119,6 +119,13 @@ async consultarEmpresa(request:Request, response:Response){
       const empresa = await prismaClient.user.findMany({
           where:{
             gerente:true
+          },
+          select:{
+            UserRole:{
+              where:{
+                id_role:2,//id_role do gerente
+              }
+            }
           }
           
       })
@@ -131,6 +138,36 @@ async consultarEmpresa(request:Request, response:Response){
 }   
 
 async pesquisarEmpresa(request:Request, response:Response){
+  try {
+    const{id }=request.params
+
+    const gerente=await prismaClient.user.findFirst({
+      where: {
+        id: Number(id),//resolver esse problema. admin exibe
+      },
+      select:{
+        gerente:true
+      }
+      
+    })
+    if(gerente?.gerente==!true){//se for diferente de true
+      return response.json("não tem direito a acessar essa rota")
+    }
+
+    const produto=await prismaClient.user.findMany({
+      where: {
+        id: Number(id),//resolver esse problema. admin exibe
+      },
+      include:{
+        products:{}
+      }
+      
+    })
+
+  } catch (error) {
+    
+  }
+  /*
   try {
     const{id}=request.params
 
@@ -311,7 +348,7 @@ async pesquisarEmpresa(request:Request, response:Response){
         
   } catch (error) {
       return response.json(error)
-  }
+  }*/
 }
 
 }
