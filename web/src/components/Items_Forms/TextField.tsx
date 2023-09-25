@@ -2,7 +2,7 @@
     type?: any
     label?: string
     placeholder?: string
-    value?: any
+    valor?: any
     onChange: (evento: any) => void
     obrigatorio: boolean
     labelCSS?: string
@@ -10,7 +10,7 @@
     inputCSS?: string
 }
 
-export default function TextField({ obrigatorio = false, label, placeholder, onChange,  value, type, labelCSS, campoCSS, inputCSS} : Props) {
+export default function TextField({ obrigatorio = false, label, placeholder, onChange,  valor, type, labelCSS, campoCSS, inputCSS} : Props) {
     return (
         <div>
             <label className={`${labelCSS}`}>{label}</label>
@@ -18,8 +18,8 @@ export default function TextField({ obrigatorio = false, label, placeholder, onC
                 <input 
                     className={`${inputCSS}`} 
                     type={type}
-                    value={value}
-                    onChange={() => {}}
+                    value={valor}
+                    onChange={onChange}
                     required={obrigatorio}
                     placeholder={placeholder}
                 />

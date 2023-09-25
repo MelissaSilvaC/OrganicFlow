@@ -9,8 +9,22 @@ export default function PanelPartner() {
     {/** useStates */ }
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+    const [senhaVerificada, setSenhaVerificada] = useState("");
     const [nomeComercial, setNomeComercial] = useState("")
     const [cnpj, setCnpj] = useState("")
+
+    /**
+     * axios.post('http://localhost:3000' + '/user', {
+            email: email,
+            password: senha,
+            company: nomeComercial
+            //cnpj:cnpj
+        })
+        .then(response => console.log(response + ' dados enviados'))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
+     */
 
     {/** Estilos */ }
     const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
@@ -31,7 +45,7 @@ export default function PanelPartner() {
                             obrigatorio={true}
                             placeholder='Nome comercial'
                             onChange={evento => setNomeComercial(evento.target.value)}
-                            value={nomeComercial}
+                            valor={nomeComercial}
                             type='text'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
@@ -42,7 +56,7 @@ export default function PanelPartner() {
                             obrigatorio={true}
                             placeholder='CNPJ'
                             onChange={evento => setCnpj(evento.target.value)}
-                            value={cnpj}
+                            valor={cnpj}
                             type='text'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
@@ -53,7 +67,7 @@ export default function PanelPartner() {
                             obrigatorio={true}
                             placeholder='E-mail'
                             onChange={evento => setEmail(evento.target.value)}
-                            value={email}
+                            valor={email}
                             type='e-mail'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
@@ -64,7 +78,7 @@ export default function PanelPartner() {
                             obrigatorio={true}
                             placeholder='Senha'
                             onChange={evento => setSenha(evento.target.value)}
-                            value={senha}
+                            valor={senha}
                             type='password'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
@@ -74,8 +88,8 @@ export default function PanelPartner() {
                         <TextField
                             obrigatorio={true}
                             placeholder='Confirmar senha'
-                            onChange={evento => setSenha(evento.target.value)}
-                            value={senha}
+                            onChange={evento => setSenhaVerificada(evento.target.value)}
+                            valor={senhaVerificada}
                             type='password'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}

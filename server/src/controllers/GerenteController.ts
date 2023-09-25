@@ -159,7 +159,7 @@ async pesquisarEmpresa(request:Request, response:Response){
         id: Number(id),//resolver esse problema. admin exibe
       },
       include:{
-        products:{}
+        Produto:{}
       }
       
     })

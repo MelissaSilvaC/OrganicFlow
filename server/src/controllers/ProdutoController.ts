@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 export class ProdutoController {
   async criar(request: Request, response: Response) {
-    const { nome, photo, id_linha } = request.body;
+    const { nome, photo} = request.body;
 
 
     const produto = await prismaClient.produto.create({
@@ -14,9 +14,7 @@ export class ProdutoController {
         nome,
         photo,
         user: { connect: { id:Number(request.user.id)  } }, // Conecta com o usuário que está criando o registro
-        linha: {
-          connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-        }
+        
       },
     });
 
@@ -56,19 +54,24 @@ export class ProdutoController {
     return response.json(produto);
   }
 
-//   async pesquisar(request: Request, response: Response) {
-//     const { id } = request.query; // GET /produto?id=1; o query vem da URL
-//     const produtoList = await prismaClient.produto.findMany({
-//       where: {
-//         nome: {
-//           contains: String(nome), // Exibe uma lista de registros com o nome parecido
-//         },
-//         user: { id:Number(request.user.id) }, // Verifica se o registro pertence ao usuário autenticado
-//       take: 4, // Limita o resultado a 4 registros
-//     });
+  async pesquisar(request: Request, response: Response) {
+    try {
+      const{id}=request.params
 
-//     return response.json(produtoList);
-//   }
+      const produto = prismaClient.produto.findMany({
+        where:{
+          id:Number(id)
+        },
+        include:{
+          Linha:{}
+        }
+      })
+
+
+    } catch (error) {
+        return response.json(error)
+    }
+  }
 
   async deletar(request: Request, response: Response) {
     const { id } = request.params;

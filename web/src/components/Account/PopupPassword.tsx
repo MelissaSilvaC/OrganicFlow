@@ -27,7 +27,7 @@ export default function PopupPassword() {
                     obrigatorio={true}
                     placeholder='E-mail'
                     onChange={evento => setReEmail(evento.target.value)}
-                    value={ReEmail}
+                    valor={ReEmail}
                     type='e-mail'
                     campoCSS={campoTCSS}
                     inputCSS={inputTCSS}

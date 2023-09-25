@@ -55,6 +55,8 @@ router.get("/linha/:id",linhaController.pesquisar)
 router.get("/empresa/:id",gerenteController.pesquisarEmpresa)
 router.get("/empresa",gerenteController.consultarEmpresa)
 router.get("/fiscal/:id", fiscalController.consultarFiscal)
+router.get("/produto/:id", produtoController.pesquisar)
+
 
 //cliente cadastrado
 router.post("/feed", feedController.criar)

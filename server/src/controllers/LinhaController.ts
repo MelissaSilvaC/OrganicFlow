@@ -4,7 +4,7 @@ const QRCode = require('qrcode');
 
 export class LinhaController{
     async criar(request:Request, response:Response){
-        const{local_cultivo,especie,data_cultivo,lote,photo}=request.body;
+        const{local_cultivo,especie,data_cultivo,lote,photo,id_produto}=request.body;
 
         const linha=await prismaClient.linha.create({
             data:{
@@ -12,8 +12,14 @@ export class LinhaController{
                 especie,
                 data_cultivo,
                 lote,
-                photo
+                photo,
+                produto: {
+                    connect: { id: Number(id_produto) } // Conecta com o id_linha obtido do corpo da requisição
+                }
             }
+
+        // fazer o método de ele escolher o produto cujo fará a conexão
+
         })
         const LinhaId=linha.id;    // Obtém o ID do novo post
         response.redirect(`/linha/${LinhaId}`)//redireciona pra pesquisa do back-end

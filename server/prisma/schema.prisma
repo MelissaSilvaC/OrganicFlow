@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -20,7 +20,9 @@ model User {
   cnpj     String?
   photo    String?
   gerente  Boolean @default(false)
+  fiscal Boolean @default(false)
   //photo  Photo[]
+  medalha Boolean @default(false)
 
   created_at     DateTime         @default(now())
   UserRole       UserRole[]
@@ -33,7 +35,8 @@ model User {
   Relatorio4 Armazenamento[]
   Relatorio5 Varejo[]
 
-  Feed Feed[]
+  Feed    Feed[]
+  Produto Produto[]
 
   @@map("users")
 }
@@ -120,7 +123,9 @@ model Linha {
   especie       String
   data_cultivo  String
   lote          Int
-  qrcode        String? @db.VarChar(10000) // Aumentar o tamanho da coluna qrcode para 1000 caracteres
+  qrcode        String?   @db.VarChar(10000) // Aumentar o tamanho da coluna qrcode para 1000 caracteres
+  id_produto Int
+  produto    Produto @relation(fields: [id_produto], references: [id], onDelete: Cascade)
 
   @@map("linha")
 }
@@ -222,11 +227,10 @@ model Produto {
   id_user Int
   user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
 
-  id_linha Int
-  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
+  Linha Linha[]
 
-  nome       String
-  photo      String
+  nome  String
+  photo String
 
   @@map("produto")
 }

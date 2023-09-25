@@ -27,6 +27,15 @@ export class FiscalController {
       if (userFiscal instanceof Error) {
         return response.status(400).json(userFiscal.message);
       }
+      
+      const fiscal=await prismaClient.user.update({
+        where:{
+          id:Number(id_user)
+        },
+        data:{
+          fiscal:true
+        }
+      })
 
       const userACL=await prismaClient.user.findFirst({
         where:{
@@ -46,6 +55,7 @@ export class FiscalController {
           }
         },
       })
+
 
       return response.json(userACL)
     }

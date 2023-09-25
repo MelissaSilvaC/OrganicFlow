@@ -5,33 +5,50 @@ import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
 import IUser from 'types/IUser'
 import { useNavigate } from "react-router-dom"
+import axios from 'axios'
 
 export default function PanelSignup() {
 
     {/** useStates */ }
+    const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [senhaVerificada, setSenhaVerificada] = useState("");
     const navigate = useNavigate()
-    //const { cadastrarDados, erro, sucesso } = usePost()
+
+    const cadastrarDados = ({ name, email, password }: IUser) => {
+        console.log(name + email + password)
+        axios.post('http://localhost:3001' + '/user', {
+            name: name,
+            email: email,
+            password: password,
+        })
+        .then(response => console.log(response + ' dados enviados'))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
+    }
 
     {/** Estilos */ }
     const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
     const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1'
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
+        evento.preventDefault();
+
+        console.log(nome, email, senha)
 
         const usuarioC: IUser = {
+            name : nome,
             email: email,
             password: senha,
         }
 
-        if(senha === senhaVerificada){
+        if(senha == senhaVerificada){
             try {
-                //cadastrarDados({ url: 'clinica', dados: clinica });
-                navigate('/')
+                cadastrarDados(usuarioC);
+                navigate('/sessao/login')
             } catch (erro) {
                 erro && alert('Erro ao cadastrar os dados')
             }
@@ -41,6 +58,7 @@ export default function PanelSignup() {
         
     }
 
+    
     return (
         <div>
             <Title texto='Cadastre-se'/>
@@ -49,13 +67,24 @@ export default function PanelSignup() {
                 {/** Espaço destinado ao formulário */}
                 <div className='h-auto w-[450px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
                     <form className='w-full' onSubmit={handleSubmit}>
+                        {/** Campo nome */}
+                        <TextField
+                            obrigatorio={true}
+                            placeholder='Nome'
+                            onChange={evento => setNome(evento.target.value)}
+                            valor={nome}
+                            type='text'
+                            campoCSS={campoTCSS}
+                            inputCSS={inputTCSS}
+                        />
+
                         {/** Campo e-mail */}
                         <TextField
                             obrigatorio={true}
                             placeholder='E-mail'
-                            onChange={setEmail}
-                            value={email}
-                            type='e-mail'
+                            onChange={evento => setEmail(evento.target.value)}
+                            valor={email}
+                            type='text'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
@@ -64,8 +93,8 @@ export default function PanelSignup() {
                         <TextField
                             obrigatorio={true}
                             placeholder='Senha'
-                            onChange={setSenha}
-                            value={senha}
+                            onChange={evento => setSenha(evento.target.value)}
+                            valor={senha}
                             type='password'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
@@ -75,20 +104,23 @@ export default function PanelSignup() {
                         <TextField
                             obrigatorio={true}
                             placeholder='Confirmar senha'
-                            onChange={setSenhaVerificada}
-                            value={senhaVerificada}
+                            onChange={evento => setSenhaVerificada(evento.target.value)}
+                            valor={senhaVerificada}
                             type='password'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
 
-                        <Button botaoCSS={botaoTCSS} texto='Cadastre-se' />
+                        
+                        <Button botaoCSS={botaoTCSS} texto='Cadastre-se'/>
 
                         {/** Link de recuperação de senha, divisão e autenticação */}
-                        <div className='space-y-2 mt-5'>
+                        {/**
+                         * <div className='space-y-2 mt-5'>
                             <div className='h-[2px] w-full bg-white opacity-70' />
                             <Button botaoCSS={botaoTCSS} texto='Logar com conta Google' />
                         </div>
+                         */}
                     </form>
                 </div>
             </div>
