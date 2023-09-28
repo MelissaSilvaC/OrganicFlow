@@ -8,7 +8,8 @@ import Timeline from './pages/Inspector/Timeline'
 import Home from './pages/Home'
 import LoginScreen from 'pages/LoginScreen'
 import AboutUs from 'pages/AboutUs'
-import ComplaintsList from 'pages/Manager/ComplaintsList'
+import ComplaintsList from 'pages/Administration/ComplaintsList'
+import MUINavbar from 'components/MUINavbar'
 
 export default function AppRouter(){
     return(
@@ -17,7 +18,7 @@ export default function AppRouter(){
             {/**Se aparecer uma barra horizontal na tela, foi a navbar */}
             
             <Routes>
-                <Route path='/' element={<Navbar />} >
+                <Route path='/' element={<MUINavbar />} >
                     <Route index element={<Home />}/>
                     <Route path='sobre' element={<AboutUs/>} />
                     <Route path='empresas' element={<Companies />} />

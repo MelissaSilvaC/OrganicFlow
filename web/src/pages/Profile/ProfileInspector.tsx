@@ -11,6 +11,7 @@ export default function ProfileInspector(){
                     <p className="text-white text-2xl px-24 pb-8">Cadastro na empresas</p>
 
                     <div className="flex">
+                        {/**Função map listando os perfis da empresa */}
                         <CompanyCard /><CompanyCard /><CompanyCard /><CompanyCard />
                         <CompanyCard /><CompanyCard /><CompanyCard /><CompanyCard />
                     </div>
@@ -20,6 +21,7 @@ export default function ProfileInspector(){
                 <div className="px-24">
                     <p className="text-white text-2xl pb-8">Produtos da empresa (selecionada)</p>
                     <div className="flex flex-wrap">
+                        {/**Função map que lista os produtos da empresa */}
                         <ProductCard /><ProductCard /><ProductCard /><ProductCard />
                         <ProductCard /><ProductCard /><ProductCard /><ProductCard />
                         <ProductCard /><ProductCard /><ProductCard /><ProductCard />

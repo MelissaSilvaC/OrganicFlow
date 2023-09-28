@@ -8,7 +8,10 @@ export default function ComplaintsList(){
                 <TitleComplaint />
             </div>
             <div className="px-16">
-                <Table />
+                
+                <div className="bg-gray-200">
+                    <Table />
+                </div>
             </div>
         </div>
     )

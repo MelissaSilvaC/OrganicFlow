@@ -10,6 +10,8 @@ export default function Companies(){
 
                 <div className='flex bg-red-300'>
                     <div className='bg-amarelo_areia opacity-50 w-[1440px] h-screen rounded-xl flex flex-wrap p-10'>
+
+                        {/**Função que lista os perfis da empresa */}
                         <Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card /><Card />
                     </div>
                 </div>
