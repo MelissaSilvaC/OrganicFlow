@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/img/Logo/logo-letras.png'
-import perfil from '../assets/img/logo_basica.png'
+import logo from '../../assets/img/Logo/color-words-horizontal.png'
+import perfil from '../../assets/img/logo_basica.png'
 import { Outlet } from 'react-router-dom'
 
 const itemListaTCSS = 'px-4 py-3 font-bold hover:bg-verde_escuro hover:text-neutral-50 rounded-lg'

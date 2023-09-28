@@ -1,4 +1,4 @@
-import IProduct from "types/IProduct";
+import IProduct from "types/IProduto";
 
 export default function TestProduct({ image, nameProduct } : IProduct) {
     return (

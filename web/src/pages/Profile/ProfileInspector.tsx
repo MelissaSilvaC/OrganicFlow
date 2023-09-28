@@ -1,21 +1,32 @@
+import React from "react";
+import Slider from "react-slick";
 import CompanyCard from "../../components/Cards/CompanyCard";
 import ProductCard from "../../components/Cards/ProductCard";
 import ProfileScreen from "../ProfileScreen";
 
-export default function ProfileInspector(){
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+export default function ProfileInspector() {
+    const companySettings = {
+        infinite: true,
+        slidesToShow: 6, // Número de cartões exibidos de cada vez
+        slidesToScroll: 1, // Número de cartões para rolar de cada vez
+    };
+
+    
+
     return (
         <ProfileScreen>
             <div className="space-y-28 mt-24">
-                <div>
-                    {/** Scroll bar horizontal */}
-                    <p className="text-white text-2xl px-24 pb-8">Cadastro na empresas</p>
+                <div className="px-24">
+                    <p className="text-white text-2xl px-24 pb-8">Cadastro nas empresas</p>
 
-                    <div className="flex">
-                        {/**Função map listando os perfis da empresa */}
+                    <Slider {...companySettings}>
+                        {/* Lista dos perfis da empresa */}
                         <CompanyCard /><CompanyCard /><CompanyCard /><CompanyCard />
                         <CompanyCard /><CompanyCard /><CompanyCard /><CompanyCard />
-                    </div>
-                    
+                    </Slider>
                 </div>
 
                 <div className="px-24">
@@ -32,5 +43,5 @@ export default function ProfileInspector(){
                 </div>
             </div>
         </ProfileScreen>
-    )
+    );
 }

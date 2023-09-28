@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import SignupScreen from './pages/SignupScreen'
 import Companies from './pages/Company/Companies'
 import ProfileCompany from './pages/Profile/ProfileCompany'
-import Navbar from './components/Navbar'
+import Navbar from './components/navbar/Navbar'
 import ProfileInspector from './pages/Profile/ProfileInspector'
 import Timeline from './pages/Inspector/Timeline'
 import Home from './pages/Home'
 import LoginScreen from 'pages/LoginScreen'
 import AboutUs from 'pages/AboutUs'
 import ComplaintsList from 'pages/Administration/ComplaintsList'
-import MUINavbar from 'components/MUINavbar'
+import MUINavbar from 'components/navbar/MUINavbar'
 
 export default function AppRouter(){
     return(

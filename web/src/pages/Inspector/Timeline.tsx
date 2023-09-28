@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import ProductImage from "../../components/Cards/ProductImage";
 import CustomPaginationActionsTable from "components/Table/TimelinesTable";
 
