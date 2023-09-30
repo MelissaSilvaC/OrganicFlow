@@ -1,5 +1,5 @@
+import TitleTimeLine from "components/Cards/TitleTimeLine";
 import Navbar from "../../components/navbar/Navbar";
-import ProductImage from "../../components/Cards/ProductImage";
 import CustomPaginationActionsTable from "components/Table/TimelinesTable";
 
 
@@ -7,7 +7,7 @@ export default function Timeline() {
     return (
         <div className="bg-preto h-full py-24">
             <div className="flex items-end space-x-28">
-                <ProductImage />
+                <TitleTimeLine />
             </div>
             <div className="py-28">
                 {/**Tabela */}

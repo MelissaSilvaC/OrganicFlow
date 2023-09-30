@@ -49,7 +49,7 @@ export default function MUINavbar() {
         <AppBar position="static" sx={{backgroundColor: '#f8f0df'}}>
             <Container maxWidth="xl" className='bg-amarelo_areia'>
                 <Toolbar disableGutters>
-                    {/** Logo */}
+                    {/** Logo normal*/}
                     <Link to='/sessao' >
                           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                         {/**<img src={logo} className='w-[220px] ml-12' /> */}
@@ -96,7 +96,7 @@ export default function MUINavbar() {
                         </Menu>
                     </Box>
 
-                    {/** Logo */}
+                    {/** Logo simples*/}
                     <Link to='/sessao' >
                         <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                         {/**<img src={logoSimples} className='w-[220px] ml-12' /> */}
