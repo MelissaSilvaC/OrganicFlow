@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
+import BasicAccordion from './MUIAccordion';
 
 export default function Accordion(){
     const relatorio = 'bg-blue-200 h-[120px] w-[650px] flex transform hover:shadow-2xl transition duration-300 ease-in-out '
@@ -13,76 +14,14 @@ export default function Accordion(){
     return (
         <Container maxWidth="sm">
             <Box sx={{
-                bgcolor: '#cfe8fc',
-                height: '70vh',
                 width: '50vh',
                 display: 'flex',
                 justifyContent: 'center',
             }}>
-                <div className="bg-red-400 font-montserrat flex justify-center items-center">
+                <div className="font-montserrat flex justify-center items-center py-16">
 
-
-                    <div className="px-16">
-
-                        <Link to='/'>
-                            <section className={`${relatorio} rounded-t-2xl`}>
-                                <div className={`${data} rounded-ss-2xl`}>
-                                    <p>Mes</p>
-                                    <p>00</p>
-                                </div>
-                                <div className={texto}> <p>Produção Agrícola</p> </div>
-                                <div className='bg-red-200 h-full w-[30%]' />
-                                {espaco}
-                            </section>
-                        </Link>
-                        {divisoria}
-                        <Link to='/'>
-                            <section className={relatorio}>
-                                <div className={data}>
-                                    <p>Mes</p>
-                                    <p>00</p>
-                                </div>
-                                <div className={texto}> <p>Processamento e Embalagem</p> </div>
-                                <div className='bg-red-200 h-full w-[30%]' />
-                                {espaco}
-                            </section>
-                        </Link>
-                        {divisoria}
-                        <Link to='/'>
-                            <section className={relatorio}>
-                                <div className={data}>
-                                    <p>Mes</p>
-                                    <p>00</p>
-                                </div>
-                                <div className={texto}> <p>Transporte e Logística</p> </div>
-                                <div className='bg-red-200 h-full w-[30%]' />
-                                {espaco}
-                            </section>
-                        </Link>
-                        {divisoria}
-                        <Link to='/'>
-                            <section className={relatorio}>
-                                <div className={data}>
-                                    <p>Mes</p>
-                                    <p>00</p>
-                                </div>
-                                <div className={texto}> <p>Armazenamento e Distribuição</p> </div>
-                                <div className='bg-red-200 h-full w-[30%]' />
-                                {espaco}
-                            </section>
-                        </Link>
-                        {divisoria}
-                        <Link to='/'>
-                            <section className={`${relatorio} rounded-b-2xl`}>
-                                <div className={`${data} rounded-es-2xl`}>
-                                    <p>Mes</p>
-                                    <p>00</p>
-                                </div>
-                                <div className={texto}> <p>Varejo e Consumo</p> </div>
-                                <div className='bg-red-200 h-full w-[30%]' />
-                                {espaco}
-                            </section>
-                        </Link>
+                    <div className="px-24">
+                        <BasicAccordion />
                     </div>
                 </div>
 

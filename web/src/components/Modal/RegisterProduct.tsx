@@ -17,6 +17,7 @@ const style = {
     p: 4,
 };
 
+
 export default function ModalProduct({ children }: { children?: React.ReactNode }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);

@@ -4,18 +4,9 @@ import PanelPartner from "./Account/Panel_Partner";
 
 export default function ToggleSwitchTest(){
     const [isToggled, setIsToggled] = React.useState(false);
-
-    /**
-     * const spanAtivo = "h-full w-[130px] rounded-full bg-white p-2 justify-center shadow-black shadow-2xl absolute left-0 shadow-lg shadow-gray-400 cursor-pointer"
-    const spanDesativo = "h-full w-[130px] rounded-full bg-white p-2 justify-center shadow-black shadow-2xl absolute right-0 shadow-lg shadow-gray-400 cursor-pointer"
-
-     */
-    
-
     const toggle = () => {
         setIsToggled((prev) => !prev);
     };
-
     
     return(
         <>

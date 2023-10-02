@@ -3,10 +3,9 @@ import CustomPaginationActionsTable from "components/Table/TimelinesTable";
 
 export default function TimelineList() {
     return (
-        <div className="bg-preto h-full py-24">
-            <div className="flex items-end space-x-28">
-                <TitleTimeLine />
-            </div>
+        <div className="bg-preto h-full pt-[80px] pb-5">
+            <TitleTimeLine />
+            
             <div className="py-28">
                 {/**Tabela */}
                 <div className="px-16">
