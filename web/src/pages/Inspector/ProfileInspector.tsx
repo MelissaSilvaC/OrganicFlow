@@ -45,8 +45,8 @@ export default function ProfileInspector() {
         <ProfileScreen>
             <div className="space-y-28 mt-24">
                 <div className="px-24">
-                    <p className="text-white text-2xl px-24 pb-8">Cadastro nas empresas</p>
-
+                    <p className="text-white text-2xl pb-8">Cadastro nas empresas</p>
+                    {/**Notas: arrumar a responsividade e fazer o slider só aparecer quando os cards preencherem a tela */}
                     <Slider {...companySettings}>
                         {/* Lista dos perfis da empresa */}
                         <CompanyCard /><CompanyCard /><CompanyCard /><CompanyCard />
@@ -55,7 +55,7 @@ export default function ProfileInspector() {
                 </div>
 
                 <div className="px-24">
-                    <p className="text-white text-2xl pb-8">Produtos da empresa (selecionada)</p>
+                    <p className="text-white text-2xl pb-8">Produtos da empresa (nomeDaEmpresa)</p>
                     <div className="flex flex-wrap">
                         {/**Função map que lista os produtos da empresa */}
                         

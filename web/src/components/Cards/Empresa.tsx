@@ -1,5 +1,7 @@
 import empresa from '../../assets/img/logo2.png'
 import React, { useState } from 'react';
+import TextShadow from './TextShadow';
+import { Link } from 'react-router-dom';
 
 export default function CompanyCard(){
     const [hover, setHover] = useState(false);
@@ -13,20 +15,22 @@ export default function CompanyCard(){
     };
 
     return(
-        <div
-            className="w-64 h-52 mx-5 flex flex-col justify-end rounded-[50px] shadow border-2 border-verde_escuro bg-verde_folha bg-cover"
-            style={{ 
-                backgroundImage: `url(${empresa})`,
-                cursor: hover ? 'pointer' : 'auto'
-            }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-            {hover && (
-                <div className='w-full h-[130px] rounded-b-[40px] bg-gradient-to-t from-black to-transparent flex flex-col justify-end' >
-                    <p className='capitalize text-white font-semibold text-xl m-6'>empresa</p>
+        <>
+            <Link to='/empresa/perfil'>
+                <div
+                    className="w-56 h-44 mx-5 flex flex-col justify-end rounded-[50px] shadow border-2 border-verde_escuro bg-verde_folha bg-cover"
+                    style={{
+                        backgroundImage: `url(${empresa})`,
+                        cursor: hover ? 'pointer' : 'auto'
+                    }}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    {hover && (
+                        <TextShadow nome='empresa' />
+                    )}
                 </div>
-            )}
-        </div>
+            </Link>
+        </>
     )
 }

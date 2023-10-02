@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+import ModalScreen from '@mui/material/Modal';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -23,7 +23,7 @@ export default function BasicModal({ children }: { children?: React.ReactNode })
     return (
         <div>
             <a onClick={ handleOpen } className='text-white text-lg opacity-70 mt-2 underline cursor-pointer'> Esqueceu a senha? </a>
-            <Modal
+            <ModalScreen
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -32,7 +32,7 @@ export default function BasicModal({ children }: { children?: React.ReactNode })
                 <Box sx={style}>
                     {children}
                 </Box>
-            </Modal>
+            </ModalScreen>
         </div>
     );
 }

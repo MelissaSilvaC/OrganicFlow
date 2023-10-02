@@ -12,7 +12,6 @@ export default function SignupScreen() {
                 <div className='flex basis-2/3 flex-col justify-center items-center bg-black bg-opacity-50 w-full h-screen '>
                     <ToggleButton/>
                 </div>
-
                 
                 <div className='flex items-center'>
                     <Link to='/empresa/perfil'>

@@ -1,5 +1,5 @@
  interface Props {
-    type?: any
+    tipo?: string
     label?: string
     placeholder?: string
     valor?: any
@@ -10,14 +10,14 @@
     inputCSS?: string
 }
 
-export default function TextField({ obrigatorio = false, label, placeholder, onChange,  valor, type, labelCSS, campoCSS, inputCSS} : Props) {
+export default function TextField({ obrigatorio = false, label, placeholder, onChange,  valor, tipo, labelCSS, campoCSS, inputCSS} : Props) {
     return (
         <div>
             <label className={`${labelCSS}`}>{label}</label>
             <div className={`${campoCSS}`}>
                 <input 
                     className={`${inputCSS}`} 
-                    type={type}
+                    type={tipo}
                     value={valor}
                     onChange={onChange}
                     required={obrigatorio}

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+import ModalScreen from '@mui/material/Modal';
 import { GrAddCircle } from 'react-icons/gr';
+import { TfiClose } from 'react-icons/tfi'
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -21,23 +22,26 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    var ButtonCSS = "w-48 h-48 m-5 flex flex-col justify-center items-center rounded-[50px] border-4 border-verde_escuro bg-verde_palido"
-
     return (
         <div>
-            <button onClick={handleOpen} className={ButtonCSS} >
-                <GrAddCircle className='w-24 h-24' />
+            <button onClick={handleOpen} className="w-40 h-40 m-5 flex flex-col justify-center items-center rounded-[50px] border-4 border-verde_escuro bg-verde_palido transform hover:shadow-2xl hover:bg-lime-600 transition duration-300 ease-in-out" >
+                <GrAddCircle className='w-20 h-20' />
             </button>
-            <Modal
+            <ModalScreen
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+                    <div className='flex justify-end'>
+                        <button onClick={handleClose}>
+                            <TfiClose className='w-8 h-8 fill-gray-300' />
+                        </button>
+                    </div>
                     {children}
                 </Box>
-            </Modal>
+            </ModalScreen>
         </div>
     );
 }

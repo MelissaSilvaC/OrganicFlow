@@ -6,7 +6,7 @@ import fundo from '../assets/img/Fundo/field.png'
 export default function ProfileScreen({ children }: { children?: React.ReactNode }) {
     return (
         <div className='bg-preto'>
-            <div className="bg-red-200 h-[300px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
+            <div className="h-[300px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
             {/** Tela do perfil da empresa */}
             <div className="h-full">
                 <div className="bg-verde_folha h-2" />
@@ -19,7 +19,7 @@ export default function ProfileScreen({ children }: { children?: React.ReactNode
                             <img className="w-36 h-36 rounded-full top-[-55px] absolute" src={logoEmpresa} />
                         </div>
                         <div className='flex flex-col ml-[170px]'>
-                            <p className='font-bold text-5xl text-white my-4'>Plantinha</p>
+                            <p className='font-bold text-4xl text-white my-4'>Plantinha</p>
                             <p className='text-lg text-white'>plantinha@gmail.com</p>
                             <p className='text-lg text-white pb-5'>Rua plantao, 123 - Penha/São Paulo - SP</p>
                             <p className='font-light w-[500px] text-md text-white'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam neque modi aspernatur quisquam nam labore eveniet eligendi delectus voluptatum a doloribus dolor, facilis odit cumque. Mollitia, voluptas perferendis? Dolores, praesentium.</p>

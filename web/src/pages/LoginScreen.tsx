@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import PanelLogin from 'components/Account/Panel_Login'
 
 export default function LoginScreen() {
-
     return (
         <div className='w-screen h-screen bg-cover' style={{ backgroundImage: `url(${Background})` }}>
             <div className='flex flex-row gap-5'>

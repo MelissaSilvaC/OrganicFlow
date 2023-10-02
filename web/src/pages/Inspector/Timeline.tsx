@@ -1,20 +1,20 @@
 import TitleTimeLine from "components/Cards/TitleTimeLine";
-import Navbar from "../../components/navbar/Navbar";
-import CustomPaginationActionsTable from "components/Table/TimelinesTable";
+import Accordion from 'components/Accordion/Accordion';
+import BasicAccordion from "components/Accordion/MUIAccordion";
 
-
-export default function Timeline() {
+export default function TimeLine() {
     return (
-        <div className="bg-preto h-full py-24">
-            <div className="flex items-end space-x-28">
-                <TitleTimeLine />
+        <div className="bg-preto h-full pt-[80px] pb-5">
+            <TitleTimeLine />
+            <div className="text-white font-medium ml-24 my-12">
+                <p>ID: (parametro ID)</p>
+                <p>(parametro data)</p>
+                <p>Endereço do fornecedor: (parametro Fornecedor)</p>
+                <p>Número do lote: (parametro Lote)</p>
             </div>
-            <div className="py-28">
-                {/**Tabela */}
-                <div className="px-16">
-                    <CustomPaginationActionsTable />
-                </div>
-            </div>
+            <Accordion />
+            <BasicAccordion />
         </div>
+        
     )
 }

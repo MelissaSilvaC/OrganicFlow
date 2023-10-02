@@ -139,7 +139,8 @@ export default function CustomPaginationActionsTable() {
                                 <Link to={`/link-da-denuncia${row.id}`}>ID: {row.id}</Link>
                             </TableCell>
                             <TableCell component="th" scope="row" style={{ color: `white` }}>
-                                <Link to={`/link-da-denuncia${row.id}`}>{row.data}</Link>
+                                {/**<Link to={`/link-da-denuncia${row.id}`}>{row.data}</Link> */}
+                                <Link to={`/fiscal/lista/linhatempo`}>{row.data}</Link>
                             </TableCell>
                         </TableRow>
                     ))}

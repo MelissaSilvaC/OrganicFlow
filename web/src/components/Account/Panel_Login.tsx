@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import TextField from '../Items_Forms/TextField'
 import Button from '../Items_Forms/Button'
-import PopupPassword from './PopupPassword'
 import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
-import BasicModal from 'components/Modal'
+import BasicModal from 'components/Modal/RecoverPassword'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 
@@ -57,7 +56,7 @@ export default function PanelLogin() {
                         placeholder='E-mail'
                         onChange={evento => setEmail(evento.target.value)}
                         valor={email}
-                        type='e-mail'
+                        tipo='e-mail'
                         campoCSS={campoTCSS}
                         inputCSS={inputTCSS}
                     />
@@ -68,7 +67,7 @@ export default function PanelLogin() {
                         placeholder='Senha'
                         onChange={evento => setSenha(evento.target.value)}
                         valor={senha}
-                        type='password'
+                        tipo='password'
                         campoCSS={campoTCSS}
                         inputCSS={inputTCSS}
                     />
@@ -84,7 +83,7 @@ export default function PanelLogin() {
                             placeholder='E-mail'
                             onChange={evento => setEmail(evento.target.value)}
                             valor={email}
-                            type='e-mail'
+                            tipo='e-mail'
                             campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                             inputCSS={inputTCSS}
                         />

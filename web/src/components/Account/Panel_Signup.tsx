@@ -45,7 +45,7 @@ export default function PanelSignup() {
             password: senha,
         }
 
-        if(senha == senhaVerificada){
+        if(senha === senhaVerificada){
             try {
                 cadastrarDados(usuarioC);
                 navigate('/sessao/login')
@@ -73,7 +73,7 @@ export default function PanelSignup() {
                             placeholder='Nome'
                             onChange={evento => setNome(evento.target.value)}
                             valor={nome}
-                            type='text'
+                            tipo='text'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
@@ -84,7 +84,7 @@ export default function PanelSignup() {
                             placeholder='E-mail'
                             onChange={evento => setEmail(evento.target.value)}
                             valor={email}
-                            type='text'
+                            tipo='text'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
@@ -95,7 +95,7 @@ export default function PanelSignup() {
                             placeholder='Senha'
                             onChange={evento => setSenha(evento.target.value)}
                             valor={senha}
-                            type='password'
+                            tipo='password'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
@@ -106,7 +106,7 @@ export default function PanelSignup() {
                             placeholder='Confirmar senha'
                             onChange={evento => setSenhaVerificada(evento.target.value)}
                             valor={senhaVerificada}
-                            type='password'
+                            tipo='password'
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />

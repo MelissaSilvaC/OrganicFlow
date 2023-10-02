@@ -40,7 +40,7 @@ export default function MUINavbar() {
         { label: 'Quem somos', to: '/sobre'}, 
         { label: 'Perfil empresa', to: '/empresa/perfil'},
         { label: 'Perfil fiscal', to: '/fiscal/perfil' },
-        { label: 'Linha do tempo', to: '/fiscal/linhatempo' },
+        { label: 'Lista de linhas do tempo', to: 'fiscal/lista' },
         { label: 'Lista de denúncias', to: '/admin/listadenuncias' },
     ];
 
@@ -86,11 +86,13 @@ export default function MUINavbar() {
                         }}
                         >
                         {rotas.map((rota, index) => (
-                            <MenuItem key={index} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    {rota.label}
-                                </Typography>
-                            </MenuItem>
+                            <Link to={rota.to}>
+                                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        {rota.label}
+                                    </Typography>
+                                </MenuItem>
+                            </Link>
                         ))}
                         
                         </Menu>
