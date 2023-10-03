@@ -1,7 +1,7 @@
 import Background from '../assets/img/Fundo/field.png'
 import logoOF from '../assets/img/Logo/white-words-horizontal.png'
 import { Link } from 'react-router-dom'
-import ToggleButton from "../components/ToggleButton"
+import ToggleButton from "../components/Account/ToggleButton"
 
 export default function SignupScreen() {
     return (

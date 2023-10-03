@@ -2,8 +2,36 @@ import logoEmpresa from '../assets/img/logo2.png'
 import { FiSearch } from 'react-icons/fi';
 import { FiFilter } from 'react-icons/fi';
 import fundo from '../assets/img/Fundo/field.png'
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 
 export default function ProfileScreen({ children }: { children?: React.ReactNode }) {
+
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [company, setCompany] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [photo, setPhoto] = useState('');
+    const [medalha, setMedalha] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:3001'+'/empresa/:id')
+        .then(response => {
+            const { name, email, company, cnpj, photo, medalha } = response.data;
+            setNome(name);
+            setEmail(email);
+            setCompany(company);
+            setCnpj(cnpj);
+            setPhoto(photo);
+            setMedalha(medalha);
+            
+            console.log(name)
+        })
+            .catch(error => {
+                console.error('Erro ao buscar dados:', error);
+            });
+    }, []);
+
     return (
         <div className='bg-preto'>
             <div className="h-[300px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
@@ -19,8 +47,8 @@ export default function ProfileScreen({ children }: { children?: React.ReactNode
                             <img className="w-36 h-36 rounded-full top-[-55px] absolute" src={logoEmpresa} />
                         </div>
                         <div className='flex flex-col ml-[170px]'>
-                            <p className='font-bold text-4xl text-white my-4'>Plantinha</p>
-                            <p className='text-lg text-white'>plantinha@gmail.com</p>
+                            <p className='font-bold text-4xl text-white my-4'>{nome}</p>
+                            <p className='text-lg text-white'>{email}</p>
                             <p className='text-lg text-white pb-5'>Rua plantao, 123 - Penha/São Paulo - SP</p>
                             <p className='font-light w-[500px] text-md text-white'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam neque modi aspernatur quisquam nam labore eveniet eligendi delectus voluptatum a doloribus dolor, facilis odit cumque. Mollitia, voluptas perferendis? Dolores, praesentium.</p>
                         </div>

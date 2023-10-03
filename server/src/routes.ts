@@ -76,7 +76,7 @@ router.post("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController
 router.get("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.listarSeuFiscal);
 router.delete("/fiscal/:id",authMiddleware,is([RolesPrivate.gerente]),fiscalController.removerFiscal)
 router.put("/user/:id",authMiddleware,userController.atualizar)
-router.post("/produto", authMiddleware,produtoController.criar)
+router.post("/produto", authMiddleware,is([RolesPrivate.gerente]),produtoController.criar)
 
 
 //fiscal

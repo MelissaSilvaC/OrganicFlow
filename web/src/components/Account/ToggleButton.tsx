@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PanelSignup from "./Account/Panel_Signup";
-import PanelPartner from "./Account/Panel_Partner";
+import PanelSignup from "./Panel_Signup";
+import PanelPartner from "./Panel_Partner";
 
 export default function ToggleSwitchTest(){
     const [isToggled, setIsToggled] = React.useState(false);

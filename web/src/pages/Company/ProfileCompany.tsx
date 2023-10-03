@@ -2,10 +2,11 @@ import ProfileScreen from "../ProfileScreen";
 import ModalProduct from "components/Modal/RegisterProduct";
 import TextField from "components/Items_Forms/TextField";
 import Button from "components/Items_Forms/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IProduto from "types/IProduto";
 import ProductCard from "components/Cards/Produto";
 import React from "react";
+import axios from "axios";
 
 export default function ProfileCompany() {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -13,47 +14,41 @@ export default function ProfileCompany() {
     const [imageURL, setImageURL] = useState<string | null>(null);
     const [nameProduct, setNameProduct] = useState("")
     {/** LIMPE A LISTA APÓS OS TESTES */ }
-    const [produtos, setProdutos] = useState<IProduto[]>([  // Inicialize o estado "produtos" com a lista inicial.
-        {
-            image: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
-            nameProduct: 'Cenoura'
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1589753014594-0676c69bbcbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFiYW5ldGV8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            nameProduct: 'Rabanete'
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1556781366-336f8353ba7c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YWxmYWNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-            nameProduct: 'Alface'
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
-            nameProduct: 'Cenoura'
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1589753014594-0676c69bbcbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmFiYW5ldGV8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            nameProduct: 'Rabanete'
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1556781366-336f8353ba7c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YWxmYWNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-            nameProduct: 'Alface'
-        }
-    ]);
+    // useEffect(()=>{
+    //     axios.get('http://localhost:3001'+'/empresa/:id')
+    //     .then(response => {
+    //         console.log('Dados recebidos:', response.data);
+    //       })
+    //       .catch(error => {
+    //         console.error('Erro ao buscar dados:', error);
+    //       });   
+ //    const [produtos, setProdutos] = useState<IProduto[]>([  // Inicialize o estado "produtos" com a lista inicial.
+        
 
-    //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
+
+        // {
+        //     image: // tps://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
+        //     namePro// t: 'Cenoura'
+        // },
+       //    //]);
+
+
+
+  //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
         if (image) {
-            // Verifica se um arquivo de imagem foi selecionado
-            console.log('Upload de imagem:', image);
-            // Aqui você pode enviar a imagem para o servidor ou realizar outras ações
-            const novoProduto: IProduto = {
-                image: URL.createObjectURL(image), 
-                // Use URL.createObjectURL para obter um URL temporário para o arquivo selecionado
-                nameProduct,
-            };
 
-            setProdutos((prevState) => [...prevState, novoProduto]);
+            axios.post('http://localhost:3001'+'/produto',{
+                nome: nameProduct,
+                photo: URL.createObjectURL(image),
+                })
+                .then(response => console.log(response))//se for sucedido 
+                .catch((error) => {
+                    console.log(error);
+                });
+            
+            
             setImage(null);
             setNameProduct('');
         } else {
@@ -115,7 +110,8 @@ export default function ProfileCompany() {
                         </form>
                     </ModalProduct>
 
-                    {produtos?.map((produto, index) => (
+                    {/**
+                     * {produtos?.map((produto, index) => (
                         <ProductCard
                             key={index}
                             image={produto.image}
@@ -123,6 +119,7 @@ export default function ProfileCompany() {
                         />
                     ))
                     }
+                     */}
 
                 </div>
             </div>

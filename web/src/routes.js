@@ -23,7 +23,7 @@ export default function AppRouter(){
                         <Route index element={<Home />} />
                         <Route path='sobre' element={<AboutUs />} />
                         <Route path='empresas' element={<Companies />} />
-                        <Route path='empresa/perfil' element={<ProfileCompany />} />
+                        <Route path='empresa/perfil/:id' element={<ProfileCompany />} />
                         <Route path='fiscal/perfil' element={<ProfileInspector />} />
                         <Route path='fiscal/lista' element={<TimelineList />} />
                         <Route path='fiscal/lista/linhatempo' element={<Timeline />} />

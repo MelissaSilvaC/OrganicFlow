@@ -67,7 +67,8 @@ export class ProdutoController {
         }
       })
 
-
+      return response.json(produto)
+      
     } catch (error) {
         return response.json(error)
     }

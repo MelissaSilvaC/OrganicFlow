@@ -117,6 +117,9 @@ export class FiscalController {
     }
 
   async consultarFiscal(request:Request, response:Response){
+
+    //consultar a empresa e o produto
+    
     const {id}=request.params
     const User = await prismaClient.user.findUnique({
         where:{

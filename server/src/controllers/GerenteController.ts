@@ -164,6 +164,8 @@ async pesquisarEmpresa(request:Request, response:Response){
       
     })
 
+    return response.json(produto)
+
   } catch (error) {
     
   }
