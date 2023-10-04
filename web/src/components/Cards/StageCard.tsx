@@ -23,20 +23,21 @@ export default function StageCard({ month, day, stageName } : Props) {
      * (com imagem se o fiscal colocar)
      */
 
+    const Acordeao = {
+        background: '#BDBDBD',
+        height: '120px',
+        width: '70rem',
+        display: 'flex',
+        padding: '0px',
+        margin: '0px',
+    }
 
     return (
         <AccordionSummary
             aria-controls="panel1a-content"
             id="panel1a-header"
-            sx={{
-                background: '#BDBDBD',
-                height: '120px',
-                width: '70rem',
-                display: 'flex',
-                padding: '0px',
-                margin: '0px',
-            }}>
-            <div className='bg-zinc-600 h-full w-[30%] py-[28px] text-2xl font-medium text-white flex flex-col justify-center items-center '>
+            sx={Acordeao}>
+            <div className='bg-zinc-600 h-full w-[30%] py-[28px] text-2xl font-medium text-white flex flex-col justify-center items-center'>
                 <p>{month}</p>
                 <p>{day}</p>
             </div>

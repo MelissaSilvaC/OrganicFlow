@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import CompanyCard from "../../components/Cards/Empresa";
-import ProfileScreen from "../ProfileScreen";
+import ProfileScreen from "./ProfileScreen";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import IProduto from "types/IProduto";

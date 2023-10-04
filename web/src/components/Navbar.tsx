@@ -1,6 +1,6 @@
 import * as React from 'react';
-import logo from '../../assets/img/Logo/color-words-horizontal.png'
-import logoSimples from '../../assets/img/Logo/color-icon.png'
+import logo from '../assets/img/Logo/color-words-horizontal.png'
+import logoSimples from '../assets/img/Logo/color-icon.png'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Outlet, Link } from 'react-router-dom'
 
 const settings = ['Dashboard', 'Logout'];
@@ -22,22 +21,12 @@ export default function MUINavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => { setAnchorElNav(event.currentTarget) };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => { setAnchorElUser(event.currentTarget) };
+  const handleCloseNavMenu = () => { setAnchorElNav(null) };
+  const handleCloseUserMenu = () => { setAnchorElUser(null) };
 
   const rotas = [
-        { label: 'Empresas', to: '/empresas'}, 
-        { label: 'Quem somos', to: '/sobre'}, 
         { label: 'Perfil empresa', to: '/empresa/perfil'},
         { label: 'Perfil fiscal', to: '/fiscal/perfil' },
         { label: 'Lista de linhas do tempo', to: 'fiscal/lista' },
@@ -51,8 +40,7 @@ export default function MUINavbar() {
                 <Toolbar disableGutters>
                     {/** Logo normal*/}
                     <Link to='/sessao' >
-                          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                        {/**<img src={logo} className='w-[220px] ml-12' /> */}
+                          <img src={logo} className='hidden md:flex mr-10 w-[200px]' />
                     </Link>
 
                     {/** Menu de navegação */}
@@ -100,8 +88,7 @@ export default function MUINavbar() {
 
                     {/** Logo simples*/}
                     <Link to='/sessao' >
-                        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                        {/**<img src={logoSimples} className='w-[220px] ml-12' /> */}
+                          <img src={logoSimples} className='max-sm:flex hidden w-[150px]' />
                     </Link>
 
                     {/** Menu de navegação */}
@@ -111,8 +98,12 @@ export default function MUINavbar() {
                                 <Button
                                     key={index}
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'black', display: 'block' }}
-                                >
+                                    sx={{ 
+                                        my: 2, 
+                                        color: 'black', 
+                                        display: 'block', 
+                                        fontFamily: 'montserrat' 
+                                    }}>
                                     {rota.label}
                                 </Button>
                             </Link>

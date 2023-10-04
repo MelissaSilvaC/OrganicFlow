@@ -1,9 +1,13 @@
+import ButtonCreateReport from "./ButtonCreateReport"
+
 export default function StageIV() {
     return (
         <>
+        <ButtonCreateReport/>
+
+        
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                malesuada lacus ex, sit amet blandit leo lobortis eget.
+                relatório
             </p>
         </>
     )

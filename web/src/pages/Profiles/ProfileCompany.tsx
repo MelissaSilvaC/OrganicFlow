@@ -1,4 +1,3 @@
-import ProfileScreen from "../ProfileScreen";
 import ModalProduct from "components/Modal/RegisterProduct";
 import TextField from "components/Items_Forms/TextField";
 import Button from "components/Items_Forms/Button";
@@ -7,6 +6,7 @@ import IProduto from "types/IProduto";
 import ProductCard from "components/Cards/Produto";
 import React from "react";
 import axios from "axios";
+import ProfileScreen from "./ProfileScreen";
 
 export default function ProfileCompany() {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'

@@ -14,7 +14,7 @@ export default function SignupScreen() {
                 </div>
                 
                 <div className='flex items-center'>
-                    <Link to='/empresa/perfil'>
+                    <Link to='/'>
                         <img src={logoOF} />
                     </Link>
                 </div>
