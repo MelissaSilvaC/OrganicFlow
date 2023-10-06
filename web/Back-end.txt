@@ -1,0 +1,69 @@
+Lista de linhas do tempo
+src/components/Table/TimelinesTable.tsx
+- Exibir dados na tabela
+- (se conseguir, aplicar funcionalidade do cadastro no botão )
+
+Lista de denúncias
+src/components/Table/ComplaintsTable.tsx
+- Exibir dados na tabela
+
+
+
+{/**
+                Nome do produtor ou empresa responsável. (normal)
+                Localização geográfica da propriedade ou fazenda orgânica.(normal)
+                Data de início do plantio (date)
+                Data prevista para colheita. (date)
+                Lista de insumos orgânicos utilizados (adubos, fertilizantes, etc.). (array)
+                Registro de práticas de manejo sustentável e controle de pragas.(texto bloco)
+            <br /><br />
+        
+            CONSULTA
+            <div>
+                <div>
+                    <label>Nome do produtor ou empresa responsável</label>
+                    <div className={`${campoTCSS} flex items-center shadow-none bg-gray-100`}>
+                        {/**<p>{nome}</p> 
+                        dbsfysdfbsadgbfujasd
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <label>Localização geográfica da propriedade ou fazenda orgânica</label>
+                    <div className={`${campoTCSS} flex items-center shadow-none bg-gray-100`}>
+                        <p>{localizacao}</p>
+                    </div>
+                </div>
+                <br />
+                <div className="flex justify-evenly">
+                    <div>
+                        <label>Data de início do plantio</label>
+                        <div className={`${campoTCSS} flex items-center shadow-none bg-gray-100`}>
+                            <p>{dataPlantio}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Data prevista para colheita</label>
+                        <div className={`${campoTCSS} flex items-center shadow-none bg-gray-100`}>
+                            <p>{dataColheita}</p>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <label>Lista de insumos orgânicos utilizados (adubos, fertilizantes, etc.)</label>
+                    <div className={`${campoTCSS} flex items-center shadow-none bg-gray-100`}>
+                        <p>{insumos}</p>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <label>Registro de práticas de manejo sustentável e controle de pragas</label>
+                    <div className={`${campoTCSS} flex items-center shadow-none bg-gray-100`}>
+                        <p>{praticas}</p>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <br /><br /><br /><br /><br /><br />
+        */}

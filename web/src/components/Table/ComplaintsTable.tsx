@@ -13,9 +13,14 @@ const columns: GridColDef[] = [
       if (argumento !== null) {
         // Wrap the data in a link
         return (
+          /**
           <a href={`your_link_here/${argumento}`}>
             {argumento}
           </a>
+          */
+          <Link to='denuncia'>
+            {argumento}
+          </Link>
         );
       }
       return null; // Return null for null values
@@ -31,9 +36,14 @@ const columns: GridColDef[] = [
       if (argumento !== null) {
         // Wrap the data in a link
         return (
+          /**
           <a href={`your_link_here/${argumento}`}>
             {argumento}
           </a>
+          */
+          <Link to='denuncia'>
+            {argumento}
+          </Link>
         );
       }
       return null; // Return null for null values
@@ -49,9 +59,14 @@ const columns: GridColDef[] = [
       if (argumento !== null) {
         // Wrap the data in a link
         return (
+          /**
           <a href={`your_link_here/${argumento}`}>
             {argumento}
           </a>
+          */
+          <Link to='denuncia'>
+            {argumento}
+          </Link>
         );
       }
       return null; // Return null for null values

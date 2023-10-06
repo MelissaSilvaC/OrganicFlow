@@ -3,7 +3,7 @@ import Table from "components/Table/ComplaintsTable";
 
 export default function ComplaintsList(){
     return (
-        <div className="bg-preto py-28">
+        <div className="bg-preto">
             <div className="pt-16 pb-24">
                 <TitleComplaint />
             </div>

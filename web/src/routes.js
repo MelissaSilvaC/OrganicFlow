@@ -4,11 +4,12 @@ import ProfileCompany from './pages/Profiles/ProfileCompany'
 import ProfileInspector from './pages/Profiles/ProfileInspector'
 import LoginScreen from 'pages/LoginScreen'
 import ComplaintsList from 'pages/Administration/ComplaintsList'
-import MUINavbar from 'components/Navbar'
+import Navbar from 'components/Navbar'
 import Home from 'pages/Home'
 import TimelineList from 'pages/Inspector/TimelineList'
 import Timeline from 'pages/Inspector/TimeLine'
 import RegisterReport from 'pages/Inspector/RegisterReport'
+import Complaint from 'pages/Administration/Complaint'
 
 export default function AppRouter(){
     return(
@@ -18,7 +19,7 @@ export default function AppRouter(){
                 {/**Se aparecer uma barra horizontal na tela, foi a navbar */}
 
                 <Routes>
-                    <Route path='/' element={<MUINavbar />} >
+                    <Route path='/' element={<Navbar />} >
                         <Route index element={<Home />} />
                         <Route path='empresa/perfil/:id' element={<ProfileCompany />} />
                         <Route path='fiscal/perfil' element={<ProfileInspector />} />
@@ -26,6 +27,7 @@ export default function AppRouter(){
                         <Route path='fiscal/lista/linhatempo' element={<Timeline />} />
                         <Route path='fiscal/lista/linhatempo/cadastrar' element={<RegisterReport />} />
                         <Route path='admin/listadenuncias' element={<ComplaintsList />} />
+                        <Route path='admin/listadenuncias/denuncia' element={<Complaint />} />
                     </Route>
 
                     <Route path='/sessao' element={<SignupScreen />} />
