@@ -23,7 +23,7 @@ export default function PanelPartner() {
                 console.log(error);
             });
       */}
-      
+
     const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
     const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1'
@@ -31,7 +31,7 @@ export default function PanelPartner() {
     return (
         <div>
             {/** Título e imagens vetorizas */}
-            <Title texto='Seja parceiro'/>
+            <Title texto='Seja parceiro' />
 
             <div className='flex justify-center'>
                 {/** Espaço destinado ao formulário */}

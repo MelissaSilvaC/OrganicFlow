@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import TextShadow from './TextShadow';
 import { Link } from 'react-router-dom';
 
-export default function CompanyCard(){
+export default function CompanyCard() {
     const [hover, setHover] = useState(false);
 
     const handleMouseEnter = () => {
@@ -14,7 +14,7 @@ export default function CompanyCard(){
         setHover(false);
     };
 
-    return(
+    return (
         <>
             <Link to='/empresa/perfil'>
                 <div

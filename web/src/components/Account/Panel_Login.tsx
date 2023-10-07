@@ -13,32 +13,32 @@ export default function PanelLogin() {
     const [senha, setSenha] = useState("")
     const navigate = useNavigate()
 
-    axios.post('http://localhost:3001'+'/login',{//verifica login
+    axios.post('http://localhost:3001' + '/login', {//verifica login
         email: email, //campo do email no front
         password: senha, //campo password no front
-      })
-      .then(
-          response => {
-              if (response.data.fail) {//pega o fail do json; fail===true]
-                  console.log('email e senha incorretos')
-                  console.log('erro: '+ response.data.error)//pega o error: do json
-                  let error = response.data.error
-              } else {
-                console.log(response.data.token)//se usuário existir
-                  localStorage.setItem('token', response.data.token); //armazena o token no local
-                   axios.defaults.headers[
-                     "authorization"
-                   ]=`Bearer ${response.data.token}`
-                   
-                  navigate('/');//faz o usuario retornar a página inicial
-                  
-              }
-          } 
+    })
+        .then(
+            response => {
+                if (response.data.fail) {//pega o fail do json; fail===true]
+                    console.log('email e senha incorretos')
+                    console.log('erro: ' + response.data.error)//pega o error: do json
+                    let error = response.data.error
+                } else {
+                    console.log(response.data.token)//se usuário existir
+                    localStorage.setItem('token', response.data.token); //armazena o token no local
+                    axios.defaults.headers[
+                        "authorization"
+                    ] = `Bearer ${response.data.token}`
+
+                    navigate('/');//faz o usuario retornar a página inicial
+
+                }
+            }
         )
-      .catch((error) => {
-        console.log(error);
-      });
-    
+        .catch((error) => {
+            console.log(error);
+        });
+
     {/** Estilos */ }
     const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -47,7 +47,7 @@ export default function PanelLogin() {
     return (
         <div>
             <Title texto='Entre' />
-            
+
             <div className='h-auto w-[450px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
                 <form className='w-full'>
                     {/** Campo e-mail */}

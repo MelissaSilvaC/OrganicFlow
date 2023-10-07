@@ -8,7 +8,7 @@ import StageIII from "components/Stages/StageIII";
 import StageIV from "components/Stages/StageIV";
 import StageV from "components/Stages/StageV";
 import StageCard from "components/Cards/StageCard";
-import { StageII } from "components/Stages/StageII";
+import StageII  from "components/Stages/StageII";
 import { useState } from "react";
 import Medal_I from '../../assets/img/Medals/Medal_I.png'
 import Medal_II from '../../assets/img/Medals/Medal_II.png'
@@ -21,43 +21,68 @@ import Medal_OF from '../../assets/img/Medals/ofMedal.png'
  * TIME LINE
  * 
  * --Acordeão
- * \É um acordeão com cada estágio da cadeia de produção\
  * Ao expandir o acordeão, irá mostrar os campos preenchidos(o relatório)
  * 
  * --Com relatório e Sem relatório
- * \Durante o processo de cadastro dos relatórios, vai aparecer, por meio das cores, se está abilitada(com relatório) ou desabilitada(sem)\
  * Quando desabilitada, vai aparecer o cadastro do relatório
  * Quando abilitado, vai aprecer a consulta do relatório
+ * 
+ * Lista de etapas
+ * :::::Dar medalha para apenas um estágio:::::
+ * :::::Transição suave para a medalha aparecer e vice versa:::::
+ * :::::Alterar cores para apenas um estágio:::::
+ * Ao clicar em 'enviar relatório', aparecer as informações e alteração de cores
+ * Transformar as informações em componentes
  * 
  */
 
 export default function TimeLine() {
-    const baseBG = { background: 'white'}
+    const baseBG = { background: 'white' }
     const noBG = { background: 'none' }
-    const [medal, setMedal] = useState(false)
-    const [enableReport, setEnableReport] = useState(false)
+    const [medals, setMedals] = useState([
+        { id: 1, showMedal: false },
+        { id: 2, showMedal: false },
+        { id: 3, showMedal: false },
+        { id: 4, showMedal: false },
+        { id: 5, showMedal: false },
+        // Adicione mais objetos conforme necessário para cada StageCard
+    ]);
+    const [reports, setReports] = useState([
+        { id: 1, showReport: false },
+        { id: 2, showReport: false },
+        { id: 3, showReport: false },
+        { id: 4, showReport: false },
+        { id: 5, showReport: false }
+    ]);
 
-    const handleMedal = () => {
-        setMedal(!medal); // Inverte o valor da medalha
-    }
+    // A função handleMedal recebe o cardId como argumento
+    // Ela identifica qual StageCard deve ser atualizado com base no cardId
+    const handleMedal = (cardId: number) => {
+        setMedals((prevMedals) =>
+            prevMedals.map((medal) =>
+                medal.id === cardId ? { ...medal, showMedal: !medal.showMedal } : medal
+            )
+        );
+    };
 
-    const handleColors = () => {
-        // Aqui você pode adicionar a lógica para alterar o valor da variável 'enableReport'
-        // por exemplo, toggle entre verdadeiro e falso
-        setEnableReport(!enableReport);
+    const handleReport = (stageId: number) => {
+        setReports((prevReports) =>
+            prevReports.map((report) =>
+                report.id === stageId ? { ...report, showReport: !report.showReport } : report
+            )
+        )
     }
 
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex">
                 <TitleTimeLine />
-                <div
-                    className="w-28 h-28 bg-cover flex self-center ml-12"
-                    style={{backgroundImage:`url(${Medal_OF})`}}
+                <div className="w-28 h-28 bg-cover flex self-center ml-12"
+                    style={{ backgroundImage: `url(${Medal_OF})` }}
                 />
             </div>
 
-            <div className="text-white font-medium ml-24 my-12">
+            <div className="text-white font-medium ml-24 my-12 text-lg">
                 <p>ID: (parametro ID)</p>
                 <p>(parametro data)</p>
                 <p>Endereço do fornecedor: (parametro Fornecedor)</p>
@@ -71,89 +96,111 @@ export default function TimeLine() {
                     justifyContent: 'center',
                 }}>
                     <div className="font-montserrat flex justify-center items-center py-16">
-
-                        <div className="px-24">
-                            <div>
-                                <Accordion sx={noBG}>
-                                    <StageCard
-                                        month="Mes"
-                                        day="00"
-                                        stageName="Produção Agrícola"
-                                        enableReport = {enableReport}
-                                        medal={medal} // Passa o estado da medalha como prop
-                                        Num_medal={Medal_I}
-                                        //handleMedal={() => handleMedal("StageI")} 
-                                        // Passa o nome do estágio como argumento
-                                        
-                                        //handleColors={() => handleColors("StageI")} 
-                                        // Passa o nome do estágio como argumento
+                        <div>
+                            {/** ESTAGIO 1 */}
+                            <Accordion sx={noBG}>
+                                <StageCard
+                                    month="Mes"
+                                    day="00"
+                                    stageName="Produção Agrícola"
+                                    report={reports.find((report) => report.id === 1)?.showReport}
+                                    medal={medals.find((medal) => medal.id === 1)?.showMedal} // Passe o estado individual
+                                    Num_medal={Medal_I}
+                                    handleMedal={() => handleMedal(1)} // Passe o id do StageCard
+                                    handleReport={() => handleReport(1)}
+                                />
+                                <AccordionDetails sx={baseBG}>
+                                    <StageI 
+                                        handleMedal={() => handleMedal(1)} 
+                                        handleReport={() => handleReport(1)} 
                                     />
-                                    <AccordionDetails sx={baseBG}> <StageI handleMedal={handleMedal} handleColors={handleColors} /> </AccordionDetails>
-                                </Accordion>
+                                </AccordionDetails>
+                            </Accordion>
 
-                                <Accordion sx={noBG}>
-                                    <StageCard 
-                                        month="Mes"
-                                        day="00"
-                                        stageName="Processamento e Embalagem"
-                                        enableReport={enableReport}
-                                        medal={medal}
-                                        Num_medal={Medal_II}
-                                        //handleMedal={() => handleMedal("StageII")}
-                                        //handleColors={() => handleColors("StageII")}
+                            {/** ESTAGIO 2 */}
+                            <Accordion sx={noBG}>
+                                <StageCard
+                                    month="Mes"
+                                    day="00"
+                                    stageName="Processamento e Embalagem"
+                                    report={reports.find((report) => report.id === 2)?.showReport}
+                                    medal={medals.find((medal) => medal.id === 2)?.showMedal} // Passe o estado individual
+                                    Num_medal={Medal_II}
+                                    handleMedal={() => handleMedal(2)} // Passe o id do StageCard
+                                    handleReport={() => handleReport(2)}
+                                />
+                                <AccordionDetails sx={baseBG}>
+                                    <StageII 
+                                        handleMedal={() => handleMedal(2)} 
+                                        handleReport={() => handleReport(2)} 
                                     />
-                                    <AccordionDetails sx={baseBG}> <StageII /> </AccordionDetails>
-                                </Accordion>
+                                </AccordionDetails>
+                            </Accordion>
 
-                                <Accordion sx={noBG}>
-                                    <StageCard
-                                        month="Mes"
-                                        day="00"
-                                        stageName="Transporte e Logística"
-                                        enableReport={enableReport}
-                                        medal={medal}
-                                        Num_medal={Medal_III}
-                                        //handleMedal={() => handleMedal("StageIII")}
-                                        //handleColors={() => handleColors("StageIII")}
-                                    />
-                                    <AccordionDetails sx={baseBG}> <StageIII /> </AccordionDetails>
-                                </Accordion>
+                            {/** ESTAGIO 3 */}
+                            <Accordion sx={noBG}>
+                                <StageCard
+                                    month="Mes"
+                                    day="00"
+                                    stageName="Transporte e Logística"
+                                    report={reports.find((report) => report.id === 3)?.showReport}
+                                    medal={medals.find((medal) => medal.id === 3)?.showMedal} // Passe o estado individual
+                                    Num_medal={Medal_III}
+                                    handleMedal={() => handleMedal(3)} // Passe o id do StageCard
+                                    handleReport={() => handleReport(3)}
 
-                                <Accordion sx={noBG}>
-                                    <StageCard
-                                        month="Mes"
-                                        day="00"
-                                        stageName="Armazenamento e Distribuição"
-                                        enableReport={enableReport}
-                                        medal={medal}
-                                        Num_medal={Medal_IV}
-                                        //handleMedal={() => handleMedal("StageIV")}
-                                        //handleColors={() => handleColors("StageIV")}
+                                />
+                                <AccordionDetails sx={baseBG}>
+                                    <StageIII 
+                                        handleMedal={() => handleMedal(3)} 
+                                        handleReport={() => handleReport(3)} 
                                     />
-                                    <AccordionDetails sx={baseBG}> <StageIV /> </AccordionDetails>
-                                </Accordion>
+                                </AccordionDetails>
+                            </Accordion>
 
-                                <Accordion sx={noBG}>
-                                    <StageCard
-                                        month="Mes"
-                                        day="00"
-                                        stageName="Varejo e Consumo"
-                                        enableReport={enableReport}
-                                        medal={medal}
-                                        Num_medal={Medal_V}
-                                        //handleMedal={() => handleMedal("StageV")}
-                                        //handleColors={() => handleColors("StageV")}
+                            {/** ESTAGIO 4 */}
+                            <Accordion sx={noBG}>
+                                <StageCard
+                                    month="Mes"
+                                    day="00"
+                                    stageName="Armazenamento e Distribuição"
+                                    report={reports.find((report) => report.id === 4)?.showReport}
+                                    medal={medals.find((medal) => medal.id === 4)?.showMedal} // Passe o estado individual
+                                    Num_medal={Medal_IV}
+                                    handleMedal={() => handleMedal(4)} // Passe o id do StageCard
+                                    handleReport={() => handleReport(4)}
+                                />
+                                <AccordionDetails sx={baseBG}>
+                                    <StageIV 
+                                        handleMedal={() => handleMedal(4)} 
+                                        handleReport={() => handleReport(4)} 
                                     />
-                                    <AccordionDetails sx={baseBG}> <StageV /> </AccordionDetails>
-                                </Accordion>
-                            </div>
+                                </AccordionDetails>
+                            </Accordion>
+
+                            {/** ESTAGIO 5 */}
+                            <Accordion sx={noBG}>
+                                <StageCard
+                                    month="Mes"
+                                    day="00"
+                                    stageName="Varejo e Consumo"
+                                    report={reports.find((report) => report.id === 5)?.showReport}
+                                    medal={medals.find((medal) => medal.id === 5)?.showMedal} // Passe o estado individual
+                                    Num_medal={Medal_V}
+                                    handleMedal={() => handleMedal(5)} // Passe o id do StageCard
+                                    handleReport={() => handleReport(5)}
+                                />
+                                <AccordionDetails sx={baseBG}>
+                                    <StageV 
+                                        handleMedal={() => handleMedal(5)} 
+                                        handleReport={() => handleReport(5)} 
+                                    />
+                                </AccordionDetails>
+                            </Accordion>
                         </div>
-
                     </div>
                 </Box>
             </Container>
-
         </div>
-        
     )
 }
