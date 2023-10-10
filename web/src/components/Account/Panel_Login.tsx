@@ -13,6 +13,12 @@ export default function PanelLogin() {
     const [senha, setSenha] = useState("")
     const navigate = useNavigate()
 
+    {/** Estilos */ }
+    const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
+    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
+    const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-verde_palido'
+    
+
     axios.post('http://localhost:3001' + '/login', {//verifica login
         email: email, //campo do email no front
         password: senha, //campo password no front
@@ -39,15 +45,9 @@ export default function PanelLogin() {
             console.log(error);
         });
 
-    {/** Estilos */ }
-    const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
-    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
-    const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1'
-
     return (
         <div>
             <Title texto='Entre' />
-
             <div className='h-auto w-[450px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
                 <form className='w-full'>
                     {/** Campo e-mail */}

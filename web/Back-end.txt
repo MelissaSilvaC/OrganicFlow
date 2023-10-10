@@ -6,4 +6,7 @@ src/components/Table/TimelinesTable.tsx
 Lista de denúncias
 src/components/Table/ComplaintsTable.tsx
 - Exibir dados na tabela
+
+Modal que cadastra linha do tempo
+src/pages/Inspector/TimelineList.tsx
         

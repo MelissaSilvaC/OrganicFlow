@@ -26,7 +26,7 @@ export default function PanelPartner() {
 
     const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
-    const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1'
+    const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-verde_palido'
 
     return (
         <div>

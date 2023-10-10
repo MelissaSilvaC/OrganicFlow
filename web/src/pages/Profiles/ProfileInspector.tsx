@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import CompanyCard from "../../components/Cards/Empresa";
 import ProfileScreen from "./ProfileScreen";
@@ -8,12 +8,7 @@ import IProduto from "types/IProduto";
 import ProductCard from "components/Cards/Produto";
 
 export default function ProfileInspector() {
-    const companySettings = {
-        infinite: true,
-        slidesToShow: 6, // Número de cartões exibidos de cada vez
-        slidesToScroll: 1, // Número de cartões para rolar de cada vez
-    };
-
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [produtos, setProdutos] = useState<IProduto[]>([  // Inicialize o estado "produtos" com a lista inicial.
         {
             image: 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
@@ -40,6 +35,23 @@ export default function ProfileInspector() {
             nameProduct: 'Alface'
         }
     ]);
+    const companySettings = {
+        infinite: true,
+        slidesToShow: windowWidth >= 1024 ? 6 : windowWidth >= 768 ? 4 : 2,
+        slidesToScroll: 1,
+    };
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <ProfileScreen>
@@ -53,20 +65,18 @@ export default function ProfileInspector() {
                         <CompanyCard /><CompanyCard /><CompanyCard /><CompanyCard />
                     </Slider>
                 </div>
-
                 <div className="px-24">
                     <p className="text-white text-2xl pb-8">Produtos da empresa (nomeDaEmpresa)</p>
                     <div className="flex flex-wrap">
+
                         {/**Função map que lista os produtos da empresa */}
-                        
                         {produtos?.map((produto, index) => (
                             <ProductCard
                                 key={index}
                                 image={produto.image}
                                 nameProduct={produto.nameProduct}
                             />
-                        ))
-                        }
+                        ))}
 
                     </div>
                 </div>

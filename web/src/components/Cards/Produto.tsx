@@ -18,7 +18,7 @@ export default function TestProduct({ image, nameProduct }: IProduct) {
         <>
             <Link to='/fiscal/lista'>
                 <div
-                    className="w-44 h-44 m-3 flex flex-col justify-end rounded-[50px] border-2 border-verde_escuro bg-verde_folha bg-cover"
+                    className="w-36 h-36 m-3 flex flex-col justify-end rounded-[50px] border-2 border-verde_escuro bg-verde_folha bg-cover"
                     style={{
                         backgroundImage: `url(${image})`,
                         cursor: hover ? 'pointer' : 'auto'

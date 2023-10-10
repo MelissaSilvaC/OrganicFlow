@@ -17,25 +17,6 @@ import Medal_IV from '../../assets/img/Medals/Medal_IV.png'
 import Medal_V from '../../assets/img/Medals/Medal_V.png'
 import Medal_OF from '../../assets/img/Medals/ofMedal.png'
 
-/**
- * TIME LINE
- * 
- * --Acordeão
- * Ao expandir o acordeão, irá mostrar os campos preenchidos(o relatório)
- * 
- * --Com relatório e Sem relatório
- * Quando desabilitada, vai aparecer o cadastro do relatório
- * Quando abilitado, vai aprecer a consulta do relatório
- * 
- * Lista de etapas
- * :::::Dar medalha para apenas um estágio:::::
- * :::::Transição suave para a medalha aparecer e vice versa:::::
- * :::::Alterar cores para apenas um estágio:::::
- * Ao clicar em 'enviar relatório', aparecer as informações e alteração de cores
- * Transformar as informações em componentes
- * 
- */
-
 export default function TimeLine() {
     const baseBG = { background: 'white' }
     const noBG = { background: 'none' }
@@ -54,6 +35,7 @@ export default function TimeLine() {
         { id: 4, showReport: false },
         { id: 5, showReport: false }
     ]);
+    const allMedalsShown = medals.every((medal) => medal.showMedal);
 
     // A função handleMedal recebe o cardId como argumento
     // Ela identifica qual StageCard deve ser atualizado com base no cardId
@@ -77,12 +59,15 @@ export default function TimeLine() {
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex">
                 <TitleTimeLine />
-                <div className="w-28 h-28 bg-cover flex self-center ml-12"
-                    style={{ backgroundImage: `url(${Medal_OF})` }}
-                />
+                {/* Exibe a imagem quando todas as medalhas estiverem exibidas */}
+                {allMedalsShown && (
+                    <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center ml-12"
+                        style={{ backgroundImage: `url(${Medal_OF})` }}
+                    />
+                )}
             </div>
 
-            <div className="text-white font-medium ml-24 my-12 text-lg">
+            <div className="text-white font-medium ml-24 max-md:ml-10 my-12 text-lg">
                 <p>ID: (parametro ID)</p>
                 <p>(parametro data)</p>
                 <p>Endereço do fornecedor: (parametro Fornecedor)</p>
@@ -201,6 +186,8 @@ export default function TimeLine() {
                     </div>
                 </Box>
             </Container>
+
+            
         </div>
     )
 }

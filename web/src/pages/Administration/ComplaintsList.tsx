@@ -3,7 +3,7 @@ import Table from "components/Table/ComplaintsTable";
 
 export default function ComplaintsList(){
     return (
-        <div className="bg-preto">
+        <div className="bg-preto pb-28">
             <div className="pt-16 pb-24">
                 <TitleComplaint />
             </div>

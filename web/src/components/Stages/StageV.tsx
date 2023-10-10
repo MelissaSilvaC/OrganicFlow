@@ -54,7 +54,7 @@ export default function StageV({ handleMedal, handleReport }: IHandle) {
                         <TextField
                             obrigatorio={true}
                             onChange={evento => setDataChegada(evento.target.value)}
-                            label="Data de chegada dos produtos ao ponto de venda"
+                            label="Data de chegada dos produtos"
                             valor={dataChegada}
                             tipo='date'
                             labelCSS='flex justify-center'
@@ -102,12 +102,12 @@ export default function StageV({ handleMedal, handleReport }: IHandle) {
                         <br />
                         <div className="flex justify-evenly">
                             <InfoField
-                                label="Data de chegada dos produtos ao ponto de venda"
+                                label="Data de chegada do produto"
                                 valor={dataChegada}
                                 estilo={estilo}
                             />
                             <InfoField
-                                label="Data de validade"
+                                label="Data de validade do produto"
                                 valor={dataValidade}
                                 estilo={estilo}
                             />
