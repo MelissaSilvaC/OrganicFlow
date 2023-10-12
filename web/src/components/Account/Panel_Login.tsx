@@ -87,7 +87,7 @@ export default function PanelLogin() {
                             campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                             inputCSS={inputTCSS}
                         />
-                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1' texto='Enviar' />
+                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Enviar' />
                     </BasicModal>
                     {/** Ativa o popup */}
 

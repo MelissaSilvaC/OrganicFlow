@@ -1,6 +1,5 @@
 import * as React from 'react';
 import logo from '../assets/img/Logo/logo-letras.png'
-import logoSimples from '../assets/img/Logo/color-icon.png'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Outlet, Link } from 'react-router-dom'
 
-const settings = ['Dashboard', 'Logout'];
+const settings = ['Login', 'Dashboard', 'Logout'];
 
 export default function Navbar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);

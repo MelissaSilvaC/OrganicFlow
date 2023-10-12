@@ -77,7 +77,7 @@ export default function TimelineList() {
                                     <label
                                         htmlFor='file-input'
                                         className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                        Selecione um arquivo
+                                        Selecione uma imagem
                                     </label>
                                 </div>
 
