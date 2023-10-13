@@ -3,9 +3,9 @@ import Table from "components/Table/ComplaintsTable";
 
 export default function ComplaintsList(){
     return (
-        <div className="bg-preto pb-28">
-            <div className="pt-16 pb-24">
-                <TitleComplaint />
+        <div className="pb-28">
+            <div className="pt-14 pb-24">
+                <TitleComplaint titulo="Denúncias"/>
             </div>
             <div className="px-16">
                 <div className="bg-gray-200">

@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Outlet, Link } from 'react-router-dom'
+import Papel from '../assets/img/Fundo/papel1.png'
 
 const settings = ['Login', 'Dashboard', 'Logout'];
 
@@ -22,8 +23,8 @@ export default function Navbar() {
 
     return (
         <>
-            <AppBar position="static" sx={{ backgroundColor: '#f8f0df' }}>
-                <Container maxWidth="xl" className='bg-amarelo_areia'>
+            <AppBar position="static" sx={{ backgroundImage: `url(${Papel})`, backgroundSize: 'cover' }}>
+                <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <div className='flex items-center justify-between w-full max-md:mx-10'>
                             <Link to='/sessao' >

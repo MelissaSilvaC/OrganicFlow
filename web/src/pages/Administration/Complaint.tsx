@@ -8,7 +8,7 @@ export default function Complaint(){
     return (
         <div className="bg-preto text-white pb-10">
             <div className="pt-16">
-                <TitleComplaint />
+                <TitleComplaint titulo="Denúncia"/>
             </div>
             <div className="px-[18rem] py-20">
                 <div className="mb-8 font-medium text-lg space-y-2">

@@ -6,7 +6,6 @@ import LoginScreen from 'pages/LoginScreen'
 import ComplaintsList from 'pages/Administration/ComplaintsList'
 import Navbar from 'components/Navbar'
 import Home from 'pages/App'
-import Teste from 'pages/teste'
 import TimelineList from 'pages/Inspector/TimelineList'
 import Timeline from 'pages/Inspector/TimeLine'
 import Complaint from 'pages/Administration/Complaint'
@@ -22,14 +21,12 @@ export default function AppRouter(){
                 <Routes>
                     <Route path='/' element={<Navbar />} >
                         <Route index element={<Home />} />
-                        <Route path='/teste' element={<Teste />} />
                         <Route path='empresa/perfil/:id' element={<ProfileCompany />} />
                         <Route path='fiscal/perfil' element={<ProfileInspector />} />
                         <Route path='fiscal/lista' element={<TimelineList />} />
                         <Route path='fiscal/lista/linhatempo' element={<Timeline />} />
                         <Route path='admin/listadenuncias' element={<ComplaintsList />} />
                         <Route path='admin/listadenuncias/denuncia' element={<Complaint />} />
-
                         {/**<Route path='*' element={<Footer />} /> */}
                     </Route>
                     

@@ -2,10 +2,11 @@ import logo from '../assets/img/Logo/logo-letras.png'
 import instagram from '../assets/img/SocialMidia/instagramIcon.png'
 import facebook from '../assets/img/SocialMidia/facebookIcon.png'
 import gmail from '../assets/img/SocialMidia/emailIcon.png'
+import Papel from '../assets/img/Fundo/papel1.png'
 
 export default function Footer() {
     return (
-        <footer className="bg-amarelo_areia flex justify-center p-8">
+        <footer className="bg-amarelo_areia flex justify-center p-8" style={{ backgroundImage: `url(${Papel})` }}>
 
             <div className="w-[40%] flex flex-col justify-between">
                 <img src={logo} className="w-[18rem]"/>
