@@ -48,8 +48,8 @@ export default function Dashboard() {
 
             {/**Area onde vai aparecer a interface selecionada */}
             <div className="w-full">
-                {selectedOption === "Lista de denúncias" && <ComplaintsList />}
                 {selectedOption === "Validar gerentes" && <AbleManager />}
+                {selectedOption === "Lista de denúncias" && <ComplaintsList />}
                 {selectedOption === "Lista de feedbacks" && <FeedbacksList />}
             </div>
         </div>

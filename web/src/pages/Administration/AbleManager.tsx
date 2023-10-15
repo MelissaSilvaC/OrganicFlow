@@ -1,6 +1,7 @@
 import InfoManagerCard from "components/Cards/InfoManagerCard";
 import TitleComplaint from "components/Cards/Titles/TitleComplaint";
 import { FiSearch } from 'react-icons/fi';
+import empresa from '../../assets/img/logoExample.png'
 
 export default function AbleManager(){
     return(
@@ -21,8 +22,42 @@ export default function AbleManager(){
                 </div>
 
                 <div className="flex flex-wrap">
-                    <InfoManagerCard /><InfoManagerCard /><InfoManagerCard />
-                    <InfoManagerCard /><InfoManagerCard /><InfoManagerCard />
+                    {/**
+                     * if(manager = true){
+                     * Função map preenchendo os seguintes parametros:
+                     * photo
+                     * name
+                     * email
+                     * cnpj
+                     * }
+                     * 
+                     * (
+                     * OBS: acredito q vc não precisa dos useState, no máximo uma variável para fazer a função map funcionar
+                     * Outra coisa, vc precisa fazer algo para que apenas as PESSOAS JURÍDICAS sejam listadas, vc pode usar o CNPJ
+                     * para isso
+                     * )
+                     */}
+                    <InfoManagerCard 
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    
                 </div>
             </div>
 
@@ -44,9 +79,46 @@ export default function AbleManager(){
                 </div>
 
                 <div className="flex flex-wrap">
-                    <InfoManagerCard /><InfoManagerCard /><InfoManagerCard />
-                    <InfoManagerCard /><InfoManagerCard /><InfoManagerCard />
-                    <InfoManagerCard /><InfoManagerCard /><InfoManagerCard />
+                    {/**
+                     * if(manager = false){
+                     * Função map preenchendo os seguintes parametros:
+                     * photo
+                     * name
+                     * email
+                     * cnpj
+                     * }
+                     * 
+                     */}
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
+                    <InfoManagerCard
+                        photo={empresa}
+                        name="Seeds sprout"
+                        email="seedsprout@email.com"
+                        cnpj="97.206.822/0001-65" />
                 </div>
             </div>
         </>
