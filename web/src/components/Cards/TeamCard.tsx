@@ -1,20 +1,19 @@
+import rabanete from 'assets/img/rabanete.jpg'
+
 export default function TeamCard(){
     return (
-        <div className="bg-preto h-[30rem] w-[20rem]">
-            <img />
-            <div>
-                <div className="text-verde_folha">
-                    <p>Nome do usuário</p>
-                    <p>Cargo</p>
+        <div className="bg-preto w-[20rem]">
+            <img src={rabanete} className='' />
+            <div className='p-5'>
+                <div>
+                    <div className="py-4 text-verde_folha font-bold text-xl text-center">
+                        <p>Nome do integrante</p>
+                        <p className='text-base'>Cargo</p>
+                    </div>
+                    <p className="text-white opacity-70 text-center pb-12">
+                        Sed quis blandit ligula. Nunc sapien arcu, egestas eget vulputate non, iaculis ut nunc. Sed molestie orci dolor.
+                    </p>
                 </div>
-                <p className="text-white">
-                    Sed quis blandit ligula. Nunc sapien arcu, egestas eget vulputate non, iaculis ut nunc. Sed molestie orci dolor.
-                </p>
-            </div>
-            <div>
-                <img />
-                <img />
-                <img />
             </div>
         </div>
     )

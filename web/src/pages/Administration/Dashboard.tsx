@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ComplaintsList from "./ComplaintsList";
+import AbleManager from "./AbleManager";
+import FeedbacksList from "./FeedbacksList";
 
-export default function Teste() {
+export default function Dashboard() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
     const handleOptionClick = (option: string) => {
@@ -10,6 +12,8 @@ export default function Teste() {
 
     return (
         <div className="flex bg-preto">
+            
+            {/**Menu vertical */}
             <div className="bg-cinza_escuro h-screen w-[20%] text-white">
                 <ul className="font-medium text-lg pl-12 pt-24 space-y-5 hover:cursor-pointer">
                     <li
@@ -41,8 +45,12 @@ export default function Teste() {
                     </li>
                 </ul>
             </div>
+
+            {/**Area onde vai aparecer a interface selecionada */}
             <div className="w-full">
                 {selectedOption === "Lista de denúncias" && <ComplaintsList />}
+                {selectedOption === "Validar gerentes" && <AbleManager />}
+                {selectedOption === "Lista de feedbacks" && <FeedbacksList />}
             </div>
         </div>
     );

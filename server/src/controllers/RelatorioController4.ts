@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 export class Relatorio4Controller {
   async criar(request: Request, response: Response) {
-    const { nome, local, praticas, responsavel, dt_entrada, dt_saida,id_linha } = request.body;
+    const { nome, local, praticas, responsavel, dt_entrada, dt_saida,medalha,id_linha } = request.body;
 
     const armazenamento = await prismaClient.armazenamento.create({
       data: {
@@ -16,6 +16,7 @@ export class Relatorio4Controller {
         responsavel,
         dt_entrada,
         dt_saida,
+        medalha,
         user: { connect: { id:Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
         linha: {
           connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
@@ -28,7 +29,7 @@ export class Relatorio4Controller {
 
   async atualizar(request: Request, response: Response) {
     const { id } = request.params;
-    const { nome, local, praticas, responsavel, dt_entrada, dt_saida } = request.body;
+    const { nome, local, praticas, responsavel, dt_entrada,medalha, dt_saida } = request.body;
 
     let armazenamento = await prismaClient.armazenamento.findFirst({
       where: {
@@ -54,6 +55,7 @@ export class Relatorio4Controller {
         responsavel,
         dt_entrada,
         dt_saida,
+        medalha,
       },
     });
 

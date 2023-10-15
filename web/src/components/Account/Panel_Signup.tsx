@@ -18,7 +18,7 @@ export default function PanelSignup() {
 
     const cadastrarDados = ({ name, email, password }: IUser) => {
         console.log(name + email + password)
-        axios.post('http://localhost:3001' + '/user', {
+        axios.post('http://localhost:3000' + '/user', {
             name: name,
             email: email,
             password: password,
@@ -49,9 +49,11 @@ export default function PanelSignup() {
             try {
                 cadastrarDados(usuarioC);
                 navigate('/sessao/login')
+
             } catch (erro) {
                 erro && alert('Erro ao cadastrar os dados')
             }
+
         }else {
             alert('senhas incompatíveis')
         }

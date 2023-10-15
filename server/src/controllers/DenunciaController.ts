@@ -15,22 +15,40 @@ export class DenunciaController{
                 //         id:Number(id_user)//conect references e fields
                 //     }
                 // }
-            }
+            },
+            
         })
 
         return response.json(denuncia)
     }
     
-    async consultar(request:Request, response:Response){
+    async consultar(request: Request, response: Response) {
         try {
-            const denuncia = await prismaClient.denuncia.findMany({})
-            return response.json(denuncia)
-            
+          const denuncias = await prismaClient.denuncia.findMany({
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  fiscal: true,
+                },
+              },
+            },
+          });
+      
+          // Ordenar as denúncias com base no campo fiscal
+          denuncias.sort((a, b) => {
+            const fiscalA = a.user?.fiscal ? 1 : 0;
+            const fiscalB = b.user?.fiscal ? 1 : 0;
+            return fiscalB - fiscalA; // fiscal true vem primeiro
+          });
+      
+          return response.json(denuncias);
         } catch (error) {
-            return response.json(error)
+          return response.json(error);
         }
-            
-    } 
+      }
+      
+      
     /*   
 
     async atualizar(request:Request, response:Response){

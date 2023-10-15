@@ -1,4 +1,4 @@
-import fundo from '../../assets/img/tomate.jpg'
+import fundo from '../../../assets/img/tomate.jpg'
 
 export default function TitleTimeLine(){
     return(

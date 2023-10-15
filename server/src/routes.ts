@@ -63,7 +63,8 @@ router.post("/feed", feedController.criar)
 
 
 //administrador
-router.get("/denuncia",authMiddleware,is([RolesPrivate.admin]),denunciaController.consultar)
+// router.get("/denuncia",authMiddleware,is([RolesPrivate.admin]),denunciaController.consultar)
+router.get("/denuncia",denunciaController.consultar)
 router.delete("/denuncia/:id",authMiddleware,is([RolesPrivate.admin]),denunciaController.deletar)
 router.get("/gerente",authMiddleware,gerenteController.listarGerente); //lista de gerente 
 router.post("/gerente",authMiddleware,gerenteController.permissaoGerente);

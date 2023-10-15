@@ -19,7 +19,7 @@ export default function PanelLogin() {
     const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-verde_palido'
     
 
-    axios.post('http://localhost:3001' + '/login', {//verifica login
+    axios.post('http://localhost:3000' + '/login', {//verifica login
         email: email, //campo do email no front
         password: senha, //campo password no front
     })
@@ -35,9 +35,7 @@ export default function PanelLogin() {
                     axios.defaults.headers[
                         "authorization"
                     ] = `Bearer ${response.data.token}`
-
                     navigate('/');//faz o usuario retornar a página inicial
-
                 }
             }
         )

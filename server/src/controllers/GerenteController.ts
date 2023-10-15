@@ -141,7 +141,7 @@ async pesquisarEmpresa(request:Request, response:Response){
   try {
     const{id }=request.params
 
-    const gerente=await prismaClient.user.findFirst({
+    const gerente=await prismaClient.user.findUnique({
       where: {
         id: Number(id),//resolver esse problema. admin exibe
       },

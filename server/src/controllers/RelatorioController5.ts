@@ -6,13 +6,14 @@ const prismaClient = new PrismaClient();
 
 export class Relatorio5Controller {
   async criar(request: Request, response: Response) {
-    const { nome, local, dt_chegada,id_linha } = request.body;
+    const { nome, local, dt_chegada,medalha,id_linha } = request.body;
 
     const varejo = await prismaClient.varejo.create({
       data: {
         nome,
         local,
         dt_chegada,
+        medalha,
         user: { connect: { id: Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
         linha: {
           connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
@@ -25,7 +26,7 @@ export class Relatorio5Controller {
 
   async atualizar(request: Request, response: Response) {
     const { id } = request.params;
-    const { nome, local, dt_chegada } = request.body;
+    const { nome, local,medalha, dt_chegada } = request.body;
 
     let varejo = await prismaClient.varejo.findFirst({
       where: {
@@ -48,6 +49,7 @@ export class Relatorio5Controller {
         nome,
         local,
         dt_chegada,
+        medalha,
       },
     });
 

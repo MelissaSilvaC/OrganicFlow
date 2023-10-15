@@ -1,4 +1,5 @@
 export default interface IProduto {
-    image: string,
-    nameProduct: string,
+    id: number;
+    nome: string;
+    photo: string;
 }

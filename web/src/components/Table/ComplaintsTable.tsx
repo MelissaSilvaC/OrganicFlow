@@ -1,25 +1,36 @@
-import * as React from 'react';
+import React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useEffect } from "react";
+
+interface Denuncia {
+  id: number;
+  description: string;
+  alvo: string;
+  user: {
+    name: string;
+  };
+}
 
 const columns: GridColDef[] = [
   {
-    field: 'data',
-    headerName: 'Data',
-    width: 150,
+    field: 'name',
+    headerName: 'Usuário que denunciou',
+    width: 300,
     renderCell: (params) => {
-      const argumento = params.row.data;
-      // Check if the argumento is not null
-      if (argumento !== null) {
-        // Wrap the data in a link
+      const description = params.row.name;
+      // Check if the description is not null
+      if (description !== null) {
+        // Wrap the name in a link
         return (
           /**
-          <a href={`your_link_here/${argumento}`}>
-            {argumento}
+          <a href={`your_link_here/${description}`}>
+            {description}
           </a>
           */
           <Link to='denuncia'>
-            {argumento}
+            {description}
           </Link>
         );
       }
@@ -27,22 +38,22 @@ const columns: GridColDef[] = [
     },
   },
   {
-    field: 'usuario',
-    headerName: 'Usuário',
-    width: 150,
+    field: 'alvo',
+    headerName: 'Usuário alvo',
+    width: 300,
     renderCell: (params) => {
-      const argumento = params.row.usuario;
-      // Check if the argumento is not null
-      if (argumento !== null) {
-        // Wrap the data in a link
+      const description = params.row.alvo;
+      // Check if the description is not null
+      if (description !== null) {
+        // Wrap the name in a link
         return (
           /**
-          <a href={`your_link_here/${argumento}`}>
-            {argumento}
+          <a href={`your_link_here/${description}`}>
+            {description}
           </a>
           */
           <Link to='denuncia'>
-            {argumento}
+            {description}
           </Link>
         );
       }
@@ -50,22 +61,22 @@ const columns: GridColDef[] = [
     },
   },
   {
-    field: 'argumento',
-    headerName: 'Argumento',
-    width: 150,
+    field: 'description',
+    headerName: 'Descrição',
+    width: 300,
     renderCell: (params) => {
-      const argumento = params.row.argumento;
-      // Check if the argumento is not null
-      if (argumento !== null) {
-        // Wrap the data in a link
+      const description = params.row.description;
+      // Check if the description is not null
+      if (description !== null) {
+        // Wrap the name in a link
         return (
           /**
-          <a href={`your_link_here/${argumento}`}>
-            {argumento}
+          <a href={`your_link_here/${description}`}>
+            {description}
           </a>
           */
           <Link to='denuncia'>
-            {argumento}
+            {description}
           </Link>
         );
       }
@@ -74,23 +85,53 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
-  { id: 1, data: 'Snow', usuario: 'Jon', argumento: 'a ' },
-  { id: 2, data: 'Lannister', usuario: 'Cersei', argumento: 'a ' },
-  { id: 3, data: 'Lannister', usuario: 'Jaime', argumento: 'a ' },
-  { id: 4, data: 'Stark', usuario: 'Arya', argumento: 'a ' },
-  { id: 5, data: 'Targaryen', usuario: 'Daenerys', argumento: 'a ' },
-  { id: 6, data: 'Melisandre', usuario: null, argumento: 'a ' },
-  { id: 7, data: 'Clifford', usuario: 'Ferrara', argumento: 'a ' },
-  { id: 8, data: 'Frances', usuario: 'Rossini', argumento: 'a ' },
-  { id: 9, data: 'Roxie', usuario: 'Harvey', argumento: 'a ' },
-];
+
+
+// const rows = [
+//   //data: usuario que fez a denuncia
+//   //usuario: alvo
+//   //argumento: description
+//   { id: 1, name: 'Snow', alvo: 'Jon', description: 'a ' },
+//   { id: 2, name: 'Lannister', alvo: 'Cersei', description: 'a ' },
+//   { id: 3, name: 'Lannister', alvo: 'Jaime', description: 'a ' },
+//   { id: 4, name: 'Stark', alvo: 'Arya', description: 'a ' },
+//   { id: 5, name: 'Targaryen', alvo: 'Daenerys', description: 'a ' },
+//   { id: 6, name: 'Melisandre', alvo: null, description: 'a ' },
+//   { id: 7, name: 'Clifford', alvo: 'Ferrara', description: 'a ' },
+//   { id: 8, name: 'Frances', alvo: 'Rossini', description: 'a ' },
+//   { id: 9, name: 'Roxie', alvo: 'Harvey', description: 'a ' },
+// ];
 
 export default function DataTable() {
+  const [denuncias, setDenuncias] = useState<any[]>([]);
+
+  useEffect(() => { 
+
+    axios.get(`http://localhost:3000/denuncia`)
+    .then(response => {
+
+        const novosDenuncia = response.data.map((denuncia: Denuncia) => ({
+        id: denuncia.id,
+        name: denuncia.user.name,
+        alvo: denuncia.alvo,
+        description: denuncia.description,
+        }));
+        
+    setDenuncias(novosDenuncia);
+    console.log(novosDenuncia)
+    
+    })
+    //retorna o objeto inteiro
+    .catch((error) => {
+        console.log(error);
+    });
+    // console.log('aa')
+    
+  }, []);
   return (
     <div>
       <DataGrid
-        rows={rows}
+        rows={denuncias}
         columns={columns}
         pageSizeOptions={[5, 10]}
         checkboxSelection

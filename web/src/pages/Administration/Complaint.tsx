@@ -1,4 +1,4 @@
-import TitleComplaint from "components/Cards/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/TitleComplaint";
 import Button from "components/Items_Forms/Button";
 
 export default function Complaint(){
@@ -6,10 +6,8 @@ export default function Complaint(){
     const buttonCSS = 'bg-verde_folha h-[40px] rounded-lg font-semibold text-white px-5 mr-6 shadow hover:bg-verde_palido'
 
     return (
-        <div className="bg-preto text-white pb-10">
-            <div className="pt-16">
-                <TitleComplaint titulo="Denúncia"/>
-            </div>
+        <div className="bg-preto text-white">
+            <TitleComplaint titulo="Denúncia"/>
             <div className="px-[18rem] py-20">
                 <div className="mb-8 font-medium text-lg space-y-2">
                     <p>Data/Data/Data</p>

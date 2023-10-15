@@ -8,15 +8,15 @@ export default function AboutUs(){
                 <div>
                     <p className='text-verde_folha font-bold text-4xl mb-5'>Sobre Nós</p>
                     {/**Texto */}
-                    <div className='w-[45rem] space-y-3'>
+                    <div className='w-[45rem] space-y-1'>
                         <p>
-                            Curabitur velit justo, sodales eu malesuada sed, egestas quis magna. Mauris magna purus, pellentesque ut ante sollicitudin, vestibulum dictum lorem. Donec sem dolor, dignissim vitae dui a, dapibus pellentesque lectus. Pellentesque sed dolor sed mi dignissim tincidunt vel non lectus. Morbi vitae lacus vel ligula interdum egestas.
+                            Nos conhecemos na Escola Técnica Estadual (ETEC) - Júlia, Lucas, Melissa e Nicoly - e no processo da criação do nosso Trabalho de Conclusão de Curso (TCC), reconhecemos a importância de concretizar esse projeto. 
                         </p>
                         <p>
-                            Donec porttitor erat tempor dui efficitur maximus a sit amet lorem. Donec tincidunt dignissim mi, quis pretium erat egestas lacinia. Nullam ultricies quis velit ac tempor. Sed quis blandit ligula. Nunc sapien arcu, egestas eget vulputate non, iaculis ut nunc.
+                            Em um mundo onde a autenticidade e a qualidade dos produtos se tornam cada vez mais incertas, queríamos oferecer uma solução confiável. A Organic Flow nasceu para atender a essa necessidade crescente.
                         </p>
                         <p>
-                            Integer eget convallis nunc. Suspendisse ut turpis gravida, tempor nisl eget, dignissim magna. Nullam varius lectus erat, vitae lobortis velit dignissim sed. Donec fermentum, augue imperdiet accumsan viverra, turpis sapien iaculis mauris, posuere eleifend neque justo sed nibh.
+                            Esta iniciativa visa aprimorar a qualidade de vida daqueles com necessidades alimentares específicas e oferecer suporte aos indivíduos preocupados com a origem e a qualidade de seus alimentos.
                         </p>
                     </div>
                     <button className='bg-verde_folha mt-5 w-[20rem] h-[3rem] rounded-lg text-lg font-semibold shadow-md hover:bg-verde_palido'>Junte-se a Nós</button>

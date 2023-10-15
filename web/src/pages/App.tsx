@@ -5,6 +5,8 @@ import Banner from 'components/Banner';
 import AboutUs from 'components/AboutUs';
 import Papel from '../assets/img/Fundo/papel1.png'
 import TeamCard from 'components/Cards/TeamCard';
+import { useState } from 'react';
+import FeedbackArea from 'components/FeedbackArea';
 
 export default function App() {
   const navigate = useNavigate()
@@ -16,12 +18,16 @@ export default function App() {
       <Companies />
       <AboutUs />
 
-      <div className='bg-cover h-[50rem] px-28' style={{ backgroundImage: `url(${Papel})` }}>
-        <p>Nosso Time</p>
-        <TeamCard />
+      <div className='bg-cover py-14 px-28 flex flex-col items-center' style={{ backgroundImage: `url(${Papel})` }}>
+        <p className='text-verde_folha font-bold text-4xl mb-8'>Nosso Time</p>
+        <div className='flex space-x-10'>
+          <TeamCard /><TeamCard /><TeamCard /><TeamCard />
+        </div>
       </div>
 
-      <div className='mt-[25rem]'/>
+      <FeedbackArea />
+
+      <div className='mt-[1rem]'/>
 
       <Button
         botaoCSS={botaoTCSS}
@@ -47,11 +53,6 @@ export default function App() {
         botaoCSS={botaoTCSS}
         texto='Lista de denúncias'
         onClick={() => { navigate('/admin/listadenuncias') }}
-      />
-      <Button
-        botaoCSS={botaoTCSS}
-        texto='Telas teste'
-        onClick={() => { navigate('/teste') }}
       />
     </div>
   )

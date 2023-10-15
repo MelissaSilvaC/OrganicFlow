@@ -2,17 +2,18 @@ import ModalProduct from "components/Modal/RegisterProduct";
 import TextField from "components/Items_Forms/TextField";
 import Button from "components/Items_Forms/Button";
 import { useState, useEffect } from "react";
-import IProduto from "types/IProduto";
 import ProductCard from "components/Cards/Produto";
 import React from "react";
 import axios from "axios";
 import ProfileScreen from "./ProfileScreen";
+
 
 export default function ProfileCompany() {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
     const [image, setImage] = useState<File | null>(null)
     const [imageURL, setImageURL] = useState<string | null>(null);
     const [nameProduct, setNameProduct] = useState("")
+    const [produtos, setProdutos] = useState<any[]>([]);
     {/** LIMPE A LISTA APÓS OS TESTES */ }
     // useEffect(()=>{
     //     axios.get('http://localhost:3001'+'/empresa/:id')
@@ -35,11 +36,39 @@ export default function ProfileCompany() {
 
 
   //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
+//   const [produtos, setProdutos] = useState<IProduto[]>([]);
+
+  useEffect(() => { 
+
+        const url = window.location.href;
+        const id = url.split("/").pop(); 
+        axios.get(`http://localhost:3000/empresa/${id}`)
+        .then(response => {
+
+            const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
+            id: produto.id,
+            nome: produto.nome,
+            photo: produto.photo,
+            }));
+            
+        setProdutos(novosProduto);
+        console.log(novosProduto)
+        })
+        //retorna o objeto inteiro
+        .catch((error) => {
+            console.log(error);
+        });
+        // console.log('aa')
+        
+  }, []);
+
+
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
         if (image) {
 
-            axios.post('http://localhost:3001'+'/produto',{
+            axios.post('http://localhost:3000'+'/produto',{
                 nome: nameProduct,
                 photo: URL.createObjectURL(image),
                 })
@@ -84,7 +113,7 @@ export default function ProfileCompany() {
                                 <label
                                     htmlFor='file-input'
                                     className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                    Selecione uma imagem
+                                    Selecione um arquivo
                                 </label>
                             </div>
 
@@ -110,16 +139,24 @@ export default function ProfileCompany() {
                         </form>
                     </ModalProduct>
 
-                    {/**
-                     * {produtos?.map((produto, index) => (
+                    
+                     {/* {produtos?.map((produto) => (
+                            <ProductCard
+                                key={produto.id}
+                                image={produto.image}
+                                nameProduct={produto.nameProduct}
+                            />
+                        ))} */}
+
+                    {produtos?.map((produto) => (
                         <ProductCard
-                            key={index}
-                            image={produto.image}
-                            nameProduct={produto.nameProduct}
+                        key={produto.id}
+                        id={produto.id}
+                        nome={produto.nome}
+                        photo={produto.photo}
                         />
-                    ))
-                    }
-                     */}
+                    ))}
+                     
 
                 </div>
             </div>

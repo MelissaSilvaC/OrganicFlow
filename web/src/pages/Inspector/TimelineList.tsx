@@ -1,5 +1,5 @@
 import axios from "axios";
-import TitleTimeLine from "components/Cards/TitleTimeLine";
+import TitleTimeLine from "components/Cards/Titles/TitleTimeLine";
 import Button from "components/Items_Forms/Button";
 import TextField from "components/Items_Forms/TextField";
 import ModalTimeline from "components/Modal/RegisterTimeline";

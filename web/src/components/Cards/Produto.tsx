@@ -1,9 +1,14 @@
-import IProduct from "types/IProduto";
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import TextShadow from "./TextShadow";
 
-export default function TestProduct({ image, nameProduct }: IProduct) {
+interface ProdutoProps{
+    id:number;
+    nome:string;
+    photo:string;
+}
+
+const TestProduct:React.FC<ProdutoProps>=({ nome,photo}) => {
     const [hover, setHover] = useState(false);
 
     const handleMouseEnter = () => {
@@ -18,16 +23,16 @@ export default function TestProduct({ image, nameProduct }: IProduct) {
         <>
             <Link to='/fiscal/lista'>
                 <div
-                    className="w-36 h-36 m-3 flex flex-col justify-end rounded-[50px] border-2 border-verde_escuro bg-verde_folha bg-cover"
+                    className="w-44 h-44 m-3 flex flex-col justify-end rounded-[50px] border-2 border-verde_escuro bg-verde_folha bg-cover"
                     style={{
-                        backgroundImage: `url(${image})`,
+                        backgroundImage: `url(${photo})`,
                         cursor: hover ? 'pointer' : 'auto'
                     }}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
                     {hover && (
-                        <TextShadow nome={nameProduct} />
+                        <TextShadow nome={nome} />
                     )}
                 </div>
             </Link>
@@ -35,3 +40,4 @@ export default function TestProduct({ image, nameProduct }: IProduct) {
     )
 
 }
+export default TestProduct

@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Outlet, Link } from 'react-router-dom'
 import Papel from '../assets/img/Fundo/papel1.png'
+import Footer from './Footer';
 
 const settings = ['Login', 'Dashboard', 'Logout'];
 
@@ -28,7 +29,7 @@ export default function Navbar() {
                     <Toolbar disableGutters>
                         <div className='flex items-center justify-between w-full max-md:mx-10'>
                             <Link to='/sessao' >
-                                <img src={logo} className='flex mr-10 w-[200px] max-md:w-[150px] py-4' />
+                                <img src={logo} className='flex mr-10 w-[14rem] max-md:w-[150px] py-4' />
                             </Link>
 
                             {/**Perfil */}
@@ -68,6 +69,7 @@ export default function Navbar() {
             <div>
                 <Outlet />
             </div>
+            <Footer />
         </>
     );
 }

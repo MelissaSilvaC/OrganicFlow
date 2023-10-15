@@ -56,7 +56,7 @@ export class UserController{
 
     async atualizar(request:Request, response:Response){
         const{id}=request.params
-        const{name,password, email, company}=request.body;
+        const{name,company,cnpj,photo,local}=request.body;
 
         let User=await prismaClient.user.findFirst({
             where:{
@@ -69,7 +69,7 @@ export class UserController{
             })
         }
 
-        const hashPassword=await bcrypt.hash(password,10)
+        // const hashPassword=await bcrypt.hash(password,10)
 
         User=await prismaClient.user.update({
             where:{
@@ -77,9 +77,10 @@ export class UserController{
             },
             data:{
                 name,
-                email,
-                password:hashPassword,
-                company
+                company,
+                cnpj,
+                photo,
+                local
             }
         })
 
