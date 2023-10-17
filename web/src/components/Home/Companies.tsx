@@ -1,7 +1,7 @@
 import { FiSearch } from 'react-icons/fi';
-import Papel from '../assets/img/Fundo/papel1.png'
+import Papel from '../../assets/img/Fundo/papel1.png'
 import Slider from 'react-slick';
-import CompanyBrand from './Cards/CompanyBrand';
+import CompanyBrand from '../Cards/ImageCards/CompanyBrand';
 
 export default function Companies() {
     const companySettings = {
@@ -24,6 +24,25 @@ export default function Companies() {
                 </div>
             </div>
             <div className='mt-10'>
+                {/**Notas: arrumar a responsividade e fazer o slider só aparecer quando os cards preencherem a tela */}
+
+                {/**PARA COMPUTADOR
+                     * if(empresa < 6){
+                     *  lista flex wrap
+                     * 
+                     * }else{
+                     *  carrossel
+                     * }
+                     * 
+
+                        PARA TELAS MENORES
+                    if(empresa < 3){
+                     *  lista flex wrap
+                     * 
+                     * }else{
+                     *  carrossel(SLIDES TO SHOW = 2 OU 3)
+                     * }
+                     */}
                 <Slider {...companySettings}>
                     {/* Lista dos perfis da empresa */}
                     <CompanyBrand /><CompanyBrand /><CompanyBrand /><CompanyBrand /><CompanyBrand />

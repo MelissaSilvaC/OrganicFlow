@@ -1,7 +1,7 @@
 import FeedbackCard from "components/Cards/FeedbackCard";
 import TitleComplaint from "components/Cards/Titles/TitleComplaint";
 
-import empresa from '../../assets/img/logoExample.png'
+import empresa from '../../../assets/img/logoExample.png'
 
 export default function FeedbacksList(){
     return(

@@ -89,19 +89,19 @@ function createData(id: number, data: string) {
 }
 
 const rows = [
-    createData(1, 'Cupcake'),
-    createData(2, 'Donut'),
-    createData(3, 'Eclair'),
-    createData(4, 'Frozen yoghurt'),
-    createData(5, 'Gingerbread'),
-    createData(6, 'Honeycomb'),
-    createData(7, 'Ice cream sandwich'),
-    createData(8, 'Jelly Bean'),
-    createData(9, 'KitKat'),
-    createData(10, 'Lollipop'),
-    createData(11, 'Marshmallow'),
-    createData(12, 'Nougat'),
-    createData(13, 'Oreo'),
+    createData(1, '20/5/17'),
+    createData(2, '20/5/17'),
+    createData(3, '20/5/17'),
+    createData(4, '20/5/17'),
+    createData(5, '20/5/17'),
+    createData(6, '20/5/17'),
+    createData(7, '20/5/17'),
+    createData(8, '20/5/17'),
+    createData(9, '20/5/17'),
+    createData(10, '20/5/17'),
+    createData(11, '20/5/17'),
+    createData(12, '20/5/17'),
+    createData(13, '20/5/17'),
 ].sort((a, b) => (a.id < b.id ? -1 : 1));
 
 export default function CustomPaginationActionsTable() {
@@ -140,7 +140,7 @@ export default function CustomPaginationActionsTable() {
                             </TableCell>
                             <TableCell component="th" scope="row" style={{ color: `white` }}>
                                 {/**<Link to={`/link-da-denuncia${row.id}`}>{row.data}</Link> */}
-                                <Link to={`/fiscal/lista/linhatempo`}>{row.data}</Link>
+                                <Link to={`/fiscal/lista/linhatempo`}>Criado em: {row.data}</Link>
                             </TableCell>
                         </TableRow>
                     ))}

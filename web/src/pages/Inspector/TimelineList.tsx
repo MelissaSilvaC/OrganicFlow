@@ -2,19 +2,12 @@ import axios from "axios";
 import TitleTimeLine from "components/Cards/Titles/TitleTimeLine";
 import Button from "components/Items_Forms/Button";
 import TextField from "components/Items_Forms/TextField";
-import ModalTimeline from "components/Modal/RegisterTimeline";
 import CustomPaginationActionsTable from "components/Table/TimelinesTable";
 import { useState } from "react";
 
 export default function TimelineList() {
-    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
-    const fieldTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
     const [image, setImage] = useState<File | null>(null)
     const [imageURL, setImageURL] = useState<string | null>(null);
-    const [local, setLocal] = useState("")
-    const [especie, setEspecie] = useState("")
-    const [dataCultivo, setDataCultivo] = useState("")
-    const [lote, setLote] = useState("")
 
     //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,87 +50,24 @@ export default function TimelineList() {
                 {/**Tabela */}
                 <div className="px-28">
                     <CustomPaginationActionsTable />
-                    <div className="flex mt-8">
+                    <div className="flex mt-8 max-lg:flex max-lg:flex-wrap max-lg:space-y-5">
                         <Button
                             texto='Escanear linha do tempo'
                             botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold text-white px-5 mr-6 shadow hover:bg-verde_palido'
-                            onClick={() => { }}
+                            onClick={() => {}}
                         />
-                        <ModalTimeline>
-                            <form onSubmit={onSubmit}>
-                                {/* Renderiza a imagem se imageURL estiver definida */}
-                                <div className="flex justify-center">
-                                    <div className="w-48 h-40 rounded-[35px] border-2 border-verde_escuro bg-cover" style={{ backgroundImage: `url(${imageURL})` }}>
-                                        {/**{imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[35px]" />} */}
-                                    </div>
-                                </div>
-                                {/* Label e botão */}
-                                <div className="flex flex-col my-2">
-                                    <label className="font-medium" >Imagem:</label>
-                                    <label
-                                        htmlFor='file-input'
-                                        className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                        Selecione uma imagem
-                                    </label>
-                                </div>
 
-                                <input
-                                    required
-                                    type='file'
-                                    name='image'
-                                    onChange={handleImageChange}
-                                    style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
-                                    id='file-input' // Adiciona um id para referência ao label
-                                />
-                                {/**Espécie do alimento */}
-                                <TextField
-                                    obrigatorio={true}
-                                    placeholder='Nome da espécie do alimento'
-                                    onChange={evento => setEspecie(evento.target.value)}
-                                    valor={especie}
-                                    tipo='text'
-                                    campoCSS={fieldTCSS}
-                                    inputCSS={inputTCSS}
-                                />
+                        <Button
+                            onClick={() => {}}
+                            texto='Cadastrar linha do tempo'
+                            botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold text-white px-5 shadow hover:bg-verde_palido'
+                        />
 
-                                {/**Data do cultivo */}
-                                <TextField
-                                    obrigatorio={true}
-                                    placeholder='Data do cultivo'
-                                    onChange={evento => setDataCultivo(evento.target.value)}
-                                    valor={dataCultivo}
-                                    tipo='date'
-                                    campoCSS={fieldTCSS}
-                                    inputCSS={inputTCSS}
-                                />
-
-                                {/**Local do cultivo */}
-                                <TextField
-                                    obrigatorio={true}
-                                    placeholder='Local do cultivo'
-                                    onChange={evento => setLocal(evento.target.value)}
-                                    valor={local}
-                                    tipo='text'
-                                    campoCSS={fieldTCSS}
-                                    inputCSS={inputTCSS}
-                                />
-
-                                {/**Número do lote */}
-                                <TextField
-                                    obrigatorio={false}
-                                    placeholder='Número do lote'
-                                    onChange={evento => setLote(evento.target.value)}
-                                    valor={lote}
-                                    tipo='text'
-                                    campoCSS={fieldTCSS}
-                                    inputCSS={inputTCSS}
-                                />
-                                <Button 
-                                    botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' 
-                                    texto='Enviar' 
-                                />
-                            </form>
-                        </ModalTimeline>
+                        <Button
+                            texto='Deletar produto'
+                            botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
+                            onClick={() => { alert('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionada a esse produto') }}
+                        />
                     </div>
                 </div>
             </div>

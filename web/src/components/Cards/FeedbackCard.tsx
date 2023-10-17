@@ -10,7 +10,7 @@ interface IFeedback {
 
 export default function FeedbackCard({photo, name, feedbackText} : IFeedback){
     return(
-        <div className="text-white w-[26rem] border-2 border-slate-600 rounded-md m-5">
+        <div className="text-white w-[26rem] border-2 border-slate-600 rounded-md m-5 shadow-lg">
             <div className="flex px-5 py-2 bg-verde_escuro">
                 <div className="w-12 h-12 rounded-full bg-cover mr-4" style={{ backgroundImage: `url(${photo})` }} />
                 <p className='font-semibold text-lg pb-2 flex items-end'>{name}</p>

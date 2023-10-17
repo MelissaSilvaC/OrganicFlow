@@ -20,9 +20,7 @@ const columns: GridColDef[] = [
     width: 300,
     renderCell: (params) => {
       const description = params.row.name;
-      // Check if the description is not null
       if (description !== null) {
-        // Wrap the name in a link
         return (
           /**
           <a href={`your_link_here/${description}`}>
@@ -34,7 +32,7 @@ const columns: GridColDef[] = [
           </Link>
         );
       }
-      return null; // Return null for null values
+      return null;
     },
   },
   {
@@ -85,25 +83,13 @@ const columns: GridColDef[] = [
   },
 ];
 
-
-
-// const rows = [
-//   //data: usuario que fez a denuncia
-//   //usuario: alvo
-//   //argumento: description
-//   { id: 1, name: 'Snow', alvo: 'Jon', description: 'a ' },
-//   { id: 2, name: 'Lannister', alvo: 'Cersei', description: 'a ' },
-//   { id: 3, name: 'Lannister', alvo: 'Jaime', description: 'a ' },
-//   { id: 4, name: 'Stark', alvo: 'Arya', description: 'a ' },
-//   { id: 5, name: 'Targaryen', alvo: 'Daenerys', description: 'a ' },
-//   { id: 6, name: 'Melisandre', alvo: null, description: 'a ' },
-//   { id: 7, name: 'Clifford', alvo: 'Ferrara', description: 'a ' },
-//   { id: 8, name: 'Frances', alvo: 'Rossini', description: 'a ' },
-//   { id: 9, name: 'Roxie', alvo: 'Harvey', description: 'a ' },
-// ];
-
 export default function DataTable() {
   const [denuncias, setDenuncias] = useState<any[]>([]);
+  const [selectedComplaint, setSelectedComplaint] = useState(null);
+
+  const handleComplaintClick = (complaint: React.SetStateAction<null>) => {
+    setSelectedComplaint(complaint);
+  };
 
   useEffect(() => { 
 
@@ -139,22 +125,4 @@ export default function DataTable() {
     </div>
   );
 }
-
-/**
- * export default function DataTable() {
-  return (
-    <div style={{ height: 400, width: '100%', backgroundColor: 'lightgray' }}>
-      
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{ pagination: { paginationModel: { page: 0, pageSize: 5 } } }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-        />
-      
-    </div>
-  );
-}
- */
 

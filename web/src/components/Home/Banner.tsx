@@ -1,4 +1,4 @@
-import Background from '../assets/img/Fundo/hotifruti.png'
+import Background from '../../assets/img/Fundo/hotifruti.png'
 import { FaRegEye } from 'react-icons/fa';
 import { LuThumbsUp } from 'react-icons/lu';
 import { TfiLocationPin } from 'react-icons/tfi';

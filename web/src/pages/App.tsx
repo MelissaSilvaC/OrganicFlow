@@ -1,12 +1,12 @@
 import Button from 'components/Items_Forms/Button'
 import { useNavigate } from 'react-router-dom'
-import Companies from 'components/Companies';
-import Banner from 'components/Banner';
-import AboutUs from 'components/AboutUs';
+import Companies from 'components/Home/Companies';
+import Banner from 'components/Home/Banner';
+import AboutUs from 'components/Home/AboutUs';
 import Papel from '../assets/img/Fundo/papel1.png'
-import TeamCard from 'components/Cards/TeamCard';
+import TeamCard from 'components/Cards/InfoCards/Team';
 import { useState } from 'react';
-import FeedbackArea from 'components/FeedbackArea';
+import FeedbackArea from 'components/Home/FeedbackArea';
 
 export default function App() {
   const navigate = useNavigate()

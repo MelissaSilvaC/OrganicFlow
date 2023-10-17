@@ -1,7 +1,7 @@
-import InfoManagerCard from "components/Cards/InfoManagerCard";
+import InfoManagerCard from "components/Cards/InfoCards/Manager";
 import TitleComplaint from "components/Cards/Titles/TitleComplaint";
 import { FiSearch } from 'react-icons/fi';
-import empresa from '../../assets/img/logoExample.png'
+import empresa from '../../../assets/img/logoExample.png'
 
 export default function AbleManager(){
     return(

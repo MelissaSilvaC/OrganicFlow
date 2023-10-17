@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import ModalScreen from '@mui/material/Modal';
 import Button from 'components/Items_Forms/Button';
 import { TfiClose } from 'react-icons/tfi';
+import { LuPencil } from 'react-icons/lu';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -17,7 +18,7 @@ const style = {
     p: 4,
 };
 
-export default function ModalTimeline({ children }: { children?: React.ReactNode }) {
+export default function ModalManager({ children }: { children?: React.ReactNode }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -26,9 +27,10 @@ export default function ModalTimeline({ children }: { children?: React.ReactNode
         <div>
             <Button
                 onClick={handleOpen}
-                texto='Cadastrar linha do tempo'
-                botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold text-white px-5 shadow hover:bg-verde_palido'
+                texto='Cadastrar fiscal'
+                botaoCSS='bg-zinc-500 h-[40px] rounded font-semibold text-white px-10 py-6 shadow flex items-center'
             />
+
             <ModalScreen
                 open={open}
                 onClose={handleClose}

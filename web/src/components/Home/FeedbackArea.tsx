@@ -1,5 +1,5 @@
 import Button from 'components/Items_Forms/Button'
-import Green from '../assets/img/Fundo/greenLines.png'
+import Green from '../../assets/img/Fundo/greenLines.png'
 import TextArea from 'components/Items_Forms/TextArea';
 import { useState } from 'react';
 

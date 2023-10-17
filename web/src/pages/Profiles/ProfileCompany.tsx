@@ -2,11 +2,12 @@ import ModalProduct from "components/Modal/RegisterProduct";
 import TextField from "components/Items_Forms/TextField";
 import Button from "components/Items_Forms/Button";
 import { useState, useEffect } from "react";
-import ProductCard from "components/Cards/Produto";
+import ProductCard from "components/Cards/ImageCards/Produto";
 import React from "react";
 import axios from "axios";
 import ProfileScreen from "./ProfileScreen";
-
+import logoEmpresa from '../../assets/img/logoExample.png'
+import ManagementInspector from "components/ManagementInspectors";
 
 export default function ProfileCompany() {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -23,65 +24,63 @@ export default function ProfileCompany() {
     //       .catch(error => {
     //         console.error('Erro ao buscar dados:', error);
     //       });   
- //    const [produtos, setProdutos] = useState<IProduto[]>([  // Inicialize o estado "produtos" com a lista inicial.
-        
-
-
-        // {
-        //     image: // tps://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
-        //     namePro// t: 'Cenoura'
-        // },
-       //    //]);
+    //    const [produtos, setProdutos] = useState<IProduto[]>([  // Inicialize o estado "produtos" com a lista inicial.
 
 
 
-  //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
-//   const [produtos, setProdutos] = useState<IProduto[]>([]);
+    // {
+    //     image: // tps://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
+    //     namePro// t: 'Cenoura'
+    // },
+    //    //]);
 
-  useEffect(() => { 
+
+
+    //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
+    //   const [produtos, setProdutos] = useState<IProduto[]>([]);
+
+    useEffect(() => {
 
         const url = window.location.href;
-        const id = url.split("/").pop(); 
+        const id = url.split("/").pop();
         axios.get(`http://localhost:3000/empresa/${id}`)
-        .then(response => {
+            .then(response => {
 
-            const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
-            id: produto.id,
-            nome: produto.nome,
-            photo: produto.photo,
-            }));
-            
-        setProdutos(novosProduto);
-        console.log(novosProduto)
-        })
-        //retorna o objeto inteiro
-        .catch((error) => {
-            console.log(error);
-        });
+                const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
+                    id: produto.id,
+                    nome: produto.nome,
+                    photo: produto.photo,
+                }));
+
+                setProdutos(novosProduto);
+                console.log(novosProduto)
+            })
+            //retorna o objeto inteiro
+            .catch((error) => {
+                console.log(error);
+            });
         // console.log('aa')
-        
-  }, []);
 
-
+    }, []);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); 
+        e.preventDefault();
         if (image) {
 
-            axios.post('http://localhost:3000'+'/produto',{
+            axios.post('http://localhost:3000' + '/produto', {
                 nome: nameProduct,
                 photo: URL.createObjectURL(image),
-                })
+            })
                 .then(response => console.log(response))//se for sucedido 
                 .catch((error) => {
                     console.log(error);
                 });
-            
-            
+
+
             setImage(null);
             setNameProduct('');
         } else {
-            console.log('Nenhuma imagem selecionada.');
+            console.log('Falha ao cadastrar');
         }
     }
 
@@ -91,14 +90,20 @@ export default function ProfileCompany() {
         if (selectedImage) {
             setImage(selectedImage); // Atualize o estado com o objeto File
             setImageURL(URL.createObjectURL(selectedImage));
-            console.log('passou por essa função')
         }
     };
 
     return (
-        <ProfileScreen>
-            <div>
-                <div className="flex m-24 flex-wrap ">
+        <ProfileScreen
+            photo={logoEmpresa}
+            userName="CompanyName"
+            email="company@email.com"
+            adress="Rua plantao, 123 - Penha/São Paulo - SP"
+        >
+            <div className="flex flex-wrap mt-16 mb-20">
+                <div>
+                    <p className="text-white text-2xl pb-8">Produtos da empresa</p>
+
                     <ModalProduct>
                         <form onSubmit={onSubmit}>
                             {/* Renderiza a imagem se imageURL estiver definida */}
@@ -139,8 +144,7 @@ export default function ProfileCompany() {
                         </form>
                     </ModalProduct>
 
-                    
-                     {/* {produtos?.map((produto) => (
+                    {/* {produtos?.map((produto) => (
                             <ProductCard
                                 key={produto.id}
                                 image={produto.image}
@@ -150,16 +154,16 @@ export default function ProfileCompany() {
 
                     {produtos?.map((produto) => (
                         <ProductCard
-                        key={produto.id}
-                        id={produto.id}
-                        nome={produto.nome}
-                        photo={produto.photo}
+                            key={produto.id}
+                            id={produto.id}
+                            nome={produto.nome}
+                            photo={produto.photo}
                         />
                     ))}
-                     
-
                 </div>
             </div>
+            <ManagementInspector />
+
         </ProfileScreen>
     )
 }

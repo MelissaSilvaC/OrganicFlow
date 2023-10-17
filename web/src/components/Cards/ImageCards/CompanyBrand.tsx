@@ -1,4 +1,4 @@
-import empresa from '../../assets/img/logoExample.png'
+import empresa from '../../../assets/img/logoExample.png'
 
 export default function CompanyBrand(){
     return (

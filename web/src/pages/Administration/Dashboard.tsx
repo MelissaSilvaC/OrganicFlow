@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import ComplaintsList from "./ComplaintsList";
-import AbleManager from "./AbleManager";
-import FeedbacksList from "./FeedbacksList";
+import ComplaintsList from "./DashboardPanels/ComplaintsList";
+import AbleManager from "./DashboardPanels/AbleManager";
+import FeedbacksList from "./DashboardPanels/FeedbacksList";
+import BanedUserView from "./DashboardPanels/BanedUserView";
 
 export default function Dashboard() {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = useState("Validar gerentes")
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
@@ -14,7 +15,7 @@ export default function Dashboard() {
         <div className="flex bg-preto">
             
             {/**Menu vertical */}
-            <div className="bg-cinza_escuro h-screen w-[20%] text-white">
+            <div className="bg-cinza_escuro w-[20%] text-white">
                 <ul className="font-medium text-lg pl-12 pt-24 space-y-5 hover:cursor-pointer">
                     <li
                         onClick={() => handleOptionClick("Validar gerentes")}
@@ -44,13 +45,15 @@ export default function Dashboard() {
                         Ver usuários banidos
                     </li>
                 </ul>
+                <div className="h-screen" />
             </div>
 
             {/**Area onde vai aparecer a interface selecionada */}
-            <div className="w-full">
+            <div className="w-[80%]">
                 {selectedOption === "Validar gerentes" && <AbleManager />}
                 {selectedOption === "Lista de denúncias" && <ComplaintsList />}
                 {selectedOption === "Lista de feedbacks" && <FeedbacksList />}
+                {selectedOption === "Ver usuários banidos" && <BanedUserView />}
             </div>
         </div>
     );

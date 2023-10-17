@@ -14,7 +14,6 @@ import InfoField from "./InfoField"
 
 export default function StageIII({ handleMedal, handleReport }: IHandle) {
     const [nomeTransporte, setNomeTransporte] = useState("")
-    const [nomeLogistica, setNomeLogistica] = useState("")
     const [dataCarregamento, setDataCarregamento] = useState("")
     const [dataDescarregamento, setDataDescarregamento] = useState("")
     const [rotaPercorrida, setRotaPercorrida] = useState("")
@@ -39,16 +38,6 @@ export default function StageIII({ handleMedal, handleReport }: IHandle) {
                         onChange={evento => setNomeTransporte(evento.target.value)}
                         label="Nome da empresa de transporte"
                         valor={nomeTransporte}
-                        tipo='text'
-                        campoCSS={campoTCSS}
-                        inputCSS={inputTCSS}
-                    />
-                    <br />
-                    <TextField
-                        obrigatorio={true}
-                        onChange={evento => setNomeLogistica(evento.target.value)}
-                        label="Logística responsável"
-                        valor={nomeLogistica}
                         tipo='text'
                         campoCSS={campoTCSS}
                         inputCSS={inputTCSS}
@@ -116,11 +105,6 @@ export default function StageIII({ handleMedal, handleReport }: IHandle) {
                         <InfoField
                             label="Nome da empresa de transporte"
                             valor={nomeTransporte}
-                        />
-                        <br />
-                        <InfoField
-                            label="Logística responsável"
-                            valor={dataDescarregamento}
                         />
                         <br />
                         <div className="flex justify-evenly">
