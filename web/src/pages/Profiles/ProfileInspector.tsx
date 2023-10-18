@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios'
 import { useEffect, } from "react";
 import logoEmpresa from '../../assets/img/logoExample.png'
-import TitleComplaint from "components/Cards/Titles/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/Title-complaint";
 
 export default function ProfileInspector() {
     const [produtos, setProdutos] = useState<any[]>([]);

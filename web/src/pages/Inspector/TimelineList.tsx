@@ -1,7 +1,5 @@
-import axios from "axios";
-import TitleTimeline from "components/Cards/Titles/TitleTimeline";
+import TitleTimeline from "components/Cards/Titles/Title-timeline";
 import Button from "components/Items_Forms/Button";
-import TextField from "components/Items_Forms/TextField";
 import CustomPaginationActionsTable from "components/Table/TimelinesTable";
 import { useState } from "react";
 
@@ -13,20 +11,6 @@ export default function TimelineList() {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (image) {
-
-            /**axios.post('http://localhost:3001' + '/produto', {
-                nome: nameProduct,
-                photo: URL.createObjectURL(image),
-            })
-                .then(response => console.log(response))
-                .catch((error) => {
-                    console.log(error);
-                });
-
-
-            setImage(null);
-            setNameProduct(''); */
-
             console.log('A imagem e os outros dados foram submetidos')
         } else {
             console.log('Nenhuma imagem selecionada.');

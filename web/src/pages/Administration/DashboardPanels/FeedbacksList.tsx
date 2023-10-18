@@ -1,5 +1,5 @@
 import FeedbackCard from "components/Cards/FeedbackCard";
-import TitleComplaint from "components/Cards/Titles/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/Title-complaint";
 
 import empresa from '../../../assets/img/logoExample.png'
 

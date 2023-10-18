@@ -1,4 +1,4 @@
-import TitleComplaint from "components/Cards/Titles/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import empresa from '../../../assets/img/logoExample.png'
 import BanedUserCard from "components/Cards/InfoCards/BanedUser";
 

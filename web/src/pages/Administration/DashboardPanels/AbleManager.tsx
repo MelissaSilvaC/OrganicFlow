@@ -1,5 +1,5 @@
 import InfoManagerCard from "components/Cards/InfoCards/Manager";
-import TitleComplaint from "components/Cards/Titles/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import { FiSearch } from 'react-icons/fi';
 import empresa from '../../../assets/img/logoExample.png'
 

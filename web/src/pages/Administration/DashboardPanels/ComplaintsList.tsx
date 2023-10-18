@@ -1,4 +1,4 @@
-import TitleComplaint from "components/Cards/Titles/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import Table from "components/Table/ComplaintsTable";
 import { useState } from "react";
 

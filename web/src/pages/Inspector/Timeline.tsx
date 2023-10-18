@@ -1,4 +1,4 @@
-import TitleTimeline from "components/Cards/Titles/TitleTimeline";
+import TitleTimeline from "components/Cards/Titles/Title-timeline";
 import Accordion from '@mui/material/Accordion';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -7,7 +7,7 @@ import StageI from "components/Stages/StageI";
 import StageIII from "components/Stages/StageIII";
 import StageIV from "components/Stages/StageIV";
 import StageV from "components/Stages/StageV";
-import StageCard from "components/Cards/Titles/StageCard";
+import StageCard from "components/Cards/Titles/Stage-card";
 import StageII from "components/Stages/StageII";
 import { useState } from "react";
 import Medal_I from '../../assets/img/Medals/Medal_I.png'

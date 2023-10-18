@@ -1,4 +1,4 @@
-import TitleComplaint from "components/Cards/Titles/TitleComplaint";
+import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import Button from "components/Items_Forms/Button";
 
 export default function Complaint() {
