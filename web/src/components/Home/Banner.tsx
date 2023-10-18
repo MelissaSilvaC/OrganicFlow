@@ -8,7 +8,7 @@ export default function Banner() {
     return (
         <div className="bg-cover h-[40rem] max-lg:h-[35rem] flex items-center text-white" style={{ backgroundImage: `url(${Background})` }}>
 
-            <div className='flex flex-col max-lg:items-center space-y-6 max-lg:w-full text-center'>
+            <div className='flex flex-col max-lg:items-center space-y-6 max-lg:w-full text-center w-full'>
 
                 <div className='font-extrabold text-4xl max-lg:text-2xl space-y-2 max-lg:text-center'>
                     <p>Traçando Caminhos</p>
