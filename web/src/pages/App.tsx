@@ -26,34 +26,6 @@ export default function App() {
       </div>
 
       <FeedbackArea />
-
-      <div className='mt-[1rem]'/>
-
-      <Button
-        botaoCSS={botaoTCSS}
-        texto='Perfil empresa'
-        onClick={() => { navigate('/empresa/perfil') }}
-      />
-      <Button
-        botaoCSS={botaoTCSS}
-        texto='Perfil fiscal'
-        onClick={() => { navigate('/fiscal/perfil') }}
-      />
-      <Button
-        botaoCSS={botaoTCSS}
-        texto='Lista de linhas do tempo'
-        onClick={() => { navigate('/fiscal/lista') }}
-      />
-      <Button
-        botaoCSS={botaoTCSS}
-        texto='Linha do tempo'
-        onClick={() => { navigate('/fiscal/lista/linhatempo') }}
-      />
-      <Button
-        botaoCSS={botaoTCSS}
-        texto='Lista de denúncias'
-        onClick={() => { navigate('/admin/listadenuncias') }}
-      />
     </div>
   )
 }

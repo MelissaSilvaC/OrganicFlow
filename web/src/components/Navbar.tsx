@@ -14,7 +14,21 @@ import { Outlet, Link } from 'react-router-dom'
 import Papel from '../assets/img/Fundo/papel1.png'
 import Footer from './Footer';
 
-const settings = ['Login', 'Dashboard', 'Logout'];
+const settings = [
+    {
+        id: 1,
+        label: 'Login',
+        to: '/sessao/login'
+    }, {
+        id: 2,
+        label: 'Dashboard',
+        to: '/admin/dashboard'
+    }, {
+        id: 3,
+        label: 'Logout',
+        to: '/'
+    }
+];
 
 export default function Navbar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -28,7 +42,7 @@ export default function Navbar() {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <div className='flex items-center justify-between w-full max-md:mx-10'>
-                            <Link to='/sessao' >
+                            <Link to={'/'} >
                                 <img src={logo} className='flex mr-10 w-[14rem] max-md:w-[150px] py-4' />
                             </Link>
 
@@ -56,8 +70,10 @@ export default function Navbar() {
                                     onClose={handleCloseUserMenu}
                                 >
                                     {settings.map((setting) => (
-                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">{setting}</Typography>
+                                        <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                                            <Link to={setting.to}>
+                                                <Typography textAlign="center">{setting.label}</Typography>
+                                            </Link>
                                         </MenuItem>
                                     ))}
                                 </Menu>

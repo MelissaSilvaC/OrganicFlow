@@ -8,7 +8,6 @@ import Home from 'pages/App'
 import TimelineList from 'pages/Inspector/TimelineList'
 import Timeline from 'pages/Inspector/TimeLine'
 import Complaint from 'pages/Administration/Complaint'
-import Footer from 'components/Footer'
 import Dashboard from 'pages/Administration/Dashboard'
 
 export default function AppRouter(){
@@ -23,7 +22,7 @@ export default function AppRouter(){
                         <Route path='fiscal/perfil' element={<ProfileInspector />} />
                         <Route path='fiscal/lista' element={<TimelineList />} />
                         <Route path='fiscal/lista/linhatempo' element={<Timeline />} />
-                        <Route path='admin/listadenuncias' element={<Dashboard />} />
+                        <Route path='admin/dashboard' element={<Dashboard />} />
                         <Route path='admin/listadenuncias/denuncia' element={<Complaint />} />
                     </Route>
                     
