@@ -9,19 +9,21 @@ import { useState } from 'react';
 import FeedbackArea from 'components/Home/FeedbackArea';
 
 export default function App() {
-  const navigate = useNavigate()
-  const botaoTCSS = 'bg-verde_folha w-[30%] h-[50px] rounded-xl text-xl font-bold text-white my-5 hover:bg-verde_palido'
-
   return (
     <div className='bg-preto'>
       <Banner />
       <Companies />
       <AboutUs />
 
-      <div className='bg-cover py-14 px-28 flex flex-col items-center' style={{ backgroundImage: `url(${Papel})` }}>
-        <p className='text-verde_folha font-bold text-4xl mb-8'>Nosso Time</p>
-        <div className='flex space-x-10'>
-          <TeamCard /><TeamCard /><TeamCard /><TeamCard />
+      <div className='bg-cover py-14 px-28 max-lg:px-1 flex flex-col items-center' style={{ backgroundImage: `url(${Papel})` }}>
+        <p className='text-verde_folha font-bold text-4xl mb-8 max-lg:text-2xl'>Nosso Time</p>
+        <div className='flex space-x-10 max-lg:space-x-0 max-lg:flex-wrap max-lg:space-y-4'>
+          <div className='flex space-x-10 max-lg:space-x-0'>
+            <TeamCard /><TeamCard />
+          </div>
+          <div className='flex space-x-10 max-lg:space-x-0'>
+            <TeamCard /><TeamCard />
+          </div>
         </div>
       </div>
 

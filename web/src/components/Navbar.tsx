@@ -41,9 +41,9 @@ export default function Navbar() {
             <AppBar position="static" sx={{ backgroundImage: `url(${Papel})`, backgroundSize: 'cover' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <div className='flex items-center justify-between w-full max-md:mx-10'>
+                        <div className='flex items-center justify-between w-full max-lg:mx-4'>
                             <Link to={'/'} >
-                                <img src={logo} className='flex mr-10 w-[14rem] max-md:w-[150px] py-4' />
+                                <img src={logo} className='flex mr-10 w-[14rem] max-lg:w-[150px] py-4' />
                             </Link>
 
                             {/**Perfil */}

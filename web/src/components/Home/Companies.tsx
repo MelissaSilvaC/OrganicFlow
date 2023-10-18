@@ -12,17 +12,18 @@ export default function Companies() {
 
     return (
         <div className='bg-cover h-[25rem] px-28' style={{ backgroundImage: `url(${Papel})` }}>
-            <p className='text-verde_escuro font-bold text-4xl text-center pt-10'>Nossos Parceiros</p>
-            <div>
-                <div className='flex justify-end'>
-                    <div className='w-[450px] h-10 bg-neutral-100 rounded-[50px] flex px-6'>
-                        <input className='bg-transparent focus:outline-none grow' placeholder='Localize uma empresa' />
-                        <div className='w-8 h-8 rounded-full bg-verde_escuro flex self-center justify-center'>
-                            <FiSearch className='w-5 h-5 flex self-center stroke-white' />
-                        </div>
+            <p className='text-verde_escuro font-bold text-4xl max-lg:text-2xl text-center pt-10'>Nossos Parceiros</p>
+
+            <div className='flex justify-end max-lg:flex-col max-lg:items-center max-lg:mt-3'>
+
+                <div className='w-[450px] max-lg:w-[300px] h-10 bg-neutral-100 rounded-[50px] flex px-6'>
+                    <input className='bg-transparent focus:outline-none grow max-lg:text-sm' placeholder='Localize uma empresa' />
+                    <div className='w-8 h-8 rounded-full bg-verde_escuro flex self-center justify-center'>
+                        <FiSearch className='w-5 h-5 flex self-center stroke-white' />
                     </div>
                 </div>
             </div>
+
             <div className='mt-10'>
                 {/**Notas: arrumar a responsividade e fazer o slider só aparecer quando os cards preencherem a tela */}
 
