@@ -14,7 +14,7 @@ export default function Companies() {
         <div className='bg-cover h-[25rem] px-28' style={{ backgroundImage: `url(${Papel})` }}>
             <p className='text-verde_escuro font-bold text-4xl max-lg:text-2xl text-center pt-10'>Nossos Parceiros</p>
 
-            <div className='flex justify-end max-lg:flex-col max-lg:items-center max-lg:mt-3'>
+            <div className='flex justify-end max-lg:flex-col max-lg:items-center mt-5'>
 
                 <div className='w-[450px] max-lg:w-[300px] h-10 bg-neutral-100 rounded-[50px] flex px-6'>
                     <input className='bg-transparent focus:outline-none grow max-lg:text-sm' placeholder='Localize uma empresa' />
