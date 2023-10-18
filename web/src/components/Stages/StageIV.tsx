@@ -100,7 +100,7 @@ export default function StageIV({ handleMedal, handleReport }: IHandle) {
                         <Button
                             botaoCSS={botaoTCSS}
                             texto='Medalha'
-                            onClick={handleMedal} // Chama a função handleMedal do componente TimeLine
+                            onClick={handleMedal} // Chama a função handleMedal do componente Timeline
                         />
                         <Button
                             botaoCSS={botaoTCSS}

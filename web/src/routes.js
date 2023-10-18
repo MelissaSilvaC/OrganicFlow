@@ -6,7 +6,7 @@ import LoginScreen from 'pages/LoginScreen'
 import Navbar from 'components/Navbar'
 import Home from 'pages/App'
 import TimelineList from 'pages/Inspector/TimelineList'
-import Timeline from 'pages/Inspector/TimeLine'
+import Timeline from 'pages/Inspector/Timeline'
 import Complaint from 'pages/Administration/Complaint'
 import Dashboard from 'pages/Administration/Dashboard'
 

@@ -1,4 +1,4 @@
-import TitleTimeLine from "components/Cards/Titles/TitleTimeLine";
+import TitleTimeline from "components/Cards/Titles/TitleTimeline";
 import Accordion from '@mui/material/Accordion';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -25,7 +25,7 @@ interface Option {
     label: string;
 }
 
-export default function TimeLine() {
+export default function Timeline() {
     const baseBG = { background: 'white' }
     const noBG = { background: 'none' }
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5'
@@ -96,7 +96,7 @@ export default function TimeLine() {
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex">
-                <TitleTimeLine />
+                <TitleTimeline />
                 {/* Exibe a imagem quando todas as medalhas estiverem exibidas */}
                 {allMedalsShown && (
                     <div

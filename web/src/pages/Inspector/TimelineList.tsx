@@ -1,5 +1,5 @@
 import axios from "axios";
-import TitleTimeLine from "components/Cards/Titles/TitleTimeLine";
+import TitleTimeline from "components/Cards/Titles/TitleTimeline";
 import Button from "components/Items_Forms/Button";
 import TextField from "components/Items_Forms/TextField";
 import CustomPaginationActionsTable from "components/Table/TimelinesTable";
@@ -44,7 +44,7 @@ export default function TimelineList() {
 
     return (
         <section className="bg-preto pt-[80px] pb-5">
-            <TitleTimeLine />
+            <TitleTimeline />
 
             <div className="py-28">
                 {/**Tabela */}

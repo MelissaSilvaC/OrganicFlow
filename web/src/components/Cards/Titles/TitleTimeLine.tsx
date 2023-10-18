@@ -1,6 +1,6 @@
 import fundo from '../../../assets/img/tomate.jpg'
 
-export default function TitleTimeLine(){
+export default function TitleTimeline(){
     return(
         <div 
             className="bg-gray-300 w-[560px] h-[130px] rounded-e-[50px] max-lg:h-[110px] max-lg:w-[350px] bg-cover flex items-end" 
