@@ -102,7 +102,7 @@ export default function ProfileCompany() {
         >
             <div className="flex flex-wrap mt-16 mb-20">
                 <div>
-                    <p className="text-white text-2xl pb-8">Produtos da empresa</p>
+                    <p className="text-white text-2xl max-sm:text-xl pb-8">Produtos da empresa</p>
 
                     <ModalProduct>
                         <form onSubmit={onSubmit}>

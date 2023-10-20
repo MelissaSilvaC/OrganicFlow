@@ -9,11 +9,11 @@ export default function SignupScreen() {
             <div className='h-full flex gap-5'>
 
                 {/** Painel lateral */}
-                <div className='flex flex-col basis-2/3 justify-center items-center bg-black bg-opacity-50 max-md:basis-auto'>
+                <div className='flex basis-2/3 max-lg:basis-full flex-col justify-center items-center bg-black bg-opacity-50 w-full h-screen'>
                     <ToggleButton/>
                 </div>
                 
-                <div className='flex items-center max-md:hidden'>
+                <div className='flex items-center max-lg:hidden'>
                     <Link to='/'>
                         <img src={logoOF} />
                     </Link>

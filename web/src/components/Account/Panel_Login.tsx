@@ -14,9 +14,9 @@ export default function PanelLogin() {
     const navigate = useNavigate()
 
     {/** Estilos */ }
-    const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
-    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
-    const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-verde_palido'
+    const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
+    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
+    const botaoTCSS = 'bg-verde_folha w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-verde_palido'
     
 
     axios.post('http://localhost:3000' + '/login', {//verifica login
@@ -44,9 +44,9 @@ export default function PanelLogin() {
         });
 
     return (
-        <div>
+        <div className='flex flex-col items-center'>
             <Title texto='Entre' />
-            <div className='h-auto w-[450px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
+            <div className='h-auto w-[450px] max-lg:w-[350px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
                 <form className='w-full'>
                     {/** Campo e-mail */}
                     <TextField
@@ -74,7 +74,7 @@ export default function PanelLogin() {
                 </form>
 
                 {/** Link de recuperação de senha, divisão e autenticação */}
-                <div className='space-y-2 mt-1'>
+                <div className='space-y-2 mt-1 max-lg:mt-3 '>
                     <BasicModal>
                         <TextField
                             obrigatorio={true}
@@ -82,10 +82,10 @@ export default function PanelLogin() {
                             onChange={evento => setEmail(evento.target.value)}
                             valor={email}
                             tipo='e-mail'
-                            campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                            campoCSS='h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3 border border-verde_escuro'
                             inputCSS={inputTCSS}
                         />
-                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Enviar' />
+                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-green-900' texto='Enviar' />
                     </BasicModal>
                     {/** Ativa o popup */}
 
@@ -97,7 +97,7 @@ export default function PanelLogin() {
 
             </div>
 
-            <div className='flex mt-4 w-full justify-center font-bold text-xl'>
+            <div className='flex mt-4 w-full justify-center font-bold text-xl max-lg:text-base'>
                 <p className='flex text-white mr-2'>Não possui conta? </p>
                 <Link to='/sessao' className='flex text-verde_folha underline'>Cadastre-se</Link>
             </div>

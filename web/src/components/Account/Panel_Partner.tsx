@@ -24,20 +24,15 @@ export default function PanelPartner() {
             });
       */}
 
-    const campoTCSS = 'h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3'
-    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
-    const botaoTCSS = 'bg-verde_folha w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-verde_palido'
+    const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
+    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
+    const botaoTCSS = 'bg-verde_folha w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-verde_palido'
 
     return (
-        <div>
-            {/** Título e imagens vetorizas */}
-            <Title texto='Seja parceiro' />
-
-            <div className='flex justify-center'>
-                {/** Espaço destinado ao formulário */}
-                <div className='h-auto w-[450px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
+        <div className='flex flex-col items-center'>
+            <Title texto='Seja Parceiro' />
+            <div className='h-auto w-[450px] max-lg:w-[350px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
                     <form className='w-full'>
-                        {/** Campo Nome */}
                         <TextField
                             obrigatorio={true}
                             placeholder='Nome comercial'
@@ -47,8 +42,6 @@ export default function PanelPartner() {
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
-
-                        {/** Campo CNPJ */}
                         <TextField
                             obrigatorio={true}
                             placeholder='CNPJ'
@@ -58,8 +51,6 @@ export default function PanelPartner() {
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
-
-                        {/** Campo e-mail */}
                         <TextField
                             obrigatorio={true}
                             placeholder='E-mail'
@@ -69,8 +60,6 @@ export default function PanelPartner() {
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
-
-                        {/** Campo senha */}
                         <TextField
                             obrigatorio={true}
                             placeholder='Senha'
@@ -80,8 +69,6 @@ export default function PanelPartner() {
                             campoCSS={campoTCSS}
                             inputCSS={inputTCSS}
                         />
-
-                        {/** Campo confirmar senha */}
                         <TextField
                             obrigatorio={true}
                             placeholder='Confirmar senha'
@@ -94,15 +81,12 @@ export default function PanelPartner() {
 
                         <Button botaoCSS={botaoTCSS} texto='Cadastre-se' />
                     </form>
-                </div>
-
             </div>
 
-            <div className='flex mt-4 w-full justify-center font-bold text-xl'>
+            <div className='flex mt-4 w-full justify-center font-bold text-xl max-lg:text-base'>
                 <p className='flex text-white mr-2'>Já possui conta? </p>
                 <Link to='/sessao/login' className='flex text-verde_folha underline'>Entre</Link>
             </div>
-
         </div>
     )
 }

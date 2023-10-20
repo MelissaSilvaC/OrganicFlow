@@ -15,15 +15,14 @@ export default function App() {
       <Companies />
       <AboutUs />
 
-      <div className='bg-cover py-14 px-28 max-lg:px-1 flex flex-col items-center' style={{ backgroundImage: `url(${Papel})` }}>
+      <div className='bg-cover py-14 px-28 max-lg:px-0 text-center items-center' style={{ backgroundImage: `url(${Papel})` }}>
         <p className='text-verde_folha font-bold text-4xl mb-8 max-lg:text-2xl'>Nosso Time</p>
-        <div className='flex space-x-10 max-lg:space-x-0 max-lg:flex-wrap max-lg:space-y-4'>
-          <div className='flex space-x-10 max-lg:space-x-0 max-lg:justify-center max-lg:w-full'>
-            <TeamCard /><TeamCard />
-          </div>
-          <div className='flex space-x-10 max-lg:space-x-0 max-lg:justify-center max-lg:w-full'>
-            <TeamCard /><TeamCard />
-          </div>
+
+        <div className='flex space-x-10 justify-center max-lg:space-x-0 max-lg:space-y-4 max-lg:flex-col max-lg:items-center max-lg:pr-4'>
+
+          <div className='flex space-x-10 max-lg:space-x-0 '><TeamCard /><TeamCard /></div>
+          <div className='flex space-x-10 max-lg:space-x-0 '><TeamCard /><TeamCard /></div>
+
         </div>
       </div>
 

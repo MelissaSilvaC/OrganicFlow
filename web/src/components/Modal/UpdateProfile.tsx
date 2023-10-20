@@ -25,8 +25,8 @@ export default function ModalProfile({ children }: { children?: React.ReactNode 
 
     return (
         <div>
-            <button className='w-8 h-8 rounded-full bg-verde_folha flex justify-center' onClick={handleOpen}>
-                <LuPencil className='w-5 h-5 flex self-center stroke-white' />
+            <button className='w-8 h-8 max-sm:w-7 max-sm:h-7 rounded-full bg-verde_folha flex justify-center' onClick={handleOpen}>
+                <LuPencil className='w-5 h-5 max-sm:w-4 max-sm:h-4 flex self-center stroke-white' />
             </button>
             <ModalScreen
                 open={open}

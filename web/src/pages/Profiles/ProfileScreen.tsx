@@ -1,5 +1,3 @@
-import { FiSearch } from 'react-icons/fi';
-import { FiFilter } from 'react-icons/fi';
 import fundo from '../../assets/img/Fundo/field.png'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
@@ -58,76 +56,72 @@ export default function ProfileScreen({ photo, userName, email, adress, children
 
     return (
         <div className='bg-preto'>
-            <div className="h-[300px] max-md:h-[250px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
-            <div className="bg-verde_folha h-2" />
+            <div className="h-[300px] max-sm:h-[200px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
+            <div className="bg-verde_folha h-2 max-sm:h-1 " />
 
-            <div className="h-full px-[10rem] max-lg:px-[4rem]">
-                <div className='flex mt-10 justify-between w-full max-lg:flex-col'>
-                    <div className='flex'>
-                        {/**Perfil e informações */}
-                        <div className='flex flex-col max-md:self-center'>
-                            <div className='flex justify-end'>
-                                <ModalProfile>
-                                    <form onSubmit={onSubmit}>
-                                        {/* Renderiza a imagem se imageURL estiver definida */}
-                                        <div className="flex justify-center">
-                                            <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
-                                                {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
-                                            </div>
+            <div className="h-full px-[10rem] max-sm:px-5 py-4">
+                <div className='flex mt-10 items-end max-sm:items-baseline w-full max-sm:flex-col max-sm:mt-0 max-sm:justify-normal max-sm:w-auto'>
+
+                    <div className='flex flex-col max-sm:w-28'>
+                        <div className='flex justify-end'>
+                            <ModalProfile>
+                                <form onSubmit={onSubmit}>
+                                    <div className="flex justify-center">
+                                        <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
+                                            {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
                                         </div>
-                                        {/* Label e botão */}
-                                        <div className="flex flex-col my-2">
-                                            <label className="font-medium" >Imagem:</label>
-                                            <label
-                                                htmlFor='file-input'
-                                                className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                                Selecione uma imagem
-                                            </label>
-                                        </div>
+                                    </div>
+                                    <div className="flex flex-col my-2">
+                                        <label className="font-medium" >Imagem:</label>
+                                        <label
+                                            htmlFor='file-input'
+                                            className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-sm font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
+                                            Selecione uma imagem
+                                        </label>
+                                    </div>
 
-                                        <input
-                                            required
-                                            type='file'
-                                            name='image'
-                                            onChange={handleImageChange}
-                                            style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
-                                            id='file-input' // Adiciona um id para referência ao label
-                                        />
+                                    <input
+                                        required
+                                        type='file'
+                                        name='image'
+                                        onChange={handleImageChange}
+                                        style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
+                                        id='file-input' // Adiciona um id para referência ao label
+                                    />
 
-                                        <TextField
-                                            obrigatorio={true}
-                                            placeholder='Nome do usuário ou empresa'
-                                            onChange={evento => setName(evento.target.value)}
-                                            valor={name}
-                                            tipo='text'
-                                            campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
-                                            inputCSS={inputTCSS}
-                                        />
-                                        {/** SE FOR PERFIL DE EMPRESA */}
-                                        <TextField
-                                            obrigatorio={true}
-                                            placeholder='Endereço da empresa'
-                                            onChange={evento => setCompanyAdress(evento.target.value)}
-                                            valor={companyAdress}
-                                            tipo='text'
-                                            campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
-                                            inputCSS={inputTCSS}
-                                        />
-                                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Salvar edição' />
-                                    </form>
-                                </ModalProfile>
-                            </div>
-                            <img className="w-36 h-36 rounded-full" src={photo} />
+                                    <TextField
+                                        obrigatorio={true}
+                                        placeholder='Nome do usuário ou empresa'
+                                        onChange={evento => setName(evento.target.value)}
+                                        valor={name}
+                                        tipo='text'
+                                        campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                                        inputCSS={inputTCSS}
+                                    />
+                                    {/** SE FOR PERFIL DE EMPRESA */}
+                                    <TextField
+                                        obrigatorio={true}
+                                        placeholder='Endereço da empresa'
+                                        onChange={evento => setCompanyAdress(evento.target.value)}
+                                        valor={companyAdress}
+                                        tipo='text'
+                                        campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                                        inputCSS={inputTCSS}
+                                    />
+                                    <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Salvar edição' />
+                                </form>
+                            </ModalProfile>
                         </div>
-                        <div className='ml-10 text-white max-md:mt-2'>
-                            <p className='font-bold text-4xl max-md:text-3xl my-4'>{userName}</p>
-                            <p className='text-lg'>{email}</p>
-                            <p className='text-lg'>{adress}</p>
-                        </div>
+                        <img className="w-36 h-36 max-sm:w-24 max-sm:h-24 rounded-full" src={photo} />
+                    </div>
+
+                    <div className='ml-10 max-sm:ml-0 text-white text-lg max-sm:text-base max-sm:mt-3'>
+                        <p className='font-bold text-4xl max-sm:text-2xl my-4'>{userName}</p>
+                        <p>{email}</p>
+                        <p>{adress}</p>
                     </div>
                 </div>
-
-                <div className='pb-28'>
+                <div className='pb-28 max-sm:pb-20'>
                     {children}
                 </div>
             </div>

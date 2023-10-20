@@ -22,7 +22,7 @@ export default function ModalRecoverPassword({ children }: { children?: React.Re
 
     return (
         <div>
-            <a onClick={ handleOpen } className='text-white text-lg opacity-70 mt-2 underline cursor-pointer'> Esqueceu a senha? </a>
+            <a onClick={handleOpen} className='text-white text-lg max-lg:text-sm opacity-70 mt-2 underline cursor-pointer'> Esqueceu a senha? </a>
             <ModalScreen
                 open={open}
                 onClose={handleClose}

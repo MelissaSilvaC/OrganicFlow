@@ -6,11 +6,11 @@ import { LiaHandPointerSolid } from 'react-icons/lia';
 
 export default function Banner() {
     return (
-        <div className="bg-cover h-[40rem] max-lg:h-[35rem] flex items-center text-white" style={{ backgroundImage: `url(${Background})` }}>
+        <div className="bg-cover h-[40rem] max-lg:h-[30rem] flex items-center text-white" style={{ backgroundImage: `url(${Background})` }}>
 
             <div className='flex flex-col max-lg:items-center space-y-6 max-lg:w-full text-center w-full'>
 
-                <div className='font-extrabold text-4xl max-lg:text-2xl space-y-2 max-lg:text-center'>
+                <div className='font-extrabold text-4xl max-lg:text-2xl space-y-2 max-lg:text-center max-lg:mb-5'>
                     <p>Traçando Caminhos</p>
                     <p>Conectando Confiança!</p>
                 </div>
@@ -23,7 +23,8 @@ export default function Banner() {
                     <button className='bg-verde_folha px-4 py-2 rounded-lg hover:bg-verde_palido'>Saiba mais</button>
                 </div>
 
-                <div className='flex justify-evenly max-lg:justify-normal text-lg font-medium max-lg:space-x-5'>
+                <div className='flex justify-center space-x-28 max-lg:justify-normal text-lg font-medium max-lg:space-x-5'>
+                    
                     <div className='flex space-x-28 max-lg:space-x-0 max-lg:flex-col max-lg:space-y-4'>
                         <div className='flex flex-col items-center'>
                             <FaRegEye className='w-20 h-20 max-lg:w-16 max-lg:h-16 fill-verde_folha pb-3' />
@@ -45,6 +46,7 @@ export default function Banner() {
                             Acessível
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

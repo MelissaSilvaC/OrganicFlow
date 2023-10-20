@@ -5,15 +5,15 @@ import PanelLogin from 'components/Account/Panel_Login'
 
 export default function LoginScreen() {
     return (
-        <div className='w-screen h-screen bg-cover' style={{ backgroundImage: `url(${Background})` }}>
-            <div className='flex flex-row gap-5'>
+        <div className='h-full bg-cover' style={{ backgroundImage: `url(${Background})` }}>
+            <div className='h-full flex gap-5'>
 
                 {/** Painel lateral */}
-                <div className='flex basis-2/3 flex-col justify-center items-center bg-black bg-opacity-50 w-full h-screen '>
+                <div className='flex basis-2/3 max-lg:basis-full flex-col justify-center items-center bg-black bg-opacity-50 w-full h-screen'>
                     <PanelLogin />
                 </div>
                 
-                <div className='flex items-center'>
+                <div className='flex items-center max-lg:hidden'>
                     <Link to='/'>
                         <img src={logoOF} />
                     </Link>
