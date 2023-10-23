@@ -28,8 +28,9 @@ export default function ModalManager({ children }: { children?: React.ReactNode 
             <Button
                 onClick={handleOpen}
                 texto='Cadastrar fiscal'
-                botaoCSS='bg-zinc-500 h-[40px] rounded font-semibold text-white px-10 py-6 shadow flex items-center'
+                botaoCSS='bg-zinc-500 h-[40px] rounded font-semibold max-sm:font-medium text-white px-10 max-sm:px-6 py-6 max-sm:py-4 shadow flex items-center'
             />
+            {/**botaoCSS='bg-zinc-500 h-[40px] rounded font-semibold text-white px-10 py-6 shadow flex items-center' */}
 
             <ModalScreen
                 open={open}

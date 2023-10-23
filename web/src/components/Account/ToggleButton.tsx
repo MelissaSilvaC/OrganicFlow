@@ -18,12 +18,12 @@ export default function ToggleSwitchTest(){
                     `}
                     onClick={toggle}
                 >
-                    {isToggled ? 'Cadastre-se' : 'Seja Parceiro'}
+                    {isToggled ? 'Seja Parceiro' : 'Cadastre-se'}
                 </span>
             </div>
 
             <div className='flex flex-col mt-10'>
-                {isToggled ? <PanelSignup /> : <PanelPartner />}
+                {isToggled ? <PanelPartner /> : <PanelSignup />}
             </div>
         </>
     )

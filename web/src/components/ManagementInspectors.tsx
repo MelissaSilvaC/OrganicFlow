@@ -36,10 +36,10 @@ export default function ManagementInspector(){
 
     return (
         <div className="flex flex-wrap ">
-            <p className="text-white text-2xl pb-8">Fiscais da empresa</p>
+            <p className="text-white text-2xl max-sm:text-xl pb-8">Fiscais da empresa</p>
 
-            <div className="flex flex-wrap">
-                <div className="text-white w-[25rem] border-2 border-slate-600 rounded flex justify-center items-center m-5 hover:bg-cinza_escuro hover:cursor-pointer">
+            <div className="flex flex-wrap max-sm:justify-center">
+                <div className="text-white w-[25rem] max-sm:w-[15rem] max-sm:h-[10rem] border-2 max-sm:border border-slate-600 rounded flex justify-center items-center m-5 hover:bg-cinza_escuro hover:cursor-pointer">
                     <ModalManager>
                         <form onSubmit={() => { }}>
                             {/* Renderiza a imagem se imageURL estiver definida */}
@@ -102,36 +102,31 @@ export default function ManagementInspector(){
                 {/**
                  * Função map listando cards com as contas dos fiscais
                  */}
-
-
-                <InspectorCard
-                    photo={empresa}
-                    name="Rita"
-                    email="seedsprout@email.com"
-                    password="9765765"
-                />
-                <InspectorCard
-                    photo={empresa}
-                    name="Rita"
-                    email="seedsprout@email.com"
-                    password="9765765"
-                />
-                <InspectorCard
-                    photo={empresa}
-                    name="Rita"
-                    email="seedsprout@email.com"
-                    password="9765765"
-                />
-                <InspectorCard
-                    photo={empresa}
-                    name="Rita"
-                    email="seedsprout@email.com"
-                    password="9765765"
-                />
+                    <InspectorCard
+                        photo={empresa}
+                        name="Rita"
+                        email="seedsprout@email.com"
+                        password="9765765"
+                    />
+                    <InspectorCard
+                        photo={empresa}
+                        name="Rita"
+                        email="seedsprout@email.com"
+                        password="9765765"
+                    />
+                    <InspectorCard
+                        photo={empresa}
+                        name="Rita"
+                        email="seedsprout@email.com"
+                        password="9765765"
+                    />
+                    <InspectorCard
+                        photo={empresa}
+                        name="Rita"
+                        email="seedsprout@email.com"
+                        password="9765765"
+                    />
             </div>
-            {/** 
-                 * Botão para criar e listagem dos cards (semelhante aos do gerente) com um icone para deletar
-                */}
         </div>
     )
 }

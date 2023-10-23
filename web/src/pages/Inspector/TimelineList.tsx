@@ -30,26 +30,26 @@ export default function TimelineList() {
         <section className="bg-preto pt-[80px] pb-5">
             <TitleTimeline />
 
-            <div className="py-28">
+            <div className="py-28 max-lg:py-10">
                 {/**Tabela */}
-                <div className="px-28">
+                <div className="px-28 max-lg:px-4">
                     <CustomPaginationActionsTable />
-                    <div className="flex mt-8 max-lg:flex max-lg:flex-wrap max-lg:space-y-5">
+                    <div className="flex mt-8 max-lg:flex max-lg:flex-wrap max-lg:space-y-5 max-sm:text-sm">
                         <Button
                             texto='Escanear linha do tempo'
-                            botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold text-white px-5 mr-6 shadow hover:bg-verde_palido'
+                            botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 mr-6 shadow hover:bg-verde_palido'
                             onClick={() => {}}
                         />
 
                         <Button
-                            onClick={() => {}}
                             texto='Cadastrar linha do tempo'
-                            botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold text-white px-5 shadow hover:bg-verde_palido'
+                            botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 shadow hover:bg-verde_palido'
+                            onClick={() => { }}
                         />
 
                         <Button
                             texto='Deletar produto'
-                            botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
+                            botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold max-lg:font-medium px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
                             onClick={() => { alert('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionada a esse produto') }}
                         />
                     </div>

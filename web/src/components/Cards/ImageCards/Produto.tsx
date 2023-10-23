@@ -23,7 +23,7 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo}) => {
         <>
             <Link to='/fiscal/lista'>
                 <div
-                    className="w-44 h-44 m-3 flex flex-col justify-end rounded-[50px] border-2 border-verde_escuro bg-verde_folha bg-cover"
+                    className="w-44 h-44 max-sm:w-28 max-sm:h-28 m-3 max-sm:m-1 flex flex-col justify-end rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-verde_folha bg-cover"
                     style={{
                         backgroundImage: `url(${photo})`,
                         cursor: hover ? 'pointer' : 'auto'

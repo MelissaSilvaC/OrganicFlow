@@ -14,8 +14,8 @@ interface Props {
 export default function StageCard({ month, day, stageName, report, medal, Num_medal, handleMedal, handleReport }: Props) {
     const accordionStyles = {
         background: report ? '#80ab6b' : '#BDBDBD',
-        height: '120px',
-        width: '70rem',
+        height: '120px',//Desktop:120px
+        width: '70rem',//Desktop: 70rem
         display: 'flex',
         padding: '0px',
         margin: '0px',
@@ -39,9 +39,7 @@ export default function StageCard({ month, day, stageName, report, medal, Num_me
                 </div>
                 <div
                     className={`w-24 h-24 bg-cover pl-24 flex my-4 transition-opacity ${medal ? 'opacity-100' : 'opacity-0'}`}
-                    style={{
-                        backgroundImage: `url(${Num_medal})`,
-                    }}
+                    style={{ backgroundImage: `url(${Num_medal})` }}
                 />
             </div>
             <div className='w-20' />

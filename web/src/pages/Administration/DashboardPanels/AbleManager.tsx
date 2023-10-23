@@ -7,12 +7,12 @@ export default function AbleManager(){
     return(
         <>
             <TitleComplaint titulo="Validar gerentes" />
-            <div className="text-white px-20">
-                <div className="flex justify-between">
-                    <p className="text-2xl pb-10">Gerentes validados</p>
+            <div className="text-white px-20 max-sm:px-2">
+                <div className="flex justify-between max-sm:flex-col max-sm:px-5">
+                    <p className="text-2xl pb-10 max-sm:text-xl">Gerentes validados</p>
 
                     <div>
-                        <div className='w-[400px] h-11 bg-neutral-100 rounded-[50px] flex px-6'>
+                        <div className='w-[400px] max-sm:w-[300px] h-11 bg-neutral-100 rounded-[50px] flex px-6'>
                             <input className='bg-transparent focus:outline-none grow' placeholder='Pesquisar...' />
                             <div className='w-8 h-8 rounded-full bg-verde_folha flex self-center justify-center'>
                                 <FiSearch className='w-5 h-5 flex self-center stroke-white' />

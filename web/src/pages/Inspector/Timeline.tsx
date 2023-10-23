@@ -26,7 +26,10 @@ interface Option {
 }
 
 export default function Timeline() {
-    const baseBG = { background: 'white' }
+    const baseBG = { 
+        background: 'white',
+        //width: '10rem'
+    }
     const noBG = { background: 'none' }
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5'
     const [medals, setMedals] = useState([
@@ -95,7 +98,7 @@ export default function Timeline() {
 
     return (
         <div className="bg-preto pt-[80px] pb-5">
-            <div className="flex">
+            <div className="flex max-sm:flex-col">
                 <TitleTimeline />
                 {/* Exibe a imagem quando todas as medalhas estiverem exibidas */}
                 {allMedalsShown && (
@@ -106,158 +109,160 @@ export default function Timeline() {
                 )}
             </div>
 
-            <div className="text-white font-medium ml-24 max-md:ml-10 my-12 text-lg">
+            <div className="text-white font-medium ml-24 max-lg:ml-5 my-12 text-lg max-lg:text-sm max-lg:font-normal">
                 <p>ID: (parametro ID)</p>
                 <p>(parametro data)</p>
                 <p>Endereço do fornecedor: (parametro Fornecedor)</p>
                 <p>Número do lote: (parametro Lote)</p>
             </div>
 
-            <Container maxWidth="sm">
-                <Box sx={{
-                    width: '50vh',
-                    display: 'flex',
-                    justifyContent: 'center',
-                }}>
-                    <div className="font-montserrat flex justify-center items-center pt-16">
-                        <div>
-                            {/** ESTAGIO 1 */}
-                            <Accordion sx={noBG}>
-                                <StageCard
-                                    month="Mes"
-                                    day="00"
-                                    stageName="Produção Agrícola"
-                                    report={reports.find((report) => report.id === 1)?.showReport}
-                                    medal={medals.find((medal) => medal.id === 1)?.showMedal} // Passe o estado individual
-                                    Num_medal={Medal_I}
-                                    handleMedal={() => handleMedal(1)} // Passe o id do StageCard
-                                    handleReport={() => handleReport(1)}
-                                />
-                                <AccordionDetails sx={baseBG}>
-                                    <StageI
-                                        handleMedal={() => handleMedal(1)}
-                                        handleReport={() => handleReport(1)}
-                                    />
-                                </AccordionDetails>
-                            </Accordion>
+            <div className="pt-16 flex flex-col justify-center items-center">
+                <div className="flex flex-col">
+                    {/** ESTAGIO 1 */}
+                    <Accordion sx={noBG}>
+                        <StageCard
+                            month="Mes"
+                            day="00"
+                            stageName="Produção Agrícola"
+                            report={reports.find((report) => report.id === 1)?.showReport}
+                            medal={medals.find((medal) => medal.id === 1)?.showMedal} // Passe o estado individual
+                            Num_medal={Medal_I}
+                            handleMedal={() => handleMedal(1)} // Passe o id do StageCard
+                            handleReport={() => handleReport(1)}
+                        />
+                        <AccordionDetails sx={baseBG}>
+                            <StageI
+                                handleMedal={() => handleMedal(1)}
+                                handleReport={() => handleReport(1)}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
 
-                            {/** ESTAGIO 2 */}
-                            <Accordion sx={noBG}>
-                                <StageCard
-                                    month="Mes"
-                                    day="00"
-                                    stageName="Processamento e Embalagem"
-                                    report={reports.find((report) => report.id === 2)?.showReport}
-                                    medal={medals.find((medal) => medal.id === 2)?.showMedal} // Passe o estado individual
-                                    Num_medal={Medal_II}
-                                    handleMedal={() => handleMedal(2)} // Passe o id do StageCard
-                                    handleReport={() => handleReport(2)}
-                                />
-                                <AccordionDetails sx={baseBG}>
-                                    <StageII
-                                        handleMedal={() => handleMedal(2)}
-                                        handleReport={() => handleReport(2)}
-                                    />
-                                </AccordionDetails>
-                            </Accordion>
+                    {/** ESTAGIO 2 */}
+                    <Accordion sx={noBG}>
+                        <StageCard
+                            month="Mes"
+                            day="00"
+                            stageName="Processamento e Embalagem"
+                            report={reports.find((report) => report.id === 2)?.showReport}
+                            medal={medals.find((medal) => medal.id === 2)?.showMedal} // Passe o estado individual
+                            Num_medal={Medal_II}
+                            handleMedal={() => handleMedal(2)} // Passe o id do StageCard
+                            handleReport={() => handleReport(2)}
+                        />
+                        <AccordionDetails sx={baseBG}>
+                            <StageII
+                                handleMedal={() => handleMedal(2)}
+                                handleReport={() => handleReport(2)}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
 
-                            {/** ESTAGIO 3 */}
-                            <Accordion sx={noBG}>
-                                <StageCard
-                                    month="Mes"
-                                    day="00"
-                                    stageName="Transporte e Logística"
-                                    report={reports.find((report) => report.id === 3)?.showReport}
-                                    medal={medals.find((medal) => medal.id === 3)?.showMedal} // Passe o estado individual
-                                    Num_medal={Medal_III}
-                                    handleMedal={() => handleMedal(3)} // Passe o id do StageCard
-                                    handleReport={() => handleReport(3)}
+                    {/** ESTAGIO 3 */}
+                    <Accordion sx={noBG}>
+                        <StageCard
+                            month="Mes"
+                            day="00"
+                            stageName="Transporte e Logística"
+                            report={reports.find((report) => report.id === 3)?.showReport}
+                            medal={medals.find((medal) => medal.id === 3)?.showMedal} // Passe o estado individual
+                            Num_medal={Medal_III}
+                            handleMedal={() => handleMedal(3)} // Passe o id do StageCard
+                            handleReport={() => handleReport(3)}
 
-                                />
-                                <AccordionDetails sx={baseBG}>
-                                    <StageIII
-                                        handleMedal={() => handleMedal(3)}
-                                        handleReport={() => handleReport(3)}
-                                    />
-                                </AccordionDetails>
-                            </Accordion>
+                        />
+                        <AccordionDetails sx={baseBG}>
+                            <StageIII
+                                handleMedal={() => handleMedal(3)}
+                                handleReport={() => handleReport(3)}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
 
-                            {/** ESTAGIO 4 */}
-                            <Accordion sx={noBG}>
-                                <StageCard
-                                    month="Mes"
-                                    day="00"
-                                    stageName="Armazenamento e Distribuição"
-                                    report={reports.find((report) => report.id === 4)?.showReport}
-                                    medal={medals.find((medal) => medal.id === 4)?.showMedal} // Passe o estado individual
-                                    Num_medal={Medal_IV}
-                                    handleMedal={() => handleMedal(4)} // Passe o id do StageCard
-                                    handleReport={() => handleReport(4)}
-                                />
-                                <AccordionDetails sx={baseBG}>
-                                    <StageIV
-                                        handleMedal={() => handleMedal(4)}
-                                        handleReport={() => handleReport(4)}
-                                    />
-                                </AccordionDetails>
-                            </Accordion>
+                    {/** ESTAGIO 4 */}
+                    <Accordion sx={noBG}>
+                        <StageCard
+                            month="Mes"
+                            day="00"
+                            stageName="Armazenamento e Distribuição"
+                            report={reports.find((report) => report.id === 4)?.showReport}
+                            medal={medals.find((medal) => medal.id === 4)?.showMedal} // Passe o estado individual
+                            Num_medal={Medal_IV}
+                            handleMedal={() => handleMedal(4)} // Passe o id do StageCard
+                            handleReport={() => handleReport(4)}
+                        />
+                        <AccordionDetails sx={baseBG}>
+                            <StageIV
+                                handleMedal={() => handleMedal(4)}
+                                handleReport={() => handleReport(4)}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
 
-                            {/** ESTAGIO 5 */}
-                            <Accordion sx={noBG}>
-                                <StageCard
-                                    month="Mes"
-                                    day="00"
-                                    stageName="Varejo e Consumo"
-                                    report={reports.find((report) => report.id === 5)?.showReport}
-                                    medal={medals.find((medal) => medal.id === 5)?.showMedal} // Passe o estado individual
-                                    Num_medal={Medal_V}
-                                    handleMedal={() => handleMedal(5)} // Passe o id do StageCard
-                                    handleReport={() => handleReport(5)}
-                                />
-                                <AccordionDetails sx={baseBG}>
-                                    <StageV
-                                        handleMedal={() => handleMedal(5)}
-                                        handleReport={() => handleReport(5)}
-                                    />
-                                </AccordionDetails>
-                            </Accordion>
-                        </div>
-                    </div>
-                </Box>
-            </Container>
-            {/**Esse botão só deve aparecer para usuários comuns */}
-            <ModalComplaint>
-                <form>
-                    <label>Argumento</label>
-                    <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
-                        <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectChange}>
-                            <option value="">Selecione uma opção</option>
-                            {options.map((option) => (
-                                <option key={option.id} value={option.id.toString()}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    {/**
+                    {/** ESTAGIO 5 */}
+                    <Accordion sx={noBG}>
+                        <StageCard
+                            month="Mes"
+                            day="00"
+                            stageName="Varejo e Consumo"
+                            report={reports.find((report) => report.id === 5)?.showReport}
+                            medal={medals.find((medal) => medal.id === 5)?.showMedal} // Passe o estado individual
+                            Num_medal={Medal_V}
+                            handleMedal={() => handleMedal(5)} // Passe o id do StageCard
+                            handleReport={() => handleReport(5)}
+                        />
+                        <AccordionDetails sx={baseBG}>
+                            <StageV
+                                handleMedal={() => handleMedal(5)}
+                                handleReport={() => handleReport(5)}
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <div className="flex my-6 space-x-8">
+                        <Button
+                            texto='Gerar QRcode'
+                            botaoCSS='bg-verde_folha font-semibold flex self-start rounded-xl py-3 px-5 text-white hover:bg-verde_palido'
+                            onClick={() => { }}
+                        />
+
+                        {/**Esse botão só deve aparecer para usuários comuns */}
+                        <ModalComplaint>
+                            <form>
+                                <label>Argumento</label>
+                                <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
+                                    <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectChange}>
+                                        <option value="">Selecione uma opção</option>
+                                        {options.map((option) => (
+                                            <option key={option.id} value={option.id.toString()}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                {/**
                      * Se argument foi selecionado, ele pega o valor da frase com "{argument.label}"
                      * {argument && <p>Você selecionou: {argument.label}</p>} 
                      * */}
-                    <br />
-                    <TextArea
-                        obrigatorio={true}
-                        onChange={evento => setDescription(evento.target.value)}
-                        label="Descrição"
-                        valor={description}
-                        campoCSS={"bg-neutral-50 rounded-xl shadow px-6 my-3"}
-                        inputCSS={inputTCSS}
-                    />
-                    <Button
-                        botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900'
-                        texto='Enviar denúncia'
-                    />
-                </form>
-            </ModalComplaint>
+                                <br />
+                                <TextArea
+                                    obrigatorio={true}
+                                    onChange={evento => setDescription(evento.target.value)}
+                                    label="Descrição"
+                                    valor={description}
+                                    campoCSS={"bg-neutral-50 rounded-xl shadow px-6 my-3"}
+                                    inputCSS={inputTCSS}
+                                />
+                                <Button
+                                    botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900'
+                                    texto='Enviar denúncia'
+                                />
+                            </form>
+                        </ModalComplaint>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     )
 }

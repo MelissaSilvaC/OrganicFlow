@@ -26,7 +26,7 @@ export default function ModalComplaint({ children }: { children?: React.ReactNod
         <div>
             <button 
             onClick={handleOpen}
-            className="ml-[21rem] my-5 text-red-600 font-semibold flex self-start rounded-xl p-3 border-2 border-red-600 hover:animate-pulse">
+            className="text-red-600 font-semibold flex self-start rounded-xl p-3 border-2 border-red-600 hover:animate-pulse">
                 <MdReportGmailerrorred className='w-6 h-6 stroke-red-600 mr-2' />
                 Denunciar
             </button>

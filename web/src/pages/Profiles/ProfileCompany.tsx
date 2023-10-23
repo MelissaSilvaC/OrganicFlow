@@ -100,10 +100,10 @@ export default function ProfileCompany() {
             email="company@email.com"
             adress="Rua plantao, 123 - Penha/São Paulo - SP"
         >
-            <div className="flex flex-wrap mt-16 mb-20">
-                <div>
-                    <p className="text-white text-2xl max-sm:text-xl pb-8">Produtos da empresa</p>
+            <div className="flex max-sm:flex-wrap flex-col mt-16 mb-20 max-sm:mt-8 max-sm:mb-10">
+                <p className="text-white text-2xl max-sm:text-xl pb-8">Produtos da empresa</p>
 
+                <div className="flex flex-wrap max-sm:justify-center">
                     <ModalProduct>
                         <form onSubmit={onSubmit}>
                             {/* Renderiza a imagem se imageURL estiver definida */}
@@ -143,15 +143,6 @@ export default function ProfileCompany() {
                             <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Enviar' />
                         </form>
                     </ModalProduct>
-
-                    {/* {produtos?.map((produto) => (
-                            <ProductCard
-                                key={produto.id}
-                                image={produto.image}
-                                nameProduct={produto.nameProduct}
-                            />
-                        ))} */}
-
                     {produtos?.map((produto) => (
                         <ProductCard
                             key={produto.id}
@@ -160,10 +151,51 @@ export default function ProfileCompany() {
                             photo={produto.photo}
                         />
                     ))}
+
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
+                    <ProductCard
+                        id={1}
+                        nome="produto"
+                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
+                    />
                 </div>
             </div>
-            <ManagementInspector />
 
+            <ManagementInspector />
         </ProfileScreen>
     )
 }

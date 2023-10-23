@@ -25,8 +25,8 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
 
     return (
         <div>
-            <button onClick={handleOpen} className="w-40 h-40 m-5 flex flex-col justify-center items-center rounded-[50px] border-4 border-verde_escuro bg-verde_palido transform hover:shadow-2xl hover:bg-lime-600 transition duration-300 ease-in-out" >
-                <GrAddCircle className='w-20 h-20' />
+            <button onClick={handleOpen} className="w-40 h-40 max-sm:w-24 max-sm:h-24 m-5 max-sm:m-2.5 flex flex-col justify-center items-center rounded-[50px] max-sm:rounded-full border-4 max-sm:border-2 border-verde_escuro bg-verde_palido transform hover:shadow-2xl hover:bg-lime-600 transition duration-300 ease-in-out" >
+                <GrAddCircle className='w-20 h-20 max-sm:w-12 max-sm:h-12' />
             </button>
             <ModalScreen
                 open={open}

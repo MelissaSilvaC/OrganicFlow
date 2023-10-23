@@ -15,7 +15,7 @@ export default function Dashboard() {
         <div className="flex bg-preto">
             
             {/**Menu vertical */}
-            <div className="bg-cinza_escuro w-[20%] text-white">
+            <div className="bg-cinza_escuro w-[20%] text-white max-sm:hidden">
                 <ul className="font-medium text-lg pl-12 pt-24 space-y-5 hover:cursor-pointer">
                     <li
                         onClick={() => handleOptionClick("Validar gerentes")}
@@ -49,7 +49,7 @@ export default function Dashboard() {
             </div>
 
             {/**Area onde vai aparecer a interface selecionada */}
-            <div className="w-[80%]">
+            <div className="w-[80%] max-sm:w-auto">
                 {selectedOption === "Validar gerentes" && <AbleManager />}
                 {selectedOption === "Lista de denúncias" && <ComplaintsList />}
                 {selectedOption === "Lista de feedbacks" && <FeedbacksList />}
