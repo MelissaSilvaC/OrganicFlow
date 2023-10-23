@@ -36,6 +36,8 @@ const relatorio4Controller= new Relatorio4Controller();
 const relatorio5Controller= new Relatorio5Controller();
 const feedController = new FeedController();
 const produtoController = new ProdutoController();
+
+import upload from './uploadConfig';
 // const userRole=new UserRole();
 
 router.post("/user",userController.criar);
@@ -50,7 +52,6 @@ router.post("/login",sessionController.login);
 // router.get("/role",roleController.consultar);
 
 //cliente
-router.post("/denuncia",authMiddleware,denunciaController.criar)
 router.get("/linha/:id",linhaController.pesquisar)
 router.get("/empresa/:id",gerenteController.pesquisarEmpresa)
 router.get("/empresa",gerenteController.consultarEmpresa)
@@ -59,17 +60,19 @@ router.get("/produto/:id", produtoController.pesquisar)
 
 
 //cliente cadastrado
-router.post("/feed", feedController.criar)
+router.post("/feed", authMiddleware,feedController.criar)
+router.post("/denuncia", authMiddleware,denunciaController.criar )
 
 
 //administrador
 // router.get("/denuncia",authMiddleware,is([RolesPrivate.admin]),denunciaController.consultar)
 router.get("/denuncia",denunciaController.consultar)
 router.delete("/denuncia/:id",authMiddleware,is([RolesPrivate.admin]),denunciaController.deletar)
-router.get("/gerente",authMiddleware,gerenteController.listarGerente); //lista de gerente 
+router.get("/gerente",gerenteController.listarGerente); //lista de gerente 
+router.get("/gerentevalido",gerenteController.listarGerenteValido); //lista de gerente 
 router.post("/gerente",authMiddleware,gerenteController.permissaoGerente);
 router.delete("/gerente",authMiddleware,gerenteController.suspenderGerente);
-router.get("/feed" ,authMiddleware,feedController.consultar)
+router.get("/feed" ,feedController.consultar)
 
 //gerente
 router.get("/user",userController.pesquisar); //quando o gerente precisar pesquisar o usuario
@@ -77,14 +80,14 @@ router.post("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController
 router.get("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.listarSeuFiscal);
 router.delete("/fiscal/:id",authMiddleware,is([RolesPrivate.gerente]),fiscalController.removerFiscal)
 router.put("/user/:id",authMiddleware,userController.atualizar)
-router.post("/produto", authMiddleware,is([RolesPrivate.gerente]),produtoController.criar)
+router.post("/produto", upload.single('file'),produtoController.criar)
 
 
 //fiscal
-router.post("/linha",authMiddleware,is([RolesPrivate.fiscal]),linhaController.criar)
+router.post("/linha",linhaController.criar)
 // router.get("/linha",linhaController.consultar)
 router.put("/linha/:id",authMiddleware,is([RolesPrivate.fiscal]),linhaController.gerarQrcode)
-router.post("/relatorio1",authMiddleware,is([RolesPrivate.fiscal]),relatorio1Controller.criar)
+router.post("/relatorio1",relatorio1Controller.criar)
 router.post("/relatorio2",authMiddleware,is([RolesPrivate.fiscal]),relatorio2Controller.criar)
 router.post("/relatorio3",authMiddleware,is([RolesPrivate.fiscal]),relatorio3Controller.criar)
 router.post("/relatorio4",authMiddleware,is([RolesPrivate.fiscal]),relatorio4Controller.criar)

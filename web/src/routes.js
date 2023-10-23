@@ -19,9 +19,9 @@ export default function AppRouter(){
                     <Route path='/' element={<Navbar />} >
                         <Route index element={<Home />} />
                         <Route path='empresa/perfil/:id' element={<ProfileCompany />} />
-                        <Route path='fiscal/perfil' element={<ProfileInspector />} />
+                        <Route path='fiscal/perfil/:id' element={<ProfileInspector />} />
                         <Route path='fiscal/lista' element={<TimelineList />} />
-                        <Route path='fiscal/lista/linhatempo' element={<Timeline />} />
+                        <Route path='fiscal/lista/linhatempo/:id' element={<Timeline />} />
                         <Route path='admin/dashboard' element={<Dashboard />} />
                         <Route path='admin/listadenuncias/denuncia' element={<Complaint />} />
                     </Route>

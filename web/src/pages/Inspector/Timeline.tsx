@@ -1,7 +1,5 @@
 import TitleTimeline from "components/Cards/Titles/Title-timeline";
 import Accordion from '@mui/material/Accordion';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import StageI from "components/Stages/StageI";
 import StageIII from "components/Stages/StageIII";
@@ -96,20 +94,33 @@ export default function Timeline() {
          */
     }
 
+    const updateMedalStatus = (cardId: number, status: boolean) => {
+        setMedals((prevMedals) =>
+            prevMedals.map((medal) =>
+                medal.id === cardId ? { ...medal, showMedal: status } : medal
+            )
+        );
+    };
+
+
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex max-sm:flex-col">
-                <TitleTimeline />
+                <TitleTimeline
+                    bgProduct="bg"
+                    txtProduct="Nome do produto"
+                />
+
                 {/* Exibe a imagem quando todas as medalhas estiverem exibidas */}
                 {allMedalsShown && (
                     <div
-                        className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center ml-12"
+                        className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
                         style={{ backgroundImage: `url(${Medal_OF})` }}
                     />
                 )}
             </div>
 
-            <div className="text-white font-medium ml-24 max-lg:ml-5 my-12 text-lg max-lg:text-sm max-lg:font-normal">
+            <div className="text-white font-medium ml-24 max-lg:ml-5 my-12 max-sm:my-1 text-lg max-lg:text-sm max-lg:font-normal">
                 <p>ID: (parametro ID)</p>
                 <p>(parametro data)</p>
                 <p>Endereço do fornecedor: (parametro Fornecedor)</p>
@@ -132,7 +143,7 @@ export default function Timeline() {
                         />
                         <AccordionDetails sx={baseBG}>
                             <StageI
-                                handleMedal={() => handleMedal(1)}
+                                handleMedal={() => updateMedalStatus(1, false)} // Exemplo com cardId 1 e status true
                                 handleReport={() => handleReport(1)}
                             />
                         </AccordionDetails>

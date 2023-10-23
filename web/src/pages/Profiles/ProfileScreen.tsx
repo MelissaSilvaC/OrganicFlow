@@ -6,32 +6,38 @@ import ModalProfile from 'components/Modal/UpdateProfile';
 import Button from 'components/Items_Forms/Button';
 import TextField from 'components/Items_Forms/TextField';
 
-export default function ProfileScreen({ photo, userName, email, adress, children }: IProfile) {
+export default function ProfileScreen({ children }: IProfile) {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
     const [image, setImage] = useState<File | null>(null)
-    const [imageURL, setImageURL] = useState<string | null>(null);
+    const [photo, setPhoto] = useState<string | undefined>("");
 
-    const [name, setName] = useState("")
-    const [companyAdress, setCompanyAdress] = useState("")
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [company, setCompany] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    
+    const [local, setLocal] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:3001' + '/empresa/:id')
-            .then(response => {
-                /**
-                 * const { name, email, company, cnpj, photo, medalha } = response.data;
-                setNome(name);
-                setEmail(email);
-                setCompany(company);
-                setCnpj(cnpj);
-                setPhoto(photo);
-                setMedalha(medalha);
+        
+        const url = window.location.href;
+        const id = url.split("/").pop(); // Isso assume que o ID está na última parte da URL
 
-                console.log(name)
-                 */
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados:', error);
-            });
+        axios.get('http://localhost:3000'+`/empresa/${id}`)
+        .then(response => {
+            const { name, email, company, cnpj, photo,local } = response.data[0];
+            setNome(name);
+            setEmail(email);
+            setCompany(company);
+            setCnpj(cnpj);
+            setPhoto(photo);
+            setLocal(local);
+            
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+        });
+
     }, []);
 
     //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
@@ -49,7 +55,7 @@ export default function ProfileScreen({ photo, userName, email, adress, children
         const selectedImage = e.target.files?.[0]; // Obtenha o primeiro arquivo selecionado
         if (selectedImage) {
             setImage(selectedImage); // Atualize o estado com o objeto File
-            setImageURL(URL.createObjectURL(selectedImage));
+            setPhoto(URL.createObjectURL(selectedImage));
             console.log('imagem selecionada')
         }
     };
@@ -68,7 +74,7 @@ export default function ProfileScreen({ photo, userName, email, adress, children
                                 <form onSubmit={onSubmit}>
                                     <div className="flex justify-center">
                                         <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
-                                            {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
+                                            {photo && <img src={photo} alt="Imagem Enviada" className="rounded-[50px]" />}
                                         </div>
                                     </div>
                                     <div className="flex flex-col my-2">
@@ -92,8 +98,8 @@ export default function ProfileScreen({ photo, userName, email, adress, children
                                     <TextField
                                         obrigatorio={true}
                                         placeholder='Nome do usuário ou empresa'
-                                        onChange={evento => setName(evento.target.value)}
-                                        valor={name}
+                                        onChange={evento => setNome(evento.target.value)}
+                                        valor={nome}
                                         tipo='text'
                                         campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                                         inputCSS={inputTCSS}
@@ -102,8 +108,8 @@ export default function ProfileScreen({ photo, userName, email, adress, children
                                     <TextField
                                         obrigatorio={true}
                                         placeholder='Endereço da empresa'
-                                        onChange={evento => setCompanyAdress(evento.target.value)}
-                                        valor={companyAdress}
+                                        onChange={evento => setLocal(evento.target.value)}
+                                        valor={local}
                                         tipo='text'
                                         campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                                         inputCSS={inputTCSS}
@@ -116,9 +122,9 @@ export default function ProfileScreen({ photo, userName, email, adress, children
                     </div>
 
                     <div className='ml-10 max-sm:ml-0 text-white text-lg max-sm:text-base max-sm:mt-3'>
-                        <p className='font-bold text-4xl max-sm:text-2xl my-4'>{userName}</p>
+                        <p className='font-bold text-4xl max-sm:text-2xl my-4'>{nome}</p>
                         <p>{email}</p>
-                        <p>{adress}</p>
+                        <p>{local}</p>
                     </div>
                 </div>
                 <div className='pb-28 max-sm:pb-20'>

@@ -18,7 +18,8 @@ export class Relatorio1Controller {
         insumo,
         praticas,
         medalha,
-        user: { connect: { id:Number(request.user.id)  } }, // Conecta com o usuário que está criando o registro
+        // user: { connect: { id:Number(request.user.id)  } }, // Conecta com o usuário que está criando o registro
+        user: { connect: { id:3  } }, // teste
         linha: {
           connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
         }

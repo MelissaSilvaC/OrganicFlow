@@ -22,8 +22,14 @@ export class FeedController{
     
     async consultar(request:Request, response:Response){
         try {
-            const feed = await prismaClient.feed.findMany({})
-            return response.json(feed)
+            const feed = await prismaClient.feed.findMany({include:{
+                user:{}
+            }})
+
+            if(feed.length > 0){
+                return response.json(feed)
+            }
+            return response.json('não existe feedback')
             
         } catch (error) {
             return response.json(error)

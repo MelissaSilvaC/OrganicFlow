@@ -114,21 +114,50 @@ async listarGerente(request:Request, response:Response){
     }
 }
 
+async listarGerenteValido(request:Request, response:Response){
+  try {
+    const empresa = await prismaClient.userRole.findMany({
+      where:{
+        id_role:2,//id_role do gerente
+      },
+        include:{
+          user:{
+           
+          }
+        }
+        
+    })
+    return response.json(empresa)
+
+    // const gerentesSemUserRole = gerentesComUserRole.filter(gerente => !gerente.UserRole || gerente.UserRole.length === 0);
+
+    // //const array_novo = array_velho(para cada item no array, se o gerente.UserRole não existir )
+
+    // if (gerentesSemUserRole.length > 0) {
+    //     return response.json(gerentesSemUserRole);
+    // } else {
+    //     return response.json("nenhum usuario na lista");
+    // }
+
+  } catch (error) {
+      return response.json(error);
+  }
+}
+
 async consultarEmpresa(request:Request, response:Response){
   try {
-      const empresa = await prismaClient.user.findMany({
-          where:{
-            gerente:true
-          },
-          select:{
-            UserRole:{
-              where:{
-                id_role:2,//id_role do gerente
-              }
+      const empresa = await prismaClient.userRole.findMany({
+        where:{
+          id_role:2,//id_role do gerente
+        },
+          include:{
+            user:{
+             
             }
           }
           
       })
+
       return response.json(empresa)
       
   } catch (error) {
@@ -151,7 +180,7 @@ async pesquisarEmpresa(request:Request, response:Response){
       
     })
     if(gerente?.gerente==!true){//se for diferente de true
-      return response.json("não tem direito a acessar essa rota")
+      return response.json("Empresa não existe")
     }
 
     const produto=await prismaClient.user.findMany({

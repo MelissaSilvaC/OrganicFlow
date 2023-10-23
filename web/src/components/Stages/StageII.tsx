@@ -1,9 +1,10 @@
 import Button from "components/Items_Forms/Button"
 import TextField from "components/Items_Forms/TextField"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import IHandle from "types/IHandle"
 import InfoField from "./InfoField"
+import axios from 'axios'
 
 /**
     Nome do centro de processamento e embalagem.(normal)
@@ -16,13 +17,36 @@ import InfoField from "./InfoField"
 
 export default function StageII({ handleMedal, handleReport }: IHandle) {
     const [nome, setNome] = useState("")
-    const [localizacao, setLocalizacao] = useState("")
-    const [dataProcessamento, setDataProcessamento] = useState("")
-    const [dataEmbalagem, setDataEmbalagem] = useState("")
+    const [local, setLocal] = useState("")
+    const [dtProcessamento, setDtProcessamento] = useState("")
+    const [dtEmbalagem, setDtEmbalagem] = useState("")
     //const [material, setMaterial] = useState([])
     const [material, setMaterial] = useState("")
     const [praticas, setPraticas] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
+    useEffect(() => { 
+        const url = window.location.href;
+        const id = url.split("/").pop(); 
+        axios.get(`http://localhost:3000/linha/${id}`)
+        .then(response => {
+            const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem ,form} = response.data.Relatorio2[0];
+            setNome(nome);
+            setLocal(local);
+            setMaterial(ingrediente);
+            setPraticas(praticas);
+            setDtProcessamento(dt_processamento);
+            setDtEmbalagem(dt_embalagem);
+            setIsFormVisible(form);
+            
+            handleReport()
+            // console.log(response.data.Relatorio2);
+            // console.log(response.data.Relatorio2[0].nome);
+            // console.log(nome);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }, []);
 
     const estilo = "flex justify-center"
     const campoTCSS = 'h-[40px] bg-neutral-50 rounded-xl shadow px-6 my-3'
@@ -49,9 +73,9 @@ export default function StageII({ handleMedal, handleReport }: IHandle) {
                     <br />
                     <TextField
                         obrigatorio={true}
-                        onChange={evento => setLocalizacao(evento.target.value)}
+                        onChange={evento => setLocal(evento.target.value)}
                         label="Localização do centro de processamento e embalagem"
-                        valor={localizacao}
+                        valor={local}
                         tipo='text'
                         campoCSS={campoTCSS}
                         inputCSS={inputTCSS}
@@ -60,9 +84,9 @@ export default function StageII({ handleMedal, handleReport }: IHandle) {
                     <div className="flex justify-evenly">
                         <TextField
                             obrigatorio={true}
-                            onChange={evento => setDataProcessamento(evento.target.value)}
+                            onChange={evento => setDtProcessamento(evento.target.value)}
                             label="Data de processamento dos alimentos"
-                            valor={dataProcessamento}
+                            valor={dtProcessamento}
                             tipo='date'
                             labelCSS='flex justify-center'
                             campoCSS={campoTCSS}
@@ -70,9 +94,9 @@ export default function StageII({ handleMedal, handleReport }: IHandle) {
                         />
                         <TextField
                             obrigatorio={true}
-                            onChange={evento => setDataEmbalagem(evento.target.value)}
+                            onChange={evento => setDtEmbalagem(evento.target.value)}
                             label="Data de embalagem dos alimentos"
-                            valor={dataEmbalagem}
+                            valor={dtEmbalagem}
                             tipo='date'
                             labelCSS='flex justify-center'
                             campoCSS={campoTCSS}
@@ -123,18 +147,18 @@ export default function StageII({ handleMedal, handleReport }: IHandle) {
                         <br />
                         <InfoField
                             label="Localização geográfica da propriedade ou fazenda orgânica"
-                            valor={localizacao}
+                            valor={local}
                         />
                         <br />
                         <div className="flex justify-evenly">
                             <InfoField
                                 label="Data de processamento dos alimentos"
-                                valor={dataProcessamento}
+                                valor={dtProcessamento}
                                 estilo={estilo}
                             />
                             <InfoField
                                 label="Data de embalagem dos alimentos"
-                                valor={dataEmbalagem}
+                                valor={dtEmbalagem}
                                 estilo={estilo}
                             />
                         </div>

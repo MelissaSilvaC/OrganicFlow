@@ -1,9 +1,10 @@
 import Button from "components/Items_Forms/Button"
 import TextField from "components/Items_Forms/TextField"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import IHandle from "types/IHandle"
 import InfoField from "./InfoField"
+import axios from 'axios'
 /**
     Nome do centro de armazenamento.(normal)
     Localização do centro de armazenamento.(normal)
@@ -22,6 +23,32 @@ export default function StageIV({ handleMedal, handleReport }: IHandle) {
     const [praticas, setPraticas] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
 
+        
+    useEffect(() => { 
+        const url = window.location.href;
+        const id = url.split("/").pop(); 
+        axios.get(`http://localhost:3000/linha/${id}`)
+        .then(response => {
+            const { nome, local, responsavel, dt_entrada, dt_saida, praticas,form } = response.data.Relatorio4[0];
+            setNome(nome);
+            setLocalizacao(local);
+            setResponsavel(responsavel);
+            setDataEntrada(dt_entrada);
+            setDataSaida(dt_saida);
+            setPraticas(praticas);
+            
+            console.log(response.data.Relatorio4);
+            console.log(response.data.Relatorio4[0].nome);
+            console.log(nome);
+            setIsFormVisible(form);
+            
+            handleReport()
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }, []);
+    
     const estilo = "flex justify-center"
     const campoTCSS = 'h-[40px] bg-neutral-50 rounded-xl shadow px-6 my-3'
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5'

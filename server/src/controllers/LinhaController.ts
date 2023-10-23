@@ -12,7 +12,6 @@ export class LinhaController{
                 especie,
                 data_cultivo,
                 lote,
-                photo,
                 produto: {
                     connect: { id: Number(id_produto) } // Conecta com o id_linha obtido do corpo da requisição
                 }
@@ -21,6 +20,8 @@ export class LinhaController{
         // fazer o método de ele escolher o produto cujo fará a conexão
 
         })
+
+        
         const LinhaId=linha.id;    // Obtém o ID do novo post
         response.redirect(`/linha/${LinhaId}`)//redireciona pra pesquisa do back-end
         
@@ -170,7 +171,8 @@ export class LinhaController{
 
         if(!linha){
             return response.json({
-                error:"não existe o produto"
+                form:true,
+                error:"não existe a linha"
             })
         }
 

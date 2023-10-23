@@ -1,9 +1,36 @@
 import FeedbackCard from "components/Cards/FeedbackCard";
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
 
+import { useEffect,useState } from "react";
+import axios from 'axios';
+
 import empresa from '../../../assets/img/logoExample.png'
 
 export default function FeedbacksList(){
+    const [feeds, setFeeds] = useState<any[]>([]);
+    useEffect(() => { 
+
+        axios.get(`http://localhost:3000/feed`)
+        .then(response => {
+
+            const feeds = response.data.map((item: any) => ({
+                id: item.id,
+                description:item.description,
+                name:item.user.name,
+                photo: item.user.photo,
+              }));
+              setFeeds(feeds);
+              console.log(feeds)
+
+        console.log(feeds)
+        })
+        //retorna o objeto inteiro
+        .catch((error) => {
+            console.log(error);
+        });
+        // console.log('aa')
+        
+  }, []);
     return(
         <>
             <TitleComplaint titulo="Feedbacks dos usuários" />
@@ -14,47 +41,14 @@ export default function FeedbacksList(){
                      * name
                      * feedbackText
                  */}
-                <FeedbackCard 
-                    photo = {empresa}
-                    name= "Seeds sprout"
-                    feedbackText= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
-
-                <FeedbackCard
-                    photo={empresa}
-                    name="Seeds sprout"
-                    feedbackText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
-
-                <FeedbackCard
-                    photo={empresa}
-                    name="Seeds sprout"
-                    feedbackText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
-
-                <FeedbackCard
-                    photo={empresa}
-                    name="Seeds sprout"
-                    feedbackText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
-
-                <FeedbackCard
-                    photo={empresa}
-                    name="Seeds sprout"
-                    feedbackText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
-
-                <FeedbackCard
-                    photo={empresa}
-                    name="Seeds sprout"
-                    feedbackText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
-
-                <FeedbackCard
-                    photo={empresa}
-                    name="Seeds sprout"
-                    feedbackText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at ligula condimentum, bibendum ex quis, elementum velit. Sed porta sollicitudin tellus et semper. Sed ut purus cursus, gravida nibh et, tempus ligula. Aenean magna libero."
-                />
+               {feeds?.map((feed) => (
+                        
+                        <FeedbackCard 
+                        photo = {feed.photo}
+                        name= {feed.name}
+                        feedbackText= {feed.description}
+                    />
+                        ))}
                 
             </div>
         </>

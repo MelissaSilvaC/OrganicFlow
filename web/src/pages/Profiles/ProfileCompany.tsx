@@ -64,23 +64,25 @@ export default function ProfileCompany() {
     }, []);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault(); 
         if (image) {
-
-            axios.post('http://localhost:3000' + '/produto', {
-                nome: nameProduct,
-                photo: URL.createObjectURL(image),
-            })
+            const formData = new FormData(); // Crie um objeto FormData para enviar a imagem
+        
+            formData.append('file', image); // Adicione a imagem ao FormData
+            formData.append('nome', nameProduct); // Adicione o nome ao FormData
+        
+            axios.post('http://localhost:3000/produto', formData) // Correção aqui
                 .then(response => console.log(response))//se for sucedido 
                 .catch((error) => {
                     console.log(error);
                 });
-
-
+        
+            
+            console.log(formData)
             setImage(null);
             setNameProduct('');
         } else {
-            console.log('Falha ao cadastrar');
+            console.log('Nenhuma imagem selecionada.');
         }
     }
 
@@ -151,47 +153,6 @@ export default function ProfileCompany() {
                             photo={produto.photo}
                         />
                     ))}
-
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                    />
                 </div>
             </div>
 

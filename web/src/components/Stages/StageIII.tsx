@@ -1,9 +1,10 @@
 import Button from "components/Items_Forms/Button"
 import TextField from "components/Items_Forms/TextField"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import IHandle from "types/IHandle"
 import InfoField from "./InfoField"
+import axios from 'axios'
 /**
     Informações sobre a empresa de transporte e logística responsável.(normal)
     Data e hora do carregamento dos produtos.(date)
@@ -14,11 +15,40 @@ import InfoField from "./InfoField"
 
 export default function StageIII({ handleMedal, handleReport }: IHandle) {
     const [nomeTransporte, setNomeTransporte] = useState("")
+    const [nomeLogistica, setNomeLogistica] = useState("")
     const [dataCarregamento, setDataCarregamento] = useState("")
     const [dataDescarregamento, setDataDescarregamento] = useState("")
     const [rotaPercorrida, setRotaPercorrida] = useState("")
     const [praticas, setPraticas] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
+
+    useEffect(() => { 
+        const url = window.location.href;
+        const id = url.split("/").pop(); 
+        axios.get(`http://localhost:3000/linha/${id}`)
+        .then(response => {
+            const { nome, dt_carregamento, dt_descarregamento, origem, destino, praticas,form } = response.data.Relatorio3[0];
+            setNomeTransporte(nome);
+            setDataCarregamento(dt_carregamento);
+            setDataDescarregamento(dt_descarregamento);
+            setNomeLogistica(origem);
+            setRotaPercorrida(destino);
+            setPraticas(praticas);
+            
+            // console.log(response.data.Relatorio3);
+            // console.log(response.data.Relatorio3[0].nome);
+            // console.log(nome);
+            setIsFormVisible(form);
+            
+            
+            handleReport()
+            
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
 
     const estilo = "flex justify-center"
     const campoTCSS = 'h-[40px] bg-neutral-50 rounded-xl shadow px-6 my-3'

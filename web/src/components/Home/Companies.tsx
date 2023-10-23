@@ -2,10 +2,32 @@ import { FiSearch } from 'react-icons/fi';
 import Papel from '../../assets/img/Fundo/papel1.png'
 import Slider from 'react-slick';
 import CompanyBrand from '../Cards/ImageCards/CompanyBrand';
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState,useEffect } from 'react';
+import axios from 'axios'
 
 export default function Companies() {
     const [slidesToShow, setSlidesToShow] = useState(7);
+    const [empresas, setEmpresas] = useState<any[]>([]);
+    useEffect(() => { 
+  
+          axios.get(`http://localhost:3000/empresa`)
+          .then(response => {
+  
+              const empresas = response.data.map((item: any) => ({
+                  id: item.user.id,
+                  photo: item.user.photo,
+                }));
+  
+          setEmpresas(empresas);
+          console.log(empresas)
+          })
+          //retorna o objeto inteiro
+          .catch((error) => {
+              console.log(error);
+          });
+          // console.log('aa')
+          
+    }, []);
 
     useLayoutEffect(() => {
         const handleResize = () => {
@@ -30,7 +52,7 @@ export default function Companies() {
     }, []);
 
     const companySettings = {
-        infinite: true,
+        infinite: false,
         slidesToShow: slidesToShow, // Número de slides a serem mostrados com base no tamanho da tela
         slidesToScroll: 1,
     };
@@ -50,9 +72,14 @@ export default function Companies() {
 
             <div className='mt-10'>
                 <Slider {...companySettings}>
-                    <CompanyBrand /><CompanyBrand /><CompanyBrand /><CompanyBrand /><CompanyBrand />
-                    <CompanyBrand /><CompanyBrand /><CompanyBrand /><CompanyBrand /><CompanyBrand />
-                </Slider>
+                {empresas?.map((empresa) => (
+                        <CompanyBrand
+                        key={empresa.id}
+                        id={empresa.id}
+                        photo={empresa.photo}
+                        />
+                    ))}
+                   </Slider>
             </div>
 
         </div>

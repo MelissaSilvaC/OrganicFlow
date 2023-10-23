@@ -2,14 +2,63 @@ import InfoManagerCard from "components/Cards/InfoCards/Manager";
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import { FiSearch } from 'react-icons/fi';
 import empresa from '../../../assets/img/logoExample.png'
+import { useState,useEffect } from "react";
+import axios from 'axios'
 
-export default function AbleManager(){
+export default function AbleManager(){ const [gerentes, setGerentes] = useState<any[]>([]);
+    const [gerentesvalidos, setGerentesValidos] = useState<any[]>([]);
+    useEffect(() => { 
+  
+          axios.get(`http://localhost:3000/gerente`)
+          .then(response => {
+  
+              const gerentes = response.data.map((item: any) => ({
+                  id: item.id,
+                  photo: item.photo,
+                  nome:item.name,
+                  cnpj:item.cnpj,
+                  email:item.email
+                }));
+  
+          setGerentes(gerentes);
+          console.log(gerentes)
+          })
+          //retorna o objeto inteiro
+          .catch((error) => {
+              console.log(error);
+          });
+          // console.log('aa')
+          
+          axios.get(`http://localhost:3000/gerentevalido`)
+          .then(response => {
+  
+              const gerentesvalidos = response.data.map((item: any) => ({
+                  id: item.user.id,
+                  photo: item.user.photo,
+                  nome:item.user.name,
+                  cnpj:item.user.cnpj,
+                  email:item.user.email
+                }));
+  
+          setGerentesValidos(gerentesvalidos);
+          console.log(gerentesvalidos)
+          })
+          //retorna o objeto inteiro
+          .catch((error) => {
+              console.log(error);
+          });
+    }, []);
+
+    const onAble = () => {
+        console.log('gerente abilitado/desabilitado')
+    }
+
     return(
         <>
             <TitleComplaint titulo="Validar gerentes" />
             <div className="text-white px-20 max-sm:px-2">
                 <div className="flex justify-between max-sm:flex-col max-sm:px-5">
-                    <p className="text-2xl pb-10 max-sm:text-xl">Gerentes validados</p>
+                    <p className="text-2xl pb-10 max-sm:text-xl">Gerentes não validados</p>
 
                     <div>
                         <div className='w-[400px] max-sm:w-[300px] h-11 bg-neutral-100 rounded-[50px] flex px-6'>
@@ -22,42 +71,14 @@ export default function AbleManager(){
                 </div>
 
                 <div className="flex flex-wrap">
-                    {/**
-                     * if(manager = true){
-                     * Função map preenchendo os seguintes parametros:
-                     * photo
-                     * name
-                     * email
-                     * cnpj
-                     * }
-                     * 
-                     * (
-                     * OBS: acredito q vc não precisa dos useState, no máximo uma variável para fazer a função map funcionar
-                     * Outra coisa, vc precisa fazer algo para que apenas as PESSOAS JURÍDICAS sejam listadas, vc pode usar o CNPJ
-                     * para isso
-                     * )
-                     */}
-                    <InfoManagerCard 
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    
+                    {gerentes?.map((gerente) => (
+                        <InfoManagerCard 
+                        onClick={onAble}
+                        photo={gerente.photo}
+                        name={gerente.nome}
+                        email={gerente.email}
+                        cnpj={gerente.cnpj} />
+                    ))}
                 </div>
             </div>
 
@@ -65,7 +86,7 @@ export default function AbleManager(){
 
             <div className="text-white px-20 pb-28">
                 <div className="flex justify-between">
-                    <p className="text-2xl pb-10">Gerentes não validados</p>
+                    <p className="text-2xl pb-10">Gerentes validados</p>
 
                     <div>
                         <div className='w-[400px] h-11 bg-neutral-100 rounded-[50px] flex px-6'>
@@ -79,46 +100,15 @@ export default function AbleManager(){
                 </div>
 
                 <div className="flex flex-wrap">
-                    {/**
-                     * if(manager = false){
-                     * Função map preenchendo os seguintes parametros:
-                     * photo
-                     * name
-                     * email
-                     * cnpj
-                     * }
-                     * 
-                     */}
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <InfoManagerCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
+                    {gerentesvalidos?.map((gerentevalidos) => (
+                        
+                        <InfoManagerCard 
+                        onClick={onAble}
+                        photo={gerentevalidos.photo}
+                        name={gerentevalidos.nome}
+                        email={gerentevalidos.email}
+                        cnpj={gerentevalidos.cnpj} />
+                    ))}
                 </div>
             </div>
         </>

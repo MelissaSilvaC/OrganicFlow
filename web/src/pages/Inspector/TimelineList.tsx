@@ -28,7 +28,10 @@ export default function TimelineList() {
 
     return (
         <section className="bg-preto pt-[80px] pb-5">
-            <TitleTimeline />
+            <TitleTimeline 
+                bgProduct="bg"
+                txtProduct="Nome do produto"
+            />
 
             <div className="py-28 max-lg:py-10">
                 {/**Tabela */}
