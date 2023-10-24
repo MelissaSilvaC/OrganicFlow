@@ -12,7 +12,14 @@ export default function InspectorCard({ photo, name, email, password }: Props) {
         <div className="text-white w-[25rem] max-sm:w-[15rem] border border-slate-600 rounded-md p-4 m-5 hover:bg-cinza_escuro hover:cursor-pointer">
 
             <div className='flex justify-end'>
-                <button onClick={() => { }} className='border-2 max-sm:border p-2 border-red-600 rounded-full hover:animate-pulse'>
+                <button onClick={() => { 
+                    const userConfirmed = window.confirm("Tem certeza de que quer continuar?");
+                    if (userConfirmed) {
+                        // Ação para continuar
+                    } else {
+                        // Ação para cancelar
+                    }
+                }} className='border-2 max-sm:border p-2 border-red-600 rounded-full hover:animate-pulse'>
                     <TfiClose className='w-4 h-4 max-sm:w-3 max-sm:h-3 fill-red-600' />
                 </button>
             </div>

@@ -53,7 +53,14 @@ export default function TimelineList() {
                         <Button
                             texto='Deletar produto'
                             botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold max-lg:font-medium px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
-                            onClick={() => { alert('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionada a esse produto') }}
+                            onClick={() => {
+                                const userConfirmed = window.confirm("Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionada a esse produto");
+                                if (userConfirmed) {
+                                    // Ação para continuar
+                                } else {
+                                    // Ação para cancelar
+                                }
+                            }}
                         />
                     </div>
                 </div>

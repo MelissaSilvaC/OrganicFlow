@@ -23,7 +23,7 @@ export default function AppRouter(){
                         <Route path='fiscal/lista' element={<TimelineList />} />
                         <Route path='fiscal/lista/linhatempo/:id' element={<Timeline />} />
                         <Route path='admin/dashboard' element={<Dashboard />} />
-                        <Route path='admin/listadenuncias/denuncia' element={<Complaint />} />
+                        <Route path='admin/dashboard/denuncia' element={<Complaint />} />
                     </Route>
                     
                     <Route path='/sessao' element={<SignupScreen />} />
