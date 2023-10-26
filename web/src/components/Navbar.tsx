@@ -21,12 +21,12 @@ const settings = [
         to: '/sessao/login'
     }, {
         id: 2,
-        label: 'Dashboard',
-        to: '/admin/dashboard'
+        label: 'Sign up',
+        to: '/sessao'
     }, {
         id: 3,
-        label: 'Logout',
-        to: '/'
+        label: 'Dashboard',
+        to: '/admin/dashboard'
     }
 ];
 

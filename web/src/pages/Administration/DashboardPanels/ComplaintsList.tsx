@@ -115,16 +115,11 @@ export default function ComplaintsList() {
 
     }, []);
 
-    //const handleRowClick = (item) => {
-    //  handleSelectedItem(item);
-    //};
-
     return (
         <div>
             <DataGrid
                 rows={denuncias}
                 columns={columns}
-                //onRowClick={(params) => handleRowClick(params.row)}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
             />

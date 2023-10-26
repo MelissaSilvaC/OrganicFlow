@@ -6,9 +6,9 @@ export default function BanedUserView() {
     return (
         <>
             <TitleComplaint titulo="Usuários banidos" />
-            <div className="text-white px-20">
+            <div className="text-white px-20 max-sm:px-2">
 
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap max-sm:pb-14">
                     {/**
                      * Função map preenchendo os seguintes parametros:
                      * photo

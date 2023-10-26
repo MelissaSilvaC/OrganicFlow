@@ -11,16 +11,12 @@ export default function Dashboard() {
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
     };
-    // Função para definir o item selecionado
-    //const handleSelectedItem = (item) => {
-    //    setSelectedItem(item);
-    //};
 
     return (
-        <div className="flex bg-preto">
+        <div className="flex max-sm:flex-col bg-preto">
             {/**Menu vertical */}
-            <div className="bg-cinza_escuro w-[20%] text-white max-sm:hidden">
-                <ul className="font-medium text-lg pl-12 pt-24 space-y-5 hover:cursor-pointer">
+            <div className="bg-cinza_escuro w-[20%] max-sm:w-auto text-white max-sm:flex max-sm:flex-col">
+                <ul className="font-medium text-lg pl-12 pt-24 max-sm:p-5 space-y-5 hover:cursor-pointer">
                     <li
                         onClick={() => handleOptionClick("Validar gerentes")}
                         className={selectedOption === "Validar gerentes" ? "underline" : ""}
@@ -40,27 +36,23 @@ export default function Dashboard() {
                         Ver usuários banidos
                     </li>
                 </ul>
-                <div className="h-screen" />
+                <div className="h-screen max-sm:h-0" />
             </div>
 
             {/**Area onde vai aparecer a interface selecionada */}
-            <div className="w-[80%] max-sm:w-auto">
+            <div className="w-[80%] max-sm:w-full">
                 {selectedOption === "Validar gerentes" && <AbleManager />}
 
                 {selectedOption === "Lista de denúncias" && 
-                    <div className="pb-28">
+                    <div className="pb-28 max-sm:h-screen">
                         <TitleComplaint titulo="Denúncias" />
-                        <div className="px-16">
+                        <div className="px-16 max-sm:px-2">
                             <div className="bg-gray-200">
                                 <ComplaintsList />
                             </div>
                         </div>
                     </div>
                 }
-                {/**
-                 * {selectedItem && <ComplaintsList item={selectedItem} />}
-                {selectedItem && <Complaint item={selectedItem} />}
-                 */}
                 {selectedOption === "Ver usuários banidos" && <BanedUserView />}
             </div>
         </div>

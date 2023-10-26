@@ -153,31 +153,6 @@ export default function ProfileCompany() {
                             photo={produto.photo}
                         />
                     ))}
-
-                    <ProductCard
-                        key={1}
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1697506788707-53f5b1a1f1f3?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        key={1}
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1697506788707-53f5b1a1f1f3?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        key={1}
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1697506788707-53f5b1a1f1f3?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D"
-                    />
-                    <ProductCard
-                        key={1}
-                        id={1}
-                        nome="produto"
-                        photo="https://images.unsplash.com/photo-1697506788707-53f5b1a1f1f3?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D"
-                    />
                 </div>
             </div>
 
