@@ -52,7 +52,7 @@ export default function AbleManager() {
 
     return (
         <>
-            <TitleComplaint titulo="Validar gerentes" />
+            <TitleComplaint titulo="Validar gerentes" estilo="max-sm:pt-0"/>
             <div className="text-white px-20 max-sm:px-2">
                 <div className="flex justify-between max-sm:flex-col max-sm:px-5">
                     <p className="text-2xl pb-4 max-sm:text-xl">Gerentes não validados</p>

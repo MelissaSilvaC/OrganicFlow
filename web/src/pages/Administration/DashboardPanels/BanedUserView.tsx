@@ -5,7 +5,7 @@ import BanedUserCard from "components/Cards/InfoCards/BanedUser";
 export default function BanedUserView() {
     return (
         <>
-            <TitleComplaint titulo="Usuários banidos" />
+            <TitleComplaint titulo="Usuários banidos" estilo="max-sm:pt-0" />
             <div className="text-white px-20 max-sm:px-2">
 
                 <div className="flex flex-wrap max-sm:pb-14">
