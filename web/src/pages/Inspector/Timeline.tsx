@@ -18,6 +18,7 @@ import ModalComplaint from "components/Modal/RegisterComplaint";
 import ModalQRcode from "components/Modal/ShowQRcode";
 import TextArea from "components/Items_Forms/TextArea";
 import Button from "components/Items_Forms/Button";
+import axios from "axios";
 
 interface Option {
     id: number;
@@ -75,6 +76,17 @@ export default function Timeline() {
         );
     };
 
+    const denunciar = ()=>{
+        axios.post('http://localhost:3000'+'/denuncia',{
+            alvo:"Empresa",
+            description:"empresa abusiva"
+        })
+        .then(response => console.log(response))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     const handleReport = (stageId: number) => {
         setReports((prevReports) =>
             prevReports.map((report) =>
@@ -103,6 +115,27 @@ export default function Timeline() {
          * Argumento da denúncia
          * Descrição da denúncia
          */
+    }
+
+    const url = window.location.href;
+    const idlinha = url.split("/").pop(); 
+    
+    const [qrcode, setQrcode] = useState("")
+
+    const gerarQrcode=()=>{
+        axios.put(`http://localhost:3000/qrCode/${idlinha}`)
+            .then(response => {
+                const qrcode= response.data.qrcode
+
+                setQrcode(qrcode)
+                console.log(qrcode)
+            })
+            //retorna o objeto inteiro
+            .catch((error) => {
+                console.log(error);
+            });
+        // console.log('aa')
+    
     }
 
     const updateMedalStatus = (cardId: number, status: boolean) => {
@@ -291,6 +324,7 @@ export default function Timeline() {
                                     inputCSS={inputTCSS}
                                 />
                                 <Button
+                                    onClick={()=>denunciar}
                                     botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
                                     texto='Enviar denúncia'
                                 />

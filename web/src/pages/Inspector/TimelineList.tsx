@@ -1,11 +1,33 @@
 import TitleTimeline from "components/Cards/Titles/Title-timeline";
 import Button from "components/Items_Forms/Button";
 import CustomPaginationActionsTable from "components/Table/TimelinesTable";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios'
 
 export default function TimelineList() {
     const [image, setImage] = useState<File | null>(null)
     const [imageURL, setImageURL] = useState<string | null>(null);
+
+    const [produto, setProduto] = useState<any>(null);
+    useEffect(() => {
+    
+        const url = window.location.href;
+        const id = url.split("/").pop();
+        axios.get(`http://localhost:3000/produto/${id}`)
+            .then(response => {
+                const produto = response.data; // Obtenha o objeto completo do produto
+               
+                setProduto(produto)
+        
+                console.log(produto)
+            })
+            //retorna o objeto inteiro
+            .catch((error) => {
+                console.log(error);
+            });
+        // console.log('aa')
+    
+    }, []);
 
     //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,12 +48,34 @@ export default function TimelineList() {
         }
     };
 
+    const url = window.location.href;
+    const id = url.split("/").pop();
+    console.log(id)
+    const cadastro=()=>{
+        axios.post(`http://localhost:3000/linha`,{
+            id_produto:id,
+        })
+        .then(response => console.log(response))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    const deletar=()=>{
+        axios.delete(`http://localhost:3000/produto/${id}`,{
+        })
+        .then(response => console.log(response))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     return (
         <section className="bg-preto pt-[80px] pb-5">
             <TitleTimeline 
-                bgProduct="bg"
-                txtProduct="Nome do produto"
-            />
+          bgProduct={produto.photo}
+          txtProduct={produto.nome}
+        />
 
             <div className="py-28 max-lg:py-10">
                 {/**Tabela */}
@@ -47,18 +91,17 @@ export default function TimelineList() {
                         <Button
                             texto='Cadastrar linha do tempo'
                             botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 shadow hover:bg-verde_palido'
-                            onClick={() => { }}
+                            onClick={() => { cadastro() }}
                         />
 
                         <Button
                             texto='Deletar produto'
                             botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold max-lg:font-medium px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
                             onClick={() => {
-                                const userConfirmed = window.confirm("Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionada a esse produto");
-                                if (userConfirmed) {
-                                    // Ação para continuar
-                                } else {
-                                    // Ação para cancelar
+                                const confirmacao = window.confirm('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionadas a esse produto');
+
+                                if (confirmacao) {
+                                    deletar()
                                 }
                             }}
                         />

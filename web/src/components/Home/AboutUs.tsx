@@ -19,7 +19,6 @@ export default function AboutUs(){
                             Esta iniciativa visa aprimorar a qualidade de vida daqueles com necessidades alimentares específicas e oferecer suporte aos indivíduos preocupados com a origem e a qualidade de seus alimentos.
                         </p>
                     </div>
-                    <button className='bg-verde_folha mt-5 w-[20rem] h-[3rem] rounded-lg text-lg font-semibold shadow-md hover:bg-verde_palido max-lg:hidden'>Junte-se a Nós</button>
                 </div>
                 <div className='max-lg:flex max-lg:justify-center'>
                     <img src={rabanete} className='w-[450px] h-[400px] max-lg:w-[250px] max-lg:h-[200px] max-lg:hidden' />
