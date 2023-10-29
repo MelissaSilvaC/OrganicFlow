@@ -110,7 +110,7 @@ export default function ProfileCompany() {
                         <form onSubmit={onSubmit}>
                             {/* Renderiza a imagem se imageURL estiver definida */}
                             <div className="flex justify-center">
-                                <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
+                                <div className="w-44 h-44 max-sm:w-24 max-sm:h-24 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
                                     {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
                                 </div>
                             </div>
@@ -142,7 +142,7 @@ export default function ProfileCompany() {
                                 campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                                 inputCSS={inputTCSS}
                             />
-                            <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Enviar' />
+                            <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Enviar' />
                         </form>
                     </ModalProduct>
                     {produtos?.map((produto) => (

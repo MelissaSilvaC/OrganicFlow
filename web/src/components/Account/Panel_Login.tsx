@@ -13,41 +13,50 @@ export default function PanelLogin() {
     const [senha, setSenha] = useState("")
     const navigate = useNavigate()
 
+    const [loginError, setLoginError] = useState("")
+
     {/** Estilos */ }
     const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
     const botaoTCSS = 'bg-verde_folha w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-verde_palido'
     
 
-    axios.post('http://localhost:3000' + '/login', {//verifica login
-        email: email, //campo do email no front
-        password: senha, //campo password no front
-    })
-        .then(
-            response => {
-                if (response.data.fail) {//pega o fail do json; fail===true]
-                    console.log('email e senha incorretos')
-                    console.log('erro: ' + response.data.error)//pega o error: do json
-                    let error = response.data.error
-                } else {
-                    console.log(response.data.token)//se usuário existir
-                    localStorage.setItem('token', response.data.token); //armazena o token no local
-                    axios.defaults.headers[
-                        "authorization"
-                    ] = `Bearer ${response.data.token}`
-                    navigate('/');//faz o usuario retornar a página inicial
+    const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
+        evento.preventDefault()
+        axios.post('http://localhost:3000' + '/login', {//verifica login
+            email: email, //campo do email no front
+            password: senha, //campo password no front
+        })
+            .then(
+                response => {
+                    console.log(email)
+                    console.log(senha)
+ 
+                    if (response.data.fail) {//pega o fail do json; fail===true]
+                        console.log('email ou senha incorretos')
+                        console.log('erro: ' + response.data.error)//pega o error: do json
+                        let error = response.data.error
+                    } else {
+                        console.log(response.data.token)//se usuário existir
+                        localStorage.setItem('token', response.data.token); //armazena o token no local
+                        axios.defaults.headers[
+                            "authorization"
+                        ] = `Bearer ${response.data.token}`
+                        navigate('/');//faz o usuario retornar a página inicial
+                    }
                 }
-            }
-        )
-        .catch((error) => {
-            console.log(error);
-        });
+            )
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
 
     return (
         <div className='flex flex-col items-center'>
             <Title texto='Entre' />
             <div className='h-auto w-[450px] max-lg:w-[350px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
-                <form className='w-full'>
+                <form className='w-full' onSubmit={handleSubmit}>
                     {/** Campo e-mail */}
                     <TextField
                         obrigatorio={true}
@@ -70,6 +79,7 @@ export default function PanelLogin() {
                         inputCSS={inputTCSS}
                     />
 
+                    {/**Se loginError for true, aparecer texto vermelho falando que os dados estão incorretos */}
                     <Button botaoCSS={botaoTCSS} texto='Entrar' />
                 </form>
 
@@ -85,7 +95,7 @@ export default function PanelLogin() {
                             campoCSS='h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3 border border-verde_escuro'
                             inputCSS={inputTCSS}
                         />
-                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-green-900' texto='Enviar' />
+                        <Button botaoCSS='bg-verde_escuro w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold max-lg:font-semibold text-white mt-1 hover:bg-green-900' texto='Enviar' />
                     </BasicModal>
                     {/** Ativa o popup */}
 

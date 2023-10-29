@@ -57,6 +57,7 @@ router.get("/empresa/:id",gerenteController.pesquisarEmpresa)
 router.get("/empresa",gerenteController.consultarEmpresa)
 router.get("/fiscal/:id", fiscalController.consultarFiscal)
 router.get("/produto/:id", produtoController.pesquisar)
+router.get("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.listarSeuFiscal);
 
 
 //cliente cadastrado
@@ -77,10 +78,11 @@ router.get("/feed" ,feedController.consultar)
 //gerente
 router.get("/user",userController.pesquisar); //quando o gerente precisar pesquisar o usuario
 router.post("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.permissaoFiscal);
-router.get("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.listarSeuFiscal);
+
 router.delete("/fiscal/:id",authMiddleware,is([RolesPrivate.gerente]),fiscalController.removerFiscal)
 router.put("/user/:id",authMiddleware,userController.atualizar)
 router.post("/produto", upload.single('file'),produtoController.criar)
+router.delete("/produto/:id", produtoController.deletar)
 
 
 //fiscal

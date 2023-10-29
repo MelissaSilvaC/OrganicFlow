@@ -3,6 +3,8 @@ import TextField from '../Items_Forms/TextField'
 import Button from '../Items_Forms/Button'
 import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 export default function PanelPartner() {
     const [email, setEmail] = useState("")
@@ -10,6 +12,38 @@ export default function PanelPartner() {
     const [senhaVerificada, setSenhaVerificada] = useState("");
     const [nomeComercial, setNomeComercial] = useState("")
     const [cnpj, setCnpj] = useState("")
+    const [telefone, setTelefone] = useState("")
+    const navigate = useNavigate()
+
+    const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
+        evento.preventDefault();
+
+        console.log(email, senha)
+
+        if (senha === senhaVerificada) {
+            try {
+                navigate('/sessao/login')
+                axios.post('http://localhost:3000' + '/user', {
+                name: nomeComercial,
+                email: email,
+                password: senha,
+                cnpj: cnpj,
+                telefone: telefone
+            })
+                .then(response => console.log(response + ' dados enviados'))//se for sucedido 
+                .catch((error) => {
+                    console.log(error);
+                });
+
+            } catch (erro) {
+                erro && alert('Erro ao cadastrar os dados')
+            }
+
+        } else {
+            alert('senhas incompatíveis')
+        }
+
+    }
 
     {/**
      * axios.post('http://localhost:3000' + '/user', {
@@ -32,55 +66,65 @@ export default function PanelPartner() {
         <div className='flex flex-col items-center'>
             <Title texto='Seja Parceiro' />
             <div className='h-auto w-[450px] max-lg:w-[350px] bg-verde_folha bg-opacity-50 rounded-lg p-8'>
-                    <form className='w-full'>
-                        <TextField
-                            obrigatorio={true}
-                            placeholder='Nome comercial'
-                            onChange={evento => setNomeComercial(evento.target.value)}
-                            valor={nomeComercial}
-                            tipo='text'
-                            campoCSS={campoTCSS}
-                            inputCSS={inputTCSS}
-                        />
-                        <TextField
-                            obrigatorio={true}
-                            placeholder='CNPJ'
-                            onChange={evento => setCnpj(evento.target.value)}
-                            valor={cnpj}
-                            tipo='text'
-                            campoCSS={campoTCSS}
-                            inputCSS={inputTCSS}
-                        />
-                        <TextField
-                            obrigatorio={true}
-                            placeholder='E-mail'
-                            onChange={evento => setEmail(evento.target.value)}
-                            valor={email}
-                            tipo='e-mail'
-                            campoCSS={campoTCSS}
-                            inputCSS={inputTCSS}
-                        />
-                        <TextField
-                            obrigatorio={true}
-                            placeholder='Senha'
-                            onChange={evento => setSenha(evento.target.value)}
-                            valor={senha}
-                            tipo='password'
-                            campoCSS={campoTCSS}
-                            inputCSS={inputTCSS}
-                        />
-                        <TextField
-                            obrigatorio={true}
-                            placeholder='Confirmar senha'
-                            onChange={evento => setSenhaVerificada(evento.target.value)}
-                            valor={senhaVerificada}
-                            tipo='password'
-                            campoCSS={campoTCSS}
-                            inputCSS={inputTCSS}
-                        />
+                <form className='w-full' onSubmit={handleSubmit}>
+                    <TextField
+                        obrigatorio={true}
+                        placeholder='Nome comercial'
+                        onChange={evento => setNomeComercial(evento.target.value)}
+                        valor={nomeComercial}
+                        tipo='text'
+                        campoCSS={campoTCSS}
+                        inputCSS={inputTCSS}
+                    />
+                    <TextField
+                        obrigatorio={true}
+                        placeholder='CNPJ'
+                        onChange={evento => setCnpj(evento.target.value)}
+                        valor={cnpj}
+                        tipo='text'
+                        campoCSS={campoTCSS}
+                        inputCSS={inputTCSS}
+                    />
+                    <TextField
+                        obrigatorio={true}
+                        placeholder='E-mail'
+                        onChange={evento => setEmail(evento.target.value)}
+                        valor={email}
+                        tipo='e-mail'
+                        campoCSS={campoTCSS}
+                        inputCSS={inputTCSS}
+                    />
+                    <TextField
+                        obrigatorio={true}
+                        placeholder='Telefone para contato'
+                        onChange={evento => setTelefone(evento.target.value)}
+                        valor={telefone}
+                        tipo='text'
+                        campoCSS={campoTCSS}
+                        inputCSS={inputTCSS}
+                    />
 
-                        <Button botaoCSS={botaoTCSS} texto='Cadastre-se' />
-                    </form>
+                    <TextField
+                        obrigatorio={true}
+                        placeholder='Senha'
+                        onChange={evento => setSenha(evento.target.value)}
+                        valor={senha}
+                        tipo='password'
+                        campoCSS={campoTCSS}
+                        inputCSS={inputTCSS}
+                    />
+                    <TextField
+                        obrigatorio={true}
+                        placeholder='Confirmar senha'
+                        onChange={evento => setSenhaVerificada(evento.target.value)}
+                        valor={senhaVerificada}
+                        tipo='password'
+                        campoCSS={campoTCSS}
+                        inputCSS={inputTCSS}
+                    />
+
+                    <Button botaoCSS={botaoTCSS} texto='Cadastre-se' />
+                </form>
             </div>
 
             <div className='flex mt-4 w-full justify-center font-bold text-xl max-lg:text-base'>

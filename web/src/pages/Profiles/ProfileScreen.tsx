@@ -73,7 +73,7 @@ export default function ProfileScreen({ children }: IProfile) {
                             <ModalProfile>
                                 <form onSubmit={onSubmit}>
                                     <div className="flex justify-center">
-                                        <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
+                                        <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 rounded-full border-2 border-verde_escuro bg-cover">
                                             {photo && <img src={photo} alt="Imagem Enviada" className="rounded-[50px]" />}
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@ export default function ProfileScreen({ children }: IProfile) {
                                         campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                                         inputCSS={inputTCSS}
                                     />
-                                    <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Salvar edição' />
+                                    <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Salvar edição' />
                                 </form>
                             </ModalProfile>
                         </div>

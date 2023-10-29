@@ -4,26 +4,24 @@ const QRCode = require('qrcode');
 
 export class LinhaController{
     async criar(request:Request, response:Response){
-        const{local_cultivo,especie,data_cultivo,lote,photo,id_produto}=request.body;
+        const{id_produto}=request.body;
+        const date = new Date();
 
+        // Obtém a data no formato desejado (dia/mes/ano)
+        const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
+
+        console.log(id_produto)
         const linha=await prismaClient.linha.create({
             data:{
-                local_cultivo,
-                especie,
-                data_cultivo,
-                lote,
+                
+                date:formattedDate,
                 produto: {
                     connect: { id: Number(id_produto) } // Conecta com o id_linha obtido do corpo da requisição
                 }
             }
-
-        // fazer o método de ele escolher o produto cujo fará a conexão
-
         })
 
-        
-        const LinhaId=linha.id;    // Obtém o ID do novo post
-        response.redirect(`/linha/${LinhaId}`)//redireciona pra pesquisa do back-end
+        return response.json(linha);
         
     }
     

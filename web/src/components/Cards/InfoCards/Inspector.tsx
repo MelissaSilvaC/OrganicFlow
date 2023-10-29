@@ -9,10 +9,9 @@ interface Props {
 
 export default function InspectorCard({ photo, name, email, password }: Props) {
     return (
-        <div className="text-white w-[25rem] max-sm:w-[15rem] border border-slate-600 rounded-md p-4 m-5 hover:bg-cinza_escuro hover:cursor-pointer">
-
+        <div className=" text-white w-[25rem] border-2 border-slate-600 rounded-md flex flex-col p-4 m-5 hover:bg-zinc-600 hover:cursor-pointer">
             <div className='flex justify-end'>
-                <button onClick={() => { 
+                <button onClick={() => {
                     const userConfirmed = window.confirm("Tem certeza de que quer continuar?");
                     if (userConfirmed) {
                         // Ação para continuar
@@ -24,7 +23,7 @@ export default function InspectorCard({ photo, name, email, password }: Props) {
                 </button>
             </div>
 
-            <div className='flex max-sm:flex-col max-sm:items-center space-x-4 max-sm:space-y-2 pb-2'>
+            <div className='flex max-sm:items-center space-x-4 max-sm:space-y-2 pb-2'>
                 <div className="w-28 h-28 max-sm:w-24 max-sm:h-24 rounded-full bg-cover" style={{ backgroundImage: `url(${photo})` }} />
 
                 <div className='flex flex-col justify-center'>
@@ -33,7 +32,6 @@ export default function InspectorCard({ photo, name, email, password }: Props) {
                     <p className='max-sm:text-sm'>{password}</p>
                 </div>
             </div>
-
         </div>
     )
 }

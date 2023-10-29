@@ -52,7 +52,7 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo}) => {
                     <form onSubmit={onUpdate}>
                         {/* Renderiza a imagem se imageURL estiver definida */}
                         <div className="flex justify-center">
-                            <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
+                            <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
                                 {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
                             </div>
                         </div>

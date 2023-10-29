@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 
 export class UserController{
     async criar(request:Request, response:Response){
-        const{name,password, email, company,photo,cnpj,gerente}=request.body;
+        const{name,password, email,telefone, cnpj,gerente,photo,local}=request.body;
 
         const User=await prismaClient.user.findFirst({
             where:{
@@ -25,10 +25,11 @@ export class UserController{
                 name,
                 email,
                 password:hashPassword,
-                company,
-                photo,
+                telefone,
                 cnpj,
-                gerente
+                gerente,
+                photo,
+                local
             }
             
         })
@@ -56,7 +57,7 @@ export class UserController{
 
     async atualizar(request:Request, response:Response){
         const{id}=request.params
-        const{name,company,cnpj,photo,local}=request.body;
+        const{name,photo,local}=request.body;
 
         let User=await prismaClient.user.findFirst({
             where:{
@@ -77,8 +78,6 @@ export class UserController{
             },
             data:{
                 name,
-                company,
-                cnpj,
                 photo,
                 local
             }
@@ -86,6 +85,33 @@ export class UserController{
 
         return response.json(User)
     }    
+
+    async banir(request:Request, response:Response){
+        const{id}=request.params
+        const{ban}=request.body;
+ 
+        let User=await prismaClient.user.findFirst({
+            where:{
+                id:Number(id)
+            }
+        })
+        if(!User){
+            return response.json({
+                error:"não existe o usuario"
+            })
+        }
+ 
+        // const hashPassword=await bcrypt.hash(password,10)
+ 
+        User=await prismaClient.user.update({
+            where:{
+                id:Number(id)
+            },
+            data:{
+                ban:true
+            }
+        })
+    }
 /*
     async deletar(request:Request, response:Response){
         const {id}=request.params

@@ -67,13 +67,23 @@ export default function AbleManager() {
                 </div>
 
                 <div className="flex flex-wrap">
-                    {gerentes?.map((gerente) => (
-                        <InfoManagerCard
-                            onClick={() => {}}
-                            photo={gerente.photo}
-                            name={gerente.nome}
-                            email={gerente.email}
-                            cnpj={gerente.cnpj} />
+                {gerentes?.map((gerente) => (
+                        <InfoManagerCard 
+                        onClick={() => {
+                            console.log(gerente.id)
+                            axios.post('http://localhost:3000' + '/gerente', {
+                                id_user:gerente.id
+                            })
+                                .then(response => console.log(response + ' dados enviados'))//se for sucedido 
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                            
+                        }}
+                        photo={gerente.photo}
+                        name={gerente.nome}
+                        email={gerente.email}
+                        cnpj={gerente.cnpj} />
                     ))}
                 </div>
             </div>

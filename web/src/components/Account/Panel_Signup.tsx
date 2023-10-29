@@ -82,6 +82,7 @@ export default function PanelSignup() {
                         inputCSS={inputTCSS}
                     />
 
+                    
                     <TextField
                         obrigatorio={true}
                         placeholder='Senha'

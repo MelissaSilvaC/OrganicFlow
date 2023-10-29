@@ -15,6 +15,7 @@ import Medal_IV from '../../assets/img/Medals/Medal_IV.png'
 import Medal_V from '../../assets/img/Medals/Medal_V.png'
 import Medal_OF from '../../assets/img/Medals/ofMedal.png'
 import ModalComplaint from "components/Modal/RegisterComplaint";
+import ModalQRcode from "components/Modal/ShowQRcode";
 import TextArea from "components/Items_Forms/TextArea";
 import Button from "components/Items_Forms/Button";
 
@@ -24,10 +25,6 @@ interface Option {
 }
 
 export default function Timeline() {
-    const baseBG = { 
-        background: 'white',
-        //width: '10rem'
-    }
     const noBG = { background: 'none' }
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5'
     const [medals, setMedals] = useState([
@@ -48,6 +45,7 @@ export default function Timeline() {
     const [target, setTarget] = useState("")
     const [description, setDescription] = useState("")
     const allMedalsShown = medals.every((medal) => medal.showMedal);
+    const [stageOpt, setStageOpt] = useState<Option | null>(null);
     const [argument, setArgument] = useState<Option | null>(null);
     const options: Option[] = [
         { id: 1, label: 'Falta de Conformidade Legal' },
@@ -60,6 +58,13 @@ export default function Timeline() {
         { id: 8, label: 'Problemas de Qualidade do Produto' },
         { id: 9, label: 'Outro' },
     ];
+    const stgOption: Option[] = [
+        { id: 1, label: 'Produção Agrícola' },
+        { id: 2, label: 'Processamento e Embalagem' },
+        { id: 3, label: 'Transporte e Logística' },
+        { id: 4, label: 'Armazenamento e Distribuição' },
+        { id: 5, label: 'Varejo e Consumo' },
+    ]
     
     // Ela identifica qual StageCard deve ser atualizado com base no cardId
     const handleMedal = (cardId: number) => {
@@ -78,10 +83,16 @@ export default function Timeline() {
         )
     }
 
-    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleSelectArgument = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedOptionId = parseInt(event.target.value, 10);
         const selectedOption = options.find((option) => option.id === selectedOptionId);
         setArgument(selectedOption || null);
+    };
+
+    const handleSelectStage = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedOptionId = parseInt(event.target.value, 10);
+        const selectedOption = stgOption.find((option) => option.id === selectedOptionId);
+        setStageOpt(selectedOption || null);
     };
 
     const onSubmit = () => {
@@ -102,7 +113,6 @@ export default function Timeline() {
         );
     };
 
-
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex max-sm:flex-col">
@@ -110,24 +120,22 @@ export default function Timeline() {
                     bgProduct="bg"
                     txtProduct="Nome do produto"
                 />
-
                 {/* Exibe a imagem quando todas as medalhas estiverem exibidas */}
                 {allMedalsShown && (
-                    <div
-                        className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
+                    <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
                         style={{ backgroundImage: `url(${Medal_OF})` }}
                     />
                 )}
             </div>
 
-            <div className="text-white font-medium ml-24 max-lg:ml-5 my-12 max-sm:my-1 text-lg max-lg:text-sm max-lg:font-normal">
+            <div className="text-white font-medium ml-24 max-lg:ml-5 my-12 max-sm:my-5 text-lg max-lg:text-sm max-lg:font-normal">
                 <p>ID: (parametro ID)</p>
                 <p>(parametro data)</p>
                 <p>Endereço do fornecedor: (parametro Fornecedor)</p>
                 <p>Número do lote: (parametro Lote)</p>
             </div>
 
-            <div className="pt-16 flex flex-col justify-center items-center">
+            <div className="pt-16 max-lg:pt-5 flex flex-col justify-center items-center">
                 <div className="flex flex-col">
                     {/** ESTAGIO 1 */}
                     <Accordion sx={noBG}>
@@ -141,7 +149,10 @@ export default function Timeline() {
                             handleMedal={() => handleMedal(1)} // Passe o id do StageCard
                             handleReport={() => handleReport(1)}
                         />
-                        <AccordionDetails sx={baseBG}>
+                        <AccordionDetails sx={{
+                            [`@media (min-width: 640px)`]: { background: 'white' },
+                            [`@media (max-width: 640px)`]: { background: 'white', width: '25rem'}
+                        }}>
                             <StageI
                                 handleMedal={() => updateMedalStatus(1, false)} // Exemplo com cardId 1 e status true
                                 handleReport={() => handleReport(1)}
@@ -161,7 +172,10 @@ export default function Timeline() {
                             handleMedal={() => handleMedal(2)} // Passe o id do StageCard
                             handleReport={() => handleReport(2)}
                         />
-                        <AccordionDetails sx={baseBG}>
+                        <AccordionDetails sx={{
+                            [`@media (min-width: 640px)`]: { background: 'white' },
+                            [`@media (max-width: 640px)`]: { background: 'white', width: '25rem' }
+                        }}>
                             <StageII
                                 handleMedal={() => handleMedal(2)}
                                 handleReport={() => handleReport(2)}
@@ -182,7 +196,10 @@ export default function Timeline() {
                             handleReport={() => handleReport(3)}
 
                         />
-                        <AccordionDetails sx={baseBG}>
+                        <AccordionDetails sx={{
+                            [`@media (min-width: 640px)`]: { background: 'white' },
+                            [`@media (max-width: 640px)`]: { background: 'white', width: '25rem' }
+                        }}>
                             <StageIII
                                 handleMedal={() => handleMedal(3)}
                                 handleReport={() => handleReport(3)}
@@ -202,7 +219,10 @@ export default function Timeline() {
                             handleMedal={() => handleMedal(4)} // Passe o id do StageCard
                             handleReport={() => handleReport(4)}
                         />
-                        <AccordionDetails sx={baseBG}>
+                        <AccordionDetails sx={{
+                            [`@media (min-width: 640px)`]: { background: 'white' },
+                            [`@media (max-width: 640px)`]: { background: 'white', width: '25rem' }
+                        }}>
                             <StageIV
                                 handleMedal={() => handleMedal(4)}
                                 handleReport={() => handleReport(4)}
@@ -222,7 +242,10 @@ export default function Timeline() {
                             handleMedal={() => handleMedal(5)} // Passe o id do StageCard
                             handleReport={() => handleReport(5)}
                         />
-                        <AccordionDetails sx={baseBG}>
+                        <AccordionDetails sx={{
+                            [`@media (min-width: 640px)`]: { background: 'white' },
+                            [`@media (max-width: 640px)`]: { background: 'white', width: '25rem' }
+                        }}>
                             <StageV
                                 handleMedal={() => handleMedal(5)}
                                 handleReport={() => handleReport(5)}
@@ -230,19 +253,14 @@ export default function Timeline() {
                         </AccordionDetails>
                     </Accordion>
 
-                    <div className="flex my-6 space-x-8">
-                        <Button
-                            texto='Gerar QRcode'
-                            botaoCSS='bg-verde_folha font-semibold flex self-start rounded-xl py-3 px-5 text-white hover:bg-verde_palido'
-                            onClick={() => { }}
-                        />
-
+                    <div className="flex my-6 space-x-8 max-sm:space-x-4">
+                        <ModalQRcode />
                         {/**Esse botão só deve aparecer para usuários comuns */}
                         <ModalComplaint>
                             <form>
                                 <label>Argumento</label>
                                 <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
-                                    <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectChange}>
+                                    <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectArgument}>
                                         <option value="">Selecione uma opção</option>
                                         {options.map((option) => (
                                             <option key={option.id} value={option.id.toString()}>
@@ -251,10 +269,18 @@ export default function Timeline() {
                                         ))}
                                     </select>
                                 </div>
-                                {/**
-                     * Se argument foi selecionado, ele pega o valor da frase com "{argument.label}"
-                     * {argument && <p>Você selecionou: {argument.label}</p>} 
-                     * */}
+                                <br />
+                                <label>Em que estágio a denúncia se dirige</label>
+                                <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
+                                    <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectStage}>
+                                        <option value="">Selecione uma opção</option>
+                                        {stgOption.map((option) => (
+                                            <option key={option.id} value={option.id.toString()}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                                 <br />
                                 <TextArea
                                     obrigatorio={true}
@@ -265,7 +291,7 @@ export default function Timeline() {
                                     inputCSS={inputTCSS}
                                 />
                                 <Button
-                                    botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900'
+                                    botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
                                     texto='Enviar denúncia'
                                 />
                             </form>

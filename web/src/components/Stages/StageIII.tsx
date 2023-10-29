@@ -5,13 +5,6 @@ import TextArea from "components/Items_Forms/TextArea"
 import IHandle from "types/IHandle"
 import InfoField from "./InfoField"
 import axios from 'axios'
-/**
-    Informações sobre a empresa de transporte e logística responsável.(normal)
-    Data e hora do carregamento dos produtos.(date)
-    Data e hora do descarregamento dos produtos.(date)
-    Rota percorrida durante o transporte. (origem e destino)(normal)(normal)
-    Registro das condições de transporte (temperatura, umidade, etc.).(texto bloco)
-*/
 
 export default function StageIII({ handleMedal, handleReport }: IHandle) {
     const [nomeTransporte, setNomeTransporte] = useState("")
@@ -50,19 +43,20 @@ export default function StageIII({ handleMedal, handleReport }: IHandle) {
     }, []);
 
 
+    const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3'
+    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
+    const botaoTCSS = 'bg-verde_folha w-[15rem] h-[35px] max-sm:h-[30px] rounded-lg font-semibold max-sm:font-normal text-white mt-4 mx-4 hover:bg-verde_palido'
+    const dataTCSS = 'flex max-sm:flex-col justify-evenly max-sm:space-y-3'
     const estilo = "flex justify-center"
-    const campoTCSS = 'h-[40px] bg-neutral-50 rounded-xl shadow px-6 my-3'
-    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5'
-    const botaoTCSS = 'bg-verde_folha w-[15rem] h-[35px] rounded-lg font-semibold text-white mt-4 mx-4 hover:bg-verde_palido'
 
     const handleForm = () => {
         setIsFormVisible(!isFormVisible);
     };
 
     return (
-        <div className="px-10 py-6">
+        <div className="px-10 max-sm:px-2 py-6">
             {isFormVisible ? (
-                <form>
+                <form className="max-sm:text-sm">
                     <TextField
                         obrigatorio={true}
                         onChange={evento => setNomeTransporte(evento.target.value)}
@@ -73,7 +67,7 @@ export default function StageIII({ handleMedal, handleReport }: IHandle) {
                         inputCSS={inputTCSS}
                     />
                     <br />
-                    <div className="flex justify-evenly">
+                    <div className={dataTCSS}>
                         <TextField
                             obrigatorio={true}
                             onChange={evento => setDataCarregamento(evento.target.value)}
@@ -114,7 +108,7 @@ export default function StageIII({ handleMedal, handleReport }: IHandle) {
                         campoCSS={" bg-neutral-50 rounded-xl shadow px-6 my-3"}
                         inputCSS={inputTCSS}
                     />
-                    <div className="flex">
+                    <div className="flex max-sm:flex-col max-sm:items-center">
                         <Button
                             botaoCSS={botaoTCSS}
                             texto='Medalha'
@@ -137,7 +131,7 @@ export default function StageIII({ handleMedal, handleReport }: IHandle) {
                             valor={nomeTransporte}
                         />
                         <br />
-                        <div className="flex justify-evenly">
+                        <div className={dataTCSS}>
                             <InfoField
                                 label="Data do carregamento dos produtos"
                                 valor={dataCarregamento}

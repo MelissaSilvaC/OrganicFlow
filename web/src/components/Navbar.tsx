@@ -17,12 +17,12 @@ import Footer from './Footer';
 const settings = [
     {
         id: 1,
-        label: 'Login',
-        to: '/sessao/login'
+        label: 'Login/Cadastro',
+        to: '/sessao'
     }, {
         id: 2,
-        label: 'Sign up',
-        to: '/sessao'
+        label: 'Timeline',
+        to: '/fiscal/lista/linhatempo/:id'
     }, {
         id: 3,
         label: 'Dashboard',

@@ -2,9 +2,8 @@ import TextField from "components/Items_Forms/TextField";
 import Button from "components/Items_Forms/Button";
 import { useState, useEffect } from "react";
 import React from "react";
-import InfoManagerCard from "components/Cards/InfoCards/Manager";
 import empresa from '../assets/img/logoExample.png'
-import ModalManager from "components/Modal/RegisterManager";
+import ModalManager from "components/Modal/RegisterInspector";
 import InspectorCard from "./Cards/InfoCards/Inspector";
 
 export default function ManagementInspector(){
@@ -19,8 +18,13 @@ export default function ManagementInspector(){
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (image) {
+
+            
+
             console.log('Fiscal cadastrado!');
         } else {
+
+            
             console.log('Falha ao cadastrar');
         }
     }
@@ -35,16 +39,16 @@ export default function ManagementInspector(){
     };
 
     return (
-        <div className="flex flex-wrap ">
+        <div className="p-0">
             <p className="text-white text-2xl max-sm:text-xl pb-8">Fiscais da empresa</p>
 
-            <div className="flex flex-wrap max-sm:justify-center">
-                <div className="text-white w-[25rem] max-sm:w-[15rem] max-sm:h-[10rem] border-2 max-sm:border border-slate-600 rounded flex justify-center items-center m-5 hover:bg-cinza_escuro hover:cursor-pointer">
+            <div className="flex flex-wrap">
+                <div className="text-white w-[25rem] max-sm:w-[13rem] max-sm:h-[6rem] border-2 max-sm:border border-slate-600 rounded flex justify-center items-center m-5 hover:bg-cinza_escuro hover:cursor-pointer">
                     <ModalManager>
-                        <form onSubmit={() => { }}>
+                        <form onSubmit={onSubmit}>
                             {/* Renderiza a imagem se imageURL estiver definida */}
                             <div className="flex justify-center">
-                                <div className="w-44 h-44 flex rounded-[50px] border-2 border-verde_escuro bg-cover">
+                                <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 rounded-full border-2 border-verde_escuro bg-cover">
                                     {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
                                 </div>
                             </div>
@@ -94,7 +98,7 @@ export default function ManagementInspector(){
                                 campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
                                 inputCSS={inputTCSS}
                             />
-                            <Button botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' texto='Cadastrar' />
+                            <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Cadastrar' />
                         </form>
                     </ModalManager>
                 </div>

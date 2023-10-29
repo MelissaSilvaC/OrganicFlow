@@ -32,6 +32,7 @@ export class SessionController{
 
         if(!User){
             return response.json({
+                fail:true,
                 error:"E-mail ou senha inválidas"
             })
         }
@@ -39,6 +40,7 @@ export class SessionController{
         const verifyPass=await bcrypt.compare(password,User.password)
         if(!verifyPass){
             return response.json({
+                fail:true,
                 error:"E-mail ou senha inválidas"
             })
         }
