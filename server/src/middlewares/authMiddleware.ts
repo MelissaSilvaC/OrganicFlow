@@ -11,11 +11,12 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
     }
  
     const{authorization}=request.headers
+    const{retornar}=request.headers
     // console.log('123')
-    // console.log(authorization)
+    console.log(authorization)
             
     if(!authorization){
-        return response.json({
+        return response.status(400).json({
             status:false,
             error:"não autorizado"
         })
@@ -35,6 +36,10 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
             roles,
         }
  
+        if(retornar){
+            return response.json({status:true})
+        }
+
         const usuario = await prismaClient.user.findUnique({
             where: { id: Number(request.user.id) },
         });
@@ -50,7 +55,7 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
         next()//vai dizer que está tudo certo e vai prosseguir a função
         
     } catch (error) {
-        return response.json({status:false ,message: 'Failed to authenticate token.',error})
+        return response.status(404).json({status:false ,message: 'Failed to authenticate token.',error})
     }
         
 }

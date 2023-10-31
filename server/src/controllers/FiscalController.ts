@@ -62,9 +62,11 @@ export class FiscalController {
   }
 
   async listarSeuFiscal(request: Request, response: Response) {
+    const{ id }=request.params
+
     const userResp=await prismaClient.user.findFirst({
         where: {
-          id: Number(request.user.id),
+          id: Number(id),
       },
       select:{
         email:true

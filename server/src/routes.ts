@@ -4,6 +4,7 @@ import { UserRole } from "./controllers/UserRoleController";
 import { UserController } from "./controllers/UserController";
 import { SessionController } from "./controllers/SessionController";
 import { authMiddleware } from "./middlewares/authMiddleware";
+import { proprioput }from "./middlewares/proprioPut"
 import { UserAccess } from "./controllers/UserAccess";
 import { can, is } from "./middlewares/permissions";
 import { PermissionsPrivate } from "./common/utils/permissions";
@@ -42,6 +43,8 @@ import upload from './uploadConfig';
 
 router.post("/user",userController.criar);
 router.post("/login",sessionController.login);
+router.get("/auth", authMiddleware);
+
 
 // router.get("/user",authMiddleware, userController.consultar);
 // router.post("/acesso",authMiddleware,userAccess.criar)
@@ -57,7 +60,7 @@ router.get("/empresa/:id",gerenteController.pesquisarEmpresa)
 router.get("/empresa",gerenteController.consultarEmpresa)
 router.get("/fiscal/:id", fiscalController.consultarFiscal)
 router.get("/produto/:id", produtoController.pesquisar)
-router.get("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.listarSeuFiscal);
+router.get("/fiscal/:id",fiscalController.listarSeuFiscal);
 
 
 //cliente cadastrado
@@ -74,14 +77,15 @@ router.get("/gerentevalido",gerenteController.listarGerenteValido); //lista de g
 router.post("/gerente",authMiddleware,gerenteController.permissaoGerente);
 router.delete("/gerente",authMiddleware,gerenteController.suspenderGerente);
 router.get("/feed" ,feedController.consultar)
+router.put("/ban/:id",userController.banir)
 
 //gerente
-router.get("/user",userController.pesquisar); //quando o gerente precisar pesquisar o usuario
+router.get("/user/:id",userController.pesquisar); //quando o gerente precisar pesquisar o usuario
 router.post("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.permissaoFiscal);
 
 router.delete("/fiscal/:id",authMiddleware,is([RolesPrivate.gerente]),fiscalController.removerFiscal)
-router.put("/user/:id",authMiddleware,userController.atualizar)
-router.post("/produto", upload.single('file'),produtoController.criar)
+router.put("/user/:id",authMiddleware,proprioput,userController.atualizar)
+router.post("/produto",authMiddleware,upload.single('file'),produtoController.criar)
 router.delete("/produto/:id", produtoController.deletar)
 
 
@@ -100,7 +104,6 @@ router.put("/relatorio2/:id",authMiddleware,is([RolesPrivate.fiscal]),relatorio2
 router.put("/relatorio3/:id",authMiddleware,is([RolesPrivate.fiscal]),relatorio3Controller.atualizar)
 router.put("/relatorio4/:id",authMiddleware,is([RolesPrivate.fiscal]),relatorio4Controller.atualizar)
 router.put("/relatorio5/:id",authMiddleware,is([RolesPrivate.fiscal]),relatorio5Controller.atualizar)
-
 
 
 export {router};

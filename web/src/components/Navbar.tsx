@@ -14,25 +14,18 @@ import { Outlet, Link } from 'react-router-dom'
 import Papel from '../assets/img/Fundo/papel1.png'
 import Footer from './Footer';
 
-const settings = [
-    {
-        id: 1,
-        label: 'Login/Cadastro',
-        to: '/sessao'
-    }, {
-        id: 2,
-        label: 'Timeline',
-        to: '/fiscal/lista/linhatempo/:id'
-    }, {
-        id: 3,
-        label: 'Dashboard',
-        to: '/admin/dashboard'
-    }
-];
+const teste = [{ id: 1, label: 'Login/Cadastro', to: '/sessao'}, { id: 2, label: 'Timeline',to: '/fiscal/lista/linhatempo/:id'}, {id: 3, label: 'Dashboard', to: '/admin/dashboard'}];
+
+//Usuário não logado
+const naoLogado = [{ id: 1, label: 'Faça login', to: '/sessao/login' }]
+const logado = [{ id: 1, label: 'Desconectar-se', to: '/sessao', /**Função pra fazer Log out */ }]
+const gerente = [{ id: 1, label: 'Ver perfil', to: '/empresa/perfil/:id' }, { id: 2, label: 'Desconectar-se', to: '/sessao', /**Função pra fazer Log out */ }]
+const fiscal = [{ id: 1, label: 'Ver perfil', to: '/fiscal/perfil/:id' }, { id: 2, label: 'Desconectar-se', to: '/sessao', /**Função pra fazer Log out */ }]
+const adm = [{ id: 1, label: 'Dashboard', to: '/admin/dashboard' }, { id: 2, label: 'Desconectar-se', to: '/sessao', /**Função pra fazer Log out */ }]
+let opcoes = [];
 
 export default function Navbar() {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => { setAnchorElUser(event.currentTarget) };
     const handleCloseUserMenu = () => { setAnchorElUser(null) };
 
@@ -55,24 +48,17 @@ export default function Navbar() {
                                 </Tooltip>
                                 <Menu
                                     sx={{ mt: '45px' }}
-                                    id="menu-appbar"
                                     anchorEl={anchorElUser}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
+                                    anchorOrigin={{vertical: 'top', horizontal: 'right'}}
                                     keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
+                                    transformOrigin={{vertical: 'top', horizontal: 'right'}}
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                 >
-                                    {settings.map((setting) => (
-                                        <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                                            <Link to={setting.to}>
-                                                <Typography textAlign="center">{setting.label}</Typography>
+                                    {teste.map((teste) => (
+                                        <MenuItem key={teste.id} onClick={handleCloseUserMenu}>
+                                            <Link to={teste.to}>
+                                                <Typography textAlign="center">{teste.label}</Typography>
                                             </Link>
                                         </MenuItem>
                                     ))}

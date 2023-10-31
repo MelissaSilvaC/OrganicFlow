@@ -9,18 +9,23 @@ import TimelineList from 'pages/Inspector/TimelineList'
 import Timeline from 'pages/Inspector/Timeline'
 import Complaint from 'pages/Administration/Complaint'
 import Dashboard from 'pages/Administration/Dashboard'
+// import AuthCheck from './AutoCheck';
 
 export default function AppRouter(){
     return(
         
         <div className='bg-preto h-screen font-montserrat'>
             <Router>
-                <Routes>
+            <Routes>
+                    
+                        
                     <Route path='/' element={<Navbar />} >
+                        {/* <Route element={<AuthCheck pathsToCheck={['fiscal/lista/:id']} />} />  */}
+                        <Route path='fiscal/lista/:id' element={<TimelineList />} />
+
                         <Route index element={<Home />} />
                         <Route path='empresa/perfil/:id' element={<ProfileCompany />} />
                         <Route path='fiscal/perfil/:id' element={<ProfileInspector />} />
-                        <Route path='fiscal/lista/:id' element={<TimelineList />} />
                         <Route path='fiscal/lista/linhatempo/:id' element={<Timeline />} />
                         <Route path='admin/dashboard' element={<Dashboard />} />
                         <Route path='admin/dashboard/denuncia' element={<Complaint />} />

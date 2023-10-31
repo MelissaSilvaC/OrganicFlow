@@ -24,8 +24,9 @@ export class ProdutoController {
           data: {
             nome,
             photo: result.secure_url, // Armazena a URL da imagem no banco de dados
-            user: { connect: { id: Number(2) } }, // Conecta com o usuário que está criando o registro
+            user: { connect: { id: Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
           },
+          
         });
   
         return response.json(produto);

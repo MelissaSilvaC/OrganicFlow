@@ -93,7 +93,7 @@ export default function ComplaintsList() {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:3000/denuncia`)
+        axios.get(`https://organicflow-server.vercel.app/denuncia`)
             .then(response => {
 
                 const novosDenuncia = response.data.map((denuncia: Denuncia) => ({

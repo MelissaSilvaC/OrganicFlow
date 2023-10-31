@@ -1,6 +1,6 @@
 import TitleTimeline from "components/Cards/Titles/Title-timeline";
 import Button from "components/Items_Forms/Button";
-import CustomPaginationActionsTable from "components/Table/TimelinesTable";
+import CustomPaginationActionsTable from "components/TimelinesTable";
 import { useState, useEffect } from "react";
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ export default function TimelineList() {
     
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`http://localhost:3000/produto/${id}`)
+        axios.get(`https://organicflow-server.vercel.app/${id}`)
             .then(response => {
                 const produto = response.data; // Obtenha o objeto completo do produto
                
@@ -52,7 +52,7 @@ export default function TimelineList() {
     const id = url.split("/").pop();
     console.log(id)
     const cadastro=()=>{
-        axios.post(`http://localhost:3000/linha`,{
+        axios.post(`https://organicflow-server.vercel.app/linha`,{
             id_produto:id,
         })
         .then(response => console.log(response))//se for sucedido 
@@ -62,7 +62,7 @@ export default function TimelineList() {
     }
 
     const deletar=()=>{
-        axios.delete(`http://localhost:3000/produto/${id}`,{
+        axios.delete(`https://organicflow-server.vercel.app/produto/${id}`,{
         })
         .then(response => console.log(response))//se for sucedido 
         .catch((error) => {
@@ -72,10 +72,14 @@ export default function TimelineList() {
 
     return (
         <section className="bg-preto pt-[80px] pb-5">
-            <TitleTimeline 
+           {produto && ( // Verifica se produto está definido
+      <div>
+        <TitleTimeline 
           bgProduct={produto.photo}
           txtProduct={produto.nome}
         />
+      </div>
+    )}
 
             <div className="py-28 max-lg:py-10">
                 {/**Tabela */}
@@ -91,13 +95,13 @@ export default function TimelineList() {
                         <Button
                             texto='Cadastrar linha do tempo'
                             botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 shadow hover:bg-verde_palido'
-                            onClick={() => { cadastro() }}
+                            onClick={() => { cadastro()}}
                         />
 
                         <Button
                             texto='Deletar produto'
                             botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold max-lg:font-medium px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
-                            onClick={() => {
+                            onClick={() => { 
                                 const confirmacao = window.confirm('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionadas a esse produto');
 
                                 if (confirmacao) {

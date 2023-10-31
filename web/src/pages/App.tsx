@@ -6,6 +6,10 @@ import AboutUs from 'components/Home/AboutUs';
 import Green from '../assets/img/Fundo/greenLines.png'
 import TeamCard from 'components/Cards/InfoCards/Team';
 import { useState } from 'react';
+import Julia from 'assets/img/Equipe/Julia.jpeg'
+import Lucas from 'assets/img/Equipe/Lucas.jpeg'
+import Melissa from 'assets/img/Equipe/Lucas.jpeg'
+import Nicole from 'assets/img/Equipe/Nicole.jpeg'
 
 export default function App() {
   return (
@@ -16,15 +20,33 @@ export default function App() {
 
       <div className='bg-cover py-14 px-28 max-lg:px-0 text-center items-center' style={{ backgroundImage: `url(${Green})` }}>
         <p className='text-white font-bold text-4xl mb-8 max-lg:text-2xl'>Nosso Time</p>
-
         <div className='flex space-x-10 justify-center max-lg:space-x-0 max-lg:space-y-4 max-lg:flex-col max-lg:items-center max-lg:pr-4'>
-
-          <div className='flex space-x-10 max-lg:space-x-0 '><TeamCard /><TeamCard /></div>
-          <div className='flex space-x-10 max-lg:space-x-0 '><TeamCard /><TeamCard /></div>
-
+          <div className='flex space-x-10 max-lg:space-x-0 '>
+            <TeamCard 
+              photo={Julia}
+              name='Julia Aparecida'
+              role='Idealista'
+            />
+            <TeamCard
+              photo={Lucas}
+              name='Lucas Hideo'
+              role='Programador back-end'
+            />
+            </div>
+          <div className='flex space-x-10 max-lg:space-x-0 '>
+            <TeamCard
+              photo={Melissa}
+              name='Melissa da Silva'
+              role='Programadora front-end'
+            />
+            <TeamCard
+              photo={Nicole}
+              name='Nicoly Gregorato'
+              role='Idealista'
+            />
+          </div>
         </div>
       </div>
-
     </div>
   )
 }

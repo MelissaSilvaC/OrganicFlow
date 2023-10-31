@@ -1,16 +1,17 @@
 import InfoManagerCard from "components/Cards/InfoCards/Manager";
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
-import { FiSearch } from 'react-icons/fi';
-import empresa from '../../../assets/img/logoExample.png'
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import SearchBar from "components/SearchBar";
 
 export default function AbleManager() {
     const [gerentes, setGerentes] = useState<any[]>([]);
     const [gerentesvalidos, setGerentesValidos] = useState<any[]>([]);
+    const [searchGerente, setSearchGerente] = useState("");
+    const [searchValidado, setSearchValidado] = useState("");
     useEffect(() => {
 
-        axios.get(`http://localhost:3000/gerente`)
+        axios.get(`https://organicflow-server.vercel.app/gerente`)
             .then(response => {
 
                 const gerentes = response.data.map((item: any) => ({
@@ -30,7 +31,7 @@ export default function AbleManager() {
             });
         // console.log('aa')
 
-        axios.get(`http://localhost:3000/gerentevalido`)
+        axios.get(`https://organicflow-server.vercel.app/gerentevalido`)
             .then(response => {
 
                 const gerentesvalidos = response.data.map((item: any) => ({
@@ -50,34 +51,46 @@ export default function AbleManager() {
             });
     }, []);
 
+    const gerenteFiltrado = gerentes.filter((gerente) =>
+        gerente.email.toLowerCase().includes(searchGerente.toLowerCase())
+    );
+
+    const validadoFiltrado = gerentesvalidos.filter((validado) =>
+        validado.email.toLowerCase().includes(searchValidado.toLowerCase())
+    );
+
     return (
         <>
             <TitleComplaint titulo="Validar gerentes" estilo="max-sm:pt-0"/>
             <div className="text-white px-20 max-sm:px-2">
                 <div className="flex justify-between max-sm:flex-col max-sm:px-5">
                     <p className="text-2xl pb-4 max-sm:text-xl">Gerentes não validados</p>
-
-                    <div className='w-[400px] max-sm:w-[300px] h-11 bg-neutral-100 rounded-[50px] flex px-6 mb-8'>
-                        <input className='bg-transparent focus:outline-none grow' placeholder='Pesquisar...' />
-                        <div className='w-8 h-8 rounded-full bg-verde_folha flex self-center justify-center'>
-                            <FiSearch className='w-5 h-5 flex self-center stroke-white' />
-                        </div>
-                    </div>
-
+                    
+                    <SearchBar
+                        placeholder='Pesquisar gerente por email'
+                        val={searchGerente}
+                        change={(e) => setSearchGerente(e.target.value)}
+                    />
                 </div>
 
                 <div className="flex flex-wrap">
-                {gerentes?.map((gerente) => (
+                {gerenteFiltrado?.map((gerente) => (
                         <InfoManagerCard 
                         onClick={() => {
                             console.log(gerente.id)
-                            axios.post('http://localhost:3000' + '/gerente', {
-                                id_user:gerente.id
+                            const token = localStorage.getItem('token')
+                            console.log(token)
+                            axios.post('https://organicflow-server.vercel.app' + '/gerente', {
+                                id_user: gerente.id,
+                            }, {
+                                headers: {
+                                    'Authorization': `Bearer ${token}`
+                                }
                             })
-                                .then(response => console.log(response + ' dados enviados'))//se for sucedido 
-                                .catch((error) => {
-                                    console.log(error);
-                                });
+                            .then(response => console.log(response))//se for sucedido 
+                            .catch((error) => {
+                                console.log(error);
+                            });
                             
                         }}
                         photo={gerente.photo}
@@ -94,17 +107,15 @@ export default function AbleManager() {
                 <div className="flex justify-between max-sm:flex-col max-sm:px-5">
                     <p className="text-2xl pb-4 max-sm:text-xl">Gerentes validados</p>
 
-                    <div className='w-[400px] max-sm:w-[300px] h-11 bg-neutral-100 rounded-[50px] flex px-6 mb-8'>
-                        <input className='bg-transparent focus:outline-none grow' placeholder='Pesquisar...' />
-                        <div className='w-8 h-8 rounded-full bg-verde_folha flex self-center justify-center'>
-                            <FiSearch className='w-5 h-5 flex self-center stroke-white' />
-                        </div>
-                    </div>
+                    <SearchBar
+                        placeholder='Pesquisar gerente por email'
+                        val={searchValidado}
+                        change={(e) => setSearchValidado(e.target.value)}
+                    />
                 </div>
 
                 <div className="flex flex-wrap">
-                    {gerentesvalidos?.map((gerentevalidos) => (
-
+                    {validadoFiltrado?.map((gerentevalidos) => (
                         <InfoManagerCard
                             onClick={() => {}}
                             photo={gerentevalidos.photo}

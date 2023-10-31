@@ -1,4 +1,4 @@
-import rabanete from 'assets/img/rabanete.jpg'
+import equipe from 'assets/img/equipe.jpg'
 
 export default function AboutUs(){
     return (
@@ -21,7 +21,7 @@ export default function AboutUs(){
                     </div>
                 </div>
                 <div className='max-lg:flex max-lg:justify-center'>
-                    <img src={rabanete} className='w-[450px] h-[400px] max-lg:w-[250px] max-lg:h-[200px] max-lg:hidden' />
+                    <img src={equipe} className='w-[450px] h-[400px] max-lg:w-[250px] max-lg:h-[200px] max-lg:hidden' />
                 </div>
             </div>
         </div>

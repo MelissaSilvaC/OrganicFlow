@@ -54,10 +54,10 @@
   "resolved" "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-5.2.0-25.2804dc98259d2ea960602aca6b8e7fdc03c1758f.tgz"
   "version" "5.2.0-25.2804dc98259d2ea960602aca6b8e7fdc03c1758f"
 
-"@prisma/engines@5.2.0":
-  "integrity" "sha512-dT7FOLUCdZmq+AunLqB1Iz+ZH/IIS1Fz2THmKZQ6aFONrQD/BQ5ecJ7g2wGS2OgyUFf4OaLam6/bxmgdOBDqig=="
-  "resolved" "https://registry.npmjs.org/@prisma/engines/-/engines-5.2.0.tgz"
-  "version" "5.2.0"
+"@prisma/engines@5.5.2":
+  "integrity" "sha512-Be5hoNF8k+lkB3uEMiCHbhbfF6aj1GnrTBnn5iYFT7GEr3TsOEp1soviEcBR0tYCgHbxjcIxJMhdbvxALJhAqg=="
+  "resolved" "https://registry.npmjs.org/@prisma/engines/-/engines-5.5.2.tgz"
+  "version" "5.5.2"
 
 "@tsconfig/node10@^1.0.7":
   "integrity" "sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA=="
@@ -1092,12 +1092,12 @@
   "resolved" "https://registry.npmjs.org/pngjs/-/pngjs-5.0.0.tgz"
   "version" "5.0.0"
 
-"prisma@*", "prisma@^5.2.0":
-  "integrity" "sha512-FfFlpjVCkZwrqxDnP4smlNYSH1so+CbfjgdpioFzGGqlQAEm6VHAYSzV7jJgC3ebtY9dNOhDMS2+4/1DDSM7bQ=="
-  "resolved" "https://registry.npmjs.org/prisma/-/prisma-5.2.0.tgz"
-  "version" "5.2.0"
+"prisma@*", "prisma@^5.5.2":
+  "integrity" "sha512-WQtG6fevOL053yoPl6dbHV+IWgKo25IRN4/pwAGqcWmg7CrtoCzvbDbN9fXUc7QS2KK0LimHIqLsaCOX/vHl8w=="
+  "resolved" "https://registry.npmjs.org/prisma/-/prisma-5.5.2.tgz"
+  "version" "5.5.2"
   dependencies:
-    "@prisma/engines" "5.2.0"
+    "@prisma/engines" "5.5.2"
 
 "process-nextick-args@~2.0.0":
   "integrity" "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="

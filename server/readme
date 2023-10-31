@@ -48,3 +48,4 @@ alterar um registro: if(se o fiscal for o último da lista a inserir o registro,
 consultar empresas. consultei uma empresa que não tem permissão
 
 fiscal boolean
+ver fiscais do gerente

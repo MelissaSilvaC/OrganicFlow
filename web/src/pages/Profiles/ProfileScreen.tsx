@@ -18,12 +18,12 @@ export default function ProfileScreen({ children }: IProfile) {
     
     const [local, setLocal] = useState('');
 
+    const url = window.location.href;
+    const id = url.split("/").pop(); // Isso assume que o ID está na última parte da URL
+    
     useEffect(() => {
-        
-        const url = window.location.href;
-        const id = url.split("/").pop(); // Isso assume que o ID está na última parte da URL
 
-        axios.get('http://localhost:3000'+`/empresa/${id}`)
+        axios.get('https://organicflow-server.vercel.app'+`/empresa/${id}`)
         .then(response => {
             const { name, email, company, cnpj, photo,local } = response.data[0];
             setNome(name);
@@ -40,15 +40,7 @@ export default function ProfileScreen({ children }: IProfile) {
 
     }, []);
 
-    //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (image) {
-            console.log('imagem editada')
-        } else {
-            console.log('Nenhuma imagem selecionada.');
-        }
-    }
+   
 
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +51,35 @@ export default function ProfileScreen({ children }: IProfile) {
             console.log('imagem selecionada')
         }
     };
+
+     //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token')
+        if (image) {
+            axios.put('https://organicflow-server.vercel.app' + '/user/'+id, {//verifica login
+                photo: photo, 
+                local: local, 
+                name:nome,
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados:', error);
+            });
+        } else {
+            console.log('Nenhuma imagem selecionada.');
+        }
+        
+       
+    }
+
 
     return (
         <div className='bg-preto'>

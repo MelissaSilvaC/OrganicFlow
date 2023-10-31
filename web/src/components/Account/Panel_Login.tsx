@@ -7,23 +7,19 @@ import BasicModal from 'components/Modal/RecoverPassword'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 
+const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
+const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
+const botaoTCSS = 'bg-verde_folha w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-verde_palido'
+
 export default function PanelLogin() {
-    {/** useStates */ }
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const navigate = useNavigate()
-
-    const [loginError, setLoginError] = useState("")
-
-    {/** Estilos */ }
-    const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
-    const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
-    const botaoTCSS = 'bg-verde_folha w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold text-white mt-1 hover:bg-verde_palido'
-    
+    const [loginError, setLoginError] = useState(false)
 
     const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
-        axios.post('http://localhost:3000' + '/login', {//verifica login
+        axios.post('https://organicflow-server.vercel.app' + '/login', {//verifica login
             email: email, //campo do email no front
             password: senha, //campo password no front
         })
@@ -33,9 +29,8 @@ export default function PanelLogin() {
                     console.log(senha)
  
                     if (response.data.fail) {//pega o fail do json; fail===true]
-                        console.log('email ou senha incorretos')
+                        {loginError ? setLoginError(loginError) : setLoginError(!loginError)}
                         console.log('erro: ' + response.data.error)//pega o error: do json
-                        let error = response.data.error
                     } else {
                         console.log(response.data.token)//se usuário existir
                         localStorage.setItem('token', response.data.token); //armazena o token no local
@@ -50,7 +45,6 @@ export default function PanelLogin() {
                 console.log(error);
             });
     }
-
 
     return (
         <div className='flex flex-col items-center'>
@@ -78,8 +72,7 @@ export default function PanelLogin() {
                         campoCSS={campoTCSS}
                         inputCSS={inputTCSS}
                     />
-
-                    {/**Se loginError for true, aparecer texto vermelho falando que os dados estão incorretos */}
+                    {loginError ? <p className='text-red-600 font-medium italic text-sm'>Dados incorretos!</p> : ''}
                     <Button botaoCSS={botaoTCSS} texto='Entrar' />
                 </form>
 
@@ -98,13 +91,10 @@ export default function PanelLogin() {
                         <Button botaoCSS='bg-verde_escuro w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold max-lg:font-semibold text-white mt-1 hover:bg-green-900' texto='Enviar' />
                     </BasicModal>
                     {/** Ativa o popup */}
-
-
                     <div className='h-[2px] w-full bg-white opacity-70' />
                     {/** Autenticação da Google */}
                     <Button botaoCSS={botaoTCSS} texto='Logar com conta Google' />
                 </div>
-
             </div>
 
             <div className='flex mt-4 w-full justify-center font-bold text-xl max-lg:text-base'>

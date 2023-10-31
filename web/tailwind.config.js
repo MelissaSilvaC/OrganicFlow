@@ -11,7 +11,7 @@ module.exports = {
         'verde_escuro': '#00371b', 
         'verde_palido': '#80ab6b',
         'amarelo_areia': '#f8f0df', 
-        'preto': '#333333',
+        'preto': '#242323',
         'cinza_escuro': '#525252',
       },
     },

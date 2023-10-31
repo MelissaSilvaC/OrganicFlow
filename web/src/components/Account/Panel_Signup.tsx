@@ -16,7 +16,7 @@ export default function PanelSignup() {
 
     const cadastrarDados = ({ name, email, password }: IUser) => {
         console.log(name + email + password)
-        axios.post('http://localhost:3000' + '/user', {
+        axios.post('https://organicflow-server.vercel.app' + '/user', {
             name: name,
             email: email,
             password: password,

@@ -58,37 +58,42 @@ export class UserController{
     async atualizar(request:Request, response:Response){
         const{id}=request.params
         const{name,photo,local}=request.body;
+        // const authenticatedUserId = request.user.id; // Supondo que você tenha o ID do usuário autenticado disponível no request
 
-        let User=await prismaClient.user.findFirst({
-            where:{
-                id:Number(id)
+        let user = await prismaClient.user.findFirst({
+            where: {
+                id: Number(id)
             }
-        })
-        if(!User){
+        });
+    
+        if (!user) {
             return response.json({
-                error:"não existe o produto"
-            })
+                error: "Usuário não encontrado"
+            });
         }
-
-        // const hashPassword=await bcrypt.hash(password,10)
-
-        User=await prismaClient.user.update({
-            where:{
-                id:Number(id)
+    
+        // if (user.id !== authenticatedUserId) {
+        //     return response.status(403).json({
+        //         error: "Você não tem permissão para editar este usuário"
+        //     });
+        // }
+    
+        user = await prismaClient.user.update({
+            where: {
+                id: Number(id)
             },
-            data:{
+            data: {
                 name,
                 photo,
                 local
             }
-        })
-
-        return response.json(User)
+        });
+    
+        return response.json(user);
     }    
 
     async banir(request:Request, response:Response){
         const{id}=request.params
-        const{ban}=request.body;
  
         let User=await prismaClient.user.findFirst({
             where:{
@@ -108,9 +113,11 @@ export class UserController{
                 id:Number(id)
             },
             data:{
-                ban:true
+                ban:true,
             }
         })
+
+        return (response.json(User))
     }
 /*
     async deletar(request:Request, response:Response){
@@ -125,14 +132,19 @@ export class UserController{
 */
 
     async pesquisar(request:Request, response:Response){
-        const { email } = request.query; //GET /user?email=João@gmail.com; o query vem da url
-        const User = await prismaClient.user.findMany({
-            where: {
-                email: {
-                  contains: String(email),//exibe uma lista de usuarios com o email parecido
-                },
-              },
-              take: 4, // Limita o resultado a 4 usuários
+        const {id} = request.params
+        // const { email } = request.query; //GET /user?email=João@gmail.com; o query vem da url
+        const User = await prismaClient.user.findFirst({
+            // where: {
+            //     email: {
+            //       contains: String(email),//exibe uma lista de usuarios com o email parecido
+            //     },
+            //   },
+            //   take: 4, // Limita o resultado a 4 usuários
+
+            where:{
+                id:Number(id)
+            }
         });
 
         if (!User) {

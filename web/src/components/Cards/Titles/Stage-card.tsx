@@ -7,11 +7,9 @@ interface Props {
     report: boolean | undefined
     Num_medal: string
     medal: boolean | undefined
-    handleMedal: () => void
-    handleReport: () => void
 }
 
-export default function StageCard({ month, day, stageName, report, medal, Num_medal, handleMedal, handleReport }: Props) {
+export default function StageCard({ month, day, stageName, report, medal, Num_medal}: Props) {
     const cardBackground = report ? 'bg-verde_escuro' : 'bg-zinc-600';
 
     return (
