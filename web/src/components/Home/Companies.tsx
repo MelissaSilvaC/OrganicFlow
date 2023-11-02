@@ -4,6 +4,11 @@ import CompanyBrand from '../Cards/ImageCards/CompanyBrand';
 import { useLayoutEffect, useState, useEffect } from 'react';
 import axios from 'axios'
 import SearchBar from 'components/SearchBar';
+import CompanyI from 'assets/img/CompanyExample/3.png'
+import CompanyII from 'assets/img/CompanyExample/4.png'
+import CompanyIII from 'assets/img/CompanyExample/5.png'
+import CompanyIV from 'assets/img/CompanyExample/6.png'
+import CompanyV from 'assets/img/CompanyExample/7.png'
 
 interface tipo {
     name: string,
@@ -25,28 +30,30 @@ export default function Companies() {
         {
             name : 'B empresa',
             id : 1,
-            photo:'https://images.unsplash.com/photo-1646981711308-dc9397659c74?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGxldHJhJTIwYnxlbnwwfHwwfHx8MA%3D%3D'
+            photo : CompanyI
         }, {
             name :'M empresa',
             id : 2,
-            photo: 'https://images.unsplash.com/photo-1535913590195-6b39514ba0c5?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGxldHJhJTIwYXxlbnwwfHwwfHx8MA%3D%3D'
+            photo: CompanyII
         }, {
             name : 'G empresa',
             id : 3,
-            photo: 'https://images.unsplash.com/photo-1545601445-9242104e5d79?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGxldHJhJTIwZ3xlbnwwfHwwfHx8MA%3D%3D'
+            photo: CompanyIII
         }, {
             name : 'E empresa',
             id : 4,
-            photo: 'https://images.unsplash.com/photo-1630269886275-2724319ce23a?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGxldHJhJTIwZXxlbnwwfHwwfHx8MA%3D%3D'
+            photo: CompanyIV
         }, {
             name : 'R empresa',
             id : 5,
-            photo: 'https://images.unsplash.com/photo-1490041030694-4835d3f07bd9?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxldHJhJTIwYXxlbnwwfHwwfHx8MA%3D%3D'
+            photo: CompanyV
         },
     ]
 
     useEffect(() => {
-        axios.get(`https://organicflow-server.vercel.app/empresa`)
+        // axios.get(`https://organicflow-server.vercel.app/empresa`)
+        
+        axios.get(`http://localhost:3000/empresa`)
             .then(response => {
                 const empresas = response.data.map((item: any) => ({
                     id: item.user.id,
@@ -100,9 +107,9 @@ export default function Companies() {
             />
             
             <div className='mt-10'>
+                
                 <Slider {...companySettings}>
-                    {/**
-                     * {listaFiltrada.map((empresa) => (
+                    {empresaFiltrada?.map((empresa) => (
                         <CompanyBrand
                             key={empresa.id}
                             id={empresa.id}
@@ -110,15 +117,6 @@ export default function Companies() {
                             name={empresa.name}
                         />
                     ))}
-                     */}
-                {empresaFiltrada.map((empresa) => (
-                    <CompanyBrand
-                        key={empresa.id}
-                        id={empresa.id}
-                        photo={empresa.photo}
-                        name={empresa.name}
-                    />
-                ))}
                 </Slider>
             </div>
         </div>

@@ -11,7 +11,7 @@ export default function AbleManager() {
     const [searchValidado, setSearchValidado] = useState("");
     useEffect(() => {
 
-        axios.get(`https://organicflow-server.vercel.app/gerente`)
+        axios.get(`http://localhost:3000/gerente`)
             .then(response => {
 
                 const gerentes = response.data.map((item: any) => ({
@@ -31,7 +31,7 @@ export default function AbleManager() {
             });
         // console.log('aa')
 
-        axios.get(`https://organicflow-server.vercel.app/gerentevalido`)
+        axios.get(`http://localhost:3000/gerentevalido`)
             .then(response => {
 
                 const gerentesvalidos = response.data.map((item: any) => ({
@@ -80,7 +80,7 @@ export default function AbleManager() {
                             console.log(gerente.id)
                             const token = localStorage.getItem('token')
                             console.log(token)
-                            axios.post('https://organicflow-server.vercel.app' + '/gerente', {
+                            axios.post('http://localhost:3000' + '/gerente', {
                                 id_user: gerente.id,
                             }, {
                                 headers: {

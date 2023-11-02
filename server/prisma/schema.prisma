@@ -17,12 +17,14 @@ model User {
   password String
   email    String
   cnpj     String?
-  photo    String?
+  photo    String? 
   local String? 
   telefone String?
   gerente  Boolean @default(false)
   fiscal Boolean @default(false)
   ban Boolean @default(false)
+
+  //@default(https://res.cloudinary.com/dd2bjzzlb/image/upload/v1698790891/Logo_Floral_Minimalista_Marrom_7_mfwagw.png) 
 
   //photo  Photo[]
 

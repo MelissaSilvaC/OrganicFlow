@@ -43,16 +43,16 @@ export default function Timeline() {
         { id: 5, label: 'Varejo e Consumo' },
     ]
 
-    const denunciar = ()=>{
-        axios.post('https://organicflow-server.vercel.app'+'/denuncia',{
-            alvo:"Empresa",
-            description:"empresa abusiva"
-        })
-        .then(response => console.log(response))//se for sucedido 
-        .catch((error) => {
-            console.log(error);
-        });
-    }
+    // const denunciar = ()=>{
+    //     axios.post('https://organicflow-server.vercel.app'+'/denuncia',{
+    //         alvo:"Empresa",
+    //         description:"empresa abusiva"
+    //     })
+    //     .then(response => console.log(response))//se for sucedido 
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
 
     const handleSelectArgument = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedOptionId = parseInt(event.target.value, 10);
@@ -66,14 +66,17 @@ export default function Timeline() {
         setStageOpt(selectedOption || null);
     };
 
-    const onSubmit = () => {
-        /**
-         * Os seguintes dados serão enviados:
-         * Data (essa data deve ser pega do sistema do pc)
-         * Email do usuário (Temos que arrumar uma maneira de extrair os dados da sessão do usuário)
-         * Argumento da denúncia
-         * Descrição da denúncia
-         */
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        axios.post('https://organicflow-server.vercel.app'+'/denuncia',{
+            alvo:"Empresa",
+            description:"empresa abusiva"
+        })
+        .then(response => console.log(response))//se for sucedido 
+        .catch((error) => { 
+            console.log(error);
+        });
     }
 
     const url = window.location.href;
@@ -123,7 +126,7 @@ export default function Timeline() {
                         <ModalQRcode />
                         {/**Esse botão só deve aparecer para usuários comuns */}
                         <ModalComplaint>
-                            <form>
+                            <form onSubmit={onSubmit}>
                                 <label>Argumento</label>
                                 <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
                                     <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectArgument}>
@@ -157,7 +160,6 @@ export default function Timeline() {
                                     inputCSS={inputTCSS}
                                 />
                                 <Button
-                                    onClick={()=>denunciar}
                                     botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
                                     texto='Enviar denúncia'
                                 />

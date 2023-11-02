@@ -23,7 +23,7 @@ export default function ProfileScreen({ children }: IProfile) {
     
     useEffect(() => {
 
-        axios.get('https://organicflow-server.vercel.app'+`/empresa/${id}`)
+        axios.get('http://localhost:3000'+`/empresa/${id}`)
         .then(response => {
             const { name, email, company, cnpj, photo,local } = response.data[0];
             setNome(name);
@@ -57,7 +57,7 @@ export default function ProfileScreen({ children }: IProfile) {
         e.preventDefault();
         const token = localStorage.getItem('token')
         if (image) {
-            axios.put('https://organicflow-server.vercel.app' + '/user/'+id, {//verifica login
+            axios.put('http://localhost:3000' + '/user/'+id, {//verifica login
                 photo: photo, 
                 local: local, 
                 name:nome,

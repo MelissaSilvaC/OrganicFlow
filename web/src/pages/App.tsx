@@ -8,7 +8,7 @@ import TeamCard from 'components/Cards/InfoCards/Team';
 import { useState } from 'react';
 import Julia from 'assets/img/Equipe/Julia.jpeg'
 import Lucas from 'assets/img/Equipe/Lucas.jpeg'
-import Melissa from 'assets/img/Equipe/Lucas.jpeg'
+import Melissa from 'assets/img/Equipe/m.jpeg'
 import Nicole from 'assets/img/Equipe/Nicole.jpeg'
 
 export default function App() {

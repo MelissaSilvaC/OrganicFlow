@@ -23,12 +23,13 @@ export default function PanelPartner() {
         if (senha === senhaVerificada) {
             try {
                 navigate('/sessao/login')
-                axios.post('https://organicflow-server.vercel.app' + '/user', {
+                axios.post('http://localhost:3000' + '/user', {
                 name: nomeComercial,
                 email: email,
                 password: senha,
                 cnpj: cnpj,
-                telefone: telefone
+                telefone: telefone,
+                gerente:true
             })
                 .then(response => console.log(response + ' dados enviados'))//se for sucedido 
                 .catch((error) => {

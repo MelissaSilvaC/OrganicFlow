@@ -19,7 +19,7 @@ export default function PanelLogin() {
 
     const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
-        axios.post('https://organicflow-server.vercel.app' + '/login', {//verifica login
+        axios.post('http://localhost:3000' + '/login', {//verifica login
             email: email, //campo do email no front
             password: senha, //campo password no front
         })

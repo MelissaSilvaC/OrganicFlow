@@ -1,5 +1,5 @@
-import React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import React from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from "react";
@@ -93,7 +93,7 @@ export default function ComplaintsList() {
 
     useEffect(() => {
 
-        axios.get(`https://organicflow-server.vercel.app/denuncia`)
+        axios.get(`http://localhost:3000/denuncia`)
             .then(response => {
 
                 const novosDenuncia = response.data.map((denuncia: Denuncia) => ({

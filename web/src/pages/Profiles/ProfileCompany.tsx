@@ -43,7 +43,7 @@ export default function ProfileCompany() {
 
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`https://organicflow-server.vercel.app/empresa/${id}`)
+        axios.get(`http://localhost:3000/empresa/${id}`)
             .then(response => {
 
                 const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
@@ -72,7 +72,7 @@ export default function ProfileCompany() {
             formData.append('file', image); // Adicione a imagem ao FormData
             formData.append('nome', nameProduct); // Adicione o nome ao FormData
             
-            axios.post('https://organicflow-server.vercel.app/produto', formData, {
+            axios.post('http://localhost:3000/produto', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}` // Adiciona o token no cabeçalho da requisição
                 }

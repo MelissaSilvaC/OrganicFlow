@@ -137,24 +137,6 @@ export default function ManagementInspector(){
                         email="seedsprout@email.com"
                         password="9765765"
                     />
-                    <InspectorCard
-                        photo={empresa}
-                        name="Rita"
-                        email="seedsprout@email.com"
-                        password="9765765"
-                    />
-                    <InspectorCard
-                        photo={empresa}
-                        name="Rita"
-                        email="seedsprout@email.com"
-                        password="9765765"
-                    />
-                    <InspectorCard
-                        photo={empresa}
-                        name="Rita"
-                        email="seedsprout@email.com"
-                        password="9765765"
-                    />
             </div>
         </div>
     )
