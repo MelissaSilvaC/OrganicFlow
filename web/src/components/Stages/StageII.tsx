@@ -8,6 +8,7 @@ import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_II.png'
+import api from '../../axiosUrl'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -27,11 +28,14 @@ export default function StageII() {
 
     const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
+    
+    const url = window.location.href;
+    const idlinha = url.split("/").pop();
 
     useEffect(() => {
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`https://organicflow-server.vercel.app/linha/${id}`)
+        api.get(`/linha/${id}`)
             .then(response => {
                 const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, form } = response.data.Relatorio2[0];
                 setNome(nome);
@@ -50,9 +54,27 @@ export default function StageII() {
             });
     }, []);
 
-    const handleForm = () => {
+    const handleForm = (dataPlantio: string, dataColheita: string, praticas: string, nome: string, localizacao: string,medal:Boolean) => {
+        // Inverta o estado isFormVisible para alternar entre formulário e grupo de campos
         setIsFormVisible(!isFormVisible);
+
+        // e.preventDefault(); 
+        api.post('/relatorio2', {
+            nome: nome,
+            local: local,
+            dt_processamento: dtProcessamento,
+            dt_embalagem: dtEmbalagem,
+            ingrediente: material,
+            praticas: praticas,
+            id_linha: idlinha,
+            medal: medal
+        })
+        .then(response => console.log(response))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
     };
+
 
     return (
         < Accordion sx={{ background: 'none' }} >
@@ -143,7 +165,7 @@ export default function StageII() {
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm()
+                                        handleForm(dtEmbalagem, dtEmbalagem, praticas, nome, local,medal)
                                     }}
                                 />
                             </div>

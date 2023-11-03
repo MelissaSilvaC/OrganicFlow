@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import TextField from '../Items_Forms/TextField'
 import Button from '../Items_Forms/Button'
 import Title from '../Items_Forms/Title'
@@ -14,9 +14,9 @@ const botaoTCSS = 'bg-verde_folha w-full h-[50px] max-lg:h-[40px] rounded-xl max
 export default function PanelLogin() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
-    const navigate = useNavigate()
     const [loginError, setLoginError] = useState(false)
-
+    const navigate = useNavigate()
+ 
     const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
         axios.post('http://localhost:3000' + '/login', {//verifica login
@@ -32,18 +32,29 @@ export default function PanelLogin() {
                         {loginError ? setLoginError(loginError) : setLoginError(!loginError)}
                         console.log('erro: ' + response.data.error)//pega o error: do json
                     } else {
+                        localStorage.setItem('id', response.data.User.id)
+                        localStorage.setItem('photo', response.data.User.photo)
+                        localStorage.setItem('name', response.data.User.name)
+                        localStorage.setItem('id_role', response.data.User.UserRole[0].id_role)
+
+                        //local de pegar variavel ------------------------
+                        const photoStorage = localStorage.getItem('photo');
+                        const idStorage = localStorage.getItem('id');
+                        const roleStorage = localStorage.getItem('id_role');
+                        const nameStorage = localStorage.getItem('name');
+                        // ---------------------------------
+
                         console.log(response.data.token)//se usuário existir
                         localStorage.setItem('token', response.data.token); //armazena o token no local
-                        axios.defaults.headers[
-                            "authorization"
-                        ] = `Bearer ${response.data.token}`
+                        axios.defaults.headers["authorization"] = `Bearer ${response.data.token}`
+
                         navigate('/');//faz o usuario retornar a página inicial
                     }
                 }
             )
             .catch((error) => {
                 console.log(error);
-            });
+        });
     }
 
     return (

@@ -17,6 +17,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useState, useEffect } from "react";
+import api from '../axiosUrl'
 
 interface TablePaginationActionsProps {
     count: number;
@@ -115,7 +116,7 @@ useEffect(() => {
 
     const url = window.location.href;
     const id = url.split("/").pop();
-    axios.get(`https://organicflow-server.vercel.app/produto/${id}`)
+    api.get(`/produto/${id}`)
         .then(response => {
             
 

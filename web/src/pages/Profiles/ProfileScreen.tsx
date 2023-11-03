@@ -5,6 +5,7 @@ import IProfile from 'types/IProfile';
 import ModalProfile from 'components/Modal/UpdateProfile';
 import Button from 'components/Items_Forms/Button';
 import TextField from 'components/Items_Forms/TextField';
+import Placeholder from 'assets/img/placeholder.png'
 
 export default function ProfileScreen({ children }: IProfile) {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -15,32 +16,32 @@ export default function ProfileScreen({ children }: IProfile) {
     const [email, setEmail] = useState('');
     const [company, setCompany] = useState('');
     const [cnpj, setCnpj] = useState('');
-    
-    const [local, setLocal] = useState('');
 
+    const [local, setLocal] = useState('');
     const url = window.location.href;
     const id = url.split("/").pop(); // Isso assume que o ID está na última parte da URL
+    const idStorage = localStorage.getItem('id');
+    let perfil = true
+    if (id != idStorage) { perfil = false }
     
     useEffect(() => {
 
-        axios.get('http://localhost:3000'+`/empresa/${id}`)
-        .then(response => {
-            const { name, email, company, cnpj, photo,local } = response.data[0];
-            setNome(name);
-            setEmail(email);
-            setCompany(company);
-            setCnpj(cnpj);
-            setPhoto(photo);
-            setLocal(local);
-            
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados:', error);
-        });
+        axios.get('http://localhost:3000' + `/empresa/${id}`)
+            .then(response => {
+                const { name, email, company, cnpj, photo, local } = response.data[0];
+                setNome(name);
+                setEmail(email);
+                setCompany(company);
+                setCnpj(cnpj);
+                setPhoto(photo);
+                setLocal(local);
+
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados:', error);
+            });
 
     }, []);
-
-   
 
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,35 +53,32 @@ export default function ProfileScreen({ children }: IProfile) {
         }
     };
 
-     //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
+    //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const token = localStorage.getItem('token')
         if (image) {
-            axios.put('http://localhost:3000' + '/user/'+id, {//verifica login
-                photo: photo, 
-                local: local, 
-                name:nome,
-                },
+            axios.put('http://localhost:3000' + '/user/' + id, {//verifica login
+                photo: photo,
+                local: local,
+                name: nome,
+            },
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
-            })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados:', error);
-            });
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);
+                });
         } else {
             console.log('Nenhuma imagem selecionada.');
         }
-        
-       
     }
-
-
+    
     return (
         <div className='bg-preto'>
             <div className="h-[300px] max-sm:h-[200px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
@@ -91,55 +89,58 @@ export default function ProfileScreen({ children }: IProfile) {
 
                     <div className='flex flex-col max-sm:w-28'>
                         <div className='flex justify-end'>
-                            <ModalProfile>
-                                <form onSubmit={onSubmit}>
-                                    <div className="flex justify-center">
-                                        <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 rounded-full border-2 border-verde_escuro bg-cover">
-                                            {photo && <img src={photo} alt="Imagem Enviada" className="rounded-[50px]" />}
+                            {perfil ?
+                                <ModalProfile>
+                                    <form onSubmit={onSubmit}>
+                                        <div className="flex justify-center">
+                                            <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 rounded-full border-2 border-verde_escuro bg-cover">
+                                                {photo && <img src={photo} alt="Imagem Enviada" className="rounded-[50px]" />}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col my-2">
-                                        <label className="font-medium" >Imagem:</label>
-                                        <label
-                                            htmlFor='file-input'
-                                            className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-sm font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                            Selecione uma imagem
-                                        </label>
-                                    </div>
+                                        <div className="flex flex-col my-2">
+                                            <label className="font-medium" >Imagem:</label>
+                                            <label
+                                                htmlFor='file-input'
+                                                className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-sm font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
+                                                Selecione uma imagem
+                                            </label>
+                                        </div>
 
-                                    <input
-                                        required
-                                        type='file'
-                                        name='image'
-                                        onChange={handleImageChange}
-                                        style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
-                                        id='file-input' // Adiciona um id para referência ao label
-                                    />
+                                        <input
+                                            required
+                                            type='file'
+                                            name='image'
+                                            onChange={handleImageChange}
+                                            style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
+                                            id='file-input' // Adiciona um id para referência ao label
+                                        />
 
-                                    <TextField
-                                        obrigatorio={true}
-                                        placeholder='Nome do usuário ou empresa'
-                                        onChange={evento => setNome(evento.target.value)}
-                                        valor={nome}
-                                        tipo='text'
-                                        campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
-                                        inputCSS={inputTCSS}
-                                    />
-                                    {/** SE FOR PERFIL DE EMPRESA */}
-                                    <TextField
-                                        obrigatorio={true}
-                                        placeholder='Endereço da empresa'
-                                        onChange={evento => setLocal(evento.target.value)}
-                                        valor={local}
-                                        tipo='text'
-                                        campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
-                                        inputCSS={inputTCSS}
-                                    />
-                                    <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Salvar edição' />
-                                </form>
-                            </ModalProfile>
+                                        <TextField
+                                            obrigatorio={true}
+                                            placeholder='Nome do usuário ou empresa'
+                                            onChange={evento => setNome(evento.target.value)}
+                                            valor={nome}
+                                            tipo='text'
+                                            campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                                            inputCSS={inputTCSS}
+                                        />
+                                        {/** SE FOR PERFIL DE EMPRESA */}
+                                        <TextField
+                                            obrigatorio={true}
+                                            placeholder='Endereço da empresa'
+                                            onChange={evento => setLocal(evento.target.value)}
+                                            valor={local}
+                                            tipo='text'
+                                            campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                                            inputCSS={inputTCSS}
+                                        />
+                                        <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Salvar edição' />
+                                    </form>
+                                </ModalProfile>
+                            : ""
+                        }
                         </div>
-                        <img className="w-36 h-36 max-sm:w-24 max-sm:h-24 rounded-full" src={photo} />
+                        <img className="w-36 h-36 max-sm:w-24 max-sm:h-24 rounded-full" src={photo ? photo : Placeholder} />
                     </div>
 
                     <div className='ml-10 max-sm:ml-0 text-white text-lg max-sm:text-base max-sm:mt-3'>

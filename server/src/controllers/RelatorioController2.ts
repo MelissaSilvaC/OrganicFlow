@@ -7,7 +7,10 @@ const prismaClient = new PrismaClient();
 export class Relatorio2Controller {
   async criar(request: Request, response: Response) {
     const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem,id_linha, medalha } = request.body;
-
+    const date = new Date();
+    // Obtém a data no formato desejado (dia/mes/ano)
+    const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
+    
     const embalagem = await prismaClient.embalagem.create({
       data: {
         nome,
@@ -20,7 +23,8 @@ export class Relatorio2Controller {
         user: { connect: { id:Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
         linha: {
           connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-        }
+        },
+        date:formattedDate,
       },
     });
 

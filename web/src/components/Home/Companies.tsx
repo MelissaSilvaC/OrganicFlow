@@ -9,6 +9,7 @@ import CompanyII from 'assets/img/CompanyExample/4.png'
 import CompanyIII from 'assets/img/CompanyExample/5.png'
 import CompanyIV from 'assets/img/CompanyExample/6.png'
 import CompanyV from 'assets/img/CompanyExample/7.png'
+import Placeholder from 'assets/img/placeholder.png'
 
 interface tipo {
     name: string,
@@ -113,7 +114,7 @@ export default function Companies() {
                         <CompanyBrand
                             key={empresa.id}
                             id={empresa.id}
-                            photo={empresa.photo}
+                            photo={empresa.photo ? empresa.photo : Placeholder}
                             name={empresa.name}
                         />
                     ))}

@@ -17,15 +17,13 @@ model User {
   password String
   email    String
   cnpj     String?
-  photo    String? 
+  photo    String?
   local String? 
   telefone String?
   gerente  Boolean @default(false)
   fiscal Boolean @default(false)
   ban Boolean @default(false)
-
-  //@default(https://res.cloudinary.com/dd2bjzzlb/image/upload/v1698790891/Logo_Floral_Minimalista_Marrom_7_mfwagw.png) 
-
+  
   //photo  Photo[]
 
   created_at     DateTime         @default(now())
@@ -138,6 +136,7 @@ model Prod_Agri {
   id_linha Int
   linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade )
 
+  date String
   nome        String
   local       String
   dt_plantio  String
@@ -158,6 +157,7 @@ model Embalagem {
   id_linha Int
   linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
 
+  date String
   nome             String
   local            String
   ingrediente      String
@@ -178,6 +178,7 @@ model Transporte {
   id_linha Int
   linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
 
+  date String
   nome               String
   praticas           String
   dt_carregamento    String
@@ -198,6 +199,7 @@ model Armazenamento {
   id_linha Int
   linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
 
+  date String
   nome        String
   local       String
   praticas    String
@@ -218,6 +220,7 @@ model Varejo {
   id_linha Int
   linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade)
 
+  date String
   nome       String
   local      String
   dt_chegada String

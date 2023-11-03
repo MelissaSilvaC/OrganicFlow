@@ -19,6 +19,16 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
     const [nameProduct, setNameProduct] = useState("")
     const [produtos, setProdutos] = useState<any[]>([]);
 
+    const url = window.location.href;
+    const idURL = url.split("/").pop();
+    const idStorage = localStorage.getItem('id');
+    let perfil = true
+    if (idURL != idStorage) { 
+        perfil = false
+    }else if(idStorage == '3'){
+        perfil = false 
+    }
+
     const handleMouseEnter = () => {
         setHover(true);
     };
@@ -48,48 +58,51 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
     return (
         <div>
             <div className='flex justify-end'>
-                <ModalUpdateProduct>
-                    <form onSubmit={onUpdate}>
-                        {/* Renderiza a imagem se imageURL estiver definida */}
-                        <div className="flex justify-center">
-                            <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
-                                {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
+                {perfil ?
+                    <ModalUpdateProduct>
+                        <form onSubmit={onUpdate}>
+                            {/* Renderiza a imagem se imageURL estiver definida */}
+                            <div className="flex justify-center">
+                                <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
+                                    {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
+                                </div>
                             </div>
-                        </div>
-                        {/* Label e botão */}
-                        <div className="flex flex-col my-2">
-                            <label className="font-medium" >Imagem:</label>
-                            <label
-                                htmlFor='file-input'
-                                className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                Selecione um arquivo
-                            </label>
-                        </div>
+                            {/* Label e botão */}
+                            <div className="flex flex-col my-2">
+                                <label className="font-medium" >Imagem:</label>
+                                <label
+                                    htmlFor='file-input'
+                                    className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
+                                    Selecione um arquivo
+                                </label>
+                            </div>
 
-                        <input
-                            required
-                            type='file'
-                            name='image'
-                            onChange={handleImageChange}
-                            style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
-                            id='file-input' // Adiciona um id para referência ao label
-                        />
+                            <input
+                                required
+                                type='file'
+                                name='image'
+                                onChange={handleImageChange}
+                                style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
+                                id='file-input' // Adiciona um id para referência ao label
+                            />
 
-                        <TextField
-                            obrigatorio={true}
-                            placeholder='Nome'
-                            onChange={evento => setNameProduct(evento.target.value)}
-                            valor={nameProduct}
-                            tipo='text'
-                            campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
-                            inputCSS={inputTCSS}
-                        />
-                        <Button 
-                            botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900' 
-                            texto='Salvar Edição' 
-                        />
-                    </form>
-                </ModalUpdateProduct>
+                            <TextField
+                                obrigatorio={true}
+                                placeholder='Nome'
+                                onChange={evento => setNameProduct(evento.target.value)}
+                                valor={nameProduct}
+                                tipo='text'
+                                campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                                inputCSS={inputTCSS}
+                            />
+                            <Button
+                                botaoCSS='bg-verde_escuro w-full h-[50px] rounded-xl text-xl font-bold text-white mt-1 hover:bg-green-900'
+                                texto='Salvar Edição'
+                            />
+                        </form>
+                    </ModalUpdateProduct>
+                    : ""
+                }
             </div>
             <Link to={`/fiscal/lista/${id}`}>
                 <div

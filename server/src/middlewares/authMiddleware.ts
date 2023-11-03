@@ -37,7 +37,14 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
         }
  
         if(retornar){
-            return response.json({status:true})
+            const user=await prismaClient.user.findFirst({
+                where: {
+                  id: Number(request.user.id),
+              },
+              
+            })
+            return response.json({status:true,user})
+            
         }
 
         const usuario = await prismaClient.user.findUnique({

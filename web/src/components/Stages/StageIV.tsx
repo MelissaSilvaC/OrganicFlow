@@ -8,12 +8,15 @@ import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_IV.png'
+import api from '../../axiosUrl'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
 const botaoTCSS = 'bg-verde_folha w-[15rem] h-[35px] max-sm:h-[30px] rounded-lg font-semibold max-sm:font-normal text-white mt-4 mx-4 hover:bg-verde_palido'
 const dataTCSS = 'flex max-sm:flex-col justify-evenly max-sm:space-y-3'
 const estilo = "flex justify-center"
+
+
 
 export default function StageIV() {
     const [nome, setNome] = useState("")
@@ -23,17 +26,19 @@ export default function StageIV() {
     const [dataSaida, setDataSaida] = useState("")
     const [praticas, setPraticas] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
+    const url = window.location.href;
+    const idlinha = url.split("/").pop();
 
     const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
 
-
+ 
     useEffect(() => {
         const url = window.location.href;
         const id = url.split("/").pop();
         axios.get(`https://organicflow-server.vercel.app/linha/${id}`)
             .then(response => {
-                const { nome, local, responsavel, dt_entrada, dt_saida, praticas, form } = response.data.Relatorio4[0];
+                const { nome, local, responsavel, dt_entrada, dt_saida, praticas, form  } = response.data.Relatorio4[0];
                 setNome(nome);
                 setLocalizacao(local);
                 setResponsavel(responsavel);
@@ -51,9 +56,25 @@ export default function StageIV() {
             });
     }, []);
 
-    const handleForm = () => {
-        setIsFormVisible(!isFormVisible);
-    };
+    const handleForm = async () => {
+        try {
+          const response = await api.post('/relatorio4', {
+            nome,
+            localizacao,
+            praticas,
+            responsavel,
+            dataEntrada,
+            dataSaida,
+            medal,
+            id_linha:idlinha
+          });
+          
+          console.log('Registro criado com sucesso:', response.data);
+          setIsFormVisible(!isFormVisible); // Alterna a visibilidade do formulário
+        } catch (error) {
+          console.error('Erro ao criar registro:', error);
+        }
+      };
 
     return (
         <Accordion sx={{ background: 'none' }}>

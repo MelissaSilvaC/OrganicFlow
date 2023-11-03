@@ -15,6 +15,13 @@ export default function ProfileCompany() {
     const [imageURL, setImageURL] = useState<string | null>(null);
     const [nameProduct, setNameProduct] = useState("")
     const [produtos, setProdutos] = useState<any[]>([]);
+
+    const url = window.location.href;
+    const id = url.split("/").pop();
+    const idStorage = localStorage.getItem('id');
+    let perfil = true
+    if (id != idStorage) { perfil = false }
+
     {/** LIMPE A LISTA APÓS OS TESTES */ }
     // useEffect(()=>{
     //     axios.get('http://localhost:3001'+'/empresa/:id')
@@ -65,6 +72,7 @@ export default function ProfileCompany() {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const token = localStorage.getItem('token')
+        
         e.preventDefault(); 
         if (image) {
             const formData = new FormData(); // Crie um objeto FormData para enviar a imagem
@@ -108,48 +116,52 @@ export default function ProfileCompany() {
             adress="Rua plantao, 123 - Penha/São Paulo - SP"
         >
             <div className="flex max-sm:flex-wrap flex-col mt-16 mb-20 max-sm:mt-8 max-sm:mb-10">
-                <p className="text-white text-2xl max-sm:text-xl pb-8">Produtos da empresa</p>
+                <p className={`text-white text-2xl max-sm:text-xl pb-8 ${perfil? "" : "hidden"}`}>Produtos da empresa</p>
 
                 <div className="flex flex-wrap max-sm:justify-center">
-                    <ModalProduct>
-                        <form onSubmit={onSubmit}>
-                            {/* Renderiza a imagem se imageURL estiver definida */}
-                            <div className="flex justify-center">
-                                <div className="w-44 h-44 max-sm:w-24 max-sm:h-24 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
-                                    {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
+                    {perfil ?
+                        <ModalProduct>
+                            <form onSubmit={onSubmit}>
+                                {/* Renderiza a imagem se imageURL estiver definida */}
+                                <div className="flex justify-center">
+                                    <div className="w-44 h-44 max-sm:w-24 max-sm:h-24 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
+                                        {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
+                                    </div>
                                 </div>
-                            </div>
-                            {/* Label e botão */}
-                            <div className="flex flex-col my-2">
-                                <label className="font-medium" >Imagem:</label>
-                                <label
-                                    htmlFor='file-input'
-                                    className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                    Selecione um arquivo
-                                </label>
-                            </div>
+                                {/* Label e botão */}
+                                <div className="flex flex-col my-2">
+                                    <label className="font-medium" >Imagem:</label>
+                                    <label
+                                        htmlFor='file-input'
+                                        className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
+                                        Selecione um arquivo
+                                    </label>
+                                </div>
 
-                            <input
-                                required
-                                type='file'
-                                name='image'
-                                onChange={handleImageChange}
-                                style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
-                                id='file-input' // Adiciona um id para referência ao label
-                            />
+                                <input
+                                    required
+                                    type='file'
+                                    name='image'
+                                    onChange={handleImageChange}
+                                    style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
+                                    id='file-input' // Adiciona um id para referência ao label
+                                />
 
-                            <TextField
-                                obrigatorio={true}
-                                placeholder='Nome'
-                                onChange={evento => setNameProduct(evento.target.value)}
-                                valor={nameProduct}
-                                tipo='text'
-                                campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
-                                inputCSS={inputTCSS}
-                            />
-                            <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Enviar' />
-                        </form>
-                    </ModalProduct>
+                                <TextField
+                                    obrigatorio={true}
+                                    placeholder='Nome'
+                                    onChange={evento => setNameProduct(evento.target.value)}
+                                    valor={nameProduct}
+                                    tipo='text'
+                                    campoCSS='h-[50px] bg-neutral-50 rounded-xl shadow px-6 my-3 border border-verde_escuro'
+                                    inputCSS={inputTCSS}
+                                />
+                                <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Enviar' />
+                            </form>
+                        </ModalProduct>
+                        : ""
+                    }
+
                     {produtos?.map((produto) => (
                         <ProductCard
                             key={produto.id}

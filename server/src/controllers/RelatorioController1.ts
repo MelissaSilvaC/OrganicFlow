@@ -7,7 +7,9 @@ const prismaClient = new PrismaClient();
 export class Relatorio1Controller {
   async criar(request: Request, response: Response) {
     const { nome, local, dt_plantio, dt_colheita, insumo, praticas,id_linha,medalha } = request.body;
-
+    const date = new Date();
+        // Obtém a data no formato desejado (dia/mes/ano)
+    const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
 
     const prodAgri = await prismaClient.prod_Agri.create({
       data: {
@@ -22,7 +24,8 @@ export class Relatorio1Controller {
         // user: { connect: { id:3  } }, // teste
         linha: {
           connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-        }
+        },
+        date:formattedDate,
       },
     });
 

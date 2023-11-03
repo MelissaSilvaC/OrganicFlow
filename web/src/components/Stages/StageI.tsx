@@ -8,6 +8,7 @@ import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_I.png'
+import api from '../../axiosUrl'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -26,15 +27,18 @@ export default function StageI() {
 
     const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
+    const [date, setDate] = useState("")
 
     const [isFormVisible, setIsFormVisible] = useState(true);
     const url = window.location.href;
     const idlinha = url.split("/").pop();
+    //idlinha === idStorage { ver botões }
+    
 
     useEffect(() => {
-        axios.get(`https://organicflow-server.vercel.app/linha/${idlinha}`)
+        api.get(`/linha/${idlinha}`)
             .then(response => {
-                const { nome, local, dt_plantio, dt_colheita, insumo, praticas, form } = response.data.Relatorio1[0];
+                const { nome, local, dt_plantio, dt_colheita, insumo, praticas, form, medal,date } = response.data.Relatorio1[0];
                 setNome(nome);
                 setLocalizacao(local);
                 setDataPlantio(dt_plantio);
@@ -42,6 +46,9 @@ export default function StageI() {
                 setInsumos(insumo);
                 setPraticas(praticas);
                 setIsFormVisible(form);
+                setMedal(medal);
+                setDate(date)
+                
 
                 // console.log(response.data.Relatorio1)
                 // console.log(response.data.Relatorio1.nome)
@@ -54,19 +61,20 @@ export default function StageI() {
 
     }, []);
 
-    const handleForm = (dataPlantio: string, dataColheita: string, insumos: string, praticas: string, nome: string, localizacao: string) => {
+    const handleForm = (dataPlantio: string, dataColheita: string, insumos: string, praticas: string, nome: string, localizacao: string,medal:Boolean) => {
         // Inverta o estado isFormVisible para alternar entre formulário e grupo de campos
         setIsFormVisible(!isFormVisible);
 
         // e.preventDefault(); 
-        axios.post('https://organicflow-server.vercel.app' + '/relatorio1', {
+        api.post('/relatorio1', {
             nome: nome,
             local: localizacao,
             dt_plantio: dataPlantio,
             dt_colheita: dataColheita,
             insumo: insumos,
             praticas: praticas,
-            id_linha: idlinha
+            id_linha: idlinha,
+            medal: medal
         })
             .then(response => console.log(response))//se for sucedido 
             .catch((error) => {
@@ -74,11 +82,25 @@ export default function StageI() {
             });
     };
 
+    /**
+     * switch(mes) { 
+        mes = 1: {  nomeMes = "Jan" break } 
+        case constant_expression2: { 
+            //statements; 
+            break; 
+        } 
+        default: { 
+            //statements; 
+            break; 
+        } 
+        } 
+     */
+
     return (
         < Accordion sx={{background: 'none'}} >
             <StageCard
-                month="Mes"
-                day="00"
+                month="Mes"//mudar data de criaçaõ do bgl
+                day="00"//mudar
                 stageName="Produção Agrícola"
                 report={report}
                 medal={medal} // VALOR BOOLEANO DA MEDALHA
@@ -165,7 +187,7 @@ export default function StageI() {
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm(dataPlantio, dataColheita, insumos, praticas, nome, localizacao)
+                                        handleForm(dataPlantio, dataColheita, insumos, praticas, nome, localizacao,medal)
                                     }}
                                 />
                             </div>

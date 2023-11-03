@@ -6,12 +6,16 @@ import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_V.png'
+import api from '../../axiosUrl'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
 const botaoTCSS = 'bg-verde_folha w-[15rem] h-[35px] max-sm:h-[30px] rounded-lg font-semibold max-sm:font-normal text-white mt-4 mx-4 hover:bg-verde_palido'
 const dataTCSS = 'flex max-sm:flex-col justify-evenly max-sm:space-y-3'
 const estilo = "flex justify-center"
+
+const url = window.location.href;
+const idlinha = url.split("/").pop();
 
 export default function StageV() {
     const [nome, setNome] = useState("")

@@ -3,17 +3,24 @@ import Button from "components/Items_Forms/Button";
 import CustomPaginationActionsTable from "components/TimelinesTable";
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import api from 'axiosUrl'
 
 export default function TimelineList() {
     const [image, setImage] = useState<File | null>(null)
     const [imageURL, setImageURL] = useState<string | null>(null);
-
     const [produto, setProduto] = useState<any>(null);
+
+    const urlA = window.location.href;
+    const idURL = urlA.split("/").pop();
+    const idStorage = localStorage.getItem('id');
+    let perfil = true
+    if (idURL != idStorage) { perfil = false }
+
     useEffect(() => {
     
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`https://organicflow-server.vercel.app/${id}`)
+        api.get(`/produto/${id}`)
             .then(response => {
                 const produto = response.data; // Obtenha o objeto completo do produto
                
@@ -52,7 +59,7 @@ export default function TimelineList() {
     const id = url.split("/").pop();
     console.log(id)
     const cadastro=()=>{
-        axios.post(`https://organicflow-server.vercel.app/linha`,{
+        api.post(`/linha`,{
             id_produto:id,
         })
         .then(response => console.log(response))//se for sucedido 
@@ -62,7 +69,7 @@ export default function TimelineList() {
     }
 
     const deletar=()=>{
-        axios.delete(`https://organicflow-server.vercel.app/produto/${id}`,{
+        api.delete(`/produto/${id}`,{
         })
         .then(response => console.log(response))//se for sucedido 
         .catch((error) => {
@@ -98,17 +105,19 @@ export default function TimelineList() {
                             onClick={() => { cadastro()}}
                         />
 
-                        <Button
-                            texto='Deletar produto'
-                            botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold max-lg:font-medium px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
-                            onClick={() => { 
-                                const confirmacao = window.confirm('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionadas a esse produto');
+                        {perfil ? 
+                            <Button
+                                texto='Deletar produto'
+                                botaoCSS='ml-12 max-lg:ml-0 text-red-600 h-[40px] rounded-lg font-semibold max-lg:font-medium px-5 mr-6 shadow border-2 border-red-600 hover:animate-pulse'
+                                onClick={() => {
+                                    const confirmacao = window.confirm('Tem certeza? Esta ação vai deletar TODAS as linhas do tempo relacionadas a esse produto');
 
-                                if (confirmacao) {
-                                    deletar()
-                                }
-                            }}
-                        />
+                                    if (confirmacao) {
+                                        deletar()
+                                    }
+                                }}
+                            />
+                            : ''}
                     </div>
                 </div>
             </div>

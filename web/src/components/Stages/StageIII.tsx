@@ -8,6 +8,7 @@ import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_III.png'
+import api from '../../axiosUrl'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -15,6 +16,8 @@ const botaoTCSS = 'bg-verde_folha w-[15rem] h-[35px] max-sm:h-[30px] rounded-lg 
 const dataTCSS = 'flex max-sm:flex-col justify-evenly max-sm:space-y-3'
 const estilo = "flex justify-center"
 
+const url = window.location.href;
+const idlinha = url.split("/").pop();
 export default function StageIII() {
     const [nomeTransporte, setNomeTransporte] = useState("")
     const [nomeLogistica, setNomeLogistica] = useState("")
@@ -30,9 +33,9 @@ export default function StageIII() {
     useEffect(() => {
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`https://organicflow-server.vercel.app/linha/${id}`)
+        api.get(`/linha/${id}`)
             .then(response => {
-                const { nome, dt_carregamento, dt_descarregamento, origem, destino, praticas, form } = response.data.Relatorio3[0];
+                const { nome, dt_carregamento, dt_descarregamento, origem, destino, praticas, form, medal,date } = response.data.Relatorio3[0];
                 setNomeTransporte(nome);
                 setDataCarregamento(dt_carregamento);
                 setDataDescarregamento(dt_descarregamento);
@@ -50,9 +53,34 @@ export default function StageIII() {
             });
     }, []);
 
-    const handleForm = () => {
+    const handleForm = (dataCarregamento: string,
+        dataDescarregamento: string,
+        praticas: string,
+        nome: string,
+        origem: string,
+        destino: string,
+        medal: boolean
+        ) => {
         setIsFormVisible(!isFormVisible);
+    
+        const data = {
+            id_linha: idlinha,
+            nome: nome,
+            praticas: praticas,
+            dt_carregamento: dataCarregamento,
+            dt_descarregamento: dataDescarregamento,
+            origem: origem,
+            destino: destino,
+            medal: medal
+        };
+    
+        api.post('/relatorio2', data)
+        .then(response => console.log(response)) // se for bem-sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
     };
+    
 
     return (
         <Accordion sx={{ background: 'none' }}>
@@ -134,7 +162,7 @@ export default function StageIII() {
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm()
+                                        handleForm(dataCarregamento, dataDescarregamento, praticas, nomeTransporte, nomeLogistica, rotaPercorrida, medal);
                                     }}
                                 />
                             </div>

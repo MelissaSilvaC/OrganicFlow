@@ -43,6 +43,17 @@ export default function Timeline() {
         { id: 5, label: 'Varejo e Consumo' },
     ]
 
+    const idStorage = localStorage.getItem('id');
+    let comum = false
+    let fiscal = false
+    if (idStorage == '1') { 
+    } else if (idStorage == '2'){
+        fiscal = true
+    } else if (idStorage == '3'){
+    }else {
+        comum = true
+    }
+
     // const denunciar = ()=>{
     //     axios.post('https://organicflow-server.vercel.app'+'/denuncia',{
     //         alvo:"Empresa",
@@ -103,7 +114,10 @@ export default function Timeline() {
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex max-sm:flex-col">
-                <TitleTimeline bgProduct="bg" txtProduct="Nome do produto"/>
+                <TitleTimeline 
+                    bgProduct="bg" 
+                    txtProduct="Nome do produto"
+                />
                 {/* Exibe a imagem quando todas as medalhas estiverem exibidas 
                 {allMedalsShown && (
                     <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
@@ -123,48 +137,52 @@ export default function Timeline() {
 
                     <div className="flex my-6 space-x-8 max-sm:space-x-4">
                         {/**Esse botão só deve aparecer para fiscais */}
-                        <ModalQRcode />
+                        {fiscal ? <ModalQRcode /> : ''}
                         {/**Esse botão só deve aparecer para usuários comuns */}
-                        <ModalComplaint>
-                            <form onSubmit={onSubmit}>
-                                <label>Argumento</label>
-                                <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
-                                    <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectArgument}>
-                                        <option value="">Selecione uma opção</option>
-                                        {options.map((option) => (
-                                            <option key={option.id} value={option.id.toString()}>
-                                                {option.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <br />
-                                <label>Em que estágio a denúncia se dirige</label>
-                                <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
-                                    <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectStage}>
-                                        <option value="">Selecione uma opção</option>
-                                        {stgOption.map((option) => (
-                                            <option key={option.id} value={option.id.toString()}>
-                                                {option.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <br />
-                                <TextArea
-                                    obrigatorio={true}
-                                    onChange={evento => setDescription(evento.target.value)}
-                                    label="Descrição"
-                                    valor={description}
-                                    campoCSS={"bg-neutral-50 rounded-xl shadow px-6 my-3"}
-                                    inputCSS={inputTCSS}
-                                />
-                                <Button
-                                    botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
-                                    texto='Enviar denúncia'
-                                />
-                            </form>
-                        </ModalComplaint>
+                        {comum ?
+                            <ModalComplaint>
+                                <form onSubmit={onSubmit}>
+                                    <label>Argumento</label>
+                                    <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
+                                        <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectArgument}>
+                                            <option value="">Selecione uma opção</option>
+                                            {options.map((option) => (
+                                                <option key={option.id} value={option.id.toString()}>
+                                                    {option.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <br />
+                                    <label>Em que estágio a denúncia se dirige</label>
+                                    <div className='bg-neutral-50 rounded-xl shadow px-6 py-4 mt-2'>
+                                        <select className='bg-transparent outline-none w-full rounded-2xl' onChange={handleSelectStage}>
+                                            <option value="">Selecione uma opção</option>
+                                            {stgOption.map((option) => (
+                                                <option key={option.id} value={option.id.toString()}>
+                                                    {option.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <br />
+                                    <TextArea
+                                        obrigatorio={true}
+                                        onChange={evento => setDescription(evento.target.value)}
+                                        label="Descrição"
+                                        valor={description}
+                                        campoCSS={"bg-neutral-50 rounded-xl shadow px-6 my-3"}
+                                        inputCSS={inputTCSS}
+                                    />
+                                    
+                                        <Button
+                                            botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
+                                            texto='Enviar denúncia'
+                                        />
+                                </form>
+                            </ModalComplaint>
+                            : ""
+                        }
                     </div>
                 </div>
             </div>
