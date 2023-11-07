@@ -38,12 +38,7 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
     };
 
     const onUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (image) {
-            console.log('produto editado!')
-        } else {
-            console.log('Nenhuma imagem selecionada.');
-        }
+        
     }
 
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM

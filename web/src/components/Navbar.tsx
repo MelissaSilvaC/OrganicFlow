@@ -4,13 +4,12 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import Papel from '../assets/img/Fundo/papel1.png'
 import Footer from './Footer';
 
@@ -58,6 +57,7 @@ export default function Navbar() {
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => { setAnchorElUser(event.currentTarget) };
     const handleCloseUserMenu = () => { setAnchorElUser(null) };
     const placeholder = '/static/images/avatar/2.jpg'
+    const navigate = useNavigate()
 
     return (
         <>
@@ -108,7 +108,7 @@ export default function Navbar() {
                                         </MenuItem>
                                     ))}
                                     {idStorage ?
-                                        <button onClick={() => { }} className='px-4'>
+                                        <button onClick={() => { localStorage.clear(); navigate('/')}} className='px-4'>
                                             Desconectar-se
                                         </button>
                                         : ''

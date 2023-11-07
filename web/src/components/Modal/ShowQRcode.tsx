@@ -5,6 +5,7 @@ import { TfiClose } from 'react-icons/tfi'
 import Button from 'components/Items_Forms/Button';
 import axios from 'axios'
 import {useState} from 'react'
+import api from '../../axiosUrl'
 
 export default function ModalProduct({ children }: { children?: React.ReactNode }) {
     const [open, setOpen] = React.useState(false);
@@ -17,7 +18,7 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
     const [qrcode, setQrcode] = useState("")
 
     const gerarQrcode=()=>{
-        axios.put(`http://localhost:3000/qrCode/${idlinha}`)
+        api.put(`http://localhost:3000/linha/${idlinha}`)
             .then(response => {
                 const qrcode= response.data.qrcode
 
@@ -31,6 +32,18 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
         // console.log('aa')
     
     }
+    
+    const handleSalvarQRCode = () => {
+        const base64Image = qrcode
+        const downloadLink = document.createElement('a');
+        downloadLink.href = base64Image;
+        downloadLink.download = 'qrcode.png'; // Nome do arquivo a ser baixado
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+
 
     return (
         <div>
@@ -84,9 +97,10 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
                         <img src={qrcode}/>
                     </div>
                     <Button
-                        botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
-                        texto='Salvar QRcode'
-                    />
+                    onClick={handleSalvarQRCode}
+                    botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
+                    texto='Salvar QRcode'
+                />
                 </Box>
             </ModalScreen>
         </div>

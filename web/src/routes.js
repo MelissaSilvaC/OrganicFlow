@@ -30,8 +30,8 @@ export default function AppRouter() {
                     {/** ':nome/:nomeProduto/lista' */}
                     <Route exact path=':name/lista/:id' element={<TimelineList />} />
                     {/** ':nome/:nomeProduto/lista/:idLinha/linhatempo' */}
-                    <Route path='fiscal/lista/linhatempo/:id' element={<Timeline />} />
-                </Route>
+                    <Route path='linha/:id' element={<Timeline />} />
+               </Route>
 
                 <Route path='/sessao' element={<SignupScreen />} />
                 <Route path='/sessao/login' element={<LoginScreen />} />

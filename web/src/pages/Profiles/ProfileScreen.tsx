@@ -21,9 +21,12 @@ export default function ProfileScreen({ children }: IProfile) {
     const url = window.location.href;
     const id = url.split("/").pop(); // Isso assume que o ID está na última parte da URL
     const idStorage = localStorage.getItem('id');
+    const roleStorage = localStorage.getItem('id_role');
     let perfil = true
+    let adm = false
     if (id != idStorage) { perfil = false }
-    
+    if (roleStorage === "1"){ adm = true}
+
     useEffect(() => {
 
         axios.get('http://localhost:3000' + `/empresa/${id}`)
@@ -75,10 +78,24 @@ export default function ProfileScreen({ children }: IProfile) {
                     console.error('Erro ao buscar dados:', error);
                 });
         } else {
-            console.log('Nenhuma imagem selecionada.');
+            axios.put('http://localhost:3000' + '/user/' + id, {//verifica login
+                local: local,
+                name: nome,
+            },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);
+                });
         }
     }
-    
+
     return (
         <div className='bg-preto'>
             <div className="h-[300px] max-sm:h-[200px] bg-cover" style={{ backgroundImage: `url(${fundo})` }} />
@@ -94,7 +111,7 @@ export default function ProfileScreen({ children }: IProfile) {
                                     <form onSubmit={onSubmit}>
                                         <div className="flex justify-center">
                                             <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 rounded-full border-2 border-verde_escuro bg-cover">
-                                                {photo && <img src={photo} alt="Imagem Enviada" className="rounded-[50px]" />}
+                                                {photo ? <img src={photo} alt="Imagem Enviada" className="rounded-[50px]" /> : <img src={Placeholder} alt="Imagem Enviada" className="rounded-[50px]" />}
                                             </div>
                                         </div>
                                         <div className="flex flex-col my-2">
@@ -107,7 +124,6 @@ export default function ProfileScreen({ children }: IProfile) {
                                         </div>
 
                                         <input
-                                            required
                                             type='file'
                                             name='image'
                                             onChange={handleImageChange}
@@ -137,17 +153,28 @@ export default function ProfileScreen({ children }: IProfile) {
                                         <Button botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]' texto='Salvar edição' />
                                     </form>
                                 </ModalProfile>
-                            : ""
-                        }
+                                : ""
+                            }
                         </div>
                         <img className="w-36 h-36 max-sm:w-24 max-sm:h-24 rounded-full" src={photo ? photo : Placeholder} />
                     </div>
 
-                    <div className='ml-10 max-sm:ml-0 text-white text-lg max-sm:text-base max-sm:mt-3'>
-                        <p className='font-bold text-4xl max-sm:text-2xl my-4'>{nome}</p>
+                    <div className='ml-10 max-sm:ml-0 text-white text-lg max-sm:text-base max-sm:mt-3 '>
+                        <div className='flex space-x-12'>
+                            <p className='font-bold text-4xl max-sm:text-2xl my-4'>{nome}</p>
+                            {adm ? 
+                                <Button
+                                    texto="Banir usuário"
+                                    botaoCSS='text-red-600 font-semibold max-sm:font-medium flex self-start rounded-xl p-2 px-5 mt-3 border-2 max-sm:border border-red-600 hover:animate-pulse'
+                                    onClick={() => { }}
+                                />
+                                : ""
+                            }
+                        </div>
                         <p>{email}</p>
                         <p>{local}</p>
                     </div>
+                    
                 </div>
                 <div className='pb-28 max-sm:pb-20'>
                     {children}

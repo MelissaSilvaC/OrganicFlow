@@ -1,7 +1,7 @@
 interface Props {
     botaoCSS?: string
     texto: string
-    onClick?: () => void
+    onClick?: (evento: any) => void
 }
 
 export default function Button({ botaoCSS, texto, onClick }: Props) {

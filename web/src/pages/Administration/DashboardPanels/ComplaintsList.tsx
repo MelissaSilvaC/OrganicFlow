@@ -37,7 +37,7 @@ const columns: GridColDef[] = [
     },
     {
         field: 'alvo',
-        headerName: 'Usuário alvo',
+        headerName: 'Alvo da denúncia',
         width: 300,
         renderCell: (params) => {
             const description = params.row.alvo;
@@ -60,7 +60,7 @@ const columns: GridColDef[] = [
     },
     {
         field: 'description',
-        headerName: 'Descrição',
+        headerName: 'Argumento',
         width: 300,
         renderCell: (params) => {
             const description = params.row.description;

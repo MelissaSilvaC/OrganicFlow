@@ -9,6 +9,7 @@ import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_I.png'
 import api from '../../axiosUrl'
+import logmes from './logica_mes'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -61,6 +62,12 @@ export default function StageI() {
 
     }, []);
 
+    const partes = date.split("/");
+    const dia = partes[0];
+    const mes = partes[1];
+
+    const nomeDoMes = logmes(Number(mes));
+
     const handleForm = (dataPlantio: string, dataColheita: string, insumos: string, praticas: string, nome: string, localizacao: string,medal:Boolean) => {
         // Inverta o estado isFormVisible para alternar entre formulário e grupo de campos
         setIsFormVisible(!isFormVisible);
@@ -82,25 +89,17 @@ export default function StageI() {
             });
     };
 
-    /**
-     * switch(mes) { 
-        mes = 1: {  nomeMes = "Jan" break } 
-        case constant_expression2: { 
-            //statements; 
-            break; 
-        } 
-        default: { 
-            //statements; 
-            break; 
-        } 
-        } 
-     */
+    const handleClick = (e: SubmitEvent) => {
+        e.preventDefault();
+        setMedal(!medal);
+      };
+
 
     return (
         < Accordion sx={{background: 'none'}} >
             <StageCard
-                month="Mes"//mudar data de criaçaõ do bgl
-                day="00"//mudar
+                month={nomeDoMes}//mudar data de criaçaõ do bgl
+                day={dia}//mudar
                 stageName="Produção Agrícola"
                 report={report}
                 medal={medal} // VALOR BOOLEANO DA MEDALHA
@@ -180,7 +179,7 @@ export default function StageI() {
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Medalha'
-                                    onClick={() => { setMedal(!medal) }}
+                                    onClick={handleClick}
                                 />
                                 <Button
                                     botaoCSS={botaoTCSS}

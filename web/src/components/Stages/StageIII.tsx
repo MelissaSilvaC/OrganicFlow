@@ -9,6 +9,7 @@ import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_III.png'
 import api from '../../axiosUrl'
+import logmes from './logica_mes'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -27,6 +28,7 @@ export default function StageIII() {
     const [praticas, setPraticas] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
 
+    const [date, setDate] = useState("")
     const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
 
@@ -42,6 +44,7 @@ export default function StageIII() {
                 setNomeLogistica(origem);
                 setRotaPercorrida(destino);
                 setPraticas(praticas);
+                setDate(date)
 
                 // console.log(response.data.Relatorio3);
                 // console.log(response.data.Relatorio3[0].nome);
@@ -52,6 +55,12 @@ export default function StageIII() {
                 console.log(error);
             });
     }, []);
+
+    const partes = date.split("/");
+    const dia = partes[0];
+    const mes = partes[1];
+
+    const nomeDoMes = logmes(Number(mes));
 
     const handleForm = (dataCarregamento: string,
         dataDescarregamento: string,
@@ -74,19 +83,23 @@ export default function StageIII() {
             medal: medal
         };
     
-        api.post('/relatorio2', data)
+        api.post('/relatorio3', data)
         .then(response => console.log(response)) // se for bem-sucedido 
         .catch((error) => {
             console.log(error);
         });
     };
     
+    const handleClick = (e: SubmitEvent) => {
+        e.preventDefault();
+        setMedal(!medal);
+      };
 
     return (
         <Accordion sx={{ background: 'none' }}>
             <StageCard
-                month="Mes"
-                day="00"
+               month={nomeDoMes}//mudar data de criaçaõ do bgl
+               day={dia}//mudar
                 stageName="Transporte e Logística"
                 report={report}
                 medal={medal} // VALOR BOOLEANO DA MEDALHA
@@ -155,7 +168,7 @@ export default function StageIII() {
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Medalha'
-                                    onClick={() => { setMedal(!medal) }}
+                                    onClick={handleClick}
                                 />
                                 <Button
                                     botaoCSS={botaoTCSS}

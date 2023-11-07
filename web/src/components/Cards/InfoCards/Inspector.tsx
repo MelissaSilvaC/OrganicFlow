@@ -1,20 +1,29 @@
+import api from 'axiosUrl';
 import { TfiClose } from 'react-icons/tfi';
 
 interface Props {
+    id:number,
     name: string,
     email: string,
     photo: string,
-    password: string,
 }
 
-export default function InspectorCard({ photo, name, email, password }: Props) {
+export default function InspectorCard({ photo, name, email,id }: Props) {
     return (
         <div className=" text-white w-[25rem] border-2 border-slate-600 rounded-md flex flex-col p-4 m-5 hover:bg-zinc-600 hover:cursor-pointer">
             <div className='flex justify-end'>
-                <button onClick={() => {
+            <button onClick={() => {
                     const userConfirmed = window.confirm("Tem certeza de que quer continuar?");
                     if (userConfirmed) {
-                        // Ação para continuar
+                        try {
+                            api.delete(`http://localhost:3000/fiscal/${id}`) // Substitua o '3' pelo ID do usuário que você deseja deletar
+                            .then(response => console.log(response))//se for sucedido 
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        } catch (error) {
+                            console.error('Erro ao deletar usuário:', error);
+                        }
                     } else {
                         // Ação para cancelar
                     }
@@ -29,7 +38,6 @@ export default function InspectorCard({ photo, name, email, password }: Props) {
                 <div className='flex flex-col justify-center'>
                     <p className='font-semibold text-lg max-sm:text-base pb-2'>{name}</p>
                     <p className='max-sm:text-sm'>{email}</p>
-                    <p className='max-sm:text-sm'>{password}</p>
                 </div>
             </div>
         </div>

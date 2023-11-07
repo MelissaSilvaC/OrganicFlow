@@ -6,6 +6,7 @@ import empresa from '../assets/img/logoExample.png'
 import ModalManager from "components/Modal/RegisterInspector";
 import InspectorCard from "./Cards/InfoCards/Inspector";
 import axios from 'axios'
+import api from '../axiosUrl'
 
 export default function ManagementInspector(){
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -24,12 +25,41 @@ export default function ManagementInspector(){
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (image) {
-            console.log('Fiscal cadastrado!');
-        } else {
-            console.log('Falha ao cadastrar');
-        }
+
+        api.post('/fiscal', {
+            name: name,
+            email: email,
+            password: password
+        })
+        .then(response => console.log(response))//se for sucedido 
+        .catch((error) => {
+            console.log(error);
+        });
+
+
+
     }
+
+    const [users, setUsers] = useState<{ id: number; name: string; email: string; photo:string; }[]>([]);
+
+
+    useEffect(() => {
+        api.get(`/fiscal_empresa/${idURL}`)
+            .then(response => {
+                console.log(response.data); // Verifique se os dados são o que você espera
+                const usersData = response.data.map((item: { user: { id: any; name: any; email: any; photo: any; }; }) => ({
+                    id: item.user.id,
+                    name: item.user.name,
+                    email: item.user.email,
+                    photo: item.user.photo
+                }));
+                setUsers(usersData);
+            })
+            .catch(error => {
+                console.error('Erro ao obter os dados:', error);
+            });
+    }, []);
+    
 
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,66 +69,16 @@ export default function ManagementInspector(){
             setImageURL(URL.createObjectURL(selectedImage));
         }
     };
-    const [produtos, setProdutos] = useState<any[]>([]);
-    useEffect(() => {
-
-        const url = window.location.href;
-        const id = url.split("/").pop();
-        axios.get(`http://localhost:3000/fiscal/${id}`)
-            .then(response => {
-
-                const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
-                    id: produto.id,
-                    nome: produto.nome,
-                    photo: produto.photo,
-                }));
-
-                setProdutos(novosProduto);
-                console.log(novosProduto)
-            })
-            //retorna o objeto inteiro
-            .catch((error) => {
-                console.log(error);
-            });
-        // console.log('aa')
-
-    }, []);
-
+   
     return (
         <div className="p-0">
             <p className="text-white text-2xl max-sm:text-xl pb-8">Fiscais da empresa</p>
-
             <div className="flex flex-wrap">
                 {perfil ?
                 <div className="text-white w-[25rem] max-sm:w-[13rem] max-sm:h-[6rem] border-2 max-sm:border border-slate-600 rounded flex justify-center items-center m-5 hover:bg-cinza_escuro hover:cursor-pointer">
                     
                         <ModalManager>
                             <form onSubmit={onSubmit}>
-                                {/* Renderiza a imagem se imageURL estiver definida */}
-                                <div className="flex justify-center">
-                                    <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 rounded-full border-2 border-verde_escuro bg-cover">
-                                        {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
-                                    </div>
-                                </div>
-                                {/* Label e botão */}
-                                <div className="flex flex-col my-2">
-                                    <label className="font-medium" >Imagem:</label>
-                                    <label
-                                        htmlFor='file-input'
-                                        className='custom-file-upload bg-verde_escuro w-full h-[40px] rounded-lg font-semibold text-white mt-1 flex justify-center items-center cursor-pointer hover:bg-green-900'>
-                                        Selecione uma imagem
-                                    </label>
-                                </div>
-
-                                <input
-                                    required
-                                    type='file'
-                                    name='image'
-                                    onChange={handleImageChange}
-                                    style={{ display: 'none' }} // Oculta o campo de entrada de arquivo
-                                    id='file-input' // Adiciona um id para referência ao label
-                                />
-
                                 <TextField
                                     obrigatorio={true}
                                     placeholder='Nome do fiscal'
@@ -132,15 +112,15 @@ export default function ManagementInspector(){
                 </div>
                 : ""}
 
-                {/**
-                 * Função map listando cards com as contas dos fiscais
-                 */}
+                {users.map(user => (
                     <InspectorCard
-                        photo={empresa}
-                        name="Rita"
-                        email="seedsprout@email.com"
-                        password="9765765"
+                    key={user.id}
+                    id={user.id}
+                    photo={user.photo}
+                    name={user.name}
+                    email={user.email}
                     />
+                ))}
             </div>
         </div>
     )

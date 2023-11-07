@@ -116,7 +116,7 @@ export default function ProfileCompany() {
             adress="Rua plantao, 123 - Penha/São Paulo - SP"
         >
             <div className="flex max-sm:flex-wrap flex-col mt-16 mb-20 max-sm:mt-8 max-sm:mb-10">
-                <p className={`text-white text-2xl max-sm:text-xl pb-8 ${perfil? "" : "hidden"}`}>Produtos da empresa</p>
+                <p className="text-white text-2xl max-sm:text-xl pb-8">Produtos da empresa</p>
 
                 <div className="flex flex-wrap max-sm:justify-center">
                     {perfil ?

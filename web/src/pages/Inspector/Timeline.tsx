@@ -10,7 +10,8 @@ import ModalComplaint from "components/Modal/RegisterComplaint";
 import ModalQRcode from "components/Modal/ShowQRcode";
 import TextArea from "components/Items_Forms/TextArea";
 import Button from "components/Items_Forms/Button";
-import axios from "axios";
+
+import api from '../../axiosUrl'
 
 interface Option {
     id: number;
@@ -24,6 +25,8 @@ export default function Timeline() {
     const [description, setDescription] = useState("")
     const [stageOpt, setStageOpt] = useState<Option | null>(null);
     const [argument, setArgument] = useState<Option | null>(null);
+    let selectedLabel : string | null
+    let selectedArgLabel: string | null
     const options: Option[] = [
         { id: 1, label: 'Falta de Conformidade Legal' },
         { id: 2, label: 'Inconsistência de Dados' },
@@ -69,20 +72,29 @@ export default function Timeline() {
         const selectedOptionId = parseInt(event.target.value, 10);
         const selectedOption = options.find((option) => option.id === selectedOptionId);
         setArgument(selectedOption || null);
+        selectedArgLabel = selectedOption?.label || null; 
+        console.log(selectedArgLabel);
     };
 
     const handleSelectStage = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedOptionId = parseInt(event.target.value, 10);
         const selectedOption = stgOption.find((option) => option.id === selectedOptionId);
-        setStageOpt(selectedOption || null);
+        selectedLabel = selectedOption?.label || null; // Aqui está a label selecionada
+        console.log(selectedLabel);
+        
     };
+
+    const url = window.location.href;
+    const idlinha = url.split("/").pop(); 
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        axios.post('https://organicflow-server.vercel.app'+'/denuncia',{
-            alvo:"Empresa",
-            description:"empresa abusiva"
+        api.post('/denuncia',{
+            argumento:selectedArgLabel,
+            description:description,
+            stage:selectedLabel,
+            id_linha:idlinha
         })
         .then(response => console.log(response))//se for sucedido 
         .catch((error) => { 
@@ -90,26 +102,6 @@ export default function Timeline() {
         });
     }
 
-    const url = window.location.href;
-    const idlinha = url.split("/").pop(); 
-    
-    const [qrcode, setQrcode] = useState("")
-
-    const gerarQrcode=()=>{
-        axios.put(`https://organicflow-server.vercel.app/qrCode/${idlinha}`)
-            .then(response => {
-                const qrcode= response.data.qrcode
-
-                setQrcode(qrcode)
-                console.log(qrcode)
-            })
-            //retorna o objeto inteiro
-            .catch((error) => {
-                console.log(error);
-            });
-        // console.log('aa')
-    
-    }
 
     return (
         <div className="bg-preto pt-[80px] pb-5">

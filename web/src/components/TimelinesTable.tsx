@@ -171,8 +171,8 @@ useEffect(() => {
                             </TableCell>
                             <TableCell component="th" scope="row" style={{ color: `white` }}>
                                 {/**<Link to={`/link-da-denuncia${row.id}`}>{row.data}</Link> */}
-                                <Link to={`/fiscal/lista/linhatempo/${row.id}`}>Criado em: {row.data}</Link>
-                            </TableCell>
+                                <Link to={`/linha/${row.id}`}>Criado em: {row.data}</Link>
+                          </TableCell>
                         </TableRow>
                     ))}
                     {emptyRows > 0 && (

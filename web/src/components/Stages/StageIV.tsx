@@ -9,6 +9,7 @@ import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_IV.png'
 import api from '../../axiosUrl'
+import logmes from './logica_mes'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3 max-sm:text-sm'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -29,16 +30,16 @@ export default function StageIV() {
     const url = window.location.href;
     const idlinha = url.split("/").pop();
 
+    
+    const [date, setDate] = useState("")
     const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
 
  
     useEffect(() => {
-        const url = window.location.href;
-        const id = url.split("/").pop();
-        axios.get(`https://organicflow-server.vercel.app/linha/${id}`)
+        api.get(`/linha/${idlinha}`)
             .then(response => {
-                const { nome, local, responsavel, dt_entrada, dt_saida, praticas, form  } = response.data.Relatorio4[0];
+                const { nome, local, responsavel, dt_entrada, dt_saida, praticas, form ,date } = response.data.Relatorio4[0];
                 setNome(nome);
                 setLocalizacao(local);
                 setResponsavel(responsavel);
@@ -46,6 +47,7 @@ export default function StageIV() {
                 setDataSaida(dt_saida);
                 setPraticas(praticas);
 
+                setDate(date)
                 console.log(response.data.Relatorio4);
                 console.log(response.data.Relatorio4[0].nome);
                 console.log(nome);
@@ -56,16 +58,22 @@ export default function StageIV() {
             });
     }, []);
 
+    const partes = date.split("/");
+    const dia = partes[0];
+    const mes = partes[1];
+
+    const nomeDoMes = logmes(Number(mes));
+
     const handleForm = async () => {
         try {
           const response = await api.post('/relatorio4', {
             nome,
-            localizacao,
+            local:localizacao,
             praticas,
             responsavel,
-            dataEntrada,
-            dataSaida,
-            medal,
+            dt_entrada:dataEntrada,
+            dt_saida:dataSaida,
+            medalha:medal,
             id_linha:idlinha
           });
           
@@ -76,14 +84,23 @@ export default function StageIV() {
         }
       };
 
+      const handleClick = (e: SubmitEvent) => {
+        console.log(medal)
+        
+        e.preventDefault();
+        setMedal(!medal);
+        
+        console.log(medal)
+      };
+
     return (
         <Accordion sx={{ background: 'none' }}>
             <StageCard
-                month="Mes"
-                day="00"
+                month={nomeDoMes}//mudar data de criaçaõ do bgl
+                day={dia}//mudar
                 stageName="Armazenamento e Distribuição"
                 report={report}
-                medal={medal} // VALOR BOOLEANO DA MEDALHA
+                medal={!medal} // VALOR BOOLEANO DA MEDALHA
                 Num_medal={Medal}
             />
             <AccordionDetails sx={{
@@ -158,7 +175,7 @@ export default function StageIV() {
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Medalha'
-                                    onClick={() => { setMedal(!medal) }}
+                                    onClick={handleClick}
                                 />
                                 <Button
                                     botaoCSS={botaoTCSS}

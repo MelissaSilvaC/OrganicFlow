@@ -9,6 +9,7 @@ import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
 import Medal from '../../assets/img/Medals/Medal_II.png'
 import api from '../../axiosUrl'
+import logmes from './logica_mes'
 
 const campoTCSS = 'h-[40px] max-sm:h-[35px] bg-neutral-50 rounded-xl shadow px-6 my-3'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-sm:mt-1.5'
@@ -26,6 +27,7 @@ export default function StageII() {
     const [praticas, setPraticas] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
 
+    const [date, setDate] = useState("")
     const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
     
@@ -37,7 +39,7 @@ export default function StageII() {
         const id = url.split("/").pop();
         api.get(`/linha/${id}`)
             .then(response => {
-                const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, form } = response.data.Relatorio2[0];
+                const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, form ,date} = response.data.Relatorio2[0];
                 setNome(nome);
                 setLocal(local);
                 setMaterial(ingrediente);
@@ -45,6 +47,8 @@ export default function StageII() {
                 setDtProcessamento(dt_processamento);
                 setDtEmbalagem(dt_embalagem);
                 setIsFormVisible(form);
+                setDate(date)
+                
                 // console.log(response.data.Relatorio2);
                 // console.log(response.data.Relatorio2[0].nome);
                 // console.log(nome);
@@ -53,6 +57,18 @@ export default function StageII() {
                 console.log(error);
             });
     }, []);
+
+    const handleClick = (e: SubmitEvent) => {
+        e.preventDefault();
+        setMedal(!medal);
+      };
+
+
+    const partes = date.split("/");
+    const dia = partes[0];
+    const mes = partes[1];
+
+    const nomeDoMes = logmes(Number(mes));
 
     const handleForm = (dataPlantio: string, dataColheita: string, praticas: string, nome: string, localizacao: string,medal:Boolean) => {
         // Inverta o estado isFormVisible para alternar entre formulário e grupo de campos
@@ -79,8 +95,8 @@ export default function StageII() {
     return (
         < Accordion sx={{ background: 'none' }} >
             <StageCard
-                month="Mes"
-                day="00"
+                month={nomeDoMes}//mudar data de criaçaõ do bgl
+                day={dia}//mudar
                 stageName="Processamento e Embalagem"
                 report={report}
                 medal={medal} // VALOR BOOLEANO DA MEDALHA
@@ -158,7 +174,7 @@ export default function StageII() {
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Medalha'
-                                    onClick={() => { setMedal(!medal) }}
+                                    onClick={handleClick}
                                 />
                                 <Button
                                     botaoCSS={botaoTCSS}
