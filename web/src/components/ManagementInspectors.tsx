@@ -34,13 +34,8 @@ export default function ManagementInspector(){
         .catch((error) => {
             console.log(error);
         });
-
-
-
     }
-
     const [users, setUsers] = useState<{ id: number; name: string; email: string; photo:string; }[]>([]);
-
 
     useEffect(() => {
         api.get(`/fiscal_empresa/${idURL}`)

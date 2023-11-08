@@ -20,7 +20,7 @@ export default function ProfileCompany() {
     const idStorage = localStorage.getItem('id');
     let perfil = true
     if (id != idStorage) { perfil = false }
-    {/** LIMPE A LISTA APÓS OS TESTES */ }
+
     // useEffect(()=>{
     //     axios.get('http://localhost:3001'+'/empresa/:id')
     //     .then(response => {
@@ -39,7 +39,6 @@ export default function ProfileCompany() {
     //   const [produtos, setProdutos] = useState<IProduto[]>([]);
 
     useEffect(() => {
-
         const url = window.location.href;
         const id = url.split("/").pop();
         api.get(`http://localhost:3000/empresa/${id}`)
@@ -52,35 +51,27 @@ export default function ProfileCompany() {
                 setProdutos(novosProduto);
                 console.log(novosProduto)
             })
-            //retorna o objeto inteiro
             .catch((error) => {
                 console.log(error);
             });
-        // console.log('aa')
-
     }, []);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const token = localStorage.getItem('token')
-        
         e.preventDefault(); 
         if (image) {
             const formData = new FormData(); // Crie um objeto FormData para enviar a imagem
-        
             formData.append('file', image); // Adicione a imagem ao FormData
             formData.append('nome', nameProduct); // Adicione o nome ao FormData
-            
             api.post('http://localhost:3000/produto', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}` // Adiciona o token no cabeçalho da requisição
                 }
-            }) // Correção aqui
+            })
                 .then(response => console.log(response))//se for sucedido 
                 .catch((error) => {
                     console.log(error);
-                });
-        
-            
+            });
             console.log(formData)
             setImage(null);
             setNameProduct('');
@@ -107,7 +98,6 @@ export default function ProfileCompany() {
         >
             <div className="flex max-sm:flex-wrap flex-col mt-16 mb-20 max-sm:mt-8 max-sm:mb-10">
                 <p className="text-white text-2xl max-sm:text-xl pb-8">Produtos da empresa</p>
-
                 <div className="flex flex-wrap items-center max-sm:justify-center">
                     {perfil ?
                         <ModalProduct>
