@@ -10,7 +10,6 @@ import ModalComplaint from "components/Modal/RegisterComplaint";
 import ModalQRcode from "components/Modal/ShowQRcode";
 import TextArea from "components/Items_Forms/TextArea";
 import Button from "components/Items_Forms/Button";
-
 import api from '../../axiosUrl'
 
 interface Option {

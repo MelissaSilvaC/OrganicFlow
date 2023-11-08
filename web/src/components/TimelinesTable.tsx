@@ -15,7 +15,6 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
 import { useState, useEffect } from "react";
 import api from '../axiosUrl'
 import Button from './Items_Forms/Button';

@@ -5,7 +5,6 @@ import React from "react";
 import empresa from '../assets/img/logoExample.png'
 import ModalManager from "components/Modal/RegisterInspector";
 import InspectorCard from "./Cards/InfoCards/Inspector";
-import axios from 'axios'
 import api from '../axiosUrl'
 
 export default function ManagementInspector(){

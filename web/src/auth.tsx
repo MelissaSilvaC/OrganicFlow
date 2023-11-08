@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
-import axios from 'axios';
+import api from './axiosUrl';
 import Navbar from 'components/Navbar';
 
 const PrivateRoute = () => {
@@ -14,7 +14,7 @@ const PrivateRoute = () => {
         navigate('/sessao/login');
       } else {
         try {
-          const response = await axios.get('http://localhost:3000/auth', {
+          const response = await api.get('http://localhost:3000/auth', {
             headers: {
               retornar: true,
               Authorization: `Bearer ${token}`

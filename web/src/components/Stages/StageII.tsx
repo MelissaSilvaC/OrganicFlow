@@ -3,7 +3,6 @@ import TextField from "components/Items_Forms/TextField"
 import { useState, useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import InfoField from "./InfoField"
-import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
@@ -86,7 +85,7 @@ export default function StageII() {
     return (
         < Accordion sx={{ background: 'none' }} >
             <StageCard
-                month={nomeDoMes}//mudar data de criaçaõ do bgl
+                month={nomeDoMes}//mudar data de criação da data
                 day={dia}//mudar
                 stageName="Processamento e Embalagem"
                 report={report}

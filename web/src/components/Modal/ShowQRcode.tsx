@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import ModalScreen from '@mui/material/Modal';
 import { TfiClose } from 'react-icons/tfi'
 import Button from 'components/Items_Forms/Button';
-import axios from 'axios'
 import {useState} from 'react'
 import api from '../../axiosUrl'
 

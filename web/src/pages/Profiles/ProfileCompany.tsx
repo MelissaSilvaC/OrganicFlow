@@ -4,10 +4,10 @@ import Button from "components/Items_Forms/Button";
 import { useState, useEffect } from "react";
 import ProductCard from "components/Cards/ImageCards/Produto";
 import React from "react";
-import axios from "axios";
 import ProfileScreen from "./ProfileScreen";
 import logoEmpresa from '../../assets/img/logoExample.png'
 import ManagementInspector from "components/ManagementInspectors";
+import api from '../../axiosUrl'
 
 export default function ProfileCompany() {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -15,13 +15,11 @@ export default function ProfileCompany() {
     const [imageURL, setImageURL] = useState<string | null>(null);
     const [nameProduct, setNameProduct] = useState("")
     const [produtos, setProdutos] = useState<any[]>([]);
-
     const url = window.location.href;
     const id = url.split("/").pop();
     const idStorage = localStorage.getItem('id');
     let perfil = true
     if (id != idStorage) { perfil = false }
-
     {/** LIMPE A LISTA APÓS OS TESTES */ }
     // useEffect(()=>{
     //     axios.get('http://localhost:3001'+'/empresa/:id')
@@ -32,17 +30,11 @@ export default function ProfileCompany() {
     //         console.error('Erro ao buscar dados:', error);
     //       });   
     //    const [produtos, setProdutos] = useState<IProduto[]>([  // Inicialize o estado "produtos" com a lista inicial.
-
-
-
     // {
     //     image: // tps://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2Vub3VyYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=600',
     //     namePro// t: 'Cenoura'
     // },
     //    //]);
-
-
-
     //ESSA FUNÇÃO É PARA SABER SE A IMAGEM FOI SUBMETIDA
     //   const [produtos, setProdutos] = useState<IProduto[]>([]);
 
@@ -50,15 +42,13 @@ export default function ProfileCompany() {
 
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`http://localhost:3000/empresa/${id}`)
+        api.get(`http://localhost:3000/empresa/${id}`)
             .then(response => {
-
                 const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
                     id: produto.id,
                     nome: produto.nome,
                     photo: produto.photo,
                 }));
-
                 setProdutos(novosProduto);
                 console.log(novosProduto)
             })
@@ -80,7 +70,7 @@ export default function ProfileCompany() {
             formData.append('file', image); // Adicione a imagem ao FormData
             formData.append('nome', nameProduct); // Adicione o nome ao FormData
             
-            axios.post('http://localhost:3000/produto', formData, {
+            api.post('http://localhost:3000/produto', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}` // Adiciona o token no cabeçalho da requisição
                 }

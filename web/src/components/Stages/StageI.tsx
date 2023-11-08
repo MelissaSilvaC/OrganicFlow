@@ -3,7 +3,6 @@ import TextField from "components/Items_Forms/TextField"
 import { useState, useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import InfoField from "./InfoField"
-import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
@@ -31,11 +30,16 @@ export default function StageI() {
     const [isFormVisible, setIsFormVisible] = useState(true);
     const url = window.location.href;
     const idlinha = url.split("/").pop();
-    
+
     useEffect(() => {
         api.get(`/linha/${idlinha}`)
             .then(response => {
-                const { nome, local, dt_plantio, dt_colheita, insumo, praticas, form, medal,date } = response.data.Relatorio1[0];
+                const { nome, local, dt_plantio, dt_colheita, insumo, praticas, form, medal, date } = response.data.Relatorio1[0];
+                // Verifique se os estados foram preenchidos e atualize 'report' com base nisso
+                if (nome || local || dt_plantio || dt_colheita || insumo || praticas || form || medal || date) {
+                    setReport(true); // Se algum estado estiver preenchido, defina 'report' como true
+                }
+
                 setNome(nome);
                 setLocalizacao(local);
                 setDataPlantio(dt_plantio);
@@ -44,6 +48,7 @@ export default function StageI() {
                 setPraticas(praticas);
                 setIsFormVisible(form);
                 setDate(date)
+
                 // console.log(response.data.Relatorio1)
                 // console.log(response.data.Relatorio1.nome)
                 // console.log(nome+'aaaaaaa')
@@ -78,9 +83,9 @@ export default function StageI() {
     };
 
     return (
-        < Accordion sx={{background: 'none'}} >
+        < Accordion sx={{ background: 'none' }} >
             <StageCard
-                month={nomeDoMes}//mudar data de criaçaõ do bgl
+                month={nomeDoMes}//mudar data de criação da data
                 day={dia}//mudar
                 stageName="Produção Agrícola"
                 report={report}
@@ -206,5 +211,5 @@ export default function StageI() {
             </AccordionDetails>
         </Accordion >
     )
-       
+
 }

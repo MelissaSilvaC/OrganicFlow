@@ -4,7 +4,6 @@ import Button from '../Items_Forms/Button'
 import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
 import BasicModal from 'components/Modal/RecoverPassword'
-import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import api from '../../axiosUrl'
 
@@ -47,7 +46,7 @@ export default function PanelLogin() {
 
                         console.log(response.data.token)//se usuário existir
                         localStorage.setItem('token', response.data.token); //armazena o token no local
-                        axios.defaults.headers["authorization"] = `Bearer ${response.data.token}`
+                        api.defaults.headers["authorization"] = `Bearer ${response.data.token}`
 
                         navigate('/');//faz o usuario retornar a página inicial
                     }

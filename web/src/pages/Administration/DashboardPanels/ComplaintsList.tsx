@@ -1,8 +1,8 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import React from "react";
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useState, useEffect } from "react";
+import api from '../../../axiosUrl'
 
 interface Denuncia {
     id: number;
@@ -86,14 +86,11 @@ const columns: GridColDef[] = [
 export default function ComplaintsList() {
     const [denuncias, setDenuncias] = useState<any[]>([]);
     const [selectedComplaint, setSelectedComplaint] = useState(null);
-
     const handleComplaintClick = (complaint: React.SetStateAction<null>) => {
         setSelectedComplaint(complaint);
     };
-
     useEffect(() => {
-
-        axios.get(`http://localhost:3000/denuncia`)
+        api.get(`/denuncia`)
             .then(response => {
 
                 const novosDenuncia = response.data.map((denuncia: Denuncia) => ({
@@ -102,17 +99,14 @@ export default function ComplaintsList() {
                     alvo: denuncia.alvo,
                     description: denuncia.description,
                 }));
-
                 setDenuncias(novosDenuncia);
                 console.log(novosDenuncia)
-
             })
             //retorna o objeto inteiro
             .catch((error) => {
                 console.log(error);
             });
         // console.log('aa')
-
     }, []);
 
     return (

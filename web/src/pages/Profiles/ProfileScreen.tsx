@@ -1,5 +1,4 @@
 import fundo from '../../assets/img/Fundo/field.png'
-import axios from 'axios'
 import { useState, useEffect } from 'react';
 import IProfile from 'types/IProfile';
 import ModalProfile from 'components/Modal/UpdateProfile';
@@ -30,7 +29,7 @@ export default function ProfileScreen({ children }: IProfile) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:3000' + `/empresa/${id}`)
+        api.get(`/empresa/${id}`)
             .then(response => {
                 const { name, email, company, cnpj, photo, local } = response.data[0];
                 setNome(name);
