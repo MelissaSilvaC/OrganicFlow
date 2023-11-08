@@ -1,43 +1,39 @@
+import React, { useState, useEffect } from 'react';
+import api from '../../../axiosUrl'
+
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import empresa from '../../../assets/img/logoExample.png'
 import BanedUserCard from "components/Cards/InfoCards/BanedUser";
 
 export default function BanedUserView() {
-    return (
-        <>
-            <TitleComplaint titulo="Usuários banidos" estilo="max-sm:pt-0" />
-            <div className="text-white px-20 max-sm:px-2">
+    const [users, setUsers] = useState<{ id: number, name: string, email: string, cnpj: string,photo:string }[]>([]);
 
-                <div className="flex flex-wrap max-sm:pb-14">
-                    {/**
-                     * Função map preenchendo os seguintes parametros:
-                     * photo
-                     * name
-                     * email
-                     * cnpj (se for gerente)
-                     * 
-                     */}
-                    <BanedUserCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <BanedUserCard
-                        photo={empresa}
-                        name="Seeds sprout"
-                        email="seedsprout@email.com"
-                        cnpj="97.206.822/0001-65" />
-                    <BanedUserCard
-                        photo={empresa}
-                        name="Fiscal"
-                        email="seedsprout@email.com" />
-                    <BanedUserCard
-                        photo={empresa}
-                        name="Fiscal"
-                        email="seedsprout@email.com" />
+  useEffect(() => {
+    api.get('/ban') // Substitua 'URL_DA_API_AQUI' pela URL da sua API
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar usuários banidos:', error);
+      });
+  }, []);
 
-                </div>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <TitleComplaint titulo="Usuários banidos" estilo="max-sm:pt-0" />
+      <div className="text-white px-20 max-sm:px-2">
+        <div className="flex flex-wrap max-sm:pb-14">
+          {users.map(user => (
+            <BanedUserCard
+              key={user.id}
+              id={user.id}
+              photo={user.photo}
+              name={user.name}
+              email={user.email}
+              cnpj={user.cnpj} />
+          ))}
+        </div>
+      </div>
+    </>
+  )
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import api from './axiosUrl';
 
 const AuthCheck = ({ pathsToCheck }: { pathsToCheck: string[] }) => {
 
@@ -15,7 +15,7 @@ const AuthCheck = ({ pathsToCheck }: { pathsToCheck: string[] }) => {
           navigate('/');
         } else {
           try {
-            const response = await axios.get('https://organicflow-server.vercel.app/auth', {
+            const response = await api.get('/auth', {
               headers: {
                 retornar: true,
                 Authorization: `Bearer ${token}`

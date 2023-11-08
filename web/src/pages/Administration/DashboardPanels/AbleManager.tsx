@@ -1,8 +1,8 @@
 import InfoManagerCard from "components/Cards/InfoCards/Manager";
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
 import { useState, useEffect } from "react";
-import axios from 'axios'
 import SearchBar from "components/SearchBar";
+import api from '../../../axiosUrl'
 
 export default function AbleManager() {
     const [gerentes, setGerentes] = useState<any[]>([]);
@@ -11,7 +11,7 @@ export default function AbleManager() {
     const [searchValidado, setSearchValidado] = useState("");
     useEffect(() => {
 
-        axios.get(`http://localhost:3000/gerente`)
+        api.get(`/gerente`)
             .then(response => {
 
                 const gerentes = response.data.map((item: any) => ({
@@ -31,7 +31,7 @@ export default function AbleManager() {
             });
         // console.log('aa')
 
-        axios.get(`http://localhost:3000/gerentevalido`)
+        api.get(`/gerentevalido`)
             .then(response => {
 
                 const gerentesvalidos = response.data.map((item: any) => ({
@@ -80,7 +80,7 @@ export default function AbleManager() {
                             console.log(gerente.id)
                             const token = localStorage.getItem('token')
                             console.log(token)
-                            axios.post('http://localhost:3000' + '/gerente', {
+                            api.post('/gerente', {
                                 id_user: gerente.id,
                             }, {
                                 headers: {

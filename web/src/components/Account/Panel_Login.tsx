@@ -5,8 +5,10 @@ import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
 import BasicModal from 'components/Modal/RecoverPassword'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom"
 import api from '../../axiosUrl'
+import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { useNavigate } from "react-router-dom"
+import {auth} from '../../services/firebase'
 
 const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
@@ -20,7 +22,7 @@ export default function PanelLogin() {
  
     const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
-        api.post('/login', {//verifica login
+        api.post( '/login', {//verifica login
             email: email, //campo do email no front
             password: senha, //campo password no front
         })
@@ -28,11 +30,18 @@ export default function PanelLogin() {
                 response => {
                     console.log(email)
                     console.log(senha)
- 
                     if (response.data.fail) {//pega o fail do json; fail===true]
                         {loginError ? setLoginError(loginError) : setLoginError(!loginError)}
                         console.log('erro: ' + response.data.error)//pega o error: do json
                     } else {
+                        if (response.data.User.UserRole && response.data.User.UserRole.length === 0) {
+                            // O usuário não possui nenhum UserRole
+                            console.log('O usuário não possui nenhum UserRole');
+                            localStorage.setItem('token', response.data.token); //armazena o token no local                            
+                            localStorage.setItem('photo', response.data.User.photo)
+                            localStorage.setItem('name', response.data.User.name)
+                            navigate('/'); //faz o usuario retornar a página inicial
+                        } 
                         localStorage.setItem('id', response.data.User.id)
                         localStorage.setItem('photo', response.data.User.photo)
                         localStorage.setItem('name', response.data.User.name)
@@ -49,7 +58,7 @@ export default function PanelLogin() {
                         localStorage.setItem('token', response.data.token); //armazena o token no local
                         axios.defaults.headers["authorization"] = `Bearer ${response.data.token}`
 
-                        navigate('/');//faz o usuario retornar a página inicial
+                        navigate('/'); //faz o usuario retornar a página inicial
                     }
                 }
             )
@@ -58,6 +67,17 @@ export default function PanelLogin() {
         });
     }
 
+    const authentication = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup (auth, provider)
+        .then((result) =>{
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+     
     return (
         <div className='flex flex-col items-center'>
             <Title texto='Entre' />
@@ -105,7 +125,7 @@ export default function PanelLogin() {
                     {/** Ativa o popup */}
                     <div className='h-[2px] w-full bg-white opacity-70' />
                     {/** Autenticação da Google */}
-                    <Button botaoCSS={botaoTCSS} texto='Logar com conta Google' />
+                    <Button botaoCSS={botaoTCSS} texto='Logar com conta Google' onClick={authentication} />
                 </div>
             </div>
 

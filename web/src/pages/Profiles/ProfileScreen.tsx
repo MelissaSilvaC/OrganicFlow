@@ -1,5 +1,4 @@
 import fundo from '../../assets/img/Fundo/field.png'
-import axios from 'axios'
 import { useState, useEffect } from 'react';
 import IProfile from 'types/IProfile';
 import ModalProfile from 'components/Modal/UpdateProfile';
@@ -30,7 +29,7 @@ export default function ProfileScreen({ children }: IProfile) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:3000' + `/empresa/${id}`)
+        api.get(`/empresa/${id}`)
             .then(response => {
                 const { name, email, company, cnpj, photo, local } = response.data[0];
                 setNome(name);
@@ -164,7 +163,17 @@ export default function ProfileScreen({ children }: IProfile) {
                                 <Button
                                     texto="Banir usuário"
                                     botaoCSS='text-red-600 font-semibold max-sm:font-medium flex self-start rounded-xl p-2 px-5 mt-3 border-2 max-sm:border border-red-600 hover:animate-pulse'
-                                    onClick={() => { }}
+                                    onClick={() => {
+                                        api.put('/ban/6')
+                                            .then(response => {
+                                                console.log('Banimento desfeito com sucesso', response);
+                                                // Aqui você pode adicionar código para atualizar o estado ou realizar outras ações após o sucesso da requisição.
+                                            })
+                                            .catch(error => {
+                                                console.error('Erro ao desfazer banimento:', error);
+                                                // Aqui você pode adicionar código para lidar com erros, se necessário.
+                                            });
+                                    }}
                                 />
                                 : ""
                             }

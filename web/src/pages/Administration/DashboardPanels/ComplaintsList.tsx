@@ -1,7 +1,7 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import React from "react";
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../../axiosUrl'
 import { useState, useEffect } from "react";
 
 interface Denuncia {
@@ -93,7 +93,7 @@ export default function ComplaintsList() {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:3000/denuncia`)
+        api.get(`/denuncia`)
             .then(response => {
 
                 const novosDenuncia = response.data.map((denuncia: Denuncia) => ({

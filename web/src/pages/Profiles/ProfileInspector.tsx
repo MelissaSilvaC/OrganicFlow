@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ProfileScreen from "./ProfileScreen";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from 'axios'
+
+import api from '../../axiosUrl'
 import { useEffect, } from "react";
 import logoEmpresa from '../../assets/img/logoExample.png'
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
@@ -13,7 +14,7 @@ export default function ProfileInspector() {
 
     useEffect(() => {
         const id = 2; // Substitua pelo id que você deseja buscar
-        axios.get(`http://localhost:3001/empresa/${id}`)
+        api.get(`/empresa/${id}`)
             .then(response => {
                 setProdutos(response.data);
             })
@@ -37,31 +38,6 @@ export default function ProfileInspector() {
                                 nameProduct={produto.nameProduct}
                             />
                         ))} */}
-                <ProductCard
-                    id={1}
-                    nome="produto"
-                    photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                />
-                <ProductCard
-                    id={1}
-                    nome="produto"
-                    photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                />
-                <ProductCard
-                    id={1}
-                    nome="produto"
-                    photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                />
-                <ProductCard
-                    id={1}
-                    nome="produto"
-                    photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                />
-                <ProductCard
-                    id={1}
-                    nome="produto"
-                    photo="https://images.unsplash.com/photo-1610397648930-477b8c7f0943?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D"
-                />
                 <ProductCard
                     id={1}
                     nome="produto"

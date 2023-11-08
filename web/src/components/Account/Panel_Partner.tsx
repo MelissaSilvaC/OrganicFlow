@@ -3,7 +3,6 @@ import TextField from '../Items_Forms/TextField'
 import Button from '../Items_Forms/Button'
 import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import api from '../../axiosUrl'
 
@@ -18,9 +17,8 @@ export default function PanelPartner() {
 
     const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
-
         console.log(email, senha)
-
+        
         if (senha === senhaVerificada) {
             try {
                 navigate('/sessao/login')

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import ModalScreen from '@mui/material/Modal';
 import { TfiClose } from 'react-icons/tfi'
 import Button from 'components/Items_Forms/Button';
-import axios from 'axios'
 import {useState} from 'react'
 import api from '../../axiosUrl'
 
@@ -18,7 +17,7 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
     const [qrcode, setQrcode] = useState("")
 
     const gerarQrcode=()=>{
-        api.put(`http://localhost:3000/linha/${idlinha}`)
+        api.put(`/linha/${idlinha}`)
             .then(response => {
                 const qrcode= response.data.qrcode
 

@@ -24,7 +24,7 @@ export default function InspectorCard({ photo, name, email,id }: Props) {
                         const userConfirmed = window.confirm("Tem certeza de que quer continuar?");
                         if (userConfirmed) {
                             try {
-                                api.delete(`http://localhost:3000/fiscal/${id}`) // Substitua o '3' pelo ID do usuário que você deseja deletar
+                                api.delete(`/fiscal/${id}`) // Substitua o '3' pelo ID do usuário que você deseja deletar
                                     .then(response => console.log(response))//se for sucedido 
                                     .catch((error) => {
                                         console.log(error);

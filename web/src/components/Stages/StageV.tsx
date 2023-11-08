@@ -39,6 +39,10 @@ export default function StageV() {
                 setDataValidade(dt_validade);
                 setIsFormVisible(form);
                 setDate(date)
+
+                if (nome || local || dt_chegada || dt_validade) {
+                    setReport(true);
+                }
             })
             .catch((error) => {
                 console.log(error);

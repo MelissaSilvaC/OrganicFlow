@@ -3,7 +3,6 @@ import TextField from "components/Items_Forms/TextField"
 import { useState, useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import InfoField from "./InfoField"
-import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
@@ -47,6 +46,9 @@ export default function StageI() {
                 // console.log(response.data.Relatorio1)
                 // console.log(response.data.Relatorio1.nome)
                 // console.log(nome+'aaaaaaa')
+                if (nome || local || dt_plantio || dt_colheita || insumo || praticas || form || medal || date) {
+                    setReport(true);
+                }
             })
             .catch((error) => {
                 console.log(error);

@@ -1,5 +1,4 @@
 import TitleTimeline from "components/Cards/Titles/Title-timeline";
-import TimelinesTable from "components/TimelinesTable";
 import { useState, useEffect, useLayoutEffect } from "react";
 import api from 'axiosUrl'
 import { Outlet } from "react-router-dom";

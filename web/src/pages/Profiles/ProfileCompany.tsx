@@ -4,10 +4,10 @@ import Button from "components/Items_Forms/Button";
 import { useState, useEffect } from "react";
 import ProductCard from "components/Cards/ImageCards/Produto";
 import React from "react";
-import axios from "axios";
 import ProfileScreen from "./ProfileScreen";
 import logoEmpresa from '../../assets/img/logoExample.png'
 import ManagementInspector from "components/ManagementInspectors";
+import api from '../../axiosUrl'
 
 export default function ProfileCompany() {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -50,7 +50,7 @@ export default function ProfileCompany() {
 
         const url = window.location.href;
         const id = url.split("/").pop();
-        axios.get(`http://localhost:3000/empresa/${id}`)
+        api.get(`/empresa/${id}`)
             .then(response => {
 
                 const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
@@ -80,10 +80,7 @@ export default function ProfileCompany() {
             formData.append('file', image); // Adicione a imagem ao FormData
             formData.append('nome', nameProduct); // Adicione o nome ao FormData
             
-            axios.post('http://localhost:3000/produto', formData, {
-                headers: {
-                    'Authorization': `Bearer ${token}` // Adiciona o token no cabeçalho da requisição
-                }
+            api.post('/produto', formData, {
             }) // Correção aqui
                 .then(response => console.log(response))//se for sucedido 
                 .catch((error) => {

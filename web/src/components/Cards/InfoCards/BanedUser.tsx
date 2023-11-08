@@ -1,11 +1,25 @@
 import Button from "components/Items_Forms/Button";
+import api from '../../../axiosUrl'
 
 interface Props {
+    id:number,
     name: string,
     email: string,
     photo: string,
     cnpj?: string,
 }
+
+const submit = () => {
+    api.put('/ban/6')
+      .then(response => {
+        console.log('Banimento desfeito com sucesso', response);
+        // Aqui você pode adicionar código para atualizar o estado ou realizar outras ações após o sucesso da requisição.
+      })
+      .catch(error => {
+        console.error('Erro ao desfazer banimento:', error);
+        // Aqui você pode adicionar código para lidar com erros, se necessário.
+      });
+  }
 
 export default function BanedUser({ photo, name, email, cnpj }: Props) {
     return (

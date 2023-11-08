@@ -3,7 +3,6 @@ import TextField from "components/Items_Forms/TextField"
 import { useState, useEffect } from "react"
 import TextArea from "components/Items_Forms/TextArea"
 import InfoField from "./InfoField"
-import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
@@ -16,8 +15,6 @@ const botaoTCSS = 'bg-verde_folha w-[15rem] h-[35px] max-sm:h-[30px] rounded-lg 
 const dataTCSS = 'flex max-sm:flex-col justify-evenly max-sm:space-y-3'
 const estilo = "flex justify-center"
 
-
-
 export default function StageIV() {
     const [nome, setNome] = useState("")
     const [localizacao, setLocalizacao] = useState("")
@@ -29,11 +26,9 @@ export default function StageIV() {
     const url = window.location.href;
     const idlinha = url.split("/").pop();
 
-    
     const [date, setDate] = useState("")
     const [report, setReport] = useState(false);
 
- 
     useEffect(() => {
         api.get(`/linha/${idlinha}`)
             .then(response => {
@@ -50,6 +45,10 @@ export default function StageIV() {
                 console.log(response.data.Relatorio4[0].nome);
                 console.log(nome);
                 setIsFormVisible(form);
+                
+                if (nome || local || responsavel || dt_entrada || dt_saida || praticas) {
+                    setReport(true);
+                }
             })
             .catch((error) => {
                 console.log(error);

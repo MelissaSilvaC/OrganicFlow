@@ -98,7 +98,7 @@ export default function TimelinesTable(nome : string) {
     const roleStorage = localStorage.getItem('id_role');
     let perfil = true
     let comum = false
-    if (id != idStorage) { perfil = false }
+    if (roleStorage === "2") { perfil = true }
     if (roleStorage === null) { comum = true }
 
     useEffect(() => {
