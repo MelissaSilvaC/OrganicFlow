@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import BasicModal from 'components/Modal/RecoverPassword'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import api from '../../axiosUrl'
 
 const campoTCSS = 'h-[50px] max-lg:h-[40px] bg-neutral-50 rounded-xl max-lg:rounded-lg shadow px-6 my-3'
 const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 max-lg:mt-2 text-lg max-lg:text-base'
@@ -19,7 +20,7 @@ export default function PanelLogin() {
  
     const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
-        axios.post('http://localhost:3000' + '/login', {//verifica login
+        api.post('/login', {//verifica login
             email: email, //campo do email no front
             password: senha, //campo password no front
         })

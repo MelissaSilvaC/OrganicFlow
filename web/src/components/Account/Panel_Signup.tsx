@@ -5,7 +5,7 @@ import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
 import IUser from 'types/IUser'
 import { useNavigate } from "react-router-dom"
-import axios from 'axios'
+import api from '../../axiosUrl'
 
 export default function PanelSignup() {
     const [nome, setNome] = useState("")
@@ -16,7 +16,7 @@ export default function PanelSignup() {
 
     const cadastrarDados = ({ name, email, password }: IUser) => {
         console.log(name + email + password)
-        axios.post('http://localhost:3000' + '/user', {
+        api.post('/user', {
             name: name,
             email: email,
             password: password,

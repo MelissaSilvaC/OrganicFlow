@@ -6,6 +6,7 @@ import ModalProfile from 'components/Modal/UpdateProfile';
 import Button from 'components/Items_Forms/Button';
 import TextField from 'components/Items_Forms/TextField';
 import Placeholder from 'assets/img/placeholder.png'
+import api from '../../axiosUrl'
 
 export default function ProfileScreen({ children }: IProfile) {
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
@@ -60,39 +61,36 @@ export default function ProfileScreen({ children }: IProfile) {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const token = localStorage.getItem('token')
+        
+        const formData = new FormData(); // Crie um objeto FormData para enviar a imagem
         if (image) {
-            axios.put('http://localhost:3000' + '/user/' + id, {//verifica login
-                photo: photo,
-                local: local,
-                name: nome,
-            },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
+            
+            formData.append('file', image); // Adicione a imagem ao FormData
+            formData.append('file', local); // Adicione a imagem ao FormData
+            formData.append('file', nome); // Adicione a imagem ao FormData
+
+
+            api.put('/user/' + id,formData, {//verifica login
+            })
                 .then(response => {
                     console.log(response)
                 })
                 .catch(error => {
                     console.error('Erro ao buscar dados:', error);
                 });
+
+            
         } else {
-            axios.put('http://localhost:3000' + '/user/' + id, {//verifica login
-                local: local,
-                name: nome,
-            },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                .then(response => {
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.error('Erro ao buscar dados:', error);
-                });
+            api.put('/user/' + id, {//verifica login
+            local: local,
+            name: nome,
+        })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados:', error);
+            });
         }
     }
 

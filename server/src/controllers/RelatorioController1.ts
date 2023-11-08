@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 export class Relatorio1Controller {
   async criar(request: Request, response: Response) {
-    const { nome, local, dt_plantio, dt_colheita, insumo, praticas,id_linha,medalha } = request.body;
+    const { nome, local, dt_plantio, dt_colheita, insumo, praticas,id_linha, } = request.body;
     const date = new Date();
         // Obtém a data no formato desejado (dia/mes/ano)
     const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
@@ -19,7 +19,7 @@ export class Relatorio1Controller {
         dt_colheita,
         insumo,
         praticas,
-        medalha,
+        
         user: { connect: { id:Number(request.user.id)  } }, // Conecta com o usuário que está criando o registro
         // user: { connect: { id:3  } }, // teste
         linha: {
@@ -34,7 +34,7 @@ export class Relatorio1Controller {
 
   async atualizar(request: Request, response: Response) {
     const { id } = request.params;
-    const { nome, local, dt_plantio, dt_colheita, insumo, praticas,medalha } = request.body;
+    const { nome, local, dt_plantio, dt_colheita, insumo, praticas, } = request.body;
 
     let prodAgri = await prismaClient.prod_Agri.findFirst({
       where: {
@@ -61,7 +61,7 @@ export class Relatorio1Controller {
         dt_colheita,
         insumo,
         praticas,
-        medalha
+        
       },
     });
 

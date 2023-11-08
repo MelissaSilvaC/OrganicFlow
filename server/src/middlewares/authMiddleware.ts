@@ -27,8 +27,8 @@ export const authMiddleware =async(request:Request,response: Response, next: Nex
     console.log(token)
  
     try {
-        const {id,permissions,roles}=jwt.verify(token, process.env.JWT_PASS ?? "") as jwtPayload//verifica o token
-        console.log(id,permissions,roles)
+        
+        const { id, permissions, roles } = jwt.verify(token, process.env.JWT_PASS ?? "", { expiresIn: '10d' } as jwt.VerifyOptions) as jwtPayload 
  
         request.user={//salva dentro da interface esses parâmetros
             id,

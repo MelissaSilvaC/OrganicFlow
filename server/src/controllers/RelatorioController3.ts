@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 export class Relatorio3Controller {
   async criar(request: Request, response: Response) {
-    const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino,id_linha ,medalha } = request.body;
+    const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino,id_linha , } = request.body;
     const date = new Date();
     // Obtém a data no formato desejado (dia/mes/ano)
     const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
@@ -19,7 +19,7 @@ export class Relatorio3Controller {
         dt_descarregamento,
         origem,
         destino,
-        medalha,
+        
         user: { connect: { id: Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
         linha: {
           connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
@@ -33,7 +33,7 @@ export class Relatorio3Controller {
 
   async atualizar(request: Request, response: Response) {
     const { id } = request.params;
-    const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino ,medalha } = request.body;
+    const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino , } = request.body;
 
     let transporte = await prismaClient.transporte.findFirst({
       where: {
@@ -59,7 +59,7 @@ export class Relatorio3Controller {
         dt_descarregamento,
         origem,
         destino,
-        medalha
+        
       },
     });
 

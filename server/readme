@@ -49,3 +49,6 @@ consultar empresas. consultei uma empresa que não tem permissão
 
 fiscal boolean
 ver fiscais do gerente
+
+VT12001: unsupported: drop database by failDBDDL
+dropei a tabela que estava dando erro, e depois dei o npx prisma db push

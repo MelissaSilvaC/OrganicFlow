@@ -7,7 +7,6 @@ import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
-import Medal from '../../assets/img/Medals/Medal_IV.png'
 import api from '../../axiosUrl'
 import logmes from './logica_mes'
 
@@ -32,7 +31,6 @@ export default function StageIV() {
 
     
     const [date, setDate] = useState("")
-    const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
 
  
@@ -73,7 +71,6 @@ export default function StageIV() {
             responsavel,
             dt_entrada:dataEntrada,
             dt_saida:dataSaida,
-            medalha:medal,
             id_linha:idlinha
           });
           
@@ -84,15 +81,6 @@ export default function StageIV() {
         }
       };
 
-      const handleClick = (e: SubmitEvent) => {
-        console.log(medal)
-        
-        e.preventDefault();
-        setMedal(!medal);
-        
-        console.log(medal)
-      };
-
     return (
         <Accordion sx={{ background: 'none' }}>
             <StageCard
@@ -100,8 +88,6 @@ export default function StageIV() {
                 day={dia}//mudar
                 stageName="Armazenamento e Distribuição"
                 report={report}
-                medal={!medal} // VALOR BOOLEANO DA MEDALHA
-                Num_medal={Medal}
             />
             <AccordionDetails sx={{
                 [`@media (min-width: 640px)`]: { background: 'white' },
@@ -171,12 +157,7 @@ export default function StageIV() {
                                 campoCSS={" bg-neutral-50 rounded-xl shadow px-6 my-3"}
                                 inputCSS={inputTCSS}
                             />
-                            <div className="flex max-sm:flex-col max-sm:items-center">
-                                <Button
-                                    botaoCSS={botaoTCSS}
-                                    texto='Medalha'
-                                    onClick={handleClick}
-                                />
+                            <div className="flex max-sm:items-center">
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Enviar relatório'

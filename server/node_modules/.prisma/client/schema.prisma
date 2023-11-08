@@ -105,7 +105,11 @@ model Denuncia {
   user    User @relation(fields: [id_user], references: [id], onDelete: Cascade)
 
   description String
-  alvo        String
+  stage String
+  argumento String
+
+  id_linha Int
+  linha    Linha @relation(fields: [id_linha], references: [id], onDelete: Cascade, onUpdate: NoAction)
   // date DateTime
 
   @@map("denuncia")
@@ -119,10 +123,12 @@ model Linha {
   Relatorio3 Transporte[]
   Relatorio4 Armazenamento[]
   Relatorio5 Varejo[]
+  Denuncia Denuncia[]
 
   date String
   qrcode        String?   @db.VarChar(10000) // Aumentar o tamanho da coluna qrcode para 1000 caracteres
   id_produto Int
+
   produto    Produto @relation(fields: [id_produto], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@map("linha")
@@ -144,7 +150,6 @@ model Prod_Agri {
   insumo      String
   praticas    String
   private     Boolean  @default(false)
-  medalha Boolean @default(false)
 
   @@map("prod_agri")
 }
@@ -165,7 +170,6 @@ model Embalagem {
   dt_processamento String
   dt_embalagem     String
   private          Boolean  @default(false)
-  medalha Boolean @default(false)
 
   @@map("embalagem")
 }
@@ -186,7 +190,6 @@ model Transporte {
   origem             String
   destino            String
   private            Boolean  @default(false)
-  medalha Boolean @default(false)
 
   @@map("transporte")
 }
@@ -207,7 +210,6 @@ model Armazenamento {
   dt_entrada  String
   dt_saida    String
   private     Boolean  @default(false)
-  medalha Boolean @default(false)
 
   @@map("armazenamento")
 }
@@ -226,7 +228,6 @@ model Varejo {
   dt_chegada String
   dt_validade String
   private    Boolean  @default(false)
-  medalha Boolean @default(false)
 
   @@map("varejo")
 }

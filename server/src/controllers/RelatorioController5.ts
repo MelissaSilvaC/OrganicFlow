@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 export class Relatorio5Controller {
   async criar(request: Request, response: Response) {
-    const { nome, local, dt_chegada,medalha,id_linha,dt_validade } = request.body;
+    const { nome, local, dt_chegada,id_linha,dt_validade } = request.body;
     const date = new Date();
     // Obtém a data no formato desejado (dia/mes/ano)
     const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
@@ -16,7 +16,7 @@ export class Relatorio5Controller {
         nome,
         local,
         dt_chegada,
-        medalha,
+        
         dt_validade,
         user: { connect: { id: Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
         linha: {
@@ -31,7 +31,7 @@ export class Relatorio5Controller {
 
   async atualizar(request: Request, response: Response) {
     const { id } = request.params;
-    const { nome, local,medalha, dt_chegada,dt_validade } = request.body;
+    const { nome, local, dt_chegada,dt_validade } = request.body;
 
     let varejo = await prismaClient.varejo.findFirst({
       where: {
@@ -54,7 +54,7 @@ export class Relatorio5Controller {
         nome,
         local,
         dt_chegada,
-        medalha,
+        
         dt_validade
       },
     });

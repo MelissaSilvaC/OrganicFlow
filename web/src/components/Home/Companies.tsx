@@ -2,7 +2,7 @@ import Papel from '../../assets/img/Fundo/papel1.png'
 import Slider from 'react-slick';
 import CompanyBrand from '../Cards/ImageCards/CompanyBrand';
 import { useLayoutEffect, useState, useEffect } from 'react';
-import axios from 'axios'
+import api from '../../axiosUrl'
 import SearchBar from 'components/SearchBar';
 import CompanyI from 'assets/img/CompanyExample/3.png'
 import CompanyII from 'assets/img/CompanyExample/4.png'
@@ -54,7 +54,7 @@ export default function Companies() {
     useEffect(() => {
         // axios.get(`https://organicflow-server.vercel.app/empresa`)
         
-        axios.get(`http://localhost:3000/empresa`)
+        api.get(`/empresa`)
             .then(response => {
                 const empresas = response.data.map((item: any) => ({
                     id: item.user.id,

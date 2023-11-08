@@ -5,6 +5,7 @@ import Title from '../Items_Forms/Title'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import api from '../../axiosUrl'
 
 export default function PanelPartner() {
     const [email, setEmail] = useState("")
@@ -23,7 +24,7 @@ export default function PanelPartner() {
         if (senha === senhaVerificada) {
             try {
                 navigate('/sessao/login')
-                axios.post('http://localhost:3000' + '/user', {
+                api.post('/user', {
                 name: nomeComercial,
                 email: email,
                 password: senha,

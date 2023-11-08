@@ -5,11 +5,9 @@ interface Props {
     day?: string
     stageName?: string
     report: boolean | undefined
-    Num_medal: string
-    medal: boolean | undefined
 }
 
-export default function StageCard({ month, day, stageName, report, medal, Num_medal}: Props) {
+export default function StageCard({ month, day, stageName, report}: Props) {
     const cardBackground = report ? 'bg-verde_escuro' : 'bg-zinc-600';
 
     return (
@@ -27,7 +25,7 @@ export default function StageCard({ month, day, stageName, report, medal, Num_me
                 display: 'flex' 
             }
         }}>
-            <div className={`${cardBackground} h-full w-[20rem] max-sm:w-[8rem] py-[28px] max-sm:py-[17px] mt-1 max-sm:mt-0 text-2xl max-sm:text-base font-medium max-sm:font-normal text-white flex flex-col justify-center items-center`}>
+            <div className={`${cardBackground} h-[7.5rem] max-sm:h-[5rem] w-[20rem] max-sm:w-[8rem] py-[28px] max-sm:py-[17px] text-2xl max-sm:text-base font-medium max-sm:font-normal text-white flex flex-col justify-center items-center`}>
                 <p>{month}</p>
                 <p>{day}</p>
             </div>
@@ -35,10 +33,6 @@ export default function StageCard({ month, day, stageName, report, medal, Num_me
                 <div className='w-full text-lg max-sm:text-base'>
                     <p>{stageName}</p>
                 </div>
-                <div
-                    className={`w-24 h-24 pl-24 max-sm:w-16 max-sm:h-16 max-sm:pl-16 bg-cover flex my-4 max-sm:my-0 transition-opacity ${medal ? 'opacity-100' : 'opacity-0'}`}
-                    style={{ backgroundImage: `url(${Num_medal})` }}
-                />
             </div>
             <div className='w-20 max-sm:w-2' />
         </AccordionSummary >

@@ -5,7 +5,6 @@ import InfoField from "./InfoField"
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
-import Medal from '../../assets/img/Medals/Medal_V.png'
 import api from '../../axiosUrl'
 import logmes from './logica_mes'
 
@@ -26,7 +25,6 @@ export default function StageV() {
     const [isFormVisible, setIsFormVisible] = useState(true);
 
     const [date, setDate] = useState("")
-    const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
 
     useEffect(() => {
@@ -34,12 +32,11 @@ export default function StageV() {
         const id = url.split("/").pop();
         api.get(`/linha/${id}`)
             .then(response => {
-                const { nome, local, dt_chegada, dt_validade, form, medalha,date } = response.data.Relatorio5[0];
+                const { nome, local, dt_chegada, dt_validade, form,date } = response.data.Relatorio5[0];
                 setNome(nome);
                 setEndereco(local);
                 setDataChegada(dt_chegada);
                 setDataValidade(dt_validade);
-                setMedal(medalha);
                 setIsFormVisible(form);
                 setDate(date)
             })
@@ -47,11 +44,6 @@ export default function StageV() {
                 console.log(error);
             });
     }, []);
-
-    const handleClick = (e: SubmitEvent) => {
-        e.preventDefault();
-        setMedal(!medal);
-      };
 
     const partes = date.split("/");
     const dia = partes[0];
@@ -65,7 +57,6 @@ export default function StageV() {
             nome,
             local: endereco,
             dt_chegada: dataChegada,
-            medalha: medal,
             id_linha: idlinha,
             dt_validade: dataValidade
           });
@@ -85,8 +76,6 @@ export default function StageV() {
                 day={dia}//mudar
                 stageName="Varejo e Consumo"
                 report={report}
-                medal={!medal} // VALOR BOOLEANO DA MEDALHA
-                Num_medal={Medal}
             />
             <AccordionDetails sx={{
                 [`@media (min-width: 640px)`]: { background: 'white' },
@@ -137,12 +126,7 @@ export default function StageV() {
                                     inputCSS={inputTCSS}
                                 />
                             </div>
-                            <div className="flex max-sm:flex-col max-sm:items-center">
-                                <Button
-                                    botaoCSS={botaoTCSS}
-                                    texto='Medalha'
-                                    onClick={handleClick}
-                                />
+                            <div className="flex max-sm:items-center">
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Enviar relatório'

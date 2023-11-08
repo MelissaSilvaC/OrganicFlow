@@ -6,7 +6,6 @@ export class LinhaController{
     async criar(request:Request, response:Response){
         const{id_produto}=request.body;
         const date = new Date();
-
         // Obtém a data no formato desejado (dia/mes/ano)
         const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
 
@@ -31,8 +30,10 @@ export class LinhaController{
         
         const protocol = request.protocol;//pega o protocolo http
         const host = request.headers.host;//pega o host localhost
-        const front= 'organicflow/' //url do front
+        const front= 'organicflow' //url do front
         const url= `${protocol}://${host}${postUrl}`
+        
+        // const url= `${protocol}://${front}${postUrl}`
         console.log(url)
 
         // Redirecionar o usuário para a nova URL

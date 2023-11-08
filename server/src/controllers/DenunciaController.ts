@@ -3,13 +3,16 @@ import { prismaClient } from '../databases/prismaClient'
 
 export class DenunciaController{
     async criar(request:Request, response:Response){
-        const{alvo, description}=request.body;
+        const{id_linha, description,stage,argumento}=request.body;
 
         const denuncia=await prismaClient.denuncia.create({
             data:{
-                alvo,
                 description,
-                id_user:Number(request.user.id)
+                id_user:Number(request.user.id),
+                stage,
+                argumento,
+                id_linha
+
                 // user:{//esse user se refere a um atributo
                 //     connect:{
                 //         id:Number(id_user)//conect references e fields

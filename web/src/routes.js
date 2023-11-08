@@ -10,6 +10,7 @@ import Timeline from 'pages/Inspector/Timeline';
 import Complaint from 'pages/Administration/Complaint';
 import Dashboard from 'pages/Administration/Dashboard';
 import PrivateRoute from './auth';
+import TimelinesTable from 'components/TimelinesTable';
 
 
 export default function AppRouter() {
@@ -27,12 +28,12 @@ export default function AppRouter() {
                 <Route path='/' element={<Navbar />}>
                   <Route index element={<Home />} />
                     <Route path=':name/:id' element={<ProfileCompany />} />
-                    {/** ':nome/:nomeProduto/lista' */}
-                    <Route exact path=':name/lista/:id' element={<TimelineList />} />
-                    {/** ':nome/:nomeProduto/lista/:idLinha/linhatempo' */}
-                    <Route path='linha/:id' element={<Timeline />} />
-               </Route>
 
+                    <Route path=':name/lista/:id' element={<TimelineList />}>
+                      <Route index element={<TimelinesTable />} />
+                      <Route path=':name/lista/linha/:id' element={<Timeline />} />
+                    </Route>
+               </Route>
                 <Route path='/sessao' element={<SignupScreen />} />
                 <Route path='/sessao/login' element={<LoginScreen />} />
               </Routes>

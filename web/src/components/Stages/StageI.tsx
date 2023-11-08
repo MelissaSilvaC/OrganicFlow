@@ -7,7 +7,6 @@ import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
-import Medal from '../../assets/img/Medals/Medal_I.png'
 import api from '../../axiosUrl'
 import logmes from './logica_mes'
 
@@ -26,16 +25,13 @@ export default function StageI() {
     const [insumos, setInsumos] = useState("")
     const [praticas, setPraticas] = useState("")
 
-    const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
     const [date, setDate] = useState("")
 
     const [isFormVisible, setIsFormVisible] = useState(true);
     const url = window.location.href;
     const idlinha = url.split("/").pop();
-    //idlinha === idStorage { ver botões }
     
-
     useEffect(() => {
         api.get(`/linha/${idlinha}`)
             .then(response => {
@@ -47,10 +43,7 @@ export default function StageI() {
                 setInsumos(insumo);
                 setPraticas(praticas);
                 setIsFormVisible(form);
-                setMedal(medal);
                 setDate(date)
-                
-
                 // console.log(response.data.Relatorio1)
                 // console.log(response.data.Relatorio1.nome)
                 // console.log(nome+'aaaaaaa')
@@ -58,20 +51,16 @@ export default function StageI() {
             .catch((error) => {
                 console.log(error);
             });
-        // console.log('aa')
-
     }, []);
 
     const partes = date.split("/");
     const dia = partes[0];
     const mes = partes[1];
-
     const nomeDoMes = logmes(Number(mes));
 
-    const handleForm = (dataPlantio: string, dataColheita: string, insumos: string, praticas: string, nome: string, localizacao: string,medal:Boolean) => {
+    const handleForm = (dataPlantio: string, dataColheita: string, insumos: string, praticas: string, nome: string, localizacao: string) => {
         // Inverta o estado isFormVisible para alternar entre formulário e grupo de campos
         setIsFormVisible(!isFormVisible);
-
         // e.preventDefault(); 
         api.post('/relatorio1', {
             nome: nome,
@@ -81,19 +70,12 @@ export default function StageI() {
             insumo: insumos,
             praticas: praticas,
             id_linha: idlinha,
-            medal: medal
         })
             .then(response => console.log(response))//se for sucedido 
             .catch((error) => {
                 console.log(error);
             });
     };
-
-    const handleClick = (e: SubmitEvent) => {
-        e.preventDefault();
-        setMedal(!medal);
-      };
-
 
     return (
         < Accordion sx={{background: 'none'}} >
@@ -102,9 +84,6 @@ export default function StageI() {
                 day={dia}//mudar
                 stageName="Produção Agrícola"
                 report={report}
-                medal={medal} // VALOR BOOLEANO DA MEDALHA
-                Num_medal={Medal}
-                //Consultar relatorio,exibir medalha
             />
             <AccordionDetails sx={{
                 [`@media (min-width: 640px)`]: { background: 'white' },
@@ -175,18 +154,13 @@ export default function StageI() {
                                 campoCSS={"bg-neutral-50 rounded-xl shadow px-6 my-3"}
                                 inputCSS={inputTCSS}
                             />
-                            <div className="flex max-sm:flex-col max-sm:items-center">
-                                <Button
-                                    botaoCSS={botaoTCSS}
-                                    texto='Medalha'
-                                    onClick={handleClick}
-                                />
+                            <div className="flex max-sm:items-center">
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm(dataPlantio, dataColheita, insumos, praticas, nome, localizacao,medal)
+                                        handleForm(dataPlantio, dataColheita, insumos, praticas, nome, localizacao)
                                     }}
                                 />
                             </div>

@@ -46,14 +46,12 @@ export default function Timeline() {
         { id: 5, label: 'Varejo e Consumo' },
     ]
 
-    const idStorage = localStorage.getItem('id');
+    const roleStorage = localStorage.getItem('id_role');
     let comum = false
     let fiscal = false
-    if (idStorage == '1') { 
-    } else if (idStorage == '2'){
+    if (roleStorage === "3"){
         fiscal = true
-    } else if (idStorage == '3'){
-    }else {
+    }else if(roleStorage === null){
         comum = true
     }
 
@@ -102,14 +100,9 @@ export default function Timeline() {
         });
     }
 
-
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex max-sm:flex-col">
-                <TitleTimeline 
-                    bgProduct="bg" 
-                    txtProduct="Nome do produto"
-                />
                 {/* Exibe a imagem quando todas as medalhas estiverem exibidas 
                 {allMedalsShown && (
                     <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
@@ -128,8 +121,7 @@ export default function Timeline() {
                     <StageV/>
 
                     <div className="flex my-6 space-x-8 max-sm:space-x-4">
-                        {/**Esse botão só deve aparecer para fiscais */}
-                        {fiscal ? <ModalQRcode /> : ''}
+                        {fiscal && <ModalQRcode /> }
                         {/**Esse botão só deve aparecer para usuários comuns */}
                         {comum ?
                             <ModalComplaint>
@@ -167,10 +159,10 @@ export default function Timeline() {
                                         inputCSS={inputTCSS}
                                     />
                                     
-                                        <Button
-                                            botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
-                                            texto='Enviar denúncia'
-                                        />
+                                    <Button
+                                        botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
+                                        texto='Enviar denúncia'
+                                    />
                                 </form>
                             </ModalComplaint>
                             : ""

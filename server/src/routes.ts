@@ -60,7 +60,7 @@ router.get("/empresa/:id",gerenteController.pesquisarEmpresa)
 router.get("/empresa",gerenteController.consultarEmpresa)
 router.get("/fiscal/:id", fiscalController.consultarFiscal)
 router.get("/produto/:id", produtoController.pesquisar)
-router.get("/fiscal/:id",fiscalController.listarSeuFiscal);
+router.get("/fiscal_empresa/:id",fiscalController.listarSeuFiscal);
 
 
 //cliente cadastrado
@@ -81,7 +81,8 @@ router.put("/ban/:id",userController.banir)
 
 //gerente
 router.get("/user/:id",userController.pesquisar); //quando o gerente precisar pesquisar o usuario
-router.post("/fiscal",authMiddleware,is([RolesPrivate.gerente]),fiscalController.permissaoFiscal);
+router.post("/fiscal",authMiddleware,fiscalController.permissaoFiscal);
+router.put("/user/:id",produtoController.atualizar);
 
 router.delete("/fiscal/:id",authMiddleware,is([RolesPrivate.gerente]),fiscalController.removerFiscal)
 router.put("/user/:id",authMiddleware,proprioput,userController.atualizar)
@@ -92,7 +93,7 @@ router.delete("/produto/:id", produtoController.deletar)
 //fiscal
 router.post("/linha",linhaController.criar)
 // router.get("/linha",linhaController.consultar)
-router.put("/linha/:id",authMiddleware,is([RolesPrivate.fiscal]),linhaController.gerarQrcode)
+router.put("/linha/:id",authMiddleware,linhaController.gerarQrcode)
 router.post("/relatorio1",authMiddleware,relatorio1Controller.criar)
 router.post("/relatorio2",authMiddleware,relatorio2Controller.criar)
 router.post("/relatorio3",authMiddleware,relatorio3Controller.criar)

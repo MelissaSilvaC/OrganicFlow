@@ -4,6 +4,7 @@ import TextShadow from "./TextShadow";
 import ModalUpdateProduct from 'components/Modal/UpdateProduct';
 import TextField from 'components/Items_Forms/TextField';
 import Button from 'components/Items_Forms/Button';
+import api from '../../../axiosUrl'
 
 interface ProdutoProps{
     id:number;
@@ -11,7 +12,7 @@ interface ProdutoProps{
     photo:string;
 }
 
-const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
+const TestProduct:React.FC<ProdutoProps>=({ nome, photo, id}) => {
     const [hover, setHover] = useState(false);
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
     const [image, setImage] = useState<File | null>(null)
@@ -28,19 +29,38 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
     }else if(idStorage == '3'){
         perfil = false 
     }
-
-    const handleMouseEnter = () => {
-        setHover(true);
-    };
-
-    const handleMouseLeave = () => {
-        setHover(false);
-    };
-
+    const handleMouseEnter = () => { setHover(true) };
+    const handleMouseLeave = () => { setHover(false) };
     const onUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-        
-    }
+        e.preventDefault();
+      
+        if (image) {
+            const formData = new FormData(); // Crie um objeto FormData para enviar a imagem
+            formData.append('file', image); // Adicione a imagem ao FormData
+            formData.append('nome', nameProduct); // Adicione o nome ao FormData
+            const arquivo = formData.get('file');
 
+            api.put(`/produto/${id}`, formData, {
+            
+            }).then(response => console.log(response))
+            .catch((error) => {
+                console.log(error);
+            });
+    
+        }
+        else{
+            console.log('aa')
+            api.put(`/produto/${id}`, {
+                nome:nameProduct
+
+            }).then(response => console.log(response))
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+      
+      
+    };
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedImage = e.target.files?.[0]; // Obtenha o primeiro arquivo selecionado
@@ -58,7 +78,7 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
                         <form onSubmit={onUpdate}>
                             {/* Renderiza a imagem se imageURL estiver definida */}
                             <div className="flex justify-center">
-                                <div className="w-44 h-44 max-sm:w-28 max-sm:h-28 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
+                                <div className="w-32 h-32 max-sm:w-28 max-sm:h-28 flex rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-cover">
                                     {imageURL && <img src={imageURL} alt="Imagem Enviada" className="rounded-[50px]" />}
                                 </div>
                             </div>
@@ -73,7 +93,6 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
                             </div>
 
                             <input
-                                required
                                 type='file'
                                 name='image'
                                 onChange={handleImageChange}
@@ -99,7 +118,7 @@ const TestProduct:React.FC<ProdutoProps>=({ nome,photo,id}) => {
                     : ""
                 }
             </div>
-            <Link to={`/fiscal/lista/${id}`}>
+            <Link to={`/${nome}/lista/${id}`}>
                 <div
                     className="w-44 h-44 max-sm:w-28 max-sm:h-28 mx-3 mb-3 mt-0 max-sm:mx-1 max-sm:mb-1 flex flex-col justify-end rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-verde_folha bg-cover"
                     style={{

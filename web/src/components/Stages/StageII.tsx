@@ -7,7 +7,6 @@ import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
-import Medal from '../../assets/img/Medals/Medal_II.png'
 import api from '../../axiosUrl'
 import logmes from './logica_mes'
 
@@ -28,7 +27,6 @@ export default function StageII() {
     const [isFormVisible, setIsFormVisible] = useState(true);
 
     const [date, setDate] = useState("")
-    const [medal, setMedal] = useState(false);
     const [report, setReport] = useState(false);
     
     const url = window.location.href;
@@ -58,19 +56,13 @@ export default function StageII() {
             });
     }, []);
 
-    const handleClick = (e: SubmitEvent) => {
-        e.preventDefault();
-        setMedal(!medal);
-      };
-
-
     const partes = date.split("/");
     const dia = partes[0];
     const mes = partes[1];
 
     const nomeDoMes = logmes(Number(mes));
 
-    const handleForm = (dataPlantio: string, dataColheita: string, praticas: string, nome: string, localizacao: string,medal:Boolean) => {
+    const handleForm = (dataPlantio: string, dataColheita: string, praticas: string, nome: string, localizacao: string) => {
         // Inverta o estado isFormVisible para alternar entre formulário e grupo de campos
         setIsFormVisible(!isFormVisible);
 
@@ -83,7 +75,6 @@ export default function StageII() {
             ingrediente: material,
             praticas: praticas,
             id_linha: idlinha,
-            medal: medal
         })
         .then(response => console.log(response))//se for sucedido 
         .catch((error) => {
@@ -99,8 +90,6 @@ export default function StageII() {
                 day={dia}//mudar
                 stageName="Processamento e Embalagem"
                 report={report}
-                medal={medal} // VALOR BOOLEANO DA MEDALHA
-                Num_medal={Medal}
             />
             <AccordionDetails sx={{
                 [`@media (min-width: 640px)`]: { background: 'white' },
@@ -170,18 +159,13 @@ export default function StageII() {
                                 campoCSS={" bg-neutral-50 rounded-xl shadow px-6 my-3"}
                                 inputCSS={inputTCSS}
                             />
-                            <div className="flex max-sm:flex-col max-sm:items-center">
-                                <Button
-                                    botaoCSS={botaoTCSS}
-                                    texto='Medalha'
-                                    onClick={handleClick}
-                                />
+                            <div className="flex max-sm:items-center">
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm(dtEmbalagem, dtEmbalagem, praticas, nome, local,medal)
+                                        handleForm(dtEmbalagem, dtEmbalagem, praticas, nome, local)
                                     }}
                                 />
                             </div>

@@ -7,7 +7,6 @@ import axios from 'axios'
 import Accordion from "@mui/material/Accordion"
 import StageCard from "components/Cards/Titles/Stage-card"
 import AccordionDetails from "@mui/material/AccordionDetails/AccordionDetails"
-import Medal from '../../assets/img/Medals/Medal_III.png'
 import api from '../../axiosUrl'
 import logmes from './logica_mes'
 
@@ -37,7 +36,7 @@ export default function StageIII() {
         const id = url.split("/").pop();
         api.get(`/linha/${id}`)
             .then(response => {
-                const { nome, dt_carregamento, dt_descarregamento, origem, destino, praticas, form, medal,date } = response.data.Relatorio3[0];
+                const { nome, dt_carregamento, dt_descarregamento, origem, destino, praticas, form, date } = response.data.Relatorio3[0];
                 setNomeTransporte(nome);
                 setDataCarregamento(dt_carregamento);
                 setDataDescarregamento(dt_descarregamento);
@@ -45,10 +44,7 @@ export default function StageIII() {
                 setRotaPercorrida(destino);
                 setPraticas(praticas);
                 setDate(date)
-
-                // console.log(response.data.Relatorio3);
-                // console.log(response.data.Relatorio3[0].nome);
-                // console.log(nome);
+                
                 setIsFormVisible(form);
             })
             .catch((error) => {
@@ -68,7 +64,6 @@ export default function StageIII() {
         nome: string,
         origem: string,
         destino: string,
-        medal: boolean
         ) => {
         setIsFormVisible(!isFormVisible);
     
@@ -80,7 +75,6 @@ export default function StageIII() {
             dt_descarregamento: dataDescarregamento,
             origem: origem,
             destino: destino,
-            medal: medal
         };
     
         api.post('/relatorio3', data)
@@ -89,11 +83,6 @@ export default function StageIII() {
             console.log(error);
         });
     };
-    
-    const handleClick = (e: SubmitEvent) => {
-        e.preventDefault();
-        setMedal(!medal);
-      };
 
     return (
         <Accordion sx={{ background: 'none' }}>
@@ -102,8 +91,6 @@ export default function StageIII() {
                day={dia}//mudar
                 stageName="Transporte e Logística"
                 report={report}
-                medal={medal} // VALOR BOOLEANO DA MEDALHA
-                Num_medal={Medal}
 
             />
             <AccordionDetails sx={{
@@ -164,18 +151,13 @@ export default function StageIII() {
                                 campoCSS={" bg-neutral-50 rounded-xl shadow px-6 my-3"}
                                 inputCSS={inputTCSS}
                             />
-                            <div className="flex max-sm:flex-col max-sm:items-center">
-                                <Button
-                                    botaoCSS={botaoTCSS}
-                                    texto='Medalha'
-                                    onClick={handleClick}
-                                />
+                            <div className="flex max-sm:items-center">
                                 <Button
                                     botaoCSS={botaoTCSS}
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm(dataCarregamento, dataDescarregamento, praticas, nomeTransporte, nomeLogistica, rotaPercorrida, medal);
+                                        handleForm(dataCarregamento, dataDescarregamento, praticas, nomeTransporte, nomeLogistica, rotaPercorrida);
                                     }}
                                 />
                             </div>

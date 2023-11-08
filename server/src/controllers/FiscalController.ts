@@ -1,20 +1,109 @@
 import { prismaClient } from '../databases/prismaClient'
 import { Request, Response } from "express";
+import bcrypt from 'bcrypt'
 
 export class FiscalController {
-  async permissaoFiscal(request: Request, response: Response) {
-    const { id_user } = request.body;
+  // async permissaoFiscal(request: Request, response: Response) {
+  //   const { id_user } = request.body;
+
+  //   const userResp=await prismaClient.user.findFirst({
+  //       where: {
+  //         id: Number(request.user.id),
+  //     },
+  //     select:{
+  //       email:true
+  //     }
+      
+  //   })
+  //   if(userResp){
+  //     const responsavel_email = userResp.email;//pega o email que foi exibido no userResp
+
+  //     const userFiscal=await prismaClient.userRole.create({
+  //       data:{
+  //         responsavel_email:responsavel_email,
+  //         user: { connect: { id:Number(id_user) } },
+  //           role: { connect: { id: Number(3) } },  
+  //       }
+  //     })
+  //     if (userFiscal instanceof Error) {
+  //       return response.status(400).json(userFiscal.message);
+  //     }
+      
+  //     const fiscal=await prismaClient.user.update({
+  //       where:{
+  //         id:Number(id_user)
+  //       },
+  //       data:{
+  //         fiscal:true
+  //       }
+  //     })
+
+  //     const userACL=await prismaClient.user.findFirst({
+  //       where:{
+  //         id:Number(id_user)
+          
+  //       },
+  //       include: {
+  //         // UserPermission:true,
+  //         UserRole:{
+  //           select:{
+  //             role:{
+  //               select:{
+  //                 description:true
+  //               }
+  //             }
+  //           }
+  //         }
+  //       },
+  //     })
+
+
+  //     return response.json(userACL)
+  //   }
+  // }
+
+  async permissaoFiscal(request:Request, response:Response){
+    const{name,password, email}=request.body;
+
+    const User=await prismaClient.user.findFirst({
+        where:{
+            email:email
+        }
+    })
+
+    if(User){
+        return response.json({
+            error:"Esta conta já foi criada"
+        })
+    }
+
+    const hashPassword=await bcrypt.hash(password,10)
+
+   
 
     const userResp=await prismaClient.user.findFirst({
         where: {
           id: Number(request.user.id),
       },
       select:{
-        email:true
+        email:true,
+        photo:true,
       }
       
     })
     if(userResp){
+
+      const user=await prismaClient.user.create({
+          data:{
+              name,
+              email,
+              password:hashPassword,
+              photo:userResp.photo,
+          }
+          
+      })
+      const id_user=user.id
+    
       const responsavel_email = userResp.email;//pega o email que foi exibido no userResp
 
       const userFiscal=await prismaClient.userRole.create({
@@ -59,7 +148,7 @@ export class FiscalController {
 
       return response.json(userACL)
     }
-  }
+}
 
   async listarSeuFiscal(request: Request, response: Response) {
     const{ id }=request.params
@@ -94,20 +183,44 @@ export class FiscalController {
     }
   }
  
+  // async removerFiscal(request:Request, response:Response){
+  //   const {id}=request.params
+  //   try {
+  //     // Primeiro, encontre o 'UserRole' que corresponde ao 'id_user' especificado
+  //       const userRole = await prismaClient.userRole.findFirst({
+  //           where: {
+  //               id_user: Number(id),
+  //           },
+  //       });
+
+  //       if (userRole) {
+  //           await prismaClient.userRole.delete({
+  //               where: {
+  //                   id: userRole.id,
+  //               },
+  //           });
+  //           response.json( "Acesso excluído com sucesso." );
+  //       }
+  //     } catch (error) {
+
+  //         response.status(500).json({ error: "Ocorreu um erro ao excluir o acesso.", details: error });
+  //     }
+  //   }
+
   async removerFiscal(request:Request, response:Response){
     const {id}=request.params
     try {
       // Primeiro, encontre o 'UserRole' que corresponde ao 'id_user' especificado
-        const userRole = await prismaClient.userRole.findFirst({
+        const user = await prismaClient.user.findFirst({
             where: {
-                id_user: Number(id),
+                id: Number(id),
             },
         });
 
-        if (userRole) {
-            await prismaClient.userRole.delete({
+        if (user) {
+            await prismaClient.user.delete({
                 where: {
-                    id: userRole.id,
+                    id: user.id,
                 },
             });
             response.json( "Acesso excluído com sucesso." );
@@ -117,6 +230,7 @@ export class FiscalController {
           response.status(500).json({ error: "Ocorreu um erro ao excluir o acesso.", details: error });
       }
     }
+
 
   async consultarFiscal(request:Request, response:Response){
 
