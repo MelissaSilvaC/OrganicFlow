@@ -1,6 +1,6 @@
 export default interface IInspector{
+    id: number,
     name: string,
     email: string,
-    password: string,
     photo: string,
 }

@@ -1,14 +1,8 @@
 import api from 'axiosUrl';
 import { TfiClose } from 'react-icons/tfi';
+import IInspector from 'types/IInspector';
 
-interface Props {
-    id:number,
-    name: string,
-    email: string,
-    photo: string,
-}
-
-export default function InspectorCard({ photo, name, email,id }: Props) {
+export default function InspectorCard({ photo, name, email,id }: IInspector) {
     const url = window.location.href;
     const idURL = url.split("/").pop();
     const idStorage = localStorage.getItem('id');

@@ -11,6 +11,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Toolbar from '@mui/material/Toolbar';
+import { Outlet } from "react-router-dom";
 
 const drawerWidth = 240;
 const itens = [{
@@ -29,9 +30,7 @@ export default function Dashboard() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => { setMobileOpen(!mobileOpen) };
     const [isVerticalNavVisible, setVerticalNavVisibility] = useState(true);
-    const handleOptionClick = (option: string) => {
-        setSelectedOption(option);
-    };
+    const handleOptionClick = (option: string) => { setSelectedOption(option) };
     const drawer = (
         <div>
             <Toolbar />
@@ -53,14 +52,12 @@ export default function Dashboard() {
     useLayoutEffect(() => {
         const handleResize = () => {
             const windowWidth = window.innerWidth;
-
             if (windowWidth >= 1024) { // Tela grande, exibe a barra de navegação vertical
                 setVerticalNavVisibility(true);
             } else { // Tela menor, exibe o botão
                 setVerticalNavVisibility(false);
             }
         };
-
         handleResize(); // Chama a função quando o componente é montado
         window.addEventListener('resize', handleResize);
         return () => {
@@ -146,7 +143,9 @@ export default function Dashboard() {
 
             {/**Area onde vai aparecer a interface selecionada */}
             <div className="w-[80%] max-sm:w-full">
-                {selectedOption === "Validar gerentes" && <AbleManager />}
+                <Outlet/>
+                {/**
+                 * {selectedOption === "Validar gerentes" && <AbleManager />}
 
                 {selectedOption === "Lista de denúncias" &&
                     <div className="pb-28 max-sm:h-screen">
@@ -159,6 +158,7 @@ export default function Dashboard() {
                     </div>
                 }
                 {selectedOption === "Ver usuários banidos" && <BanedUserView />}
+                 */}
             </div>
         </div>
     );

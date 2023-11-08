@@ -80,11 +80,16 @@ export default function PanelPartner() {
                         obrigatorio={true}
                         placeholder='CNPJ'
                         onChange={evento => setCnpj(evento.target.value)}
-                        valor={cnpj}
                         tipo='text'
                         campoCSS={campoTCSS}
                         inputCSS={inputTCSS}
-                    />
+>
+<InputMask
+    mask="99.999.999/9999-99"
+    maskChar="_"
+    value={cnpj}
+    onChange={evento => setCnpj(evento.target.value)}
+/>
                     <TextField
                         obrigatorio={true}
                         placeholder='E-mail'

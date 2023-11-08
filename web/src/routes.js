@@ -11,7 +11,9 @@ import Complaint from 'pages/Administration/Complaint';
 import Dashboard from 'pages/Administration/Dashboard';
 import PrivateRoute from './auth';
 import TimelinesTable from 'components/TimelinesTable';
-
+import AbleManager from 'pages/Administration/DashboardPanels/AbleManager';
+import ComplaintsList from 'pages/Administration/DashboardPanels/ComplaintsList';
+import BanedUserView from 'pages/Administration/DashboardPanels/BanedUserView';
 
 export default function AppRouter() {
   return (
@@ -19,8 +21,12 @@ export default function AppRouter() {
           <Router>
               <Routes>
                 <Route element={<PrivateRoute />} >
-                  <Route path='admin/dashboard' element={<Dashboard />} />
-                  <Route path='admin/dashboard/denuncia' element={<Complaint />} />
+                  <Route path='admin/dashboard' element={<Dashboard />}>
+                    <Route path='admin/dashboard/abilitar-gerente' element={<AbleManager/>}/>
+                    <Route path='admin/dashboard/lista-denuncias' element={<ComplaintsList/>} />
+                    <Route path='admin/dashboard/lista-denuncias/denuncia' element={<Complaint />} />
+                    <Route path='admin/dashboard/lista-banidos' element={<BanedUserView />} />
+                  </Route>
                   <Route path='fiscal/perfil/:id' element={<ProfileInspector />} />   
                   <Route path=':name/perfil/:id' element={<ProfileCompany />} />
                 </Route>

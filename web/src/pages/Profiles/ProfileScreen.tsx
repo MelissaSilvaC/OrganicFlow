@@ -43,7 +43,6 @@ export default function ProfileScreen({ children }: IProfile) {
             .catch(error => {
                 console.error('Erro ao buscar dados:', error);
             });
-
     }, []);
 
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM
@@ -60,14 +59,11 @@ export default function ProfileScreen({ children }: IProfile) {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const token = localStorage.getItem('token')
-        
         const formData = new FormData(); // Crie um objeto FormData para enviar a imagem
-        if (image) {
-            
+        if (image) {   
             formData.append('file', image); // Adicione a imagem ao FormData
             formData.append('file', local); // Adicione a imagem ao FormData
             formData.append('file', nome); // Adicione a imagem ao FormData
-
 
             api.put('/user/' + id,formData, {//verifica login
             })
@@ -77,8 +73,6 @@ export default function ProfileScreen({ children }: IProfile) {
                 .catch(error => {
                     console.error('Erro ao buscar dados:', error);
                 });
-
-            
         } else {
             api.put('/user/' + id, {//verifica login
             local: local,
