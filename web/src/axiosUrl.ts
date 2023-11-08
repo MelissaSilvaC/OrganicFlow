@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'mysql://apepnj8l8jh2czwiidk8:pscale_pw_e24oiliiwCuMYZY4dfZXSC2HBRqJcOUE15Y75I7vL0D@aws.connect.psdb.cloud/organicflow?sslaccept=strict',
 });
 
 const token = localStorage.getItem('token'); // Obtendo o token do localStorage
