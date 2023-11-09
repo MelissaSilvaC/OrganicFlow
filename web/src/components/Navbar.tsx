@@ -38,7 +38,7 @@ if (photoStorage) {
 }
 
 if (idStorage){
-    if (roleStorage == "1"){
+    if (roleStorage === "1"){
         opcoes = [{ id: 1, label: 'Dashboard', to: '/admin/dashboard' }]
     } else if (roleStorage === "2"){
         opcoes = [{ id: 1, label: 'Ver perfil', to: `/${nameStorage}/perfil/${idStorage}` }]

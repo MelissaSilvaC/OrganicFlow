@@ -10,7 +10,7 @@ import Timeline from 'pages/Inspector/Timeline';
 import Complaint from 'pages/Administration/DashboardPanels/Complaint';
 import Dashboard from 'pages/Administration/Dashboard';
 import PrivateRoute from './auth';
-import TimelinesTable from 'pages/Inspector/TimelinesTable';
+import TimelinesTable from 'components/TimelinesTable';
 import AbleManager from 'pages/Administration/DashboardPanels/AbleManager';
 import ComplaintsList from 'pages/Administration/DashboardPanels/ComplaintsList';
 import BanedUserView from 'pages/Administration/DashboardPanels/BanedUserView';

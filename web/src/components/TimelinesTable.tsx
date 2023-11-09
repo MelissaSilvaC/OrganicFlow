@@ -17,8 +17,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import api from '../../axiosUrl'
-import Button from '../../components/Items_Forms/Button';
+import api from '../axiosUrl'
+import Button from './Items_Forms/Button';
 
 interface Props {
     count: number;

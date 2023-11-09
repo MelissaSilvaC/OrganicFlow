@@ -67,6 +67,7 @@ export default function Timeline() {
     //     });
     // }
 
+
     const handleSelectArgument = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedOptionId = parseInt(event.target.value, 10);
         const selectedOption = options.find((option) => option.id === selectedOptionId);
@@ -86,6 +87,8 @@ export default function Timeline() {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        console.log (selectedArgLabel)
+        console.log (selectedLabel)
         api.post('/denuncia', {
             argumento: selectedArgLabel,
             description: description,
