@@ -23,16 +23,16 @@ export default function StageV() {
     const [dataChegada, setDataChegada] = useState("")
     const [dataValidade, setDataValidade] = useState("")
     const [isFormVisible, setIsFormVisible] = useState(true);
-
     const [date, setDate] = useState("")
     const [report, setReport] = useState(false);
 
+    const url = window.location.href;
+    const id = url.split("/").pop();
+
     useEffect(() => {
-        const url = window.location.href;
-        const id = url.split("/").pop();
         api.get(`/linha/${id}`)
             .then(response => {
-                const { nome, local, dt_chegada, dt_validade, form,date } = response.data.Relatorio5[0];
+                const {nome, local, dt_chegada, dt_validade, form, date} = response.data.Relatorio5[0];
                 setNome(nome);
                 setEndereco(local);
                 setDataChegada(dt_chegada);
@@ -52,24 +52,19 @@ export default function StageV() {
     const partes = date.split("/");
     const dia = partes[0];
     const mes = partes[1];
-
     const nomeDoMes = logmes(Number(mes));
     
-    const handleForm = async () => {
-        try {
-          const response = await api.post('/relatorio5', {
-            nome,
+    const handleForm = (nome: string, endereco: string, dataChegada: string, dataValidade: string) => {
+        setIsFormVisible(!isFormVisible);
+        api.post('/relatorio5', {
+            nome: nome,
             local: endereco,
             dt_chegada: dataChegada,
+            dt_validade: dataValidade,
             id_linha: idlinha,
-            dt_validade: dataValidade
-          });
-      
-          console.log('Registro criado com sucesso:', response.data);
-          setIsFormVisible(!isFormVisible); // Alterna a visibilidade do formulário
-        } catch (error) {
-          console.error('Erro ao criar registro:', error);
-        }
+        })
+            .then(response => console.log(response))//se for sucedido 
+            .catch((error) => { console.log(error) });
       };      
     
 
@@ -136,7 +131,7 @@ export default function StageV() {
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm()
+                                        handleForm(nome, endereco, dataChegada, dataValidade)
                                     }}
                                 />
                             </div>

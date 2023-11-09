@@ -39,12 +39,11 @@ export default function StageIV() {
                 setDataEntrada(dt_entrada);
                 setDataSaida(dt_saida);
                 setPraticas(praticas);
-
-                setDate(date)
-                console.log(response.data.Relatorio4);
-                console.log(response.data.Relatorio4[0].nome);
-                console.log(nome);
                 setIsFormVisible(form);
+                setDate(date)
+                //console.log(response.data.Relatorio4);
+                //console.log(response.data.Relatorio4[0].nome);
+                //console.log(nome);
                 
                 if (nome || local || responsavel || dt_entrada || dt_saida || praticas) {
                     setReport(true);
@@ -58,27 +57,22 @@ export default function StageIV() {
     const partes = date.split("/");
     const dia = partes[0];
     const mes = partes[1];
-
     const nomeDoMes = logmes(Number(mes));
 
-    const handleForm = async () => {
-        try {
-          const response = await api.post('/relatorio4', {
-            nome,
-            local:localizacao,
-            praticas,
-            responsavel,
-            dt_entrada:dataEntrada,
-            dt_saida:dataSaida,
-            id_linha:idlinha
-          });
-          
-          console.log('Registro criado com sucesso:', response.data);
-          setIsFormVisible(!isFormVisible); // Alterna a visibilidade do formulário
-        } catch (error) {
-          console.error('Erro ao criar registro:', error);
-        }
-      };
+    const handleForm = (nome: string, localizacao: string, dataEntrada: string, dataSaida: string, praticas: string) => {
+        setIsFormVisible(!isFormVisible);
+
+        api.post('/relatorio4', {
+            nome: nome,
+            local: localizacao,
+            dt_entrada: dataEntrada,
+            dt_saida: dataSaida,
+            praticas: praticas,
+            id_linha: idlinha,
+        })
+            .then(response => console.log(response))//se for sucedido 
+            .catch((error) => { console.log(error)});
+    };
 
     return (
         <Accordion sx={{ background: 'none' }}>
@@ -162,7 +156,7 @@ export default function StageIV() {
                                     texto='Enviar relatório'
                                     onClick={() => {
                                         setReport(!report)
-                                        handleForm()
+                                        handleForm(nome, localizacao, dataEntrada, dataSaida, praticas)
                                     }}
                                 />
                             </div>

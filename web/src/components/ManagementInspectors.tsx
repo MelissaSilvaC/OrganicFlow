@@ -43,7 +43,7 @@ export default function ManagementInspector(){
         api.get(`/empresa/${idURL}`)
             .then(response => {
                 console.log(response.data); // Verifique se os dados são o que você espera
-                const usersData = response.data.map((item: { user: { id: any; name: any; email: any; photo: any; }; }) => ({
+                const usersData = response.data.UserRole.map((item: { user: { id: any; name: any; email: any; photo: any; }; }) => ({
                     id: item.user.id,
                     name: item.user.name,
                     email: item.user.email,
