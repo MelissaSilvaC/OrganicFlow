@@ -10,7 +10,6 @@ import ModalComplaint from "components/Modal/RegisterComplaint";
 import ModalQRcode from "components/Modal/ShowQRcode";
 import TextArea from "components/Items_Forms/TextArea";
 import Button from "components/Items_Forms/Button";
-
 import api from '../../axiosUrl'
 
 interface Option {
@@ -25,7 +24,7 @@ export default function Timeline() {
     const [description, setDescription] = useState("")
     const [stageOpt, setStageOpt] = useState<Option | null>(null);
     const [argument, setArgument] = useState<Option | null>(null);
-    let selectedLabel : string | null
+    let selectedLabel: string | null
     let selectedArgLabel: string | null
     const options: Option[] = [
         { id: 1, label: 'Falta de Conformidade Legal' },
@@ -46,12 +45,14 @@ export default function Timeline() {
         { id: 5, label: 'Varejo e Consumo' },
     ]
 
+    const url = window.location.href;
+    const idlinha = url.split("/").pop();
     const roleStorage = localStorage.getItem('id_role');
     let comum = false
     let fiscal = false
-    if (roleStorage === "3"){
+    if (roleStorage === "3") {
         fiscal = true
-    }else if(roleStorage === null){
+    } else if (roleStorage === null) {
         comum = true
     }
 
@@ -70,7 +71,7 @@ export default function Timeline() {
         const selectedOptionId = parseInt(event.target.value, 10);
         const selectedOption = options.find((option) => option.id === selectedOptionId);
         setArgument(selectedOption || null);
-        selectedArgLabel = selectedOption?.label || null; 
+        selectedArgLabel = selectedOption?.label || null;
         console.log(selectedArgLabel);
     };
 
@@ -79,49 +80,44 @@ export default function Timeline() {
         const selectedOption = stgOption.find((option) => option.id === selectedOptionId);
         selectedLabel = selectedOption?.label || null; // Aqui está a label selecionada
         console.log(selectedLabel);
-        
-    };
 
-    const url = window.location.href;
-    const idlinha = url.split("/").pop(); 
+    };
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        api.post('/denuncia',{
-            argumento:selectedArgLabel,
-            description:description,
-            stage:selectedLabel,
-            id_linha:idlinha
+
+        api.post('/denuncia', {
+            argumento: selectedArgLabel,
+            description: description,
+            stage: selectedLabel,
+            id_linha: idlinha
         })
-        .then(response => console.log(response))//se for sucedido 
-        .catch((error) => { 
-            console.log(error);
-        });
+            .then(response => console.log(response))//se for sucedido 
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     return (
         <div className="bg-preto pt-[80px] pb-5">
             <div className="flex max-sm:flex-col">
-                {/* Exibe a imagem quando todas as medalhas estiverem exibidas 
-                {allMedalsShown && (
-                    <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
-                        style={{ backgroundImage: `url(${Medal_OF})` }}
-                    />
-                )}
+                {/* Exibe a imagem quando todos os relatórios forem cadastrados
+                <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
+                    style={{ backgroundImage: `url(${Medal_OF})` }}
+                />
                 */}
             </div>
 
             <div className="pt-20 max-lg:pt-8 flex flex-col justify-center items-center">
                 <div className="flex flex-col">
-                    <StageI/>
-                    <StageII/>
-                    <StageIII/>
-                    <StageIV/>
-                    <StageV/>
+                    <StageI />
+                    <StageII />
+                    <StageIII />
+                    <StageIV />
+                    <StageV />
 
                     <div className="flex my-6 space-x-8 max-sm:space-x-4">
-                        {fiscal && <ModalQRcode /> }
+                        {fiscal && <ModalQRcode />}
                         {/**Esse botão só deve aparecer para usuários comuns */}
                         {comum ?
                             <ModalComplaint>
@@ -158,7 +154,7 @@ export default function Timeline() {
                                         campoCSS={"bg-neutral-50 rounded-xl shadow px-6 my-3"}
                                         inputCSS={inputTCSS}
                                     />
-                                    
+
                                     <Button
                                         botaoCSS='bg-verde_escuro w-full max-lg:rounded-lg rounded-xl text-xl max-lg:text-base font-semibold text-white mt-1 hover:bg-green-900 h-[50px] max-lg:h-[40px]'
                                         texto='Enviar denúncia'
@@ -170,7 +166,6 @@ export default function Timeline() {
                     </div>
                 </div>
             </div>
-            
         </div>
     )
 }

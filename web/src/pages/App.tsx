@@ -5,7 +5,6 @@ import Banner from 'components/Home/Banner';
 import AboutUs from 'components/Home/AboutUs';
 import Green from '../assets/img/Fundo/greenLines.png'
 import TeamCard from 'components/Cards/InfoCards/Team';
-import { useState } from 'react';
 import Julia from 'assets/img/Equipe/Julia.jpeg'
 import Lucas from 'assets/img/Equipe/Lucas.jpeg'
 import Melissa from 'assets/img/Equipe/m.jpeg'

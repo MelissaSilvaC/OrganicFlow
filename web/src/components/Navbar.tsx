@@ -32,7 +32,6 @@ let fotoExiste = false;
 if (photoStorage) {
     const image = new Image();
     image.src = photoStorage;
-
     image.onload = () => {
         fotoExiste = true;
     };

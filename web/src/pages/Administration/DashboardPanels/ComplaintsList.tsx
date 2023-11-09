@@ -1,8 +1,8 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import React from "react";
 import { Link } from 'react-router-dom';
 import api from '../../../axiosUrl'
 import { useState, useEffect } from "react";
+import TitleComplaint from 'components/Cards/Titles/Title-complaint';
 
 interface Denuncia {
     id: number;
@@ -22,12 +22,7 @@ const columns: GridColDef[] = [
             const description = params.row.name;
             if (description !== null) {
                 return (
-                    /**
-                    <a href={`your_link_here/${description}`}>
-                      {description}
-                    </a>
-                    */
-                    <Link to='denuncia'>
+                    <Link to='admin/dashboard/lista-denuncias/denuncia'>
                         {description}
                     </Link>
                 );
@@ -41,21 +36,14 @@ const columns: GridColDef[] = [
         width: 300,
         renderCell: (params) => {
             const description = params.row.alvo;
-            // Check if the description is not null
             if (description !== null) {
-                // Wrap the name in a link
                 return (
-                    /**
-                    <a href={`your_link_here/${description}`}>
-                      {description}
-                    </a>
-                    */
-                    <Link to='denuncia'>
+                    <Link to='admin/dashboard/lista-denuncias/denuncia'>
                         {description}
                     </Link>
                 );
             }
-            return null; // Return null for null values
+            return null; 
         },
     },
     {
@@ -64,33 +52,20 @@ const columns: GridColDef[] = [
         width: 300,
         renderCell: (params) => {
             const description = params.row.description;
-            // Check if the description is not null
             if (description !== null) {
-                // Wrap the name in a link
                 return (
-                    /**
-                    <a href={`your_link_here/${description}`}>
-                      {description}
-                    </a>
-                    */
-                    <Link to='denuncia'>
+                    <Link to='admin/dashboard/lista-denuncias/denuncia'>
                         {description}
                     </Link>
                 );
             }
-            return null; // Return null for null values
+            return null; 
         },
     },
 ];
 
 export default function ComplaintsList() {
     const [denuncias, setDenuncias] = useState<any[]>([]);
-    const [selectedComplaint, setSelectedComplaint] = useState(null);
-
-    const handleComplaintClick = (complaint: React.SetStateAction<null>) => {
-        setSelectedComplaint(complaint);
-    };
-
     useEffect(() => {
 
         api.get(`/denuncia`)
@@ -116,13 +91,18 @@ export default function ComplaintsList() {
     }, []);
 
     return (
-        <div>
-            <DataGrid
-                rows={denuncias}
-                columns={columns}
-                pageSizeOptions={[5, 10]}
-                checkboxSelection
-            />
+        <div className="pb-28 max-sm:h-screen">
+            <TitleComplaint titulo="Denúncias" estilo="max-sm:pt-0" />
+            <div className="px-16 max-sm:px-2">
+                <div className="bg-gray-200">
+                    <DataGrid
+                        rows={denuncias}
+                        columns={columns}
+                        pageSizeOptions={[5, 10]}
+                        checkboxSelection
+                    />
+                </div>
+            </div>
         </div>
     );
 }

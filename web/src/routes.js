@@ -7,7 +7,7 @@ import Navbar from 'components/Navbar';
 import Home from 'pages/App';
 import TimelineList from 'pages/Inspector/TimelineList';
 import Timeline from 'pages/Inspector/Timeline';
-import Complaint from 'pages/Administration/Complaint';
+import Complaint from 'pages/Administration/DashboardPanels/Complaint';
 import Dashboard from 'pages/Administration/Dashboard';
 import PrivateRoute from './auth';
 import TimelinesTable from 'components/TimelinesTable';
@@ -21,12 +21,14 @@ export default function AppRouter() {
           <Router>
               <Routes>
                 <Route element={<PrivateRoute />} >
+
                   <Route path='admin/dashboard' element={<Dashboard />}>
-                    <Route path='admin/dashboard/abilitar-gerente' element={<AbleManager/>}/>
+                    <Route index element={<AbleManager/>}/>
                     <Route path='admin/dashboard/lista-denuncias' element={<ComplaintsList/>} />
                     <Route path='admin/dashboard/lista-denuncias/denuncia' element={<Complaint />} />
                     <Route path='admin/dashboard/lista-banidos' element={<BanedUserView />} />
                   </Route>
+
                   <Route path='fiscal/perfil/:id' element={<ProfileInspector />} />   
                   <Route path=':name/perfil/:id' element={<ProfileCompany />} />
                 </Route>
@@ -40,6 +42,7 @@ export default function AppRouter() {
                       <Route path=':name/lista/linha/:id' element={<Timeline />} />
                     </Route>
                </Route>
+
                 <Route path='/sessao' element={<SignupScreen />} />
                 <Route path='/sessao/login' element={<LoginScreen />} />
               </Routes>

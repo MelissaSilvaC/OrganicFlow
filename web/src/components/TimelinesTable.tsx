@@ -156,7 +156,10 @@ export default function TimelinesTable(nome : string) {
         api.post(`/linha`, {
             id_produto: id,
         })
-            .then(response => console.log(response))//se for sucedido 
+            .then(response => {
+                window.location.reload()
+                console.log(response)
+            })//se for sucedido 
             .catch((error) => {
                 console.log(error);
             });
