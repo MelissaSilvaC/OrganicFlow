@@ -31,7 +31,7 @@ export default function ProfileScreen({ children }: IProfile) {
 
         api.get(`/empresa/${id}`)
             .then(response => {
-                const { name, email, company, cnpj, photo, local } = response.data[0];
+                const { name, email, company, cnpj, photo, local } = response.data.produto[0];
                 setNome(name);
                 setEmail(email);
                 setCompany(company);
@@ -43,6 +43,7 @@ export default function ProfileScreen({ children }: IProfile) {
             .catch(error => {
                 console.error('Erro ao buscar dados:', error);
             });
+            
     }, []);
 
     //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM

@@ -53,7 +53,7 @@ export default function ProfileCompany() {
         api.get(`/empresa/${id}`)
             .then(response => {
 
-                const novosProduto = response.data[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
+                const novosProduto = response.data.produto[0].Produto.map((produto: { id: number; nome: string; photo: string; }) => ({
                     id: produto.id,
                     nome: produto.nome,
                     photo: produto.photo,
