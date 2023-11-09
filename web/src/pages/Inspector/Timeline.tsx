@@ -24,8 +24,9 @@ export default function Timeline() {
     const [description, setDescription] = useState("")
     const [stageOpt, setStageOpt] = useState<Option | null>(null);
     const [argument, setArgument] = useState<Option | null>(null);
-    let selectedLabel: string | null
-    let selectedArgLabel: string | null
+    let selectedLabel: string | null = null;
+    let selectedArgLabel: string | null = null;
+
     const options: Option[] = [
         { id: 1, label: 'Falta de Conformidade Legal' },
         { id: 2, label: 'Inconsistência de Dados' },
@@ -86,9 +87,8 @@ export default function Timeline() {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        console.log (selectedArgLabel)
-        console.log (selectedLabel)
+        console.log(selectedArgLabel)
+        console.log(selectedLabel)
         api.post('/denuncia', {
             argumento: selectedArgLabel,
             description: description,
@@ -103,14 +103,6 @@ export default function Timeline() {
 
     return (
         <div className="bg-preto pt-[80px] pb-5">
-            <div className="flex max-sm:flex-col">
-                {/* Exibe a imagem quando todos os relatórios forem cadastrados
-                <div className="w-28 h-28 max-md:w-20 max-md:h-20 bg-cover flex self-center max-sm:self-start max-sm:my-5 ml-12 max-sm:ml-5"
-                    style={{ backgroundImage: `url(${Medal_OF})` }}
-                />
-                */}
-            </div>
-
             <div className="pt-20 max-lg:pt-8 flex flex-col justify-center items-center">
                 <div className="flex flex-col">
                     <StageI />

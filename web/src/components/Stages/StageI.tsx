@@ -24,21 +24,12 @@ export default function StageI() {
     //const [insumos, setInsumos] = useState([])
     const [insumos, setInsumos] = useState("")
     const [praticas, setPraticas] = useState("")
-
+    const [isFormVisible, setIsFormVisible] = useState(true);
     const [report, setReport] = useState(false);
     const [date, setDate] = useState("")
 
-    const [isFormVisible, setIsFormVisible] = useState(true);
     const url = window.location.href;
     const idlinha = url.split("/").pop();
-    const roleStorage = localStorage.getItem('id_role');
-    let comum = false
-    let fiscal = false
-    if (roleStorage === "3") {
-        setIsFormVisible(isFormVisible);
-    } else {
-        setIsFormVisible(!isFormVisible);
-    }
     
     useEffect(() => {
         api.get(`/linha/${idlinha}`)
@@ -52,9 +43,6 @@ export default function StageI() {
                 setPraticas(praticas);
                 setIsFormVisible(form);
                 setDate(date)
-                // console.log(response.data.Relatorio1)
-                // console.log(response.data.Relatorio1.nome)
-                // console.log(nome+'aaaaaaa')
                 if (nome || local || dt_plantio || dt_colheita || insumo || praticas || form || medal || date) {
                     setReport(true);
                 }

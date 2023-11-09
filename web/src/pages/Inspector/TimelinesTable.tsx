@@ -17,8 +17,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import api from '../axiosUrl'
-import Button from './Items_Forms/Button';
+import api from '../../axiosUrl'
+import Button from '../../components/Items_Forms/Button';
 
 interface Props {
     count: number;
@@ -137,7 +137,6 @@ export default function TimelinesTable(nome : string) {
         };
     }, []);
 
-
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
@@ -229,7 +228,7 @@ export default function TimelinesTable(nome : string) {
                     <Button
                         texto='Cadastrar linha do tempo'
                         botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 shadow hover:bg-verde_palido'
-                        onClick={() => { cadastro() }}
+                        onClick={() => cadastro()}
                     />
                 }
 
