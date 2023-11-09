@@ -25,7 +25,7 @@ const idStorage = localStorage.getItem('id');
 const roleStorage = localStorage.getItem('id_role');
 const nameStorage = localStorage.getItem('name');
 
-const teste: Option[] = [{ id: 1, label: 'Login/Cadastro', to: '/sessao'}, { id: 2, label: 'Timeline',to: '/fiscal/lista/linhatempo/:id'}, {id: 3, label: 'Dashboard', to: '/admin/dashboard'}];
+const teste: Option[] = [{id: 3, label: 'Dashboard', to: '/admin/dashboard'}];
 let opcoes: Option[]
 let fotoExiste = false;
 
@@ -38,7 +38,7 @@ if (photoStorage) {
 }
 
 if (idStorage){
-    if (roleStorage === "1"){
+    if (roleStorage == "1"){
         opcoes = [{ id: 1, label: 'Dashboard', to: '/admin/dashboard' }]
     } else if (roleStorage === "2"){
         opcoes = [{ id: 1, label: 'Ver perfil', to: `/${nameStorage}/perfil/${idStorage}` }]
@@ -117,7 +117,6 @@ export default function Navbar() {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                 >
-
                                     {/**OPÇÕES DO PERFIL */}
                                     {opcoes.map((opcao) => (
                                         <MenuItem key={opcao.id} onClick={handleCloseUserMenu}>

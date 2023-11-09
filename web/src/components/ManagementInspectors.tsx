@@ -9,9 +9,6 @@ import api from '../axiosUrl'
 
 export default function ManagementInspector(){
     const inputTCSS = 'bg-transparent focus:outline-none w-full mt-2.5 text-lg'
-    const [image, setImage] = useState<File | null>(null)
-    const [imageURL, setImageURL] = useState<string | null>(null);
-
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -30,7 +27,10 @@ export default function ManagementInspector(){
             email: email,
             password: password
         })
-        .then(response => console.log(response))//se for sucedido 
+        .then(response => {
+            console.log(response)
+            window.location.reload()
+        })//se for sucedido 
         .catch((error) => {
             console.log(error);
         });
@@ -55,16 +55,6 @@ export default function ManagementInspector(){
                 console.error('Erro ao obter os dados:', error);
             });
     }, []);
-    
-
-    //ESSA FUNÇÃO É PARA SABER SE O INPUT SELECIONOU A IMAGEM
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedImage = e.target.files?.[0]; // Obtenha o primeiro arquivo selecionado
-        if (selectedImage) {
-            setImage(selectedImage); // Atualize o estado com o objeto File
-            setImageURL(URL.createObjectURL(selectedImage));
-        }
-    };
    
     return (
         <div className="p-0">

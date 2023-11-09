@@ -17,10 +17,10 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import api from '../axiosUrl'
-import Button from './Items_Forms/Button';
+import api from '../../axiosUrl'
+import Button from '../../components/Items_Forms/Button';
 
-interface TablePaginationActionsProps {
+interface Props {
     count: number;
     page: number;
     rowsPerPage: number;
@@ -30,7 +30,7 @@ interface TablePaginationActionsProps {
     ) => void;
 }
 
-function TablePaginationActions(props: TablePaginationActionsProps) {
+function TablePaginationActions(props: Props) {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
     const handleFirstPageButtonClick = ( event: React.MouseEvent<HTMLButtonElement>) => {
@@ -96,7 +96,7 @@ export default function TimelinesTable(nome : string) {
     const id = url.split("/").pop();
     const idStorage = localStorage.getItem('id');
     const roleStorage = localStorage.getItem('id_role');
-    let perfil = true
+    let perfil = false
     let comum = false
     if (roleStorage === "2") { perfil = true }
     if (roleStorage === null) { comum = true }

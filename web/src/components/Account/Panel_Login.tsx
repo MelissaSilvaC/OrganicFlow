@@ -74,7 +74,9 @@ export default function PanelLogin() {
 
 
             console.log(result);
+
             const cadastrarDados = ({ user }: { user: { displayName: string; email: string; uid: string } }) => {
+                console.log('aaa')
                 const { displayName, email, uid } = user;
             
                 // Agora você pode usar os dados displayName, email e uid para cadastrar no banco de dados

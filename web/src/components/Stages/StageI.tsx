@@ -31,6 +31,14 @@ export default function StageI() {
     const [isFormVisible, setIsFormVisible] = useState(true);
     const url = window.location.href;
     const idlinha = url.split("/").pop();
+    const roleStorage = localStorage.getItem('id_role');
+    let comum = false
+    let fiscal = false
+    if (roleStorage === "3") {
+        setIsFormVisible(isFormVisible);
+    } else {
+        setIsFormVisible(!isFormVisible);
+    }
     
     useEffect(() => {
         api.get(`/linha/${idlinha}`)
