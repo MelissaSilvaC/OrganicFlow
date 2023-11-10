@@ -7,9 +7,6 @@ import Papel from '../assets/img/Fundo/papel1.png'
 export default function Footer() {
     return (
         <footer className="bg-amarelo_areia flex max-lg:flex-col max-lg:space-y-6 justify-center p-8 max-lg:items-center" style={{ backgroundImage: `url(${Papel})` }}>
-
-<img src={instagram} className="w-[12rem]"/>
-
             <div className="w-[40%] max-lg:w-auto flex flex-col justify-between">
                 <img src={logo} className="w-[12rem]"/>
                 <div className='text-gray-500 font-semibold flex flex-col pt-10 max-lg:hidden'>

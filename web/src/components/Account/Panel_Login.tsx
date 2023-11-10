@@ -175,7 +175,8 @@ export default function PanelLogin() {
 
                 {/** Link de recuperação de senha, divisão e autenticação */}
                 <div className='space-y-2 mt-1 max-lg:mt-3 '>
-                    <BasicModal>
+                    {/**
+                     * <BasicModal>
                         <TextField
                             obrigatorio={true}
                             placeholder='E-mail'
@@ -187,10 +188,11 @@ export default function PanelLogin() {
                         />
                         <Button botaoCSS='bg-verde_escuro w-full h-[50px] max-lg:h-[40px] rounded-xl max-lg:rounded-lg text-xl max-lg:text-base font-bold max-lg:font-semibold text-white mt-1 hover:bg-green-900' texto='Enviar' />
                     </BasicModal>
-                    {/** Ativa o popup */}
-                    <div className='h-[2px] w-full bg-white opacity-70' />
-                    {/** Autenticação da Google */}
-                    <Button botaoCSS={botaoTCSS} texto='Logar com conta Google' onClick={authentication} />
+                     */}
+                    {/**
+                        <div className='h-[2px] w-full bg-white opacity-70' />
+                        <Button botaoCSS={botaoTCSS} texto='Logar com conta Google' onClick={authentication} />
+                     */}
                 </div>
             </div>
 
