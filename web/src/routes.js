@@ -33,13 +33,14 @@ export default function AppRouter() {
                   <Route path=':name/perfil/:id' element={<ProfileCompany />} />
                 </Route>
 
-                <Route path='/' element={<Navbar />}>
+               <Route path='/' element={<Navbar />}>
                   <Route index element={<Home />} />
                     <Route path=':name/:id' element={<ProfileCompany />} />
 
                     <Route path=':name/lista/:id' element={<TimelineList />}>
                       <Route index element={<TimelinesTable />} />
-                      <Route path='linha/:id' element={<Timeline />} />
+                      <Route path='linha/:id' element={<Timeline />} /> {/* Alteração aqui */}
+   
                     </Route>
                </Route>
 

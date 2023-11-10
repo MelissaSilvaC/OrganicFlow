@@ -1,14 +1,14 @@
-interface ITeam{
-    photo : string
-    name : string,
-    role : string,
+interface ITeam {
+    photo: string
+    name: string,
+    role: string,
     description?: string,
 }
 //<img src={photo} />
-export default function TeamCard({photo, name, role, description} : ITeam){
+export default function TeamCard({ photo, name, role, description }: ITeam) {
     return (
-        <div className="bg-preto w-[20rem] max-lg:w-[10rem] max-lg:mx-4">
-            <div className="bg-red-200 h-[15rem] max-lg:h-[10rem] w-full bg-cover" style={{ backgroundImage: `url(${photo})` }}/>
+        <div className="bg-preto w-[50%] max-lg:w-[10rem] max-lg:mx-4">
+            <div className="bg-red-200 h-[18rem] max-lg:h-[10rem] w-full bg-cover" style={{ backgroundImage: `url(${photo})` }} />
             <div className='p-5'>
                 <div>
                     <div className="py-4 text-verde_folha font-bold max-lg:font-semibold text-center">

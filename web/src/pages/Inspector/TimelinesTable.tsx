@@ -212,10 +212,10 @@ export default function TimelinesTable(nome : string) {
                         ).map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row" style={{ color: `white` }}>
-                                    <Link to={`${nome}/lista/linha/${row.id}`}>ID: {row.id}</Link>
+                                    <Link to={`linha/${row.id}`}>ID: {row.id}</Link>
                                 </TableCell>
                                 <TableCell component="th" scope="row" style={{ color: `white` }}>
-                                    <Link to={`${nome}/lista/linha/${row.id}`}>Criado em: {row.data}</Link>
+                                    <Link to={`linha/${row.id}`}>Criado em: {row.data}</Link>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -244,14 +244,14 @@ export default function TimelinesTable(nome : string) {
                 </Table>
             </TableContainer>
             <div className="flex mt-8 max-lg:flex-wrap max-sm:flex-nowrap max-sm:flex-col max-lg:space-y-5 max-sm:text-sm max-sm:items-center">
-                {/* {mobile &&
+                {mobile &&
                     <Button
                         texto='Escanear linha do tempo'
                         botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 mr-6 max-sm:mr-0 shadow hover:bg-verde_palido'
                         id="startScan"
-                        onClick={handleScanClick}
+                        //onClick={handleScanClick}
                     />
-                } */}
+                }
 
                 {comum ? '' :
                     <Button

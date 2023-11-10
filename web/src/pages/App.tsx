@@ -21,7 +21,7 @@ export default function App() {
         <p className='text-white font-bold text-4xl mb-10 max-lg:text-2xl'>Nosso Time</p>
         <div className='flex space-x-10 justify-center max-lg:space-x-0 max-lg:space-y-4 max-lg:flex-col max-lg:items-center max-lg:pr-4'>
           <div className='flex space-x-10 max-lg:space-x-0 '>
-            <TeamCard 
+            <TeamCard
               photo={Julia}
               name='Julia Aparecida'
               role='Idealista'
@@ -33,23 +33,20 @@ export default function App() {
               role='Programador back-end'
               description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
             />
-            </div>
+          </div>
           <div className='flex space-x-10 max-lg:space-x-0 '>
             <TeamCard
               photo={Melissa}
               name='Melissa da Silva'
               role='Programadora front-end'
               description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
-              />
+            />
             <TeamCard
               photo={Nicole}
               name='Nicoly Gregorato'
               role='Idealista'
-              description=''
+              description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
             />
-            <a href="https://github.com/Juubaju"> 
-            <img src="assets/img/SocialMidia/emailIcon.png" alt="GitHub" />
-            </a>
           </div>
         </div>
       </div>
