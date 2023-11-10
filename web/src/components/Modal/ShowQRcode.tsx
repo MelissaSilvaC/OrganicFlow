@@ -14,7 +14,7 @@ export default function ModalProduct({ children }: { children?: React.ReactNode 
     const url = window.location.href;
     const idlinha = url.split("/").pop(); 
     const partes = url.split("/");
-    const segundoNumero = partes[5];
+    const segundoNumero = partes[4];
     const [qrcode, setQrcode] = useState("")
     console.log(segundoNumero)
 
