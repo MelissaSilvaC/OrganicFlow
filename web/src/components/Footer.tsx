@@ -22,13 +22,6 @@ export default function Footer() {
                     Esperamos que ele possa ser útil e interessante para todos os visitantes.
                 </p>
             </div>
-            {
-              <div className="w-[10%] max-lg:w-auto flex justify-evenly max-lg:hidden">
-                <img src={instagram} className='h-12' />
-                <img src={facebook} className='h-12' />
-                <img src={gmail} className='h-12' />
-            </div>
-             }
 
         </footer>
     )
