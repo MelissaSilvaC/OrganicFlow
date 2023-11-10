@@ -118,7 +118,7 @@ const TestProduct:React.FC<ProdutoProps>=({ nome, photo, id}) => {
                     : ""
                 }
             </div>
-            <Link to={`/${nome}/lista/${id}`}>
+            <Link to={`/lista/${id}`}>
                 <div
                     className="w-44 h-44 max-sm:w-28 max-sm:h-28 mx-3 mb-3 mt-0 max-sm:mx-1 max-sm:mb-1 flex flex-col justify-end rounded-[50px] max-sm:rounded-[30px] border-2 border-verde_escuro bg-verde_folha bg-cover"
                     style={{
