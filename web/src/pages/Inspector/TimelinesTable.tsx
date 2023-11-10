@@ -244,15 +244,7 @@ export default function TimelinesTable(nome : string) {
                 </Table>
             </TableContainer>
             <div className="flex mt-8 max-lg:flex-wrap max-sm:flex-nowrap max-sm:flex-col max-lg:space-y-5 max-sm:text-sm max-sm:items-center">
-                {mobile &&
-                    <Button
-                        texto='Escanear linha do tempo'
-                        botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 mr-6 max-sm:mr-0 shadow hover:bg-verde_palido'
-                        id="startScan"
-                        //onClick={handleScanClick}
-                    />
-                }
-
+                
                 {comum ? '' :
                     <Button
                         texto='Cadastrar linha do tempo'
