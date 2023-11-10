@@ -25,13 +25,13 @@ export default function App() {
               photo={Julia}
               name='Julia Aparecida'
               role='Idealista'
-              description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+              description=''
             />
             <TeamCard
               photo={Lucas}
               name='Lucas Hideo'
               role='Programador back-end'
-              description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+              description=''
             />
           </div>
           <div className='flex space-x-10 max-lg:space-x-0 '>
@@ -39,13 +39,13 @@ export default function App() {
               photo={Melissa}
               name='Melissa da Silva'
               role='Programadora front-end'
-              description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+              description=''
             />
             <TeamCard
               photo={Nicole}
               name='Nicoly Gregorato'
               role='Idealista'
-              description='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'
+              description=''
             />
           </div>
         </div>
