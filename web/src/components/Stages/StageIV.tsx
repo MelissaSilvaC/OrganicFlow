@@ -102,7 +102,7 @@ export default function StageIV() {
                             <TextField
                                 obrigatorio={true}
                                 onChange={evento => setLocalizacao(evento.target.value)}
-                                label="Localização do centro de armazenamento"
+                                label="Endereço do centro de armazenamento"
                                 valor={localizacao}
                                 tipo='text'
                                 campoCSS={campoTCSS}
@@ -169,7 +169,7 @@ export default function StageIV() {
                                 />
                                 <br />
                                 <InfoField
-                                    label="Localização do centro de armazenamento"
+                                    label="Endereço do centro de armazenamento"
                                     valor={localizacao}
                                 />
                                 <br />
@@ -192,7 +192,7 @@ export default function StageIV() {
                                 </div>
                                 <br />
                                 <InfoField
-                                    label="Registro das condições de armazenamento (temperatura, umidade, etc.)"
+                                    label="Registro das condições de armazenamento"
                                     valor={praticas}
                                 />
                             </div>

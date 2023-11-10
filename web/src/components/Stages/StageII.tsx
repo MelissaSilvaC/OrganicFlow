@@ -113,7 +113,7 @@ export default function StageII() {
                             <TextField
                                 obrigatorio={true}
                                 onChange={evento => setLocal(evento.target.value)}
-                                label="Localização do centro de processamento e embalagem"
+                                label="Endereço do centro de processamento e embalagem"
                                 valor={local}
                                 tipo='text'
                                 campoCSS={campoTCSS}
@@ -146,7 +146,7 @@ export default function StageII() {
                             <TextField
                                 obrigatorio={true}
                                 onChange={evento => setMaterial(evento.target.value)}
-                                label="Lista de ingredientes e materiais de embalagem utilizados"
+                                label="Lista de materiais de embalagem utilizados"
                                 valor={material}
                                 tipo='text'
                                 campoCSS={campoTCSS}
@@ -175,12 +175,12 @@ export default function StageII() {
                         : (
                             <div>
                                 <InfoField
-                                    label="Nome do produtor ou empresa responsável"
+                                    label="Nome do centro de processamento e embalagem"
                                     valor={nome}
                                 />
                                 <br />
                                 <InfoField
-                                    label="Localização geográfica da propriedade ou fazenda orgânica"
+                                    label="Endereço do centro de processamento e embalagem"
                                     valor={local}
                                 />
                                 <br />
@@ -198,7 +198,7 @@ export default function StageII() {
                                 </div>
                                 <br />
                                 <InfoField
-                                    label="Lista de ingredientes e materiais de embalagem utilizados"
+                                    label="Lista de materiais de embalagem utilizados"
                                     valor={material}
                                 />
                                 <br />

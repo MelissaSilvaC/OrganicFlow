@@ -138,7 +138,7 @@ export default function StageIII() {
                             <TextField
                                 obrigatorio={true}
                                 onChange={evento => setRotaPercorrida(evento.target.value)}
-                                label="Rota percorrida durante o transporte (origem e destino)"
+                                label="Destino do carregamento"
                                 valor={rotaPercorrida}
                                 tipo='text'
                                 campoCSS={campoTCSS}
@@ -185,12 +185,12 @@ export default function StageIII() {
                                 </div>
                                 <br />
                                 <InfoField
-                                    label="Rota percorrida durante o transporte (origem e destino)"
+                                    label="Destino do carregamento"
                                     valor={rotaPercorrida}
                                 />
                                 <br />
                                 <InfoField
-                                    label="Registro das condições de transporte (temperatura, umidade, etc.)o"
+                                    label="Registro das condições de transporte"
                                     valor={praticas}
                                 />
                             </div>

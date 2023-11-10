@@ -96,7 +96,7 @@ export default function StageV() {
                             <TextField
                                 obrigatorio={true}
                                 onChange={evento => setEndereco(evento.target.value)}
-                                label="endereço dos pontos de venda ou estabelecimentos varejistas"
+                                label="Endereço dos pontos de venda ou estabelecimentos varejistas"
                                 valor={endereco}
                                 tipo='text'
                                 campoCSS={campoTCSS}
@@ -144,7 +144,7 @@ export default function StageV() {
                                 />
                                 <br />
                                 <InfoField
-                                    label="endereço dos pontos de venda ou estabelecimentos varejistas"
+                                    label="Endereço dos pontos de venda ou estabelecimentos varejistas"
                                     valor={endereco}
                                 />
                                 <br />

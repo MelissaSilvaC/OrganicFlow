@@ -173,7 +173,7 @@ export default function StageI() {
                                 />
                                 <br />
                                 <InfoField
-                                    label="Localização geográfica da propriedade ou fazenda orgânica"
+                                    label="Endereço da propriedade ou fazenda orgânica"
                                     valor={localizacao}
                                 />
                                 <br />
@@ -191,7 +191,7 @@ export default function StageI() {
                                 </div>
                                 <br />
                                 <InfoField
-                                    label="Lista de insumos orgânicos utilizados (adubos, fertilizantes, etc.)"
+                                    label="Lista de insumos orgânicos utilizados"
                                     valor={insumos}
                                 />
                                 <br />
