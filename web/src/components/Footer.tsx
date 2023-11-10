@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <footer className="bg-amarelo_areia flex max-lg:flex-col max-lg:space-y-6 justify-center p-8 max-lg:items-center" style={{ backgroundImage: `url(${Papel})` }}>
 
-<img src={instagramIcon} className="w-[12rem]"/>
+<img src={instagram} className="w-[12rem]"/>
 
             <div className="w-[40%] max-lg:w-auto flex flex-col justify-between">
                 <img src={logo} className="w-[12rem]"/>
@@ -25,13 +25,13 @@ export default function Footer() {
                     Esperamos que ele possa ser útil e interessante para todos os visitantes.
                 </p>
             </div>
-            {/**
-             * <div className="w-[10%] max-lg:w-auto flex justify-evenly max-lg:hidden">
+            {
+              <div className="w-[10%] max-lg:w-auto flex justify-evenly max-lg:hidden">
                 <img src={instagram} className='h-12' />
                 <img src={facebook} className='h-12' />
                 <img src={gmail} className='h-12' />
             </div>
-             */}
+             }
 
         </footer>
     )
