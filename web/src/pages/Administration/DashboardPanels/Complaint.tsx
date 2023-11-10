@@ -1,21 +1,55 @@
 import TitleComplaint from "components/Cards/Titles/Title-complaint";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from '../../../axiosUrl'
 
 export default function Complaint() {
-    const divisor = <div className="bg-gray-500 h-0.5 w-full" />
+    const [userEmail, setUserEmail] = useState("");
+    const [stageName, setStageName] = useState("");
+    const [report, setReport] = useState("");
+    const [description, setDescription] = useState("");
+
+    const divisor = <div className="bg-gray-500 h-0.5 w-full" />;
+
+    const url = window.location.href;
+    const idlinha = url.split("/").pop();
+
+    useEffect(() => {
+        api.get(`/denuncia/${idlinha}`)
+            .then(response => {
+                const denunciaData = response.data.denuncia;
+
+                if (denunciaData) {
+                    const stageN = denunciaData.stage;
+                    const email = denunciaData.user?.email; // Use o operador de navegação opcional para garantir que user não seja undefined
+                    const relatorio = denunciaData.argumento;
+                    const descricao = denunciaData.description;
+
+                    console.log(email);
+                    setUserEmail(email || ''); // Defina um valor padrão se email for undefined
+                    setStageName(stageN);
+                    setReport(relatorio);
+                    setDescription(descricao);
+                } else {
+                    console.error("Dados da denúncia não encontrados.");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [idlinha]);
 
     return (
         <div className="bg-preto text-white h-screen">
-            <TitleComplaint titulo="Denúncia" estilo="max-sm:pt-4"/>
+            <TitleComplaint titulo="Denúncia" estilo="max-sm:pt-4" />
             <div className="px-[6rem] pr-[15rem] max-sm:px-5">
                 <div className="mb-4 font-medium text-lg max-sm:text-base space-y-2">
-                    <p>usuario@email.com</p>
-                    <p>Nome do Estágio</p>
-                    <p>Relatório fraudulento</p>
+                    <p>{userEmail}</p>
+                    <p>{stageName}</p>
+                    <p>{report}</p>
                 </div>
                 {divisor}
                 <p className="my-8 max-sm:text-sm">
-                    Vestibulum quis rhoncus nunc. Donec vitae molestie tellus. Morbi laoreet, sapien scelerisque sollicitudin dictum, lorem metus euismod metus, vitae iaculis erat ex vitae enim. Aliquam dictum nulla in felis sodales, eget luctus ipsum faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. In ut justo vitae libero rhoncus sollicitudin. Maecenas tincidunt faucibus sollicitudin. Fusce lobortis suscipit lectus, eu ultricies lectus.
+                    {description}
                 </p>
             </div>
         </div>

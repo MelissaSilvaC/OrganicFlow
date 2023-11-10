@@ -43,35 +43,59 @@ export class ProdutoController {
  
 
   async atualizar(request: Request, response: Response) {
+    const { nome } = request.body;
     const { id } = request.params;
-    const { nome, photo } = request.body;
 
     let produto = await prismaClient.produto.findFirst({
       where: {
         id: Number(id),
-        user: { id:Number(request.user.id) }, // Verifica se o registro pertence ao usuário autenticado
-
+        user: { id: Number(request.user.id) },
       },
     });
-    
+
     if (!produto) {
       return response.json({
         error: "Registro não encontrado ou não pertence ao usuário autenticado",
       });
     }
 
-    produto = await prismaClient.produto.update({
-      where: {
-        id: Number(id),
-      },
-      data: {
-        nome,
-        photo,
-      },
-    });
-
-    return response.json(produto);
+    try {
+      // Verifica se foi enviado um arquivo de imagem
+      if (request.file) {
+        const result = await cloudinary.v2.uploader.upload(request.file.path); // Faz upload da imagem para o Cloudinary
+  
+        const produto = await prismaClient.produto.update({
+          where:{
+            id:Number(id)
+          },
+          data: {
+            nome,
+            photo: result.secure_url, // Armazena a URL da imagem no banco de dados
+          },
+          
+        });
+  
+        return response.json(produto);
+      }else{
+        const produto = await prismaClient.produto.update({
+          where:{
+            id:Number(id)
+          },
+          data: {
+            nome,
+          },
+          
+        });
+      return response.json(produto);
+      }
+  
+      // Se não foi enviado um arquivo, retorna um erro
+    } catch (error) {
+      console.error('Error creating product:', error);
+      return response.status(500).json({ error: 'Internal Server Error' });
+    }
   }
+
 
   async pesquisar(request: Request, response: Response) {
     try {

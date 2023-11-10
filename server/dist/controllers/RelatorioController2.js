@@ -15,7 +15,10 @@ const prismaClient = new client_1.PrismaClient();
 class Relatorio2Controller {
     criar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, id_linha, medalha } = request.body;
+            const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, id_linha, } = request.body;
+            const date = new Date();
+            // Obtém a data no formato desejado (dia/mes/ano)
+            const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
             const embalagem = yield prismaClient.embalagem.create({
                 data: {
                     nome,
@@ -24,11 +27,11 @@ class Relatorio2Controller {
                     praticas,
                     dt_processamento,
                     dt_embalagem,
-                    medalha,
                     user: { connect: { id: Number(request.user.id) } },
                     linha: {
                         connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-                    }
+                    },
+                    date: formattedDate,
                 },
             });
             return response.json(embalagem);
@@ -37,7 +40,7 @@ class Relatorio2Controller {
     atualizar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, medalha } = request.body;
+            const { nome, local, ingrediente, praticas, dt_processamento, dt_embalagem, } = request.body;
             let embalagem = yield prismaClient.embalagem.findFirst({
                 where: {
                     id: Number(id),
@@ -60,7 +63,6 @@ class Relatorio2Controller {
                     praticas,
                     dt_processamento,
                     dt_embalagem,
-                    medalha
                 },
             });
             return response.json(embalagem);

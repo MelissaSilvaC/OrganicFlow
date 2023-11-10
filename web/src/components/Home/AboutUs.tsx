@@ -8,7 +8,7 @@ export default function AboutUs(){
                 <div>
                     <p className='text-verde_folha font-bold text-4xl mb-5 max-lg:text-2xl'>Sobre Nós</p>
                     {/**Texto */}
-                    <div className='w-[45rem] space-y-1 max-lg:text-sm max-lg:w-auto max-lg:mb-8'>
+                    <div className='w-[35rem] space-y-1 max-lg:text-sm max-lg:w-auto max-lg:mb-8'>
                         <p className='max-lg:hidden'>
                             Nos conhecemos na Escola Técnica Estadual (ETEC) - Júlia, Lucas, Melissa e Nicoly - e no processo da criação do nosso Trabalho de Conclusão de Curso (TCC), reconhecemos a importância de concretizar esse projeto. 
                         </p>
@@ -21,7 +21,7 @@ export default function AboutUs(){
                     </div>
                 </div>
                 <div className='max-lg:flex max-lg:justify-center'>
-                    <img src={equipe} className='w-[450px] h-[400px] max-lg:w-[250px] max-lg:h-[200px] max-lg:hidden' />
+                    <img src={equipe} className='w-[450px] h-[450px] max-lg:w-[250px] max-lg:h-[200px] max-lg:hidden' />
                 </div>
             </div>
         </div>

@@ -19,6 +19,8 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import api from '../../axiosUrl'
 import Button from '../../components/Items_Forms/Button';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+
 
 interface Props {
     count: number;
@@ -172,6 +174,32 @@ export default function TimelinesTable(nome : string) {
                 console.log(error);
             });
     }
+    
+    // const [scannerAtivo, setScannerAtivo] = useState(false);
+
+    // useEffect(() => {
+    //     if (scannerAtivo) {
+    //         Quagga.init({
+    //             // ... configurações do Quagga
+    //         }, function(err: any) {
+    //             if (err) {
+    //                 console.error(err);
+    //                 return;
+    //             }
+    //             Quagga.start();
+    //         });
+
+    //         Quagga.onDetected(function(result: { codeResult: { code: string; }; }) {
+    //             alert('QR Code lido: ' + result.codeResult.code);
+    //             Quagga.stop();
+    //         });
+    //     }
+    // }, [scannerAtivo]);
+
+    // const handleScanClick = () => {
+    //     setScannerAtivo(true);
+    // };
+    
 
     return (
         <div className="py-28 max-lg:py-10 px-28 max-lg:px-4">
@@ -216,13 +244,14 @@ export default function TimelinesTable(nome : string) {
                 </Table>
             </TableContainer>
             <div className="flex mt-8 max-lg:flex-wrap max-sm:flex-nowrap max-sm:flex-col max-lg:space-y-5 max-sm:text-sm max-sm:items-center">
-                {mobile &&
+                {/* {mobile &&
                     <Button
                         texto='Escanear linha do tempo'
                         botaoCSS='bg-verde_folha h-[40px] rounded-lg font-semibold max-lg:font-medium text-white px-5 mr-6 max-sm:mr-0 shadow hover:bg-verde_palido'
-                        onClick={() => { }}
+                        id="startScan"
+                        onClick={handleScanClick}
                     />
-                }
+                } */}
 
                 {comum ? '' :
                     <Button

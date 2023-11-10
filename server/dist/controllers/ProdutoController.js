@@ -33,7 +33,7 @@ class ProdutoController {
                         data: {
                             nome,
                             photo: result.secure_url,
-                            user: { connect: { id: Number(2) } }, // Conecta com o usuário que está criando o registro
+                            user: { connect: { id: Number(request.user.id) } }, // Conecta com o usuário que está criando o registro
                         },
                     });
                     return response.json(produto);
@@ -49,12 +49,12 @@ class ProdutoController {
     }
     atualizar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { nome } = request.body;
             const { id } = request.params;
-            const { nome, photo } = request.body;
             let produto = yield prismaClient.produto.findFirst({
                 where: {
                     id: Number(id),
-                    user: { id: Number(request.user.id) }, // Verifica se o registro pertence ao usuário autenticado
+                    user: { id: Number(request.user.id) },
                 },
             });
             if (!produto) {
@@ -62,16 +62,38 @@ class ProdutoController {
                     error: "Registro não encontrado ou não pertence ao usuário autenticado",
                 });
             }
-            produto = yield prismaClient.produto.update({
-                where: {
-                    id: Number(id),
-                },
-                data: {
-                    nome,
-                    photo,
-                },
-            });
-            return response.json(produto);
+            try {
+                // Verifica se foi enviado um arquivo de imagem
+                if (request.file) {
+                    const result = yield cloudinary_1.default.v2.uploader.upload(request.file.path); // Faz upload da imagem para o Cloudinary
+                    const produto = yield prismaClient.produto.update({
+                        where: {
+                            id: Number(id)
+                        },
+                        data: {
+                            nome,
+                            photo: result.secure_url, // Armazena a URL da imagem no banco de dados
+                        },
+                    });
+                    return response.json(produto);
+                }
+                else {
+                    const produto = yield prismaClient.produto.update({
+                        where: {
+                            id: Number(id)
+                        },
+                        data: {
+                            nome,
+                        },
+                    });
+                    return response.json(produto);
+                }
+                // Se não foi enviado um arquivo, retorna um erro
+            }
+            catch (error) {
+                console.error('Error creating product:', error);
+                return response.status(500).json({ error: 'Internal Server Error' });
+            }
         });
     }
     pesquisar(request, response) {

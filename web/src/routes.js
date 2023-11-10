@@ -25,7 +25,7 @@ export default function AppRouter() {
                   <Route path='admin/dashboard' element={<Dashboard />}>
                     <Route index element={<AbleManager/>}/>
                     <Route path='admin/dashboard/lista-denuncias' element={<ComplaintsList/>} />
-                    <Route path='admin/dashboard/lista-denuncias/denuncia' element={<Complaint />} />
+                    <Route path='admin/dashboard/lista-denuncias/denuncia/:id' element={<Complaint />} />
                     <Route path='admin/dashboard/lista-banidos' element={<BanedUserView />} />
                   </Route>
 
@@ -39,7 +39,7 @@ export default function AppRouter() {
 
                     <Route path=':name/lista/:id' element={<TimelineList />}>
                       <Route index element={<TimelinesTable />} />
-                      <Route path=':name/lista/linha/:id' element={<Timeline />} />
+                      <Route path='linha/:id' element={<Timeline />} />
                     </Route>
                </Route>
 

@@ -15,18 +15,21 @@ const prismaClient = new client_1.PrismaClient();
 class Relatorio5Controller {
     criar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome, local, dt_chegada, medalha, id_linha, dt_validade } = request.body;
+            const { nome, local, dt_chegada, id_linha, dt_validade } = request.body;
+            const date = new Date();
+            // Obtém a data no formato desejado (dia/mes/ano)
+            const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
             const varejo = yield prismaClient.varejo.create({
                 data: {
                     nome,
                     local,
                     dt_chegada,
-                    medalha,
                     dt_validade,
                     user: { connect: { id: Number(request.user.id) } },
                     linha: {
                         connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-                    }
+                    },
+                    date: formattedDate,
                 },
             });
             return response.json(varejo);
@@ -35,7 +38,7 @@ class Relatorio5Controller {
     atualizar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { nome, local, medalha, dt_chegada, dt_validade } = request.body;
+            const { nome, local, dt_chegada, dt_validade } = request.body;
             let varejo = yield prismaClient.varejo.findFirst({
                 where: {
                     id: Number(id),
@@ -55,7 +58,6 @@ class Relatorio5Controller {
                     nome,
                     local,
                     dt_chegada,
-                    medalha,
                     dt_validade
                 },
             });

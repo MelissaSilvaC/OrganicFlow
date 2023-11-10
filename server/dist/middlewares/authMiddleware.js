@@ -18,10 +18,11 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const authMiddleware = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const { authorization } = request.headers;
+    const { retornar } = request.headers;
     // console.log('123')
-    // console.log(authorization)
+    console.log(authorization);
     if (!authorization) {
-        return response.json({
+        return response.status(400).json({
             status: false,
             error: "não autorizado"
         });
@@ -29,13 +30,20 @@ const authMiddleware = (request, response, next) => __awaiter(void 0, void 0, vo
     const token = authorization.split(' ')[1];
     console.log(token);
     try {
-        const { id, permissions, roles } = jsonwebtoken_1.default.verify(token, (_a = process.env.JWT_PASS) !== null && _a !== void 0 ? _a : ""); //verifica o token
-        console.log(id, permissions, roles);
+        const { id, permissions, roles } = jsonwebtoken_1.default.verify(token, (_a = process.env.JWT_PASS) !== null && _a !== void 0 ? _a : "", { expiresIn: '10d' });
         request.user = {
             id,
             permissions,
             roles,
         };
+        if (retornar) {
+            const user = yield prismaClient_1.prismaClient.user.findFirst({
+                where: {
+                    id: Number(request.user.id),
+                },
+            });
+            return response.json({ status: true, user });
+        }
         const usuario = yield prismaClient_1.prismaClient.user.findUnique({
             where: { id: Number(request.user.id) },
         });
@@ -48,7 +56,7 @@ const authMiddleware = (request, response, next) => __awaiter(void 0, void 0, vo
         next(); //vai dizer que está tudo certo e vai prosseguir a função
     }
     catch (error) {
-        return response.json({ status: false, message: 'Failed to authenticate token.', error });
+        return response.status(404).json({ status: false, message: 'Failed to authenticate token.', error });
     }
 });
 exports.authMiddleware = authMiddleware;

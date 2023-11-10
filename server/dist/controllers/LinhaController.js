@@ -36,8 +36,9 @@ class LinhaController {
             const postUrl = request.originalUrl; //pega a rota
             const protocol = request.protocol; //pega o protocolo http
             const host = request.headers.host; //pega o host localhost
-            const front = 'organicflow/'; //url do front
+            const front = 'organicflow'; //url do front
             const url = `${protocol}://${host}${postUrl}`;
+            // const url= `${protocol}://${front}${postUrl}`
             console.log(url);
             // Redirecionar o usuário para a nova URL
             // response.redirect(postUrl);

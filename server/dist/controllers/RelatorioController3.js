@@ -15,7 +15,10 @@ const prismaClient = new client_1.PrismaClient();
 class Relatorio3Controller {
     criar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino, id_linha, medalha } = request.body;
+            const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino, id_linha, } = request.body;
+            const date = new Date();
+            // Obtém a data no formato desejado (dia/mes/ano)
+            const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
             const transporte = yield prismaClient.transporte.create({
                 data: {
                     nome,
@@ -24,11 +27,11 @@ class Relatorio3Controller {
                     dt_descarregamento,
                     origem,
                     destino,
-                    medalha,
                     user: { connect: { id: Number(request.user.id) } },
                     linha: {
                         connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-                    }
+                    },
+                    date: formattedDate,
                 },
             });
             return response.json(transporte);
@@ -37,7 +40,7 @@ class Relatorio3Controller {
     atualizar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino, medalha } = request.body;
+            const { nome, praticas, dt_carregamento, dt_descarregamento, origem, destino, } = request.body;
             let transporte = yield prismaClient.transporte.findFirst({
                 where: {
                     id: Number(id),
@@ -60,7 +63,6 @@ class Relatorio3Controller {
                     dt_descarregamento,
                     origem,
                     destino,
-                    medalha
                 },
             });
             return response.json(transporte);

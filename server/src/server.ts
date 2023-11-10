@@ -1,12 +1,22 @@
 import express from "express"
 import {router}from "./routes"
-const cors=require('cors')
 
-const app=express()
-app.use(cors())
+const app = express();
+const cors = require('cors');
 
-app.use(express.json())
-app.use(router)
+const PORT = process.env.PORT || 3000;
 
-var PORT = 3000
-app.listen(PORT,()=>console.log("Server running "+PORT))
+app.use(express.json());
+
+// Adicione esta parte para configurar o cors
+app.use(cors({
+  origin: '*'
+}));
+
+app.use(router);
+
+app.get('/a', (req, res) => {
+    res.send('Olá! Bem-vindo à raiz da aplicação!');
+});
+
+app.listen(PORT, () => console.log("Server running " + PORT));

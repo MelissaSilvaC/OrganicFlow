@@ -9,11 +9,10 @@ export default function AbleManager() {
     const [gerentesvalidos, setGerentesValidos] = useState<any[]>([]);
     const [searchGerente, setSearchGerente] = useState("");
     const [searchValidado, setSearchValidado] = useState("");
-    useEffect(() => {
 
+    useEffect(() => {
         api.get(`/gerente`)
             .then(response => {
-
                 const gerentes = response.data.map((item: any) => ({
                     id: item.id,
                     photo: item.photo,
@@ -25,11 +24,9 @@ export default function AbleManager() {
                 setGerentes(gerentes);
                 console.log(gerentes)
             })
-            //retorna o objeto inteiro
             .catch((error) => {
                 console.log(error);
             });
-        // console.log('aa')
 
         api.get(`/gerentevalido`)
             .then(response => {

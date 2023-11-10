@@ -5,11 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const routes_1 = require("./routes");
-const cors = require('cors');
 const app = (0, express_1.default)();
-app.use(cors());
+const cors = require('cors');
+const PORT = process.env.PORT || 3000;
 app.use(express_1.default.json());
+// Adicione esta parte para configurar o cors
+app.use(cors({
+    origin: '*'
+}));
 app.use(routes_1.router);
-var PORT = 3000;
+app.get('/a', (req, res) => {
+    res.send('Olá! Bem-vindo à raiz da aplicação!');
+});
 app.listen(PORT, () => console.log("Server running " + PORT));
 //# sourceMappingURL=server.js.map

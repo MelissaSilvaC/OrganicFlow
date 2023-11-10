@@ -138,6 +138,28 @@ class GerenteController {
             }
         });
     }
+    listarbanido(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield prismaClient_1.prismaClient.user.findMany({
+                    where: {
+                        ban: true, //id_role do gerente
+                    },
+                });
+                return response.json(user);
+                // const gerentesSemUserRole = gerentesComUserRole.filter(gerente => !gerente.UserRole || gerente.UserRole.length === 0);
+                // //const array_novo = array_velho(para cada item no array, se o gerente.UserRole não existir )
+                // if (gerentesSemUserRole.length > 0) {
+                //     return response.json(gerentesSemUserRole);
+                // } else {
+                //     return response.json("nenhum usuario na lista");
+                // }
+            }
+            catch (error) {
+                return response.json(error);
+            }
+        });
+    }
     consultarEmpresa(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -179,6 +201,27 @@ class GerenteController {
                         Produto: {}
                     }
                 });
+                //buscar o fiscal
+                const userResp = yield prismaClient_1.prismaClient.user.findFirst({
+                    where: {
+                        id: Number(id),
+                    },
+                    select: {
+                        email: true
+                    }
+                });
+                if (userResp) {
+                    const responsavel_email = userResp.email; //pega o email que foi exibido no userResp
+                    const UserRole = yield prismaClient_1.prismaClient.userRole.findMany({
+                        where: {
+                            responsavel_email: responsavel_email
+                        },
+                        include: {
+                            user: {}
+                        }
+                    });
+                    return response.json({ produto, UserRole });
+                }
                 return response.json(produto);
             }
             catch (error) {

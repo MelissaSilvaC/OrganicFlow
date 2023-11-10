@@ -8,22 +8,97 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FiscalController = void 0;
 const prismaClient_1 = require("../databases/prismaClient");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 class FiscalController {
+    // async permissaoFiscal(request: Request, response: Response) {
+    //   const { id_user } = request.body;
+    //   const userResp=await prismaClient.user.findFirst({
+    //       where: {
+    //         id: Number(request.user.id),
+    //     },
+    //     select:{
+    //       email:true
+    //     }
+    //   })
+    //   if(userResp){
+    //     const responsavel_email = userResp.email;//pega o email que foi exibido no userResp
+    //     const userFiscal=await prismaClient.userRole.create({
+    //       data:{
+    //         responsavel_email:responsavel_email,
+    //         user: { connect: { id:Number(id_user) } },
+    //           role: { connect: { id: Number(3) } },  
+    //       }
+    //     })
+    //     if (userFiscal instanceof Error) {
+    //       return response.status(400).json(userFiscal.message);
+    //     }
+    //     const fiscal=await prismaClient.user.update({
+    //       where:{
+    //         id:Number(id_user)
+    //       },
+    //       data:{
+    //         fiscal:true
+    //       }
+    //     })
+    //     const userACL=await prismaClient.user.findFirst({
+    //       where:{
+    //         id:Number(id_user)
+    //       },
+    //       include: {
+    //         // UserPermission:true,
+    //         UserRole:{
+    //           select:{
+    //             role:{
+    //               select:{
+    //                 description:true
+    //               }
+    //             }
+    //           }
+    //         }
+    //       },
+    //     })
+    //     return response.json(userACL)
+    //   }
+    // }
     permissaoFiscal(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_user } = request.body;
+            const { name, password, email } = request.body;
+            const User = yield prismaClient_1.prismaClient.user.findFirst({
+                where: {
+                    email: email
+                }
+            });
+            if (User) {
+                return response.json({
+                    error: "Esta conta já foi criada"
+                });
+            }
+            const hashPassword = yield bcrypt_1.default.hash(password, 10);
             const userResp = yield prismaClient_1.prismaClient.user.findFirst({
                 where: {
                     id: Number(request.user.id),
                 },
                 select: {
-                    email: true
+                    email: true,
+                    photo: true,
                 }
             });
             if (userResp) {
+                const user = yield prismaClient_1.prismaClient.user.create({
+                    data: {
+                        name,
+                        email,
+                        password: hashPassword,
+                        photo: userResp.photo,
+                    }
+                });
+                const id_user = user.id;
                 const responsavel_email = userResp.email; //pega o email que foi exibido no userResp
                 const userFiscal = yield prismaClient_1.prismaClient.userRole.create({
                     data: {
@@ -66,9 +141,10 @@ class FiscalController {
     }
     listarSeuFiscal(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { id } = request.params;
             const userResp = yield prismaClient_1.prismaClient.user.findFirst({
                 where: {
-                    id: Number(request.user.id),
+                    id: Number(id),
                 },
                 select: {
                     email: true
@@ -93,20 +169,41 @@ class FiscalController {
             }
         });
     }
+    // async removerFiscal(request:Request, response:Response){
+    //   const {id}=request.params
+    //   try {
+    //     // Primeiro, encontre o 'UserRole' que corresponde ao 'id_user' especificado
+    //       const userRole = await prismaClient.userRole.findFirst({
+    //           where: {
+    //               id_user: Number(id),
+    //           },
+    //       });
+    //       if (userRole) {
+    //           await prismaClient.userRole.delete({
+    //               where: {
+    //                   id: userRole.id,
+    //               },
+    //           });
+    //           response.json( "Acesso excluído com sucesso." );
+    //       }
+    //     } catch (error) {
+    //         response.status(500).json({ error: "Ocorreu um erro ao excluir o acesso.", details: error });
+    //     }
+    //   }
     removerFiscal(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {
                 // Primeiro, encontre o 'UserRole' que corresponde ao 'id_user' especificado
-                const userRole = yield prismaClient_1.prismaClient.userRole.findFirst({
+                const user = yield prismaClient_1.prismaClient.user.findFirst({
                     where: {
-                        id_user: Number(id),
+                        id: Number(id),
                     },
                 });
-                if (userRole) {
-                    yield prismaClient_1.prismaClient.userRole.delete({
+                if (user) {
+                    yield prismaClient_1.prismaClient.user.delete({
                         where: {
-                            id: userRole.id,
+                            id: user.id,
                         },
                     });
                     response.json("Acesso excluído com sucesso.");

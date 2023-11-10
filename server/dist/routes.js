@@ -9,6 +9,7 @@ const RoleController_1 = require("./controllers/RoleController");
 const UserController_1 = require("./controllers/UserController");
 const SessionController_1 = require("./controllers/SessionController");
 const authMiddleware_1 = require("./middlewares/authMiddleware");
+const proprioPut_1 = require("./middlewares/proprioPut");
 const permissions_1 = require("./middlewares/permissions");
 const roles_1 = require("./common/utils/roles");
 const DenunciaController_1 = require("./controllers/DenunciaController");
@@ -42,6 +43,7 @@ const uploadConfig_1 = __importDefault(require("./uploadConfig"));
 // const userRole=new UserRole();
 router.post("/user", userController.criar);
 router.post("/login", sessionController.login);
+router.get("/auth", authMiddleware_1.authMiddleware);
 // router.get("/user",authMiddleware, userController.consultar);
 // router.post("/acesso",authMiddleware,userAccess.criar)
 // router.put("/user/:id",authMiddleware,is([RolesPrivate.admin]),userController.atualizar);
@@ -55,7 +57,7 @@ router.get("/empresa/:id", gerenteController.pesquisarEmpresa);
 router.get("/empresa", gerenteController.consultarEmpresa);
 router.get("/fiscal/:id", fiscalController.consultarFiscal);
 router.get("/produto/:id", produtoController.pesquisar);
-router.get("/fiscal", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.gerente]), fiscalController.listarSeuFiscal);
+router.get("/fiscal_empresa/:id", fiscalController.listarSeuFiscal);
 //cliente cadastrado
 router.post("/feed", authMiddleware_1.authMiddleware, feedController.criar);
 router.post("/denuncia", authMiddleware_1.authMiddleware, denunciaController.criar);
@@ -68,22 +70,26 @@ router.get("/gerentevalido", gerenteController.listarGerenteValido); //lista de 
 router.post("/gerente", authMiddleware_1.authMiddleware, gerenteController.permissaoGerente);
 router.delete("/gerente", authMiddleware_1.authMiddleware, gerenteController.suspenderGerente);
 router.get("/feed", feedController.consultar);
+router.put("/ban/:id", userController.banir);
+router.get("/ban", gerenteController.listarbanido); //lista de gerente 
 //gerente
-router.get("/user", userController.pesquisar); //quando o gerente precisar pesquisar o usuario
-router.post("/fiscal", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.gerente]), fiscalController.permissaoFiscal);
+router.get("/user/:id", userController.pesquisar); //quando o gerente precisar pesquisar o usuario
+router.post("/fiscal", authMiddleware_1.authMiddleware, fiscalController.permissaoFiscal);
+router.put("/user/:id", authMiddleware_1.authMiddleware, uploadConfig_1.default.single('file'), userController.atualizar);
 router.delete("/fiscal/:id", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.gerente]), fiscalController.removerFiscal);
-router.put("/user/:id", authMiddleware_1.authMiddleware, userController.atualizar);
-router.post("/produto", uploadConfig_1.default.single('file'), produtoController.criar);
+router.put("/user/:id", authMiddleware_1.authMiddleware, proprioPut_1.proprioput, userController.atualizar);
+router.put("/produto/:id", authMiddleware_1.authMiddleware, uploadConfig_1.default.single('file'), produtoController.atualizar);
+router.post("/produto", authMiddleware_1.authMiddleware, uploadConfig_1.default.single('file'), produtoController.criar);
 router.delete("/produto/:id", produtoController.deletar);
 //fiscal
 router.post("/linha", linhaController.criar);
 // router.get("/linha",linhaController.consultar)
-router.put("/linha/:id", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), linhaController.gerarQrcode);
-router.post("/relatorio1", relatorio1Controller.criar);
-router.post("/relatorio2", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio2Controller.criar);
-router.post("/relatorio3", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio3Controller.criar);
-router.post("/relatorio4", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio4Controller.criar);
-router.post("/relatorio5", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio5Controller.criar);
+router.put("/linha/:id", authMiddleware_1.authMiddleware, linhaController.gerarQrcode);
+router.post("/relatorio1", authMiddleware_1.authMiddleware, relatorio1Controller.criar);
+router.post("/relatorio2", authMiddleware_1.authMiddleware, relatorio2Controller.criar);
+router.post("/relatorio3", authMiddleware_1.authMiddleware, relatorio3Controller.criar);
+router.post("/relatorio4", authMiddleware_1.authMiddleware, relatorio4Controller.criar);
+router.post("/relatorio5", authMiddleware_1.authMiddleware, relatorio5Controller.criar);
 router.put("/relatorio1/:id", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio1Controller.atualizar);
 router.put("/relatorio2/:id", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio2Controller.atualizar);
 router.put("/relatorio3/:id", authMiddleware_1.authMiddleware, (0, permissions_1.is)([roles_1.RolesPrivate.fiscal]), relatorio3Controller.atualizar);

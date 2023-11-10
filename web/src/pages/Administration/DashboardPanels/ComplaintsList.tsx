@@ -1,94 +1,71 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
-import api from '../../../axiosUrl'
-import { useState, useEffect } from "react";
+import api from '../../../axiosUrl';
+import { useState, useEffect } from 'react';
 import TitleComplaint from 'components/Cards/Titles/Title-complaint';
 
 interface Denuncia {
     id: number;
+    argumento: string;
+    stage: string;
     description: string;
-    alvo: string;
     user: {
         name: string;
     };
 }
 
-const columns: GridColDef[] = [
-    {
-        field: 'name',
-        headerName: 'Usuário que denunciou',
-        width: 300,
-        renderCell: (params) => {
-            const description = params.row.name;
-            if (description !== null) {
-                return (
-                    <Link to='admin/dashboard/lista-denuncias/denuncia'>
-                        {description}
-                    </Link>
-                );
-            }
-            return null;
-        },
-    },
-    {
-        field: 'alvo',
-        headerName: 'Alvo da denúncia',
-        width: 300,
-        renderCell: (params) => {
-            const description = params.row.alvo;
-            if (description !== null) {
-                return (
-                    <Link to='admin/dashboard/lista-denuncias/denuncia'>
-                        {description}
-                    </Link>
-                );
-            }
-            return null; 
-        },
-    },
-    {
-        field: 'description',
-        headerName: 'Argumento',
-        width: 300,
-        renderCell: (params) => {
-            const description = params.row.description;
-            if (description !== null) {
-                return (
-                    <Link to='admin/dashboard/lista-denuncias/denuncia'>
-                        {description}
-                    </Link>
-                );
-            }
-            return null; 
-        },
-    },
-];
-
 export default function ComplaintsList() {
-    const [denuncias, setDenuncias] = useState<any[]>([]);
+    const [denuncias, setDenuncias] = useState<Denuncia[]>([]);
+
     useEffect(() => {
-
-        api.get(`/denuncia`)
+        api.get('/denuncia')
             .then(response => {
-
-                const novosDenuncia = response.data.map((denuncia: Denuncia) => ({
+                const novasDenuncias = response.data.map((denuncia: Denuncia) => ({
                     id: denuncia.id,
-                    name: denuncia.user.name,
-                    alvo: denuncia.alvo,
+                    name: denuncia.user.name, // Aqui você pode ajustar para o campo que deseja exibir como o nome do usuário
+                    stage: denuncia.stage, // Ajustando o nome do campo para 'stage'
                     description: denuncia.description,
                 }));
 
-                setDenuncias(novosDenuncia);
-                console.log(novosDenuncia)
-
+                setDenuncias(novasDenuncias);
             })
-            //retorna o objeto inteiro
-            .catch((error) => {
-                console.log(error);
+            .catch(error => {
+                console.error(error);
             });
-        // console.log('aa')
-
     }, []);
+
+    const columns: GridColDef[] = [
+        {
+            field: 'name',
+            headerName: 'Usuário que denunciou',
+            width: 300,
+            renderCell: params => (
+                <Link to={`denuncia/${params.row.id}`}>
+                    {params.row.name}
+                </Link>
+            ),
+        },
+        {
+            field: 'stage',
+            headerName: 'Estágio denunciado',
+            width: 300,
+            renderCell: params => (
+                <Link to={`denuncia/${params.row.id}`}>
+                    {params.row.stage}
+                </Link>
+            ),
+        },
+        {
+            field: 'description',
+            headerName: 'Argumento',
+            width: 300,
+            renderCell: params => (
+                <Link to={`denuncia/${params.row.id}`}>
+                    {params.row.description}
+                </Link>
+            ),
+        },
+    ];
 
     return (
         <div className="pb-28 max-sm:h-screen">
@@ -106,5 +83,3 @@ export default function ComplaintsList() {
         </div>
     );
 }
-
-

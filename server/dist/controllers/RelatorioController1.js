@@ -15,7 +15,10 @@ const prismaClient = new client_1.PrismaClient();
 class Relatorio1Controller {
     criar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome, local, dt_plantio, dt_colheita, insumo, praticas, id_linha, medalha } = request.body;
+            const { nome, local, dt_plantio, dt_colheita, insumo, praticas, id_linha, } = request.body;
+            const date = new Date();
+            // Obtém a data no formato desejado (dia/mes/ano)
+            const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
             const prodAgri = yield prismaClient.prod_Agri.create({
                 data: {
                     nome,
@@ -24,12 +27,12 @@ class Relatorio1Controller {
                     dt_colheita,
                     insumo,
                     praticas,
-                    medalha,
-                    // user: { connect: { id:Number(request.user.id)  } }, // Conecta com o usuário que está criando o registro
-                    user: { connect: { id: 3 } },
+                    user: { connect: { id: Number(request.user.id) } },
+                    // user: { connect: { id:3  } }, // teste
                     linha: {
                         connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-                    }
+                    },
+                    date: formattedDate,
                 },
             });
             return response.json(prodAgri);
@@ -38,7 +41,7 @@ class Relatorio1Controller {
     atualizar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { nome, local, dt_plantio, dt_colheita, insumo, praticas, medalha } = request.body;
+            const { nome, local, dt_plantio, dt_colheita, insumo, praticas, } = request.body;
             let prodAgri = yield prismaClient.prod_Agri.findFirst({
                 where: {
                     id: Number(id),
@@ -61,7 +64,6 @@ class Relatorio1Controller {
                     dt_colheita,
                     insumo,
                     praticas,
-                    medalha
                 },
             });
             return response.json(prodAgri);

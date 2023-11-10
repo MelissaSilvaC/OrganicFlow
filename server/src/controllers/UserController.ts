@@ -1,6 +1,7 @@
 import {Request,Response} from 'express'
 import { prismaClient } from '../databases/prismaClient'
 import bcrypt from 'bcrypt'
+import cloudinary from 'cloudinary';
 
 export class UserController{
     async criar(request:Request, response:Response){
@@ -77,19 +78,34 @@ export class UserController{
         //         error: "Você não tem permissão para editar este usuário"
         //     });
         // }
-    
-        user = await prismaClient.user.update({
-            where: {
-                id: Number(id)
-            },
-            data: {
+        if (request.file) {
+            const result = await cloudinary.v2.uploader.upload(request.file.path); // Faz upload da imagem para o Cloudinary
+      
+            const user = await prismaClient.user.update({
+              where:{
+                id:Number(id)
+              },
+              data: {
                 name,
-                photo,
-                local
-            }
-        });
-    
-        return response.json(user);
+                photo: result.secure_url, // Armazena a URL da imagem no banco de dados
+                local,
+              },
+              
+            });
+      
+            return response.json(user);
+        }else{
+            user = await prismaClient.user.update({
+                where: {
+                    id: Number(id)
+                },
+                data: {
+                    name,
+                    local
+                }
+            });
+            return response.json(user);
+        }
     }    
 
     async banir(request:Request, response:Response){

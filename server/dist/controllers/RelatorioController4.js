@@ -15,7 +15,10 @@ const prismaClient = new client_1.PrismaClient();
 class Relatorio4Controller {
     criar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome, local, praticas, responsavel, dt_entrada, dt_saida, medalha, id_linha } = request.body;
+            const { nome, local, praticas, responsavel, dt_entrada, dt_saida, id_linha } = request.body;
+            const date = new Date();
+            // Obtém a data no formato desejado (dia/mes/ano)
+            const formattedDate = date.toLocaleDateString('pt-BR'); // Adapte o locale conforme necessário
             const armazenamento = yield prismaClient.armazenamento.create({
                 data: {
                     nome,
@@ -24,11 +27,11 @@ class Relatorio4Controller {
                     responsavel,
                     dt_entrada,
                     dt_saida,
-                    medalha,
                     user: { connect: { id: Number(request.user.id) } },
                     linha: {
                         connect: { id: Number(id_linha) } // Conecta com o id_linha obtido do corpo da requisição
-                    }
+                    },
+                    date: formattedDate,
                 },
             });
             return response.json(armazenamento);
@@ -37,7 +40,7 @@ class Relatorio4Controller {
     atualizar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { nome, local, praticas, responsavel, dt_entrada, medalha, dt_saida } = request.body;
+            const { nome, local, praticas, responsavel, dt_entrada, dt_saida } = request.body;
             let armazenamento = yield prismaClient.armazenamento.findFirst({
                 where: {
                     id: Number(id),
@@ -60,7 +63,6 @@ class Relatorio4Controller {
                     responsavel,
                     dt_entrada,
                     dt_saida,
-                    medalha,
                 },
             });
             return response.json(armazenamento);

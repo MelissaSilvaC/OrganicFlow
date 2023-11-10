@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const prismaClient_1 = require("../databases/prismaClient");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const cloudinary_1 = __importDefault(require("cloudinary"));
 class UserController {
     criar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -65,34 +66,53 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             const { name, photo, local } = request.body;
-            let User = yield prismaClient_1.prismaClient.user.findFirst({
+            // const authenticatedUserId = request.user.id; // Supondo que você tenha o ID do usuário autenticado disponível no request
+            let user = yield prismaClient_1.prismaClient.user.findFirst({
                 where: {
                     id: Number(id)
                 }
             });
-            if (!User) {
+            if (!user) {
                 return response.json({
-                    error: "não existe o produto"
+                    error: "Usuário não encontrado"
                 });
             }
-            // const hashPassword=await bcrypt.hash(password,10)
-            User = yield prismaClient_1.prismaClient.user.update({
-                where: {
-                    id: Number(id)
-                },
-                data: {
-                    name,
-                    photo,
-                    local
-                }
-            });
-            return response.json(User);
+            // if (user.id !== authenticatedUserId) {
+            //     return response.status(403).json({
+            //         error: "Você não tem permissão para editar este usuário"
+            //     });
+            // }
+            if (request.file) {
+                const result = yield cloudinary_1.default.v2.uploader.upload(request.file.path); // Faz upload da imagem para o Cloudinary
+                const user = yield prismaClient_1.prismaClient.user.update({
+                    where: {
+                        id: Number(id)
+                    },
+                    data: {
+                        name,
+                        photo: result.secure_url,
+                        local,
+                    },
+                });
+                return response.json(user);
+            }
+            else {
+                user = yield prismaClient_1.prismaClient.user.update({
+                    where: {
+                        id: Number(id)
+                    },
+                    data: {
+                        name,
+                        local
+                    }
+                });
+                return response.json(user);
+            }
         });
     }
     banir(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { ban } = request.body;
             let User = yield prismaClient_1.prismaClient.user.findFirst({
                 where: {
                     id: Number(id)
@@ -109,9 +129,10 @@ class UserController {
                     id: Number(id)
                 },
                 data: {
-                    ban: true
+                    ban: true,
                 }
             });
+            return (response.json(User));
         });
     }
     /*
@@ -127,14 +148,18 @@ class UserController {
     */
     pesquisar(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { email } = request.query; //GET /user?email=João@gmail.com; o query vem da url
-            const User = yield prismaClient_1.prismaClient.user.findMany({
+            const { id } = request.params;
+            // const { email } = request.query; //GET /user?email=João@gmail.com; o query vem da url
+            const User = yield prismaClient_1.prismaClient.user.findFirst({
+                // where: {
+                //     email: {
+                //       contains: String(email),//exibe uma lista de usuarios com o email parecido
+                //     },
+                //   },
+                //   take: 4, // Limita o resultado a 4 usuários
                 where: {
-                    email: {
-                        contains: String(email), //exibe uma lista de usuarios com o email parecido
-                    },
-                },
-                take: 4, // Limita o resultado a 4 usuários
+                    id: Number(id)
+                }
             });
             if (!User) {
                 return response.json({

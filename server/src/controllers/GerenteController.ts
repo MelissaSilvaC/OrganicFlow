@@ -144,6 +144,32 @@ async listarGerenteValido(request:Request, response:Response){
   }
 }
 
+async listarbanido(request:Request, response:Response){
+  try {
+    const user = await prismaClient.user.findMany({
+      where:{
+        ban:true,//id_role do gerente
+      },
+        
+    })
+    return response.json(user)
+
+    // const gerentesSemUserRole = gerentesComUserRole.filter(gerente => !gerente.UserRole || gerente.UserRole.length === 0);
+
+    // //const array_novo = array_velho(para cada item no array, se o gerente.UserRole não existir )
+
+    // if (gerentesSemUserRole.length > 0) {
+    //     return response.json(gerentesSemUserRole);
+    // } else {
+    //     return response.json("nenhum usuario na lista");
+    // }
+
+  } catch (error) {
+      return response.json(error);
+  }
+}
+
+
 async consultarEmpresa(request:Request, response:Response){
   try {
       const empresa = await prismaClient.userRole.findMany({
@@ -177,7 +203,7 @@ async pesquisarEmpresa(request:Request, response:Response){
       select:{
         gerente:true
       }
-      
+
     })
     if(gerente?.gerente==!true){//se for diferente de true
       return response.json("Empresa não existe")
@@ -190,13 +216,42 @@ async pesquisarEmpresa(request:Request, response:Response){
       include:{
         Produto:{}
       }
-      
+
     })
+
+    //buscar o fiscal
+
+          const userResp=await prismaClient.user.findFirst({
+            where: {
+              id: Number(id),
+          },
+          select:{
+            email:true
+          }
+
+          })
+          if(userResp){
+            const responsavel_email = userResp.email;//pega o email que foi exibido no userResp
+
+
+              const UserRole = await prismaClient.userRole.findMany({
+                  where:{
+                      responsavel_email:responsavel_email
+                  },
+                  include:{
+                    user:{}
+                  }
+
+              })
+              return response.json({ produto,UserRole})
+
+
+          }
 
     return response.json(produto)
 
   } catch (error) {
-    
+
   }
   /*
   try {

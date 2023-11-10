@@ -78,14 +78,16 @@ router.post("/gerente",authMiddleware,gerenteController.permissaoGerente);
 router.delete("/gerente",authMiddleware,gerenteController.suspenderGerente);
 router.get("/feed" ,feedController.consultar)
 router.put("/ban/:id",userController.banir)
+router.get("/ban",gerenteController.listarbanido); //lista de gerente 
 
 //gerente
 router.get("/user/:id",userController.pesquisar); //quando o gerente precisar pesquisar o usuario
 router.post("/fiscal",authMiddleware,fiscalController.permissaoFiscal);
-router.put("/user/:id",produtoController.atualizar);
-
+router.put("/user/:id",authMiddleware,upload.single('file'),userController.atualizar);
 router.delete("/fiscal/:id",authMiddleware,is([RolesPrivate.gerente]),fiscalController.removerFiscal)
 router.put("/user/:id",authMiddleware,proprioput,userController.atualizar)
+
+router.put("/produto/:id",authMiddleware,upload.single('file'),produtoController.atualizar)
 router.post("/produto",authMiddleware,upload.single('file'),produtoController.criar)
 router.delete("/produto/:id", produtoController.deletar)
 
